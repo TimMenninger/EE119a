@@ -1,0 +1,20 @@
+"
+" Homework #2
+" Problem 1: Codabar Decoding
+"
+" This file contains equations in ABEL format for decoding 7-bit codabar input to
+" 6 output bits.  Each output is valid if and only if G is high.  For more information
+" on the problem refer to http://wolverine.caltech.edu/ee119a/homework/hw2.htm
+" Note: This most likely does not compile.
+"
+" Author: Tim Menninger
+"
+
+EQUATIONS
+    S  = I3 & (I1 # I5);
+    V3 = (!I6 & I3) # I4 # (I5 & I1);
+    V2 = I6 # (I4 & I3) # (!I5 & I2 & !I1);
+    V1 = I5;
+    V0 = I3 # I0;
+    G  = (!I6 & !I5 & ((I3 & !I2 & (I4 $ I0)) # (!I4 & !I2 & I1 & I0) # (!I4 & I2 & !I0 & (I3 # I1)))) # (!I6 & !I2 & ((I5 & !I4 & I1 & !I0) # (!I5 & I4 & !I1 & I0))) # (I6 & !I5 & !I4 & I2 & !I0 & (I3 $ I1)) # (!I3 & !I1 & (((I6 $ I4) & ((I5 & !I2 & !I0) # (!I5 & I2 & I0))) # (I2 & !I0 & ((I6 & I4) $ I5)))); 
+

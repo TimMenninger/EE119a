@@ -1,0 +1,194 @@
+MODULE   Hexer
+TITLE   'Hexer Game'
+
+
+" HexerPAL   DEVICE  'PALCE29M16'
+
+
+" This file contains the pinout for the hexer game described in the homework.
+" This version matches the new PCB.  All inputs are active low and all outputs
+" are active high (except ClkOut which could be active high or low).
+"
+" The board and LED assignments look like
+"                1
+"              /  \
+"      11----10-----8-----9
+"     /  \  /  \  /  \  /  \
+"   13----12-----2----15----14
+"     \  /  \  /  \  /  \  /
+"       7-----6-----4-----5
+"              \  /
+"                3
+"
+" Where the color/shape/LED/action combinations are:
+"   white /  hexagon / 10,  8, 15,  4,  6, 12             / invert LEDs
+"   black /  hexagon /  2,  8,  9, 14,  5,  4             / rotate clockwise once
+"    blue /  hexagon / 11, 10,  2,  6,  7, 13             / rotate counterclockwise once
+"     red / triangle /  1,  8, 15,  5,  4,  6,  7, 12, 10 / rotate clockwise once
+"   green / triangle /  3,  6, 12, 11, 10,  8,  9, 15,  4 / rotate counterclockwise once
+"
+
+" Revision History
+"    26 October 09   Glen George       initial revision (from 10/27/07 version
+"                                         of hexer0.pds
+"    31 October 09   Glen George       fixed minor syntax error
+"    25 October 16   Tim Menninger     Implemented Hexer game
+
+
+
+"------------------------------------------------------------------------------------------------------------------------------
+" pins
+"------------------------------------------------------------------------------------------------------------------------------
+
+Clock      pin   1;               "input   clock and random reset
+!BlackSw   pin   2;               "input   Black switch input/Manual Reset 1 (active low)
+Out1       pin   3  ISTYPE 'reg'; "output  current state of position 1 (active high)
+Out11      pin   4  ISTYPE 'reg'; "output  current state of position 11 (active high)
+Out10      pin   5  ISTYPE 'reg'; "output  current state of position 10 (active high)
+Out8       pin   6  ISTYPE 'reg'; "output  current state of position 8 (active high)
+Out12      pin   7  ISTYPE 'reg'; "output  current state of position 12 (active high)
+Out2       pin   8  ISTYPE 'reg'; "output  current state of position 2 (active high)
+Out9       pin   9  ISTYPE 'reg'; "output  current state of position 9 (active high)
+Out13      pin  10  ISTYPE 'reg'; "output  current state of position 13 (active high)
+!BlueSw    pin  11;               "input   Blue switch input/Manual Reset 0 (active low)
+"GND       pin  12;                supply  GND
+!WhiteSw   pin  13;               "input   White switch input/Manual Reset (active low)
+!RedSw     pin  14;               "input   Red switch input (active low)
+Out14      pin  15  ISTYPE 'reg'; "output  current state of position 14 (active high)
+Out7       pin  16  ISTYPE 'reg'; "output  current state of position 7 (active high)
+Out6       pin  17  ISTYPE 'reg'; "output  current state of position 6 (active high)
+Out5       pin  18  ISTYPE 'reg'; "output  current state of position 5 (active high)
+ClkOut     pin  19  ISTYPE 'com'; "output  clock output - used to clock an input
+Out15      pin  20  ISTYPE 'reg'; "output  current state of position 15 (active high)
+Out4       pin  21  ISTYPE 'reg'; "output  current state of position 4 (active high)
+Out3       pin  22  ISTYPE 'reg'; "output  current state of position 3 (active high)
+!GreenSw   pin  23;               "input   Green switch input/Manual Reset (active low)
+"VCC       pin  24;                supply  internal VCC
+
+
+
+
+"------------------------------------------------------------------------------------------------------------------------------
+" Some constants to improve readability
+"------------------------------------------------------------------------------------------------------------------------------
+
+" Put output bits in a list so we can easily set all of their clocks at once
+OutputBits  = [ Out15, Out14, Out13, Out12, Out11, Out10, Out9, Out8, Out7, Out6, Out5, Out4, Out3, Out2, Out1 ];
+
+" Shorthand to know when no inputs are active
+NoSw        = !BlackSw & !BlueSw & !GreenSw & !RedSw & !GreenSw;
+Pressed     = !NoSw;
+
+" Need to know if all outs are zero for a boundary case in our LFSR
+BitSet      = Out15 # Out14 # Out13 # Out12 # Out11 # Out10 # Out9 # Out8 # Out7 # Out6 # Out5 # Out4 # Out3 # Out2 # Out1;
+
+" Define constants that will be true when resetting
+ManRS       = GreenSw & WhiteSw;
+RandRS      = NoSw;
+
+" Define a 15-bit LFSR for random resets. This will be 1-indexed to match the LED indices
+LFSR1       = !BitSet # (Out14 $ Out15); " Linear feedback part
+LFSR2       = Out1;
+LFSR3       = Out2;
+LFSR4       = Out3;
+LFSR5       = Out4;
+LFSR6       = Out5;
+LFSR7       = Out6;
+LFSR8       = Out7;
+LFSR9       = Out8;
+LFSR10      = Out9;
+LFSR11      = Out10;
+LFSR12      = Out11;
+LFSR13      = Out12;
+LFSR14      = Out13;
+LFSR15      = Out14;
+
+
+
+
+"------------------------------------------------------------------------------------------------------------------------------
+EQUATIONS
+"------------------------------------------------------------------------------------------------------------------------------
+
+" The fun begins
+
+" Enable outputs on the clock out pin
+ClkOut.OE       = 1;
+
+" Use global clock for all of our registered outputs
+OutputBits.CLK  = Clock;
+
+
+
+
+
+
+"
+" Setting Outputs
+"
+"
+" ClkOut
+"
+" Clockout signal will be active whenever a switch is active.  We need this to
+" be active high so that we don't accidentally trigger random reset on button
+" releases.
+"
+ClkOut = Pressed;
+
+"
+" LEDS
+"
+" Normal Operation:
+" Equations here set all of the lights based on the rules of the game.  In this,
+" an inversion happens exactly once per triggered input, and each rotation
+" rotates exactly one position per triggered input.
+"     Black switch rotates outs 2, 8, 9, 14, 5, and 4, (with 2->8, ..., 4->2)
+"     Blue switch rotates outs 2, 10, 11, 13, 7, and 6, (with 2->10, ..., 6->2)
+"     Green switch rotates outs 3, 4, 15, 9, 8, 10, 11, 12, and 6, (with 3->4, ..., 6->3)
+"     Red switch rotates outs 1, 8, 15, 5, 4, 6, 7, 12, and 10, (with 1->8, ..., 10->1)
+"     White switch inverts outs 4, 6, 12, 10, 8, and 15, (on->off, off->on)
+"
+" Random Reset:
+" This only acknowledges the random reset switch if no other switches are
+" pushed.  The reason for this is because the Clock pin mirrors the previous
+" ClkOut, so we cannot look at that pin alone.
+" Note that LSFR's have a stuck state when all outputs are 0.  Thus, when
+" resetting, we must set lowest bit if all outputs are low.
+"
+" Manual Reset:
+" This is only acknowledged if both manual reset pins are active.  Because both
+" pins are overloaded, pressing green and white simultaneously will trick the
+" system into thinking it is being manually reset.  This does not start the
+" outputs at any known value.  When resetting, all 15 LEDs must be defined,
+" or else the starting state of the game is undefined.
+"
+" Error Handling:
+" Multiple active inputs, if not otherwise explicitly defined, will cause
+" undefined behavior.
+"
+
+"------------------------------------------------------------------------------------------------------------------------------
+"        No switch   ""    Black switch   ""    Blue switch   ""   Green switch    ""    Red switch   ""     White switch   "";
+"------------------------------------------------------------------------------------------------------------------------------
+Out1  = NoSw & Out1  ""                   ""                  ""                   "" # RedSw & Out10 ""                    "";
+Out2  = NoSw & Out2  "" # BlackSw & Out4  "" # BlueSw & Out6  ""                   ""                 ""                    "";
+Out3  = NoSw & Out3  ""                   ""                  "" # GreenSw & Out6  ""                 ""                    "";
+Out4  = NoSw & Out4  "" # BlackSw & Out5  ""                  "" # GreenSw & Out3  "" # RedSw & Out5  "" # WhiteSw & !Out4  "";
+Out5  = NoSw & Out5  "" # BlackSw & Out14 ""                  ""                   "" # RedSw & Out15 ""                    "";
+Out6  = NoSw & Out6  ""                   ""                  ""                   "" # RedSw & Out4  "" # WhiteSw & !Out6  "";
+Out7  = NoSw & Out7  ""                   "" # BlueSw & Out13 ""                   "" # RedSw & Out6  ""                    "";
+Out8  = NoSw & Out8  "" # BlackSw & Out2  ""                  "" # GreenSw & Out9  "" # RedSw & Out1  "" # WhiteSw & !Out8  "";
+Out9  = NoSw & Out9  "" # BlackSw & Out8  ""                  "" # GreenSw & Out15 ""                 ""                    "";
+Out10 = NoSw & Out10 ""                   "" # BlueSw & Out2  "" # GreenSw & Out8  "" # RedSw & Out12 "" # WhiteSw & !Out10 "";
+Out11 = NoSw & Out11 ""                   "" # BlueSw & Out10 "" # GreenSw & Out10 ""                 ""                    "";
+Out12 = NoSw & Out12 ""                   ""                  "" # GreenSw & Out11 "" # RedSw & Out7  "" # WhiteSw & !Out12 "";
+Out13 = NoSw & Out13 ""                   "" # BlueSw & Out11 ""                   ""                 ""                    "";
+Out14 = NoSw & Out14 "" # BlackSw & Out10 ""                  ""                   ""                 ""                    "";
+Out15 = NoSw & Out15 ""                   ""                  "" # GreenSw & Out4  "" # RedSw & Out8  "" # WhiteSw & !Out15 "";
+"------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+END  Hexer

@@ -1,0 +1,8 @@
+This is not synchronous because the chips that lead to the outputs (LEDs and 
+segment display) do not run on the same clock, let alone a clock at all.  Thus,
+the two die and display won't necessarily update at the same time.
+Additionally, because there is no clocking of inputs, they are susceptible to
+glitches, so it's feasible that the die and display tempporarily receive/display
+the wrong data.
+
+(Also submitted in hard copy)

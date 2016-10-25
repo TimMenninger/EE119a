@@ -1,0 +1,21 @@
+" Tim Menninger
+" EE 119a
+" Homework 3 Equations
+
+" Problem 1: 7-Segment Decimal Counter
+a := !d # !a # (b & e & g);
+b := (a & !d) # e # !f;
+c := a # f;
+d = !d # (e & !f) # (!e & f);
+e := (a & !d) # (!d & !f);
+f := (a & !d) # (!d & f) # (a & c & g);
+g := (!a & !d) # !f # (a & d & g);
+
+" Problem 3: Range Counter
+Q0 := (!Q0 & !Q1 & !Q2 & !Q3 & !Q4 & Q5 & Q6) # !Q0;
+Q1 := (!Q0 & !Q1 & !Q2 & !Q3 & !Q4 & Q5 & Q6) # (Q1 $ Q0);
+Q2 := (!Q0 & !Q1 & !Q2 & !Q3 & !Q4 & Q5 & Q6) # (Q2 $ (Q1 & Q0));
+Q3 := !(!Q0 & !Q1 & !Q2 & !Q3 & !Q4 & Q5 & Q6) & (Q3 $ (Q2 & Q1 & Q0));
+Q4 := !(!Q0 & !Q1 & !Q2 & !Q3 & !Q4 & Q5 & Q6) & (Q4 $ (Q3 & Q2 & Q1 & Q0));
+Q5 := !(!Q0 & !Q1 & !Q2 & !Q3 & !Q4 & Q5 & Q6) & (Q5 $ (Q4 & Q3 & Q2 & Q1 & Q0));
+Q6 := !(!Q0 & !Q1 & !Q2 & !Q3 & !Q4 & Q5 & Q6) & (Q6 $ (Q5 & Q4 & Q3 & Q2 & Q1 & Q0));
