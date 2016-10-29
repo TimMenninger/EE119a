@@ -116,10 +116,10 @@ def test_blue_button(openfile, initial_state):
     '''
     Takes an initial state and updates it as if the blue button were pressed.
     When the blue button is pressed, the left hexagon is rotated counter
-    clockwise, with 11, 10,  2,  6,  7, 13 being the order.
+    clockwise, with 2, 10, 11, 13, 7, 6 being the order.
     '''
     # The order of input movement
-    order = [11, 10,  2,  6,  7, 13]
+    order = [2, 10, 11, 13, 7, 6]
 
     # Define the input state
     input_state = ['.C.', 0, 1, 0, 0, 0]
@@ -136,10 +136,10 @@ def test_green_button(openfile, initial_state):
     '''
     Takes an initial state and updates it as if the green button were pressed.
     When the green button is pressed, the lower triangle rotates counter
-    clockwise, with 3,  6, 12, 11, 10,  8,  9, 15,  4 being the order.
+    clockwise, with 3, 4, 15, 9, 8, 10, 11, 12, 6 being the order.
     '''
     # The order of input movement
-    order = [3,  6, 12, 11, 10,  8,  9, 15,  4]
+    order = [3, 4, 15, 9, 8, 10, 11, 12, 6]
 
     # Define the input state
     input_state = ['.C.', 0, 0, 1, 0, 0]
@@ -185,10 +185,10 @@ def test_manual_reset(openfile, initial_state, final_state):
 
         # Print the test vector
         print_test_vector(openfile, input_state, output + [1])
-
-        # Let go of the button
-        input_state = ['.C.', 0, 0, 1, 0, 1]
-        print_test_vector(openfile, input_state, output + [0])
+        
+        # We don't test letting go of the button because it wouldn't
+        # generate a clock, and therefore it doesn't make sense to have
+        # a vector for it
 
     # Ideally output is equal to the argued final_state
     return output
@@ -334,15 +334,16 @@ def generate_test_vectors(openfile):
     # Test buttons
     print_comment(openfile,
         'Testing buttonpushes for general functionality.  Testing black, '
-      + 'blue, green, red then white, in that order, 3 times over.'
+      + 'blue, green, red then white, in that order, 9 times over.'
     )
-    for i in range(3):
+    state = test_manual_reset(newfile, state, [1,1,0,0,1,1,0,0,1,1,0,0,1,1,0])
+    for i in range(1):
         state = test_black_button(openfile, state)
-        state = test_blue_button(openfile, state)
-        state = test_green_button(openfile, state)
+        #state = test_blue_button(openfile, state)
+        #state = test_green_button(openfile, state)
         state = test_red_button(openfile, state)
         state = test_white_button(openfile, state)
-
+    return
     # For each combination of middle hexagon, try a white buttonpush
     print_comment(openfile,
         'Testing a white buttonpush on every combination of light pattern '
