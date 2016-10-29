@@ -339,11 +339,11 @@ def generate_test_vectors(openfile):
     state = test_manual_reset(newfile, state, [1,1,0,0,1,1,0,0,1,1,0,0,1,1,0])
     for i in range(1):
         state = test_black_button(openfile, state)
-        #state = test_blue_button(openfile, state)
-        #state = test_green_button(openfile, state)
+        state = test_blue_button(openfile, state)
+        state = test_green_button(openfile, state)
         state = test_red_button(openfile, state)
         state = test_white_button(openfile, state)
-    return
+
     # For each combination of middle hexagon, try a white buttonpush
     print_comment(openfile,
         'Testing a white buttonpush on every combination of light pattern '
