@@ -1,5 +1,14 @@
 import copy
 
+def binary_list_to_int(binary):
+    '''
+    Takes a list of 1's and 0's and converts it to an integer.
+    '''
+    out = 0
+    for idx, i in enumerate(range(len(binary)-1, -1, -1)):
+        out += 2**i * binary[idx]
+    return out
+
 def rotate_bits(order, initial_state):
     '''
     Helper function to rotate bits in a list in the order specified by the
@@ -58,7 +67,7 @@ def test_white_button(openfile, initial_state):
         output[bit-1] = int(not output[bit-1])
 
     # Print the test vector
-    print_test_vector(openfile, input_state, output)
+    print_test_vector(openfile, input_state, output + [1])
 
     # Return the result
     return output
@@ -79,7 +88,7 @@ def test_black_button(openfile, initial_state):
     output = rotate_bits(order, initial_state)
 
     # Print the test vector
-    print_test_vector(openfile, input_state, output)
+    print_test_vector(openfile, input_state, output + [1])
 
     return output
 
@@ -99,7 +108,7 @@ def test_red_button(openfile, initial_state):
     output = rotate_bits(order, initial_state)
 
     # Print the test vector
-    print_test_vector(openfile, input_state, output)
+    print_test_vector(openfile, input_state, output + [1])
 
     return output
 
@@ -119,7 +128,7 @@ def test_blue_button(openfile, initial_state):
     output = rotate_bits(order, initial_state)
 
     # Print the test vector
-    print_test_vector(openfile, input_state, output)
+    print_test_vector(openfile, input_state, output + [1])
 
     return output
 
@@ -139,7 +148,7 @@ def test_green_button(openfile, initial_state):
     output = rotate_bits(order, initial_state)
 
     # Print the associated test vector
-    print_test_vector(openfile, input_state, output)
+    print_test_vector(openfile, input_state, output + [1])
 
     return output
 
@@ -156,7 +165,7 @@ def test_manual_reset(openfile, initial_state, final_state):
     # white switch.
     input_state = ['.C.', 0, 0, 1, 0, 1]
     output = copy.deepcopy(initial_state) # Nothing changes yet
-    print_test_vector(openfile, input_state, output)
+    print_test_vector(openfile, input_state, output + [0])
 
     # Start feeding in bits based on desired final state.
     for i in range(14, -1, -1):
@@ -175,12 +184,11 @@ def test_manual_reset(openfile, initial_state, final_state):
         output[0] = final_state[idx-1]
 
         # Print the test vector
-        print_test_vector(openfile, input_state, output)
+        print_test_vector(openfile, input_state, output + [1])
 
-    # Demonstrate that letting go, but still holding onto manual reset, doesn't
-    # change the output at all.
-    input_state = ['.C.', 0, 0, 1, 0, 1]
-    print_test_vector(openfile, input_state, output)
+        # Let go of the button
+        input_state = ['.C.', 0, 0, 1, 0, 1]
+        print_test_vector(openfile, input_state, output + [0])
 
     # Ideally output is equal to the argued final_state
     return output
@@ -199,7 +207,7 @@ def test_random_reset(openfile, initial_state, iterations):
         output[0] = output[13] ^ output[14] + (sum(output) == 0)
         for j in range(len(output)-1):
             output[j+1] = initial_state[j]
-        print_test_vector(openfile, input_state, output)
+        print_test_vector(openfile, input_state, output + [0])
         initial_state = copy.deepcopy(output)
 
     # Will be useful to know the final state for continuing testing
@@ -356,14 +364,23 @@ def generate_test_vectors(openfile):
       + 'within the black hexagon.'
     )
     # 2^n - 1 values in set of all subsets
+    tested = [0] * 2**6
     for i in range(2**6):
+        if tested[i] == 1:
+            continue
         set_bits = int_to_binary_list(i, 6)
         black_order = [2,  8,  9, 14,  5,  4]
         set_bits = set_indices(black_order, set_bits, 15)
         # Set state to desired light pattern
         state = test_manual_reset(openfile, state, set_bits)
         # Test the pattern
-        state = test_black_button(openfile, state)
+        # Rotate completely through, so we can take care of 6 without
+        # having to reset
+        for j in range(6):
+            val = [state[1], state[7], state[8], state[13], state[4], 
+                   state[3]]
+            tested[binary_list_to_int(val)] = 1
+            state = test_black_button(openfile, state)
 
     # For each combination of left hexagon, try a blue buttonpush
     print_comment(openfile,
@@ -371,14 +388,23 @@ def generate_test_vectors(openfile):
       + 'within the blue hexagon.'
     )
     # 2^n - 1 values in set of all subsets
+    tested = [0] * 2**6
     for i in range(2**6):
+        if tested[i] == 1:
+            continue
         set_bits = int_to_binary_list(i, 6)
         blue_order = [11, 10,  2,  6,  7, 13]
         set_bits = set_indices(blue_order, set_bits, 15)
         # Set state to desired light pattern
         state = test_manual_reset(openfile, state, set_bits)
         # Test the pattern
-        state = test_blue_button(openfile, state)
+        # Rotate completely through, so we can take care of 6 without
+        # having to reset
+        for j in range(6):
+            val = [state[10], state[9], state[1], state[5], state[6], 
+                   state[12]]
+            tested[binary_list_to_int(val)] = 1
+            state = test_blue_button(openfile, state)
 
     # For each combination of upper triangle, try a red buttonpush
     print_comment(openfile,
@@ -386,14 +412,23 @@ def generate_test_vectors(openfile):
       + 'within the red triangle.'
     )
     # 2^n - 1 values in set of all subsets
+    tested = [0] * 2**9
     for i in range(2**9):
+        if tested[i] == 1:
+            continue
         set_bits = int_to_binary_list(i, 9)
         red_order = [1,  8, 15,  5,  4,  6,  7, 12, 10]
         set_bits = set_indices(red_order, set_bits, 15)
         # Set state to desired light pattern
         state = test_manual_reset(openfile, state, set_bits)
         # Test the pattern
-        state = test_red_button(openfile, state)
+        # Rotate completely through, so we can take care of 9 without
+        # having to reset
+        for j in range(9):
+            val = [state[0], state[7], state[14], state[4], state[3], 
+                   state[5], state[6], state[11], state[9]]
+            tested[binary_list_to_int(val)] = 1
+            state = test_red_button(openfile, state)
 
     # For each combination of upper triangle, try a red buttonpush
     print_comment(openfile,
@@ -401,14 +436,23 @@ def generate_test_vectors(openfile):
       + 'within the green triangle.'
     )
     # 2^n - 1 values in set of all subsets
+    tested = [0] * 2**9
     for i in range(2**9):
+        if tested[i] == 1:
+            continue
         set_bits = int_to_binary_list(i, 9)
         green_order = [3,  6, 12, 11, 10,  8,  9, 15,  4]
         set_bits = set_indices(green_order, set_bits, 15)
         # Set state to desired light pattern
         state = test_manual_reset(openfile, state, set_bits)
         # Test the pattern
-        state = test_green_button(openfile, state)
+        # Rotate completely through, so we can take care of 9 without
+        # having to reset
+        for j in range(9):
+            val = [state[2], state[5], state[11], state[10], state[9], 
+                   state[7], state[8], state[14], state[3]]
+            tested[binary_list_to_int(val)] = 1
+            state = test_green_button(openfile, state)
 
     print_comment(openfile,
         'Testing bad buttonpush combinations.'
@@ -430,7 +474,7 @@ def generate_test_vectors(openfile):
         state = test_manual_reset(openfile, state, test_bits)
         set_bits = int_to_binary_list(i, 5)
         if set_bits not in valid_combinations:
-            print_test_vector(openfile, ['.C.'] + set_bits, test_bits)
+            print_test_vector(openfile, ['.C.'] + set_bits, test_bits + [1])
 
     return
 
