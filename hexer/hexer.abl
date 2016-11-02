@@ -94,6 +94,23 @@ ManRS0      = ManRS & !BlackSw &  BlueSw & !RedSw;
 ManRS1      = ManRS &  BlackSw & !BlueSw & !RedSw;
 RandRS      = NoSw;
 
+" For each output, valid represents an input sequence that implies it should change state.  All outputs change on reset conditions
+Valid1      = ManRS0 # ManRS1 # RandRS                        # Red        ;
+Valid2      = ManRS0 # ManRS1 # RandRS # Black # Blue                      ;
+Valid3      = ManRS0 # ManRS1 # RandRS                # Green              ;
+Valid4      = ManRS0 # ManRS1 # RandRS # Black        # Green # Red # White;
+Valid5      = ManRS0 # ManRS1 # RandRS # Black                # Red        ;
+Valid6      = ManRS0 # ManRS1 # RandRS                        # Red # White;
+Valid7      = ManRS0 # ManRS1 # RandRS         # Blue         # Red        ;
+Valid8      = ManRS0 # ManRS1 # RandRS # Black        # Green # Red # White;
+Valid9      = ManRS0 # ManRS1 # RandRS # Black        # Green              ;
+Valid10     = ManRS0 # ManRS1 # RandRS         # Blue # Green # Red # White;
+Valid11     = ManRS0 # ManRS1 # RandRS         # Blue # Green              ;
+Valid12     = ManRS0 # ManRS1 # RandRS                # Green # Red # White;
+Valid13     = ManRS0 # ManRS1 # RandRS         # Blue                      ;
+Valid14     = ManRS0 # ManRS1 # RandRS # Black                             ;
+Valid15     = ManRS0 # ManRS1 # RandRS                # Green # Red # White;
+
 " Define a 15-bit manual shifter for manual resets.  Order matches such that bits shift in rows,
 " i.e., 1, 11, 10, 8, 9, 13, 12, 2, 15, 14, 7, 6, 4, 5, 3
 Man1        = ManRS1; " If there's a clock, it's because another button was pushed
@@ -113,7 +130,7 @@ Man14       = ManRS & (BlackSw # BlueSw) & Out15;
 Man15       = ManRS & (BlackSw # BlueSw) & Out2;
 
 " Define a 15-bit LFSR for random resets. This will be 1-indexed to match the LED indices
-LFSR1       = RandRS & !BitSet # (Out14 $ Out15); " Linear feedback part
+LFSR1       = RandRS & (!BitSet # (Out14 $ Out15)); " Linear feedback part
 LFSR2       = RandRS & Out1;
 LFSR3       = RandRS & Out2;
 LFSR4       = RandRS & Out3;
@@ -160,7 +177,7 @@ OutputBits.CLK  = Clock;
 " we will consider the system as if no switch is active if we are in ManRS
 " mode (when actually, two switches are active)
 "
-ClkOut = !NoSw & !ManRS;
+ClkOut = (GreenSw $ WhiteSw) # BlackSw # BlueSw # RedSw;
 
 "
 " LEDS
@@ -189,31 +206,26 @@ ClkOut = !NoSw & !ManRS;
 " outputs at any known value.  When resetting, all 15 LEDs must be defined,
 " or else the starting state of the game is undefined.
 "
-" Error Handling:
-" Multiple active inputs, if not otherwise explicitly defined, will cause
-" undefined behavior.
-"
 
-"----------------------------------------------------------------------------------------------------------------------
-"            Reset     ""   Black switch  ""   Blue switch  ""  Green switch   ""   Red switch  ""    White switch  "";
-"----------------------------------------------------------------------------------------------------------------------
-Out1  = LFSR1  # Man1  ""                 ""                ""                 "" # Red & Out10 ""                  "";
-Out2  = LFSR2  # Man2  "" # Black & Out4  "" # Blue & Out6  ""                 ""               ""                  "";
-Out3  = LFSR3  # Man3  ""                 ""                "" # Green & Out6  ""               ""                  "";
-Out4  = LFSR4  # Man4  "" # Black & Out5  ""                "" # Green & Out3  "" # Red & Out5  "" # White & !Out4  "";
-Out5  = LFSR5  # Man5  "" # Black & Out14 ""                ""                 "" # Red & Out15 ""                  "";
-Out6  = LFSR6  # Man6  ""                 ""                ""                 "" # Red & Out4  "" # White & !Out6  "";
-Out7  = LFSR7  # Man7  ""                 "" # Blue & Out13 ""                 "" # Red & Out6  ""                  "";
-Out8  = LFSR8  # Man8  "" # Black & Out2  ""                "" # Green & Out9  "" # Red & Out1  "" # White & !Out8  "";
-Out9  = LFSR9  # Man9  "" # Black & Out8  ""                "" # Green & Out15 ""               ""                  "";
-Out10 = LFSR10 # Man10 ""                 "" # Blue & Out2  "" # Green & Out8  "" # Red & Out12 "" # White & !Out10 "";
-Out11 = LFSR11 # Man11 ""                 "" # Blue & Out10 "" # Green & Out10 ""               ""                  "";
-Out12 = LFSR12 # Man12 ""                 ""                "" # Green & Out11 "" # Red & Out7  "" # White & !Out12 "";
-Out13 = LFSR13 # Man13 ""                 "" # Blue & Out11 ""                 ""               ""                  "";
-Out14 = LFSR14 # Man14 "" # Black & Out10 ""                ""                 ""               ""                  "";
-Out15 = LFSR15 # Man15 ""                 ""                "" # Green & Out4  "" # Red & Out8  "" # White & !Out15 "";
-"----------------------------------------------------------------------------------------------------------------------
-
+"--------------------------------------------------------------------------------------------------------------------------------------------
+"            Reset     ""        Valid       ""   Black switch  ""   Blue switch  ""  Green switch   ""   Red switch  ""    White switch  "";
+"--------------------------------------------------------------------------------------------------------------------------------------------
+Out1  = LFSR1  # Man1  "" # !Valid1  & Out1  ""                 ""                ""                 "" # Red & Out10 ""                  "";
+Out2  = LFSR2  # Man2  "" # !Valid2  & Out2  "" # Black & Out4  "" # Blue & Out6  ""                 ""               ""                  "";
+Out3  = LFSR3  # Man3  "" # !Valid3  & Out3  ""                 ""                "" # Green & Out6  ""               ""                  "";
+Out4  = LFSR4  # Man4  "" # !Valid4  & Out4  "" # Black & Out5  ""                "" # Green & Out3  "" # Red & Out5  "" # White & !Out4  "";
+Out5  = LFSR5  # Man5  "" # !Valid5  & Out5  "" # Black & Out14 ""                ""                 "" # Red & Out15 ""                  "";
+Out6  = LFSR6  # Man6  "" # !Valid6  & Out6  ""                 ""                ""                 "" # Red & Out4  "" # White & !Out6  "";
+Out7  = LFSR7  # Man7  "" # !Valid7  & Out7  ""                 "" # Blue & Out13 ""                 "" # Red & Out6  ""                  "";
+Out8  = LFSR8  # Man8  "" # !Valid8  & Out8  "" # Black & Out2  ""                "" # Green & Out9  "" # Red & Out1  "" # White & !Out8  "";
+Out9  = LFSR9  # Man9  "" # !Valid9  & Out9  "" # Black & Out8  ""                "" # Green & Out15 ""               ""                  "";
+Out10 = LFSR10 # Man10 "" # !Valid10 & Out10 ""                 "" # Blue & Out2  "" # Green & Out8  "" # Red & Out12 "" # White & !Out10 "";
+Out11 = LFSR11 # Man11 "" # !Valid11 & Out11 ""                 "" # Blue & Out10 "" # Green & Out10 ""               ""                  "";
+Out12 = LFSR12 # Man12 "" # !Valid12 & Out12 ""                 ""                "" # Green & Out11 "" # Red & Out7  "" # White & !Out12 "";
+Out13 = LFSR13 # Man13 "" # !Valid13 & Out13 ""                 "" # Blue & Out11 ""                 ""               ""                  "";
+Out14 = LFSR14 # Man14 "" # !Valid14 & Out14 "" # Black & Out9  ""                ""                 ""               ""                  "";
+Out15 = LFSR15 # Man15 "" # !Valid15 & Out15 ""                 ""                "" # Green & Out4  "" # Red & Out8  "" # White & !Out15 "";
+"--------------------------------------------------------------------------------------------------------------------------------------------
 
 
 END  Hexer
