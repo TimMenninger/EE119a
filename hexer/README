@@ -1,0 +1,8 @@
+Homework 4
+
+I e-mailed Glen about being sick this week but never got a response.  If I must
+get a health center note, that's fine.
+
+The test vector generator assumes the file without test vectors is named
+'hexer.abl' (if there are test vectors, they are overwritten).  The output
+file with test vectors is named 'hexer_w_vecs.abl'.

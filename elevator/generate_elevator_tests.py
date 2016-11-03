@@ -18,7 +18,7 @@ def generate_test_vectors(openfile):
 
     # Create the test vector header
     inputs  = ['FastClk', 'In0', 'In1', 'In2', 'In3', 'In4', 'Chg']
-    outputs = ['Out0', 'Out1', 'Out2', 'Out3', 'Out4']
+    outputs = ['Col0', 'Col1', 'Col2', 'Col3', 'Col4']
     print_test_header(openfile, inputs, outputs)
 
     # Do the tests as if we're on an elevator.  WLOG, we can stay on each floor
@@ -35,10 +35,32 @@ def generate_test_vectors(openfile):
     # there.  The order here shows the ground both starting on the second
     # row (first known row, so it displays ground after one clock) and not
     # so it spends some time before knowing it's on the ground floor
+    print_comment(openfile,
+        'We will start at the ground floor, then move up to floor 4, down to '
+      + 'subbasement, up to floor 3, then back to ground.  This will test '
+      + 'starting on ground with the mux row NOT a known row, moving to ground '
+      + 'from an unknown/searching state, and moving to ground while on a '
+      + 'row known to be ground (so it should change immediately).'
+    )
     floor_order = [ 2, 3, 4, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 4, 3, 2 ]
+    floor_names = [ 'subbasement',
+                    'basement',
+                    'ground floor',
+                    'floor 2',
+                    'floor 3',
+                    'floor 4' ]
     for f in floor_order:
-        mux_row = on_floor(openfile, arrays[f], mux_row, 33, 3)
+        print_comment(openfile,
+            'Moving to ' + floor_names[f]
+        )
+        mux_row = on_floor(openfile, arrays[f], mux_row, 60, 3)
 
+    print_comment(openfile,
+        'Note that all possible state encodings have a state definition, so '
+      + 'we do not need to check or test for invalid states.  Also note that '
+      + 'we simply relay the input unless we are in a known state, so there '
+      + 'is no such thing as an invalid input.'
+    )
     return
 
 ###############################################################################
@@ -78,8 +100,8 @@ def on_floor(openfile, light_array, mux_row, num_clocks, clocks_per_row):
         # Row has changed when clocks since last row change is 0
         changed = (clocks == 0)
         # Define left and right sides of test vector
-        inputs = light_array[mux_row]
-        outputs = light_array_out[mux_row] + [ int(changed) ]
+        inputs = ['.C.'] + light_array[mux_row] + [ int(changed) ]
+        outputs = light_array_out[mux_row]
         print_test_vector(openfile, inputs, outputs)
 
         # Update mux row and clocks since row change
