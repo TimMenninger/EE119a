@@ -31,7 +31,7 @@ def generate_test_vectors(openfile):
 
     # Create the test vector header
     inputs  = ['FastClk', 'In0', 'In1', 'In2', 'In3', 'In4', 'Chg']
-    outputs = ['Out0', 'Out1', 'Out2', 'Out3', 'Out4']
+    outputs = ['Col0', 'Col1', 'Col2', 'Col3', 'Col4']
     print_test_header(openfile, inputs, outputs)
 
     # Do the tests as if we're on an elevator.  WLOG, we can stay on each floor

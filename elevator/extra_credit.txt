@@ -1,0 +1,1 @@
+How this might be implemented without any clock:

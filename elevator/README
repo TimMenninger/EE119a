@@ -1,0 +1,25 @@
+This directory contains the elevator abel code to convert a "1" to a ground
+symbol.  Also contained in this directory is code that creates, inserts or
+removes test vectors from .abl files (or any file, if they have the right
+format).
+
+Contents:
+elevator.abl - The ABEL code for the elevator assignment.
+extra_credit.txt - Contains answer to extra credit question regarding
+    implementation with no clock.
+floor_patterns.py - Contains light patterns for each floor
+generate_elevator_tests.py - Creates test vectors for the elevator and inserts
+    them into the argued file.  It takes one argument: the relative path to the
+    file in which test vectors are to be inserted.  If this comes across a line
+    containing 'TEST_VECTORS' (case insensitive), it will remove all lines after
+    it and before the line containing 'END' or the end of the file.  This
+    functionality has not been well tested on erroneous inputs.
+    usage: python generate_elevator_tests.py [filename]
+remove_test_vectors.py - Removes test vectors from a file by removing all lines
+    after (and including) one that begins 'TEST_VECTORS' (case insensitive, if 
+    it exists) and before a line that begins 'END' (or the end of the file).
+    This has not been tested well on erroneous inputs.  This will remove from
+    all argued files.
+    usage: python remove_test_vectors.py [filename1 ...]
+test_vectors.py - Helper functions for generate_elevator_tests.py and
+    remove_test_vectors.py

@@ -184,10 +184,10 @@ def insert_test_vectors(filename, generate_test_vectors):
     while(line != ''):
         # Overwrite last test vectors
         if line[:12].upper() == 'TEST_VECTORS':
-            while (line[:4].upper() != 'END '):
+            while (line[:4].upper() != 'END ' and line != ''):
                 line = origfile.readline()
         # If we are at the end, start writing test vectors
-        if line[:4].upper() == 'END ':
+        if line[:4].upper() == 'END ' or line == '':
             # Insert test vectors
             generate_test_vectors(newfile)
 
@@ -198,7 +198,8 @@ def insert_test_vectors(filename, generate_test_vectors):
         newfile.write(line)
 
         # Read next line
-        line = origfile.readline()
+        if (line != ''):
+            line = origfile.readline()
 
     # Close the files
     origfile.close()
