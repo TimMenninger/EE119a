@@ -1,5 +1,5 @@
 MODULE   pwm
-TITLE   'PWM Project - I/O Pins / Counter'
+TITLE   'PWM Audio Project'
 
 
 "PWMCPLD   DEVICE   'ispLSI1016-60LJ44'
@@ -8,8 +8,8 @@ TITLE   'PWM Project - I/O Pins / Counter'
 " EE 119a  Homework #6;
 
 " Description:
-"    This is a set of I/O pin definitions and possibly useful counters
-"    for the ispLSI1016 used in the PWM project for Homework #7.
+"    This is the hardware description for the audio PWM project described in
+"    Homework #6 for EE 119a
 
 
 " Revision History:
@@ -27,16 +27,17 @@ TITLE   'PWM Project - I/O Pins / Counter'
 "    11/21/00  Glen George     Translated from LDF to ABEL
 "    11/16/05  Glen George     Reordered pins and updated comments
 "    11/17/07  Glen George     Updated comments
+"    11/08/16  Tim Menninger   Implemented audio PWM according to HW6
 
 
-
-" pins
-
+"--------------------------------------------------------------------------------------------------
+" pin definitions and descriptions
+"--------------------------------------------------------------------------------------------------
 " clock input
 CLK32           PIN  11;                            " in    global clock pin (32 MHz)
 
 " PWM output
-AudioPWMOut     PIN  10;                            " out   PWM output
+AudioPWMOut     PIN  10  ISTYPE 'com';              " out   PWM output
 
 " switch inputs
 SW1             PIN  28;                            " in    switch #1 input - active high
@@ -44,7 +45,7 @@ SW2             PIN  27;                            " in    switch #2 input - ac
 SW3             PIN  26;                            " in    switch #3 input - active high
 SW4             PIN  25;                            " in    switch #4 input - active high
 
-" ROM data bus
+" ROM data bus inputs
 AudioData7      PIN  15;                            " in    audio data, bit 7
 AudioData6      PIN  16;                            " in    audio data, bit 6
 AudioData5      PIN  17;                            " in    audio data, bit 5
@@ -54,7 +55,7 @@ AudioData2      PIN  20;                            " in    audio data, bit 2
 AudioData1      PIN  21;                            " in    audio data, bit 1
 AudioData0      PIN  22;                            " in    audio data, bit 0
 
-" ROM address bus
+" ROM address bus outputs
 AudioAddr18     PIN  29  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 18
 AudioAddr17     PIN  30  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 17
 AudioAddr16     PIN  31  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 16
@@ -76,10 +77,10 @@ AudioAddr1      PIN   8  ISTYPE 'reg_d, buffer';    " out   audio ROM address, b
 AudioAddr0      PIN   9  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 0
 
 
-
-" internal nodes
-
-" Audio data stored for PWM to use
+"--------------------------------------------------------------------------------------------------
+" internal nodes for computation
+"--------------------------------------------------------------------------------------------------
+" Audio data stored for PWM counter/setter to use
 DataBit0        NODE     ISTYPE 'reg_d, buffer';    " bit 0 of the newest audio data
 DataBit1        NODE     ISTYPE 'reg_d, buffer';    " bit 1 of the newest audio data
 DataBit2        NODE     ISTYPE 'reg_d, buffer';    " bit 2 of the newest audio data
@@ -98,12 +99,15 @@ PWMCount4       NODE     ISTYPE 'reg_d, buffer';    " bit 4 of the PWM counter
 PWMCount5       NODE     ISTYPE 'reg_d, buffer';    " bit 5 of the PWM counter
 PWMCount6       NODE     ISTYPE 'reg_d, buffer';    " bit 6 of the PWM counter
 PWMCount7       NODE     ISTYPE 'reg_d, buffer';    " bit 7 of the PWM counter
-PWMCount8       NODE     ISTYPE 'reg_d, buffer';    " bit 8 of the PWM counter
-PWMCount9       NODE     ISTYPE 'reg_d, buffer';    " bit 9 of the PWM counter
-PWMCount10      NODE     ISTYPE 'reg_d, buffer';    " bit 10 of the PWM counter
-PWMCount11      NODE     ISTYPE 'reg_d, buffer';    " bit 11 of the PWM counter
 
-" Next address for normal address incrementation
+" Counts 16 PWM cycles to satisfy 8kHz frequency.  Address is clocked when this is 1111B
+AddrClock0      NODE     ISTYPE 'reg_d, buffer';    " Counts 16 PWM cycles (bit 0)
+AddrClock1      NODE     ISTYPE 'reg_d, buffer';    " Counts 16 PWM cycles (bit 1)
+AddrClock2      NODE     ISTYPE 'reg_d, buffer';    " Counts 16 PWM cycles (bit 2)
+AddrClock3      NODE     ISTYPE 'reg_d, buffer';    " Counts 16 PWM cycles (bit 3)
+
+" Compute the next address when incrementing normally.  These are nodes and not macros
+" so we can use bus/set notation
 NextAddr0       NODE     ISTYPE 'com';              " bit 0 of the next address on normal increment
 NextAddr1       NODE     ISTYPE 'com';              " bit 1 of the next address on normal increment
 NextAddr2       NODE     ISTYPE 'com';              " bit 2 of the next address on normal increment
@@ -124,26 +128,33 @@ NextAddr16      NODE     ISTYPE 'com';              " bit 16 of the next address
 NextAddr17      NODE     ISTYPE 'com';              " bit 17 of the next address on normal increment
 NextAddr18      NODE     ISTYPE 'com';              " bit 18 of the next address on normal increment
 
+" Signals used for clocking purposes
+PWMCycle        NODE     ISTYPE 'reg_d, buffer';    " clock for 16-PWM counter
 AddrInc         NODE     ISTYPE 'reg_d, buffer';    " clock for PWM address counter
 
+" State bits for addressing state machine
 Bit1            NODE     ISTYPE 'reg_d, buffer';    " bit 1 in state encoding for addressing
 Bit0            NODE     ISTYPE 'reg_d, buffer';    " bit 0 in state encoding for addressing
 
-ResetCntr       NODE     ISTYPE 'com';              " reset the counters
-Run             NODE     ISTYPE 'com';              " run the counters
+" Stores running/not running state, used primarily to detect buttonpush edges
+Run             NODE     ISTYPE 'reg_d, buffer';    " run the counters
 
 
-
+"--------------------------------------------------------------------------------------------------
+" macros for readability
+"--------------------------------------------------------------------------------------------------
 " buses
 AudioAddr = [AudioAddr18..AudioAddr0];              " ROM address for audio data
 AudioData = [DataBit7..DataBit0];                   " registered audio data from ROM
 DataIn    = [AudioData7..AudioData0];               " audio data input from ROM
-PWMCount  = [PWMCount11..PWMCount0];                " PWM counter
+PWMCount  = [PWMCount7..PWMCount0];                 " PWM counter (LFSR)
+AddrClock = [AddrClock3..AddrClock0];               " Counts 16 PWM cycles
+NextAddr  = [NextAddr18..NextAddr0];                " next address value when counting
 
 " properties
 PLSI PROPERTY 'Y1_AS_RESET ON';                     " use Y1 as reset
 PLSI PROPERTY 'CLK  AddrInc  SLOWCLK';              " AddrInc is a product term clock
-
+PLSI PROPERTY 'CLK  PWMCount  SLOWCLK';             " PWMCount is a product term clock
 
 " Shorthand to detect buttonpushes
 SW1Edge    = !Run &  SW1 & !SW2 & !SW3 & !SW4; " button 1 edge pushed
@@ -151,26 +162,14 @@ SW2Edge    = !Run & !SW1 &  SW2 & !SW3 & !SW4; " button 2 edge pushed
 SW3Edge    = !Run & !SW1 & !SW2 &  SW3 & !SW4; " button 3 edge pushed
 SW4Edge    = !Run & !SW1 & !SW2 & !SW3 &  SW4; " button 4 edge pushed
 
-ButtonPush = SW1 # SW2 # SW3 # SW4; " True if at least one button is active
+" Shorthand for zeroing the PWM value (used to suppress outputs)
+DataZero  = [ 0, 0, 0, 0, 0, 0, 0, 0 ];
 
+" When the PWM LFSR counter is 0, it is stuck, so we need to detect that
+PWMZeroed = !PWMCount7 & !PWMCount6 & !PWMCount5 & !PWMCount4 &
+            !PWMCount3 & !PWMCount2 & !PWMCount1 & !PWMCount0;
 
-
-" PWM Counter
-"    12-bit counter
-"    clocked off the 32 MHz clock
-"    has carry lookahead every 3 bits for routing
-"    reset on ResetCntr
-
-" Shorthand for zeroing the PWM value to suppress outputs
-DataZero = [ 0, 0, 0, 0, 0, 0, 0, 0 ];
-
-" carry lookahead is computed for every 3 bits and they ripple
-"    only increment (generate carries) when Running
-PWMCountCin3  =  Run          & PWMCount0 & PWMCount1 & PWMCount2;
-PWMCountCin6  =  PWMCountCin3 & PWMCount3 & PWMCount4 & PWMCount5;
-PWMCountCin9  =  PWMCountCin6 & PWMCount6 & PWMCount7 & PWMCount8;
-
-" Keeps track of bits that are equal between the audio data and the PWM count
+" Keeps track of bits that are equal between the audio data and the PWM count, used for comparison
 Eq7 = (PWMCount7 & DataBit7) # (!PWMCount7 & !DataBit7);
 Eq6 = (PWMCount6 & DataBit6) # (!PWMCount6 & !DataBit6);
 Eq5 = (PWMCount5 & DataBit5) # (!PWMCount5 & !DataBit5);
@@ -180,12 +179,10 @@ Eq2 = (PWMCount2 & DataBit2) # (!PWMCount2 & !DataBit2);
 Eq1 = (PWMCount1 & DataBit1) # (!PWMCount1 & !DataBit1);
 Eq0 = (PWMCount0 & DataBit0) # (!PWMCount0 & !DataBit0);
 
-
 " Audio Data (ROM) Address Counter
 "    19-bit counter
 "    clocked off the AddrInc signal
 "    has carry lookahead every 3 bits for routing
-"    reset on ResetCntr (reset sets bit 18)
 "
 " Use this to compute the next address in the counter.  These are shorthand, because
 " it is possible that we want to hard-set the address when a button is pressed
@@ -196,9 +193,6 @@ AudioAddrCin6   =  AudioAddrCin3  & AudioAddr3  & AudioAddr4  & AudioAddr5;
 AudioAddrCin9   =  AudioAddrCin6  & AudioAddr6  & AudioAddr7  & AudioAddr8;
 AudioAddrCin12  =  AudioAddrCin9  & AudioAddr9  & AudioAddr10 & AudioAddr11;
 AudioAddrCin15  =  AudioAddrCin12 & AudioAddr12 & AudioAddr13 & AudioAddr14;
-
-" Next address bus value (incremented)
-NextAddr = [NextAddr18..NextAddr0];
 
 " Start addresses corresponding to each of the switches
 StartSW1 = [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]; " 0x7C000
@@ -232,7 +226,6 @@ EndSW4 =                 AudioAddr18 & !AudioAddr17 & !AudioAddr16 & " 0100B = 0
           AudioAddr7  &  AudioAddr6  &  AudioAddr5  &  AudioAddr4  & " 1111B = 0x0F
           AudioAddr3  &  AudioAddr2  &  AudioAddr1  &  AudioAddr0;   " 1111B = 0x0F
 
-
 " We will a state machine that updates the address and data bits on each iteration.
 " When it updates the data bits to match the inputs, it is matching the data from
 " the previous address.  Then, the address bits are in preparation/setup for the
@@ -245,54 +238,43 @@ AddrActive3 = [    1,    1 ]; " Switch 3 is active
 AddrActive4 = [    0,    0 ]; " Switch 4 is active
 
 
-
+"--------------------------------------------------------------------------------------------------
+" equations
+"--------------------------------------------------------------------------------------------------
 EQUATIONS
 " Enable outputs
 AudioPWMOut.OE = 1;
 AudioAddr.OE   = 1;
 
+" define the Run signal to know when we have valid input
+Run.CLK      = CLK32;
+Run          = ( SW1 & !SW2 & !SW3 & !SW4) #
+               (!SW1 &  SW2 & !SW3 & !SW4) #
+               (!SW1 & !SW2 &  SW3 & !SW4) #
+               (!SW1 & !SW2 & !SW3 &  SW4);
 
-
-" the actual address counter
-" each bit toggles on carry in or when resetting and the bit is currently set
-NextAddr0   =  AudioAddr0  $ (!ResetCntr #
-                              (AudioAddr0 & ResetCntr));
-NextAddr1   =  AudioAddr1  $ ((AudioAddr0 & !ResetCntr) #
-                              (AudioAddr1 & ResetCntr));
-NextAddr2   =  AudioAddr2  $ ((AudioAddr0 & AudioAddr1 & !ResetCntr) #
-                              (AudioAddr2 & ResetCntr));
-NextAddr3   =  AudioAddr3  $ ((AudioAddrCin3 & !ResetCntr) #
-                              (AudioAddr3 & ResetCntr));
-NextAddr4   =  AudioAddr4  $ ((AudioAddrCin3 & AudioAddr3 & !ResetCntr) #
-                              (AudioAddr4 & ResetCntr));
-NextAddr5   =  AudioAddr5  $ ((AudioAddrCin3 & AudioAddr3 & AudioAddr4 & !ResetCntr) #
-                              (AudioAddr5 & ResetCntr));
-NextAddr6   =  AudioAddr6  $ ((AudioAddrCin6 & !ResetCntr) #
-                              (AudioAddr6 & ResetCntr));
-NextAddr7   =  AudioAddr7  $ ((AudioAddrCin6 & AudioAddr6 & !ResetCntr) #
-                              (AudioAddr7 & ResetCntr));
-NextAddr8   =  AudioAddr8  $ ((AudioAddrCin6 & AudioAddr6 & AudioAddr7 & !ResetCntr) #
-                              (AudioAddr8 & ResetCntr));
-NextAddr9   =  AudioAddr9  $ ((AudioAddrCin9 & !ResetCntr) #
-                              (AudioAddr9 & ResetCntr));
-NextAddr10  =  AudioAddr10 $ ((AudioAddrCin9 & AudioAddr9 & !ResetCntr) #
-                              (AudioAddr10 & ResetCntr));
-NextAddr11  =  AudioAddr11 $ ((AudioAddrCin9 & AudioAddr9 & AudioAddr10 & !ResetCntr) #
-                              (AudioAddr11 & ResetCntr));
-NextAddr12  =  AudioAddr12 $ ((AudioAddrCin12 & !ResetCntr) #
-                              (AudioAddr12 & ResetCntr));
-NextAddr13  =  AudioAddr13 $ ((AudioAddrCin12 & AudioAddr12 & !ResetCntr) #
-                              (AudioAddr13 & ResetCntr));
-NextAddr14  =  AudioAddr14 $ ((AudioAddrCin12 & AudioAddr12 & AudioAddr13 & !ResetCntr) #
-                              (AudioAddr14 & ResetCntr));
-NextAddr15  =  AudioAddr15 $ ((AudioAddrCin15 & !ResetCntr) #
-                              (AudioAddr15 & ResetCntr));
-NextAddr16  =  AudioAddr16 $ ((AudioAddrCin15 & AudioAddr15 & !ResetCntr) #
-                              (AudioAddr16 & ResetCntr));
-NextAddr17  =  AudioAddr17 $ ((AudioAddrCin15 & AudioAddr15 & AudioAddr16 & !ResetCntr) #
-                              (AudioAddr17 & ResetCntr));
-NextAddr18  =  AudioAddr18 $ ((AudioAddrCin15 & AudioAddr15 & AudioAddr16 & AudioAddr17 & !ResetCntr) #
-                              (!AudioAddr18 & ResetCntr));
+" the address counter
+" Each bit toggles on carry in.  We don't worry about reset because the state machine resets on
+" button edges, or the PWM is suppressed when there is no valid input
+NextAddr0   = !AudioAddr0;
+NextAddr1   =  AudioAddr1  $ (AudioAddr0);
+NextAddr2   =  AudioAddr2  $ (AudioAddr0 & AudioAddr1);
+NextAddr3   =  AudioAddr3  $ (AudioAddrCin3);
+NextAddr4   =  AudioAddr4  $ (AudioAddrCin3 & AudioAddr3);
+NextAddr5   =  AudioAddr5  $ (AudioAddrCin3 & AudioAddr3 & AudioAddr4);
+NextAddr6   =  AudioAddr6  $ (AudioAddrCin6);
+NextAddr7   =  AudioAddr7  $ (AudioAddrCin6 & AudioAddr6);
+NextAddr8   =  AudioAddr8  $ (AudioAddrCin6 & AudioAddr6 & AudioAddr7);
+NextAddr9   =  AudioAddr9  $ (AudioAddrCin9);
+NextAddr10  =  AudioAddr10 $ (AudioAddrCin9 & AudioAddr9);
+NextAddr11  =  AudioAddr11 $ (AudioAddrCin9 & AudioAddr9 & AudioAddr10);
+NextAddr12  =  AudioAddr12 $ (AudioAddrCin12);
+NextAddr13  =  AudioAddr13 $ (AudioAddrCin12 & AudioAddr12);
+NextAddr14  =  AudioAddr14 $ (AudioAddrCin12 & AudioAddr12 & AudioAddr13);
+NextAddr15  =  AudioAddr15 $ (AudioAddrCin15);
+NextAddr16  =  AudioAddr16 $ (AudioAddrCin15 & AudioAddr15);
+NextAddr17  =  AudioAddr17 $ (AudioAddrCin15 & AudioAddr15 & AudioAddr16);
+NextAddr18  =  AudioAddr18 $ (AudioAddrCin15 & AudioAddr15 & AudioAddr16 & AudioAddr17);
 
 " System Control Signals
 "    signals needed to control the system operation
@@ -300,23 +282,11 @@ NextAddr18  =  AudioAddr18 $ ((AudioAddrCin15 & AudioAddr15 & AudioAddr16 & Audi
 " carry out of PWM counter clocks the address counter
 " do carry out a little early to allow time for address setup
 " note that this means the data from the ROM must be latched
-" also should clock if trying to reset the counters
-AddrInc      =  PWMCountCin9 & PWMCount9 & PWMCount10 & !PWMCount11;
-AddrInc.CLK  =  CLK32;
-
-" reset the counters when no switches are active
-ResetCntr    =  !ButtonPush;
-
-" define the Run signal
-" run counter if exactly switch is active, which is exactly when not ResetCntr
-Run           =  ( SW1 & !SW2 & !SW3 & !SW4) #
-                 (!SW1 &  SW2 & !SW3 & !SW4) #
-                 (!SW1 & !SW2 &  SW3 & !SW4) #
-                 (!SW1 & !SW2 & !SW3 &  SW4);
-
-" PWM handler
-"    setup the clock for the PWM counter
-PWMCount.CLK  = CLK32;
+" also should clock if trying to reset the counters.
+" We will clock on the last input of the 8-bit LFSR, which is 00..01, the
+" 16th time (another counter will have value 1111)
+AddrInc      = PWMCycle & AddrClock3 & AddrClock2 & AddrClock1 & AddrClock0;
+AddrInc.CLK  = CLK32;
 
 
 "    setup the clock for the audio address counter
@@ -394,42 +364,42 @@ STATE AddrActive4: " Button 4 pressed
 "--------------------------------------------------------------------------------------------------
 " PWM Counter and Output
 "--------------------------------------------------------------------------------------------------
-" the actual counter
+" The last state before reset on the PWM counter is 00000001
+PWMCycle.CLK    = CLK32
+PWMCycle        = !PWMCount7 & !PWMCount6 & !PWMCount5 & !PWMCount4 &
+                  !PWMCount3 & !PWMCount2 & !PWMCount1 &  PWMCount0;
+
+" PWM Counter
+"    8-bit LFSR
+"    clocked off the 32 MHz clock
+"    reset on all-zero state
+"    feedback bits: 7, 5, 4, 3
 " each bit toggles on carry in or when resetting and the bit is currently set
-PWMCount0   =  PWMCount0  $ ((Run & !ResetCntr) #
-                             (PWMCount0  & ResetCntr));
-PWMCount1   =  PWMCount1  $ ((Run & PWMCount0 & !ResetCntr) #
-                             (PWMCount1  & ResetCntr));
-PWMCount2   =  PWMCount2  $ ((Run & PWMCount0 & PWMCount1 & !ResetCntr) #
-                             (PWMCount2  & ResetCntr));
-PWMCount3   =  PWMCount3  $ ((PWMCountCin3 & !ResetCntr) #
-                             (PWMCount3  & ResetCntr));
-PWMCount4   =  PWMCount4  $ ((PWMCountCin3 & PWMCount3 & !ResetCntr) #
-                             (PWMCount4  & ResetCntr));
-PWMCount5   =  PWMCount5  $ ((PWMCountCin3 & PWMCount3 & PWMCount4 & !ResetCntr) #
-                             (PWMCount5  & ResetCntr));
-PWMCount6   =  PWMCount6  $ ((PWMCountCin6 & !ResetCntr) #
-                             (PWMCount6  & ResetCntr));
-PWMCount7   =  PWMCount7  $ ((PWMCountCin6 & PWMCount6 & !ResetCntr) #
-                             (PWMCount7  & ResetCntr));
-PWMCount8   =  PWMCount8  $ ((PWMCountCin6 & PWMCount6 & PWMCount7 & !ResetCntr) #
-                             (PWMCount8  & ResetCntr));
-PWMCount9   =  PWMCount9  $ ((PWMCountCin9 & !ResetCntr) #
-                             (PWMCount9 & ResetCntr));
-PWMCount10  =  PWMCount10 $ ((PWMCountCin9 & PWMCount9 & !ResetCntr) #
-                             (PWMCount10 & ResetCntr));
-PWMCount11  =  PWMCount11 $ ((PWMCountCin9 & PWMCount9 & PWMCount10 & !ResetCntr) #
-                             (PWMCount11 & ResetCntr));
+PWMCount.CLK    = CLK32;
+PWMCount0       = PWMZeroed # (PWMCount7 $ PWMCount5 $ PWMCount4 $ PWMCount3); " Feedback
+PWMCount1       = PWMCount0; " Shift
+PWMCount2       = PWMCount1; " Shift
+PWMCount3       = PWMCount2; " Shift
+PWMCount4       = PWMCount3; " Shift
+PWMCount5       = PWMCount4; " Shift
+PWMCount6       = PWMCount5; " Shift
+PWMCount7       = PWMCount6; " Shift
+
+" Count PWM cycles
+AddrClock0      =  !AddrClock0;
+AddrClock1      =  AddrClock1 $ (AddrClock0);
+AddrClock2      =  AddrClock2 $ (AddrClock1 & AddrClock0);
+AddrClock3      =  AddrClock3 $ (AddrClock2 & AddrClock1 & AddrClock0);
 
 " Set PWM out if the count is less than the data: AudioPWMOut = (PWMCount < AudioData)
-AudioPWMOut = (!PWMCount7 & DataBit7) #
-              (!PWMCount6 & DataBit6 & Eq7) #
-              (!PWMCount5 & DataBit5 & Eq7 & Eq6) #
-              (!PWMCount4 & DataBit4 & Eq7 & Eq6 & Eq5) #
-              (!PWMCount3 & DataBit3 & Eq7 & Eq6 & Eq5 & Eq4) #
-              (!PWMCount2 & DataBit2 & Eq7 & Eq6 & Eq5 & Eq4 & Eq3) #
-              (!PWMCount1 & DataBit1 & Eq7 & Eq6 & Eq5 & Eq4 & Eq3 & Eq2) #
-              (!PWMCount0 & DataBit0 & Eq7 & Eq6 & Eq5 & Eq4 & Eq3 & Eq2 & Eq1);
+AudioPWMOut     = (!PWMCount7 & DataBit7) #
+                  (!PWMCount6 & DataBit6 & Eq7) #
+                  (!PWMCount5 & DataBit5 & Eq7 & Eq6) #
+                  (!PWMCount4 & DataBit4 & Eq7 & Eq6 & Eq5) #
+                  (!PWMCount3 & DataBit3 & Eq7 & Eq6 & Eq5 & Eq4) #
+                  (!PWMCount2 & DataBit2 & Eq7 & Eq6 & Eq5 & Eq4 & Eq3) #
+                  (!PWMCount1 & DataBit1 & Eq7 & Eq6 & Eq5 & Eq4 & Eq3 & Eq2) #
+                  (!PWMCount0 & DataBit0 & Eq7 & Eq6 & Eq5 & Eq4 & Eq3 & Eq2 & Eq1);
 
 
 
