@@ -269,6 +269,11 @@ AddrActive4 = [    0,    0 ]; " Switch 4 is active
 
 
 EQUATIONS
+" Enable outputs
+AudioPWMOut.OE = 1;
+AudioAddr.OE   = 1;
+
+
 
 " System Control Signals
 "    signals needed to control the system operation
