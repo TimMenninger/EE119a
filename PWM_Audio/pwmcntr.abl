@@ -102,14 +102,32 @@ PWMCount8       NODE     ISTYPE 'reg_d, buffer';    " bit 8 of the PWM counter
 PWMCount9       NODE     ISTYPE 'reg_d, buffer';    " bit 9 of the PWM counter
 PWMCount10      NODE     ISTYPE 'reg_d, buffer';    " bit 10 of the PWM counter
 PWMCount11      NODE     ISTYPE 'reg_d, buffer';    " bit 11 of the PWM counter
-PWMCountCin3    NODE     ISTYPE 'com';              " carry in to bit 3 of the PWM counter
-PWMCountCin6    NODE     ISTYPE 'com';              " carry in to bit 6 of the PWM counter
-PWMCountCin9    NODE     ISTYPE 'com';              " carry in to bit 9 of the PWM counter
+
+" Next address for normal address incrementation
+NextAddr0       NODE     ISTYPE 'com';              " bit 0 of the next address on normal increment
+NextAddr1       NODE     ISTYPE 'com';              " bit 1 of the next address on normal increment
+NextAddr2       NODE     ISTYPE 'com';              " bit 2 of the next address on normal increment
+NextAddr3       NODE     ISTYPE 'com';              " bit 3 of the next address on normal increment
+NextAddr4       NODE     ISTYPE 'com';              " bit 4 of the next address on normal increment
+NextAddr5       NODE     ISTYPE 'com';              " bit 5 of the next address on normal increment
+NextAddr6       NODE     ISTYPE 'com';              " bit 6 of the next address on normal increment
+NextAddr7       NODE     ISTYPE 'com';              " bit 7 of the next address on normal increment
+NextAddr8       NODE     ISTYPE 'com';              " bit 8 of the next address on normal increment
+NextAddr9       NODE     ISTYPE 'com';              " bit 9 of the next address on normal increment
+NextAddr10      NODE     ISTYPE 'com';              " bit 10 of the next address on normal increment
+NextAddr11      NODE     ISTYPE 'com';              " bit 11 of the next address on normal increment
+NextAddr12      NODE     ISTYPE 'com';              " bit 12 of the next address on normal increment
+NextAddr13      NODE     ISTYPE 'com';              " bit 13 of the next address on normal increment
+NextAddr14      NODE     ISTYPE 'com';              " bit 14 of the next address on normal increment
+NextAddr15      NODE     ISTYPE 'com';              " bit 15 of the next address on normal increment
+NextAddr16      NODE     ISTYPE 'com';              " bit 16 of the next address on normal increment
+NextAddr17      NODE     ISTYPE 'com';              " bit 17 of the next address on normal increment
+NextAddr18      NODE     ISTYPE 'com';              " bit 18 of the next address on normal increment
 
 AddrInc         NODE     ISTYPE 'reg_d, buffer';    " clock for PWM address counter
 
-StateBit1       NODE     ISTYPE 'reg_d, buffer';    " bit 1 in state encoding for addressing
-StateBit0       NODE     ISTYPE 'reg_d, buffer';    " bit 0 in state encoding for addressing
+Bit1            NODE     ISTYPE 'reg_d, buffer';    " bit 1 in state encoding for addressing
+Bit0            NODE     ISTYPE 'reg_d, buffer';    " bit 0 in state encoding for addressing
 
 ResetCntr       NODE     ISTYPE 'com';              " reset the counters
 Run             NODE     ISTYPE 'com';              " run the counters
@@ -143,6 +161,8 @@ ButtonPush = SW1 # SW2 # SW3 # SW4; " True if at least one button is active
 "    has carry lookahead every 3 bits for routing
 "    reset on ResetCntr
 
+" Shorthand for zeroing the PWM value to suppress outputs
+DataZero = [ 0, 0, 0, 0, 0, 0, 0, 0 ];
 
 " carry lookahead is computed for every 3 bits and they ripple
 "    only increment (generate carries) when Running
@@ -177,52 +197,10 @@ AudioAddrCin9   =  AudioAddrCin6  & AudioAddr6  & AudioAddr7  & AudioAddr8;
 AudioAddrCin12  =  AudioAddrCin9  & AudioAddr9  & AudioAddr10 & AudioAddr11;
 AudioAddrCin15  =  AudioAddrCin12 & AudioAddr12 & AudioAddr13 & AudioAddr14;
 
-" the actual counter
-" each bit toggles on carry in or when resetting and the bit is currently set
-NextAddr0   =  AudioAddr0  $ (!ResetCntr #
-                              (AudioAddr0 & ResetCntr));
-NextAddr1   =  AudioAddr1  $ ((AudioAddr0 & !ResetCntr) #
-                              (AudioAddr1 & ResetCntr));
-NextAddr2   =  AudioAddr2  $ ((AudioAddr0 & AudioAddr1 & !ResetCntr) #
-                              (AudioAddr2 & ResetCntr));
-NextAddr3   =  AudioAddr3  $ ((AudioAddrCin3 & !ResetCntr) #
-                              (AudioAddr3 & ResetCntr));
-NextAddr4   =  AudioAddr4  $ ((AudioAddrCin3 & AudioAddr3 & !ResetCntr) #
-                              (AudioAddr4 & ResetCntr));
-NextAddr5   =  AudioAddr5  $ ((AudioAddrCin3 & AudioAddr3 & AudioAddr4 & !ResetCntr) #
-                              (AudioAddr5 & ResetCntr));
-NextAddr6   =  AudioAddr6  $ ((AudioAddrCin6 & !ResetCntr) #
-                              (AudioAddr6 & ResetCntr));
-NextAddr7   =  AudioAddr7  $ ((AudioAddrCin6 & AudioAddr6 & !ResetCntr) #
-                              (AudioAddr7 & ResetCntr));
-NextAddr8   =  AudioAddr8  $ ((AudioAddrCin6 & AudioAddr6 & AudioAddr7 & !ResetCntr) #
-                              (AudioAddr8 & ResetCntr));
-NextAddr9   =  AudioAddr9  $ ((AudioAddrCin9 & !ResetCntr) #
-                              (AudioAddr9 & ResetCntr));
-NextAddr10  =  AudioAddr10 $ ((AudioAddrCin9 & AudioAddr9 & !ResetCntr) #
-                              (AudioAddr10 & ResetCntr));
-NextAddr11  =  AudioAddr11 $ ((AudioAddrCin9 & AudioAddr9 & AudioAddr10 & !ResetCntr) #
-                              (AudioAddr11 & ResetCntr));
-NextAddr12  =  AudioAddr12 $ ((AudioAddrCin12 & !ResetCntr) #
-                              (AudioAddr12 & ResetCntr));
-NextAddr13  =  AudioAddr13 $ ((AudioAddrCin12 & AudioAddr12 & !ResetCntr) #
-                              (AudioAddr13 & ResetCntr));
-NextAddr14  =  AudioAddr14 $ ((AudioAddrCin12 & AudioAddr12 & AudioAddr13 & !ResetCntr) #
-                              (AudioAddr14 & ResetCntr));
-NextAddr15  =  AudioAddr15 $ ((AudioAddrCin15 & !ResetCntr) #
-                              (AudioAddr15 & ResetCntr));
-NextAddr16  =  AudioAddr16 $ ((AudioAddrCin15 & AudioAddr15 & !ResetCntr) #
-                              (AudioAddr16 & ResetCntr));
-NextAddr17  =  AudioAddr17 $ ((AudioAddrCin15 & AudioAddr15 & AudioAddr16 & !ResetCntr) #
-                              (AudioAddr17 & ResetCntr));
-NextAddr18  =  AudioAddr18 $ ((AudioAddrCin15 & AudioAddr15 & AudioAddr16 & AudioAddr17 & !ResetCntr) #
-                              (!AudioAddr18 & ResetCntr));
-
 " Next address bus value (incremented)
 NextAddr = [NextAddr18..NextAddr0];
 
 " Start addresses corresponding to each of the switches
-AddrZero = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 StartSW1 = [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]; " 0x7C000
 StartSW2 = [ 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]; " 0x58000
 StartSW3 = [ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]; " 0x48000
@@ -275,6 +253,47 @@ AudioAddr.OE   = 1;
 
 
 
+" the actual address counter
+" each bit toggles on carry in or when resetting and the bit is currently set
+NextAddr0   =  AudioAddr0  $ (!ResetCntr #
+                              (AudioAddr0 & ResetCntr));
+NextAddr1   =  AudioAddr1  $ ((AudioAddr0 & !ResetCntr) #
+                              (AudioAddr1 & ResetCntr));
+NextAddr2   =  AudioAddr2  $ ((AudioAddr0 & AudioAddr1 & !ResetCntr) #
+                              (AudioAddr2 & ResetCntr));
+NextAddr3   =  AudioAddr3  $ ((AudioAddrCin3 & !ResetCntr) #
+                              (AudioAddr3 & ResetCntr));
+NextAddr4   =  AudioAddr4  $ ((AudioAddrCin3 & AudioAddr3 & !ResetCntr) #
+                              (AudioAddr4 & ResetCntr));
+NextAddr5   =  AudioAddr5  $ ((AudioAddrCin3 & AudioAddr3 & AudioAddr4 & !ResetCntr) #
+                              (AudioAddr5 & ResetCntr));
+NextAddr6   =  AudioAddr6  $ ((AudioAddrCin6 & !ResetCntr) #
+                              (AudioAddr6 & ResetCntr));
+NextAddr7   =  AudioAddr7  $ ((AudioAddrCin6 & AudioAddr6 & !ResetCntr) #
+                              (AudioAddr7 & ResetCntr));
+NextAddr8   =  AudioAddr8  $ ((AudioAddrCin6 & AudioAddr6 & AudioAddr7 & !ResetCntr) #
+                              (AudioAddr8 & ResetCntr));
+NextAddr9   =  AudioAddr9  $ ((AudioAddrCin9 & !ResetCntr) #
+                              (AudioAddr9 & ResetCntr));
+NextAddr10  =  AudioAddr10 $ ((AudioAddrCin9 & AudioAddr9 & !ResetCntr) #
+                              (AudioAddr10 & ResetCntr));
+NextAddr11  =  AudioAddr11 $ ((AudioAddrCin9 & AudioAddr9 & AudioAddr10 & !ResetCntr) #
+                              (AudioAddr11 & ResetCntr));
+NextAddr12  =  AudioAddr12 $ ((AudioAddrCin12 & !ResetCntr) #
+                              (AudioAddr12 & ResetCntr));
+NextAddr13  =  AudioAddr13 $ ((AudioAddrCin12 & AudioAddr12 & !ResetCntr) #
+                              (AudioAddr13 & ResetCntr));
+NextAddr14  =  AudioAddr14 $ ((AudioAddrCin12 & AudioAddr12 & AudioAddr13 & !ResetCntr) #
+                              (AudioAddr14 & ResetCntr));
+NextAddr15  =  AudioAddr15 $ ((AudioAddrCin15 & !ResetCntr) #
+                              (AudioAddr15 & ResetCntr));
+NextAddr16  =  AudioAddr16 $ ((AudioAddrCin15 & AudioAddr15 & !ResetCntr) #
+                              (AudioAddr16 & ResetCntr));
+NextAddr17  =  AudioAddr17 $ ((AudioAddrCin15 & AudioAddr15 & AudioAddr16 & !ResetCntr) #
+                              (AudioAddr17 & ResetCntr));
+NextAddr18  =  AudioAddr18 $ ((AudioAddrCin15 & AudioAddr15 & AudioAddr16 & AudioAddr17 & !ResetCntr) #
+                              (!AudioAddr18 & ResetCntr));
+
 " System Control Signals
 "    signals needed to control the system operation
 
@@ -303,6 +322,7 @@ PWMCount.CLK  = CLK32;
 "    setup the clock for the audio address counter
 AudioAddr.CLK = AddrInc;
 AudioData.CLK = AddrInc;
+AddrBits.CLK  = AddrInc;
 
 " Audio data matches the input data, which is assumed valid at 8kHz frequency
 AudioData = DataIn;
@@ -327,45 +347,47 @@ AudioData = DataIn;
 "         treating it as an edge.
 "       - If none of these cases are satisfied, it zeroes the data and lets the address counter
 "         count.
-STATE AddrActive1:
+STATE_DIAGRAM AddrBits
 
-         IF SW1Edge       THEN AddrActive1 WITH {AudioAddr = StartSW1, AudioData = DataZero}
-    ELSE IF SW1 & EndSW1  THEN AddrActive1 WITH {AudioAddr = StartSW1, AudioData = DataIn}
-    ELSE IF SW1           THEN AddrActive1 WITH {AudioAddr = NextAddr, AudioData = DataIn}
-    ELSE IF SW2           THEN AddrActive2 WITH {AudioAddr = StartSW2, AudioData = DataZero}
-    ELSE IF SW3           THEN AddrActive3 WITH {AudioAddr = StartSW3, AudioData = DataZero}
-    ELSE IF SW4           THEN AddrActive4 WITH {AudioAddr = StartSW4, AudioData = DataZero}
-    ELSE                       AddrActive1 WITH {AudioAddr = NextAddr, AudioData = DataZero};
+STATE AddrActive1: " Button 1 pressed
 
-STATE AddrActive2:
+         IF SW1Edge       THEN AddrActive1 WITH {AudioAddr = StartSW1; AudioData = DataZero}
+    ELSE IF SW1 & EndSW1  THEN AddrActive1 WITH {AudioAddr = StartSW1; AudioData = DataIn}
+    ELSE IF SW1           THEN AddrActive1 WITH {AudioAddr = NextAddr; AudioData = DataIn}
+    ELSE IF SW2           THEN AddrActive2 WITH {AudioAddr = StartSW2; AudioData = DataZero}
+    ELSE IF SW3           THEN AddrActive3 WITH {AudioAddr = StartSW3; AudioData = DataZero}
+    ELSE IF SW4           THEN AddrActive4 WITH {AudioAddr = StartSW4; AudioData = DataZero}
+    ELSE                       AddrActive1 WITH {AudioAddr = NextAddr; AudioData = DataZero}
 
-         IF SW2Edge       THEN AddrActive2 WITH {AudioAddr = StartSW2, AudioData = DataZero}
-    ELSE IF SW2 & EndSW2  THEN AddrActive2 WITH {AudioAddr = StartSW2, AudioData = DataIn}
-    ELSE IF SW1           THEN AddrActive1 WITH {AudioAddr = StartSW1, AudioData = DataZero}
-    ELSE IF SW2           THEN AddrActive2 WITH {AudioAddr = NextAddr, AudioData = DataIn}
-    ELSE IF SW3           THEN AddrActive3 WITH {AudioAddr = StartSW3, AudioData = DataZero}
-    ELSE IF SW4           THEN AddrActive4 WITH {AudioAddr = StartSW4, AudioData = DataZero}
-    ELSE                       AddrActive2 WITH {AudioAddr = NextAddr, AudioData = DataZero};
+STATE AddrActive2: " Button 2 pressed
 
-STATE AddrActive3:
+         IF SW2Edge       THEN AddrActive2 WITH {AudioAddr = StartSW2; AudioData = DataZero}
+    ELSE IF SW2 & EndSW2  THEN AddrActive2 WITH {AudioAddr = StartSW2; AudioData = DataIn}
+    ELSE IF SW1           THEN AddrActive1 WITH {AudioAddr = StartSW1; AudioData = DataZero}
+    ELSE IF SW2           THEN AddrActive2 WITH {AudioAddr = NextAddr; AudioData = DataIn}
+    ELSE IF SW3           THEN AddrActive3 WITH {AudioAddr = StartSW3; AudioData = DataZero}
+    ELSE IF SW4           THEN AddrActive4 WITH {AudioAddr = StartSW4; AudioData = DataZero}
+    ELSE                       AddrActive2 WITH {AudioAddr = NextAddr; AudioData = DataZero}
 
-         IF SW3Edge       THEN AddrActive3 WITH {AudioAddr = StartSW3, AudioData = DataZero}
-    ELSE IF SW3 & EndSW3  THEN AddrActive3 WITH {AudioAddr = StartSW3, AudioData = DataIn}
-    ELSE IF SW1           THEN AddrActive1 WITH {AudioAddr = StartSW1, AudioData = DataZero}
-    ELSE IF SW2           THEN AddrActive2 WITH {AudioAddr = StartSW2, AudioData = DataZero}
-    ELSE IF SW3           THEN AddrActive3 WITH {AudioAddr = NextAddr, AudioData = DataIn}
-    ELSE IF SW4           THEN AddrActive4 WITH {AudioAddr = StartSW4, AudioData = DataZero}
-    ELSE                       AddrActive3 WITH {AudioAddr = NextAddr, AudioData = DataZero};
+STATE AddrActive3: " Button 3 pressed
 
-STATE AddrActive4:
+         IF SW3Edge       THEN AddrActive3 WITH {AudioAddr = StartSW3; AudioData = DataZero}
+    ELSE IF SW3 & EndSW3  THEN AddrActive3 WITH {AudioAddr = StartSW3; AudioData = DataIn}
+    ELSE IF SW1           THEN AddrActive1 WITH {AudioAddr = StartSW1; AudioData = DataZero}
+    ELSE IF SW2           THEN AddrActive2 WITH {AudioAddr = StartSW2; AudioData = DataZero}
+    ELSE IF SW3           THEN AddrActive3 WITH {AudioAddr = NextAddr; AudioData = DataIn}
+    ELSE IF SW4           THEN AddrActive4 WITH {AudioAddr = StartSW4; AudioData = DataZero}
+    ELSE                       AddrActive3 WITH {AudioAddr = NextAddr; AudioData = DataZero}
 
-         IF SW4Edge       THEN AddrActive4 WITH {AudioAddr = StartSW4, AudioData = DataZero}
-    ELSE IF SW4 & EndSW4  THEN AddrActive4 WITH {AudioAddr = StartSW4, AudioData = DataIn}
-    ELSE IF SW1           THEN AddrActive1 WITH {AudioAddr = StartSW1, AudioData = DataZero}
-    ELSE IF SW2           THEN AddrActive2 WITH {AudioAddr = StartSW2, AudioData = DataZero}
-    ELSE IF SW3           THEN AddrActive3 WITH {AudioAddr = StartSW3, AudioData = DataZero}
-    ELSE IF SW4           THEN AddrActive4 WITH {AudioAddr = NextAddr, AudioData = DataIn}
-    ELSE                       AddrActive4 WITH {AudioAddr = NextAddr, AudioData = DataZero};
+STATE AddrActive4: " Button 4 pressed
+
+         IF SW4Edge       THEN AddrActive4 WITH {AudioAddr = StartSW4; AudioData = DataZero}
+    ELSE IF SW4 & EndSW4  THEN AddrActive4 WITH {AudioAddr = StartSW4; AudioData = DataIn}
+    ELSE IF SW1           THEN AddrActive1 WITH {AudioAddr = StartSW1; AudioData = DataZero}
+    ELSE IF SW2           THEN AddrActive2 WITH {AudioAddr = StartSW2; AudioData = DataZero}
+    ELSE IF SW3           THEN AddrActive3 WITH {AudioAddr = StartSW3; AudioData = DataZero}
+    ELSE IF SW4           THEN AddrActive4 WITH {AudioAddr = NextAddr; AudioData = DataIn}
+    ELSE                       AddrActive4 WITH {AudioAddr = NextAddr; AudioData = DataZero}
 
 
 
