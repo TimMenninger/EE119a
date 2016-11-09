@@ -56,55 +56,55 @@ AudioData1      PIN  21;                            " in    audio data, bit 1
 AudioData0      PIN  22;                            " in    audio data, bit 0
 
 " ROM address bus outputs
-AudioAddr18     PIN  29  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 18
-AudioAddr17     PIN  30  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 17
-AudioAddr16     PIN  31  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 16
-AudioAddr15     PIN  32  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 15
-AudioAddr14     PIN  37  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 14
-AudioAddr13     PIN  38  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 13
-AudioAddr12     PIN  39  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 12
-AudioAddr11     PIN  40  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 11
-AudioAddr10     PIN  41  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 10
-AudioAddr9      PIN  42  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 9
-AudioAddr8      PIN  43  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 8
-AudioAddr7      PIN  44  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 7
-AudioAddr6      PIN   3  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 6
-AudioAddr5      PIN   4  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 5
-AudioAddr4      PIN   5  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 4
-AudioAddr3      PIN   6  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 3
-AudioAddr2      PIN   7  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 2
-AudioAddr1      PIN   8  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 1
-AudioAddr0      PIN   9  ISTYPE 'reg_d, buffer';    " out   audio ROM address, bit 0
+AudioAddr18     PIN  29  ISTYPE 'reg';              " out   audio ROM address, bit 18
+AudioAddr17     PIN  30  ISTYPE 'reg';              " out   audio ROM address, bit 17
+AudioAddr16     PIN  31  ISTYPE 'reg';              " out   audio ROM address, bit 16
+AudioAddr15     PIN  32  ISTYPE 'reg';              " out   audio ROM address, bit 15
+AudioAddr14     PIN  37  ISTYPE 'reg';              " out   audio ROM address, bit 14
+AudioAddr13     PIN  38  ISTYPE 'reg';              " out   audio ROM address, bit 13
+AudioAddr12     PIN  39  ISTYPE 'reg';              " out   audio ROM address, bit 12
+AudioAddr11     PIN  40  ISTYPE 'reg';              " out   audio ROM address, bit 11
+AudioAddr10     PIN  41  ISTYPE 'reg';              " out   audio ROM address, bit 10
+AudioAddr9      PIN  42  ISTYPE 'reg';              " out   audio ROM address, bit 9
+AudioAddr8      PIN  43  ISTYPE 'reg';              " out   audio ROM address, bit 8
+AudioAddr7      PIN  44  ISTYPE 'reg';              " out   audio ROM address, bit 7
+AudioAddr6      PIN   3  ISTYPE 'reg';              " out   audio ROM address, bit 6
+AudioAddr5      PIN   4  ISTYPE 'reg';              " out   audio ROM address, bit 5
+AudioAddr4      PIN   5  ISTYPE 'reg';              " out   audio ROM address, bit 4
+AudioAddr3      PIN   6  ISTYPE 'reg';              " out   audio ROM address, bit 3
+AudioAddr2      PIN   7  ISTYPE 'reg';              " out   audio ROM address, bit 2
+AudioAddr1      PIN   8  ISTYPE 'reg';              " out   audio ROM address, bit 1
+AudioAddr0      PIN   9  ISTYPE 'reg';              " out   audio ROM address, bit 0
 
 
 "--------------------------------------------------------------------------------------------------
 " internal nodes for computation
 "--------------------------------------------------------------------------------------------------
 " Audio data stored for PWM counter/setter to use
-DataBit0        NODE     ISTYPE 'reg_d, buffer';    " bit 0 of the newest audio data
-DataBit1        NODE     ISTYPE 'reg_d, buffer';    " bit 1 of the newest audio data
-DataBit2        NODE     ISTYPE 'reg_d, buffer';    " bit 2 of the newest audio data
-DataBit3        NODE     ISTYPE 'reg_d, buffer';    " bit 3 of the newest audio data
-DataBit4        NODE     ISTYPE 'reg_d, buffer';    " bit 4 of the newest audio data
-DataBit5        NODE     ISTYPE 'reg_d, buffer';    " bit 5 of the newest audio data
-DataBit6        NODE     ISTYPE 'reg_d, buffer';    " bit 6 of the newest audio data
-DataBit7        NODE     ISTYPE 'reg_d, buffer';    " bit 7 of the newest audio data
+DataBit0        NODE     ISTYPE 'reg';              " bit 0 of the newest audio data
+DataBit1        NODE     ISTYPE 'reg';              " bit 1 of the newest audio data
+DataBit2        NODE     ISTYPE 'reg';              " bit 2 of the newest audio data
+DataBit3        NODE     ISTYPE 'reg';              " bit 3 of the newest audio data
+DataBit4        NODE     ISTYPE 'reg';              " bit 4 of the newest audio data
+DataBit5        NODE     ISTYPE 'reg';              " bit 5 of the newest audio data
+DataBit6        NODE     ISTYPE 'reg';              " bit 6 of the newest audio data
+DataBit7        NODE     ISTYPE 'reg';              " bit 7 of the newest audio data
 
 " PWM Counter (12 bits -> 32 MHz / 4096 = 8 KHz)
-PWMCount0       NODE     ISTYPE 'reg_d, buffer';    " bit 0 of the PWM counter
-PWMCount1       NODE     ISTYPE 'reg_d, buffer';    " bit 1 of the PWM counter
-PWMCount2       NODE     ISTYPE 'reg_d, buffer';    " bit 2 of the PWM counter
-PWMCount3       NODE     ISTYPE 'reg_d, buffer';    " bit 3 of the PWM counter
-PWMCount4       NODE     ISTYPE 'reg_d, buffer';    " bit 4 of the PWM counter
-PWMCount5       NODE     ISTYPE 'reg_d, buffer';    " bit 5 of the PWM counter
-PWMCount6       NODE     ISTYPE 'reg_d, buffer';    " bit 6 of the PWM counter
-PWMCount7       NODE     ISTYPE 'reg_d, buffer';    " bit 7 of the PWM counter
+PWMCount0       NODE     ISTYPE 'reg';              " bit 0 of the PWM counter
+PWMCount1       NODE     ISTYPE 'reg';              " bit 1 of the PWM counter
+PWMCount2       NODE     ISTYPE 'reg';              " bit 2 of the PWM counter
+PWMCount3       NODE     ISTYPE 'reg';              " bit 3 of the PWM counter
+PWMCount4       NODE     ISTYPE 'reg';              " bit 4 of the PWM counter
+PWMCount5       NODE     ISTYPE 'reg';              " bit 5 of the PWM counter
+PWMCount6       NODE     ISTYPE 'reg';              " bit 6 of the PWM counter
+PWMCount7       NODE     ISTYPE 'reg';              " bit 7 of the PWM counter
 
 " Counts 16 PWM cycles to satisfy 8kHz frequency.  Address is clocked when this is 1111B
-AddrClock0      NODE     ISTYPE 'reg_d, buffer';    " Counts 16 PWM cycles (bit 0)
-AddrClock1      NODE     ISTYPE 'reg_d, buffer';    " Counts 16 PWM cycles (bit 1)
-AddrClock2      NODE     ISTYPE 'reg_d, buffer';    " Counts 16 PWM cycles (bit 2)
-AddrClock3      NODE     ISTYPE 'reg_d, buffer';    " Counts 16 PWM cycles (bit 3)
+AddrClock0      NODE     ISTYPE 'reg';              " Counts 16 PWM cycles (bit 0)
+AddrClock1      NODE     ISTYPE 'reg';              " Counts 16 PWM cycles (bit 1)
+AddrClock2      NODE     ISTYPE 'reg';              " Counts 16 PWM cycles (bit 2)
+AddrClock3      NODE     ISTYPE 'reg';              " Counts 16 PWM cycles (bit 3)
 
 " Compute the next address when incrementing normally.  These are nodes and not macros
 " so we can use bus/set notation
@@ -129,15 +129,15 @@ NextAddr17      NODE     ISTYPE 'com';              " bit 17 of the next address
 NextAddr18      NODE     ISTYPE 'com';              " bit 18 of the next address on normal increment
 
 " Signals used for clocking purposes
-PWMCycle        NODE     ISTYPE 'reg_d, buffer';    " clock for 16-PWM counter
-AddrInc         NODE     ISTYPE 'reg_d, buffer';    " clock for PWM address counter
+PWMCycle        NODE     ISTYPE 'reg';              " clock for 16-PWM counter
+AddrInc         NODE     ISTYPE 'reg';              " clock for PWM address counter
 
 " State bits for addressing state machine
-Bit1            NODE     ISTYPE 'reg_d, buffer';    " bit 1 in state encoding for addressing
-Bit0            NODE     ISTYPE 'reg_d, buffer';    " bit 0 in state encoding for addressing
+Bit1            NODE     ISTYPE 'reg';              " bit 1 in state encoding for addressing
+Bit0            NODE     ISTYPE 'reg';              " bit 0 in state encoding for addressing
 
 " Stores running/not running state, used primarily to detect buttonpush edges
-Run             NODE     ISTYPE 'reg_d, buffer';    " run the counters
+Run             NODE     ISTYPE 'reg';              " run the counters
 
 
 "--------------------------------------------------------------------------------------------------
@@ -153,8 +153,8 @@ NextAddr  = [NextAddr18..NextAddr0];                " next address value when co
 
 " properties
 PLSI PROPERTY 'Y1_AS_RESET ON';                     " use Y1 as reset
-PLSI PROPERTY 'CLK  AddrInc  SLOWCLK';              " AddrInc is a product term clock
-PLSI PROPERTY 'CLK  PWMCount  SLOWCLK';             " PWMCount is a product term clock
+PLSI PROPERTY 'CLK  AddrInc  CLK0';                 " AddrInc is a product term clock
+PLSI PROPERTY 'CLK  PWMCycle CLK1';                 " PWMCycle is a product term clock
 
 " Shorthand to detect buttonpushes
 SW1Edge    = !Run &  SW1 & !SW2 & !SW3 & !SW4; " button 1 edge pushed
@@ -244,37 +244,55 @@ AddrActive4 = [    0,    0 ]; " Switch 4 is active
 EQUATIONS
 " Enable outputs
 AudioPWMOut.OE = 1;
-AudioAddr.OE   = 1;
+AudioAddr18.OE = 1;
+AudioAddr17.OE = 1;
+AudioAddr16.OE = 1;
+AudioAddr15.OE = 1;
+AudioAddr14.OE = 1;
+AudioAddr13.OE = 1;
+AudioAddr12.OE = 1;
+AudioAddr11.OE = 1;
+AudioAddr10.OE = 1;
+AudioAddr9.OE  = 1;
+AudioAddr8.OE  = 1;
+AudioAddr7.OE  = 1;
+AudioAddr6.OE  = 1;
+AudioAddr5.OE  = 1;
+AudioAddr4.OE  = 1;
+AudioAddr3.OE  = 1;
+AudioAddr2.OE  = 1;
+AudioAddr1.OE  = 1;
+AudioAddr0.OE  = 1;
 
 " define the Run signal to know when we have valid input
-Run.CLK      = CLK32;
-Run          = ( SW1 & !SW2 & !SW3 & !SW4) #
-               (!SW1 &  SW2 & !SW3 & !SW4) #
-               (!SW1 & !SW2 &  SW3 & !SW4) #
-               (!SW1 & !SW2 & !SW3 &  SW4);
+Run.CLK       = CLK32;
+Run           = ( SW1 & !SW2 & !SW3 & !SW4) #
+                (!SW1 &  SW2 & !SW3 & !SW4) #
+                (!SW1 & !SW2 &  SW3 & !SW4) #
+                (!SW1 & !SW2 & !SW3 &  SW4);
 
 " the address counter
 " Each bit toggles on carry in.  We don't worry about reset because the state machine resets on
 " button edges, or the PWM is suppressed when there is no valid input
-NextAddr0   = !AudioAddr0;
-NextAddr1   =  AudioAddr1  $ (AudioAddr0);
-NextAddr2   =  AudioAddr2  $ (AudioAddr0 & AudioAddr1);
-NextAddr3   =  AudioAddr3  $ (AudioAddrCin3);
-NextAddr4   =  AudioAddr4  $ (AudioAddrCin3 & AudioAddr3);
-NextAddr5   =  AudioAddr5  $ (AudioAddrCin3 & AudioAddr3 & AudioAddr4);
-NextAddr6   =  AudioAddr6  $ (AudioAddrCin6);
-NextAddr7   =  AudioAddr7  $ (AudioAddrCin6 & AudioAddr6);
-NextAddr8   =  AudioAddr8  $ (AudioAddrCin6 & AudioAddr6 & AudioAddr7);
-NextAddr9   =  AudioAddr9  $ (AudioAddrCin9);
-NextAddr10  =  AudioAddr10 $ (AudioAddrCin9 & AudioAddr9);
-NextAddr11  =  AudioAddr11 $ (AudioAddrCin9 & AudioAddr9 & AudioAddr10);
-NextAddr12  =  AudioAddr12 $ (AudioAddrCin12);
-NextAddr13  =  AudioAddr13 $ (AudioAddrCin12 & AudioAddr12);
-NextAddr14  =  AudioAddr14 $ (AudioAddrCin12 & AudioAddr12 & AudioAddr13);
-NextAddr15  =  AudioAddr15 $ (AudioAddrCin15);
-NextAddr16  =  AudioAddr16 $ (AudioAddrCin15 & AudioAddr15);
-NextAddr17  =  AudioAddr17 $ (AudioAddrCin15 & AudioAddr15 & AudioAddr16);
-NextAddr18  =  AudioAddr18 $ (AudioAddrCin15 & AudioAddr15 & AudioAddr16 & AudioAddr17);
+NextAddr0     = !AudioAddr0;
+NextAddr1     =  AudioAddr1  $ (AudioAddr0);
+NextAddr2     =  AudioAddr2  $ (AudioAddr0 & AudioAddr1);
+NextAddr3     =  AudioAddr3  $ (AudioAddrCin3);
+NextAddr4     =  AudioAddr4  $ (AudioAddrCin3 & AudioAddr3);
+NextAddr5     =  AudioAddr5  $ (AudioAddrCin3 & AudioAddr3 & AudioAddr4);
+NextAddr6     =  AudioAddr6  $ (AudioAddrCin6);
+NextAddr7     =  AudioAddr7  $ (AudioAddrCin6 & AudioAddr6);
+NextAddr8     =  AudioAddr8  $ (AudioAddrCin6 & AudioAddr6 & AudioAddr7);
+NextAddr9     =  AudioAddr9  $ (AudioAddrCin9);
+NextAddr10    =  AudioAddr10 $ (AudioAddrCin9 & AudioAddr9);
+NextAddr11    =  AudioAddr11 $ (AudioAddrCin9 & AudioAddr9 & AudioAddr10);
+NextAddr12    =  AudioAddr12 $ (AudioAddrCin12);
+NextAddr13    =  AudioAddr13 $ (AudioAddrCin12 & AudioAddr12);
+NextAddr14    =  AudioAddr14 $ (AudioAddrCin12 & AudioAddr12 & AudioAddr13);
+NextAddr15    =  AudioAddr15 $ (AudioAddrCin15);
+NextAddr16    =  AudioAddr16 $ (AudioAddrCin15 & AudioAddr15);
+NextAddr17    =  AudioAddr17 $ (AudioAddrCin15 & AudioAddr15 & AudioAddr16);
+NextAddr18    =  AudioAddr18 $ (AudioAddrCin15 & AudioAddr15 & AudioAddr16 & AudioAddr17);
 
 " System Control Signals
 "    signals needed to control the system operation
@@ -285,17 +303,14 @@ NextAddr18  =  AudioAddr18 $ (AudioAddrCin15 & AudioAddr15 & AudioAddr16 & Audio
 " also should clock if trying to reset the counters.
 " We will clock on the last input of the 8-bit LFSR, which is 00..01, the
 " 16th time (another counter will have value 1111)
-AddrInc      = PWMCycle & AddrClock3 & AddrClock2 & AddrClock1 & AddrClock0;
-AddrInc.CLK  = CLK32;
+AddrInc       = PWMCycle & AddrClock3 & AddrClock2 & AddrClock1 & AddrClock0;
+AddrInc.CLK   = CLK32;
 
 
 "    setup the clock for the audio address counter
 AudioAddr.CLK = AddrInc;
 AudioData.CLK = AddrInc;
 AddrBits.CLK  = AddrInc;
-
-" Audio data matches the input data, which is assumed valid at 8kHz frequency
-AudioData = DataIn;
 
 "--------------------------------------------------------------------------------------------------
 " state machine for addressing
@@ -365,7 +380,7 @@ STATE AddrActive4: " Button 4 pressed
 " PWM Counter and Output
 "--------------------------------------------------------------------------------------------------
 " The last state before reset on the PWM counter is 00000001
-PWMCycle.CLK    = CLK32
+PWMCycle.CLK    = CLK32;
 PWMCycle        = !PWMCount7 & !PWMCount6 & !PWMCount5 & !PWMCount4 &
                   !PWMCount3 & !PWMCount2 & !PWMCount1 &  PWMCount0;
 
@@ -386,7 +401,8 @@ PWMCount6       = PWMCount5; " Shift
 PWMCount7       = PWMCount6; " Shift
 
 " Count PWM cycles
-AddrClock0      =  !AddrClock0;
+AddrClock.CLK   = PWMCycle;
+AddrClock0      = !AddrClock0;
 AddrClock1      =  AddrClock1 $ (AddrClock0);
 AddrClock2      =  AddrClock2 $ (AddrClock1 & AddrClock0);
 AddrClock3      =  AddrClock3 $ (AddrClock2 & AddrClock1 & AddrClock0);
