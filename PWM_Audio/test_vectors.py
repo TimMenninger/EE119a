@@ -1,6 +1,118 @@
 import copy, os
 
-LINE_LENGTH = 120
+LINE_LENGTH = 100
+
+###############################################################################
+#
+# Helper functions/utils
+#
+#
+
+#
+# int_to_binary_list
+#
+# Takes an integer and returns a list of 0s and 1s representing it in binary,
+# with the 0th index containing the MSB.  If val requires more bits than
+# num_bits, an error will rise.
+#
+# Arguments: val (int) - The number to convert
+#            num_bits (int) - The number of bits in the result
+# Returns:   binary_list (list) - The list of 0s and 1s with 0th index
+#               containing the most significant bit
+#
+# Revisions: 11/09/16 - Tim Menninger: Created
+#
+def int_to_binary_list(val, num_bits):
+    binary_list = []
+    # Put in 1s and 0s (will be in reverse order)
+    while (val != 0):
+        binary_list.append(val & 1)
+        val >>= 1
+
+    # Reverse the list before returning it
+    binary_list.reverse()
+
+    # Fill in zeroes on the left
+    fill_in = [0] * (num_bits - len(binary_list))
+
+    return fill_in + binary_list
+
+#
+# binary_list_to_int
+#
+# Takes a list of 0s and 1s with the 0th index containing the MSB, and returns
+# its integer equivalent.  The list is the binary representation of the int.
+#
+# Arguments: binary_list (list) - The binary representation of the number with
+#               the 0th index containing MSB
+# Returns:   out (int) - The integer representation of the binary list
+#
+# Revisions: 11/09/16 - Tim Menninger: Created
+#
+def binary_list_to_int(binary_list):
+    out = 0
+    # Add in each bit one at a time
+    for bit in binary_list:
+        out <<= 1
+        out += bit
+
+    return out
+
+#
+# next_8bit_lfsr
+#
+# Takes the current state of an 8-bit lfsr and returns the next value of the
+# lfsr.
+#
+# Arguments: lfsr (list) - Binary representation with 0th index containing MSB
+#               of the current lfsr state.
+# Returns:   (list) - Next lfsr state with 0th index containing MSB
+#
+# Revisions: 11/09/16 - Tim Menninger: Created
+#
+def next_8bit_lfsr(lfsr):
+    # If value is all zeroes, we put a 1 in the LSB
+    if (lfsr == [0, 0, 0, 0, 0, 0, 0, 0]):
+        return [0, 0, 0, 0, 0, 0, 0, 1]
+
+    # Otherwise, shift everything left one bit and load into the LSB the xor
+    # of bits 7, 5, 4, and 3 (their values before shifting).  We mod with 2
+    # because that gives 1 iff. there are an odd number of 1s and 0 otherwise
+    next_bit0 = (lfsr[7-7] + lfsr[7-5] + lfsr[7-4] + lfsr[7-3]) % 2
+
+    return lfsr[1:] + [next_bit0]
+
+#
+# increment_counter
+#
+# Takes a bit list that represents a counter and increments it.  The
+# distinction as counter is to imply that when the bit list is all 1s, it
+# resets the counter to all 0s.
+#
+# Arguments: bit_list ([int]) - The counter to increment with the 0th index
+#               containing the MSB
+#            start (int) - OPTIONAL Start address when wrapping
+#            inclusive_end (int) - OPTIONAL End address (inclusive) when wrapping
+# Returns:   ([int]) - The incremented counter with the 0th index containing
+#               the MSB
+#
+# Revisions: 11/10/16 - Tim Menninger: Created
+#
+def increment_counter(bit_list, start=0, inclusive_end=float('inf')):
+    # Convert to number, increment, wrap if needed, back to list
+    num = binary_list_to_int(bit_list)
+    num += 1
+    # If we incremented it to a number that requires more bits than the length
+    # of the list, set it back to zero, i.e., mod it with 2^num_bits
+    num %= 2**len(bit_list)
+
+    # If past inclusive end, reset OR if wrapped before start, fastforward
+    if (inclusive_end < num or start > num):
+        num = start
+
+    bit_list = int_to_binary_list(num, len(bit_list))
+
+    return bit_list
 
 ###############################################################################
 #

@@ -31,7 +31,7 @@ def remove_test_vectors(filename):
     while (line != ''):
         # Skip test vectors
         if line[:12].upper() == 'TEST_VECTORS':
-            while (line[:4].upper() != 'END '):
+            while (line[:4].upper() != 'END ' and line != ''):
                 line = f_copy.readline()
 
         # Write the line to the new file

@@ -143,6 +143,11 @@ Run             NODE     ISTYPE 'reg';              " run the counters
 "--------------------------------------------------------------------------------------------------
 " macros for readability
 "--------------------------------------------------------------------------------------------------
+" shortcuts
+C = .C.;
+P = .P.;
+X = .X.;
+
 " buses
 AudioAddr = [AudioAddr18..AudioAddr0];              " ROM address for audio data
 AudioData = [DataBit7..DataBit0];                   " registered audio data from ROM
@@ -265,7 +270,7 @@ AudioAddr1.OE  = 1;
 AudioAddr0.OE  = 1;
 
 " define the Run signal to know when we have valid input
-Run.CLK       = CLK32;
+Run.CLK       = AddrInc;
 Run           = ( SW1 & !SW2 & !SW3 & !SW4) #
                 (!SW1 &  SW2 & !SW3 & !SW4) #
                 (!SW1 & !SW2 &  SW3 & !SW4) #
@@ -381,8 +386,8 @@ STATE AddrActive4: " Button 4 pressed
 "--------------------------------------------------------------------------------------------------
 " The last state before reset on the PWM counter is 00000001
 PWMCycle.CLK    = CLK32;
-PWMCycle        = !PWMCount7 & !PWMCount6 & !PWMCount5 & !PWMCount4 &
-                  !PWMCount3 & !PWMCount2 & !PWMCount1 &  PWMCount0;
+PWMCycle        =  PWMCount7 & !PWMCount6 & !PWMCount5 & !PWMCount4 &
+                  !PWMCount3 & !PWMCount2 & !PWMCount1 & !PWMCount0;
 
 " PWM Counter
 "    8-bit LFSR
@@ -419,4 +424,4 @@ AudioPWMOut     = (!PWMCount7 & DataBit7) #
 
 
 
-END  pwm
+END pwm
