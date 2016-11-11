@@ -114,6 +114,36 @@ def increment_counter(bit_list, start=0, inclusive_end=float('inf')):
 
     return bit_list
 
+#
+# binary_list_to_hex_str
+#
+# Takes a list of binary values with zeroth index containing MSB and converts
+# it to an ABEL-syntax hex string.
+#
+# Arguments: bin_list ([int]) - The list to convert
+# Returns:   (string) - The input in hex
+#
+# Revisions: 11/11/16 - Tim Menninger: Created
+#
+def binary_list_to_hex_str(bin_list):
+    hex = ''
+
+    # Converts integer to hex character
+    hex_chars = [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                  'A', 'B', 'C', 'D', 'E', 'F' ]
+    # Consider low 4 bits
+    while len(bin_list) > 0:
+        # Get next character and add it
+        next = binary_list_to_int(bin_list[-4:])
+        hex = hex_chars[binary_list_to_int(bin_list[-4:])] + hex
+        # Advance list
+        bin_list = bin_list[:-4]
+
+    # Add ABEL hex symbol
+    hex = '^h' + hex
+
+    return hex
+
 ###############################################################################
 #
 # Code used by any ABEL file using this
@@ -164,7 +194,8 @@ def print_comment(openfile, comment):
 # Takes a list of inputs and outputs (all strings) that correspond to the names
 # of variables in the ABEL file.  It prints the header to the ABEL file in the
 # correct format (with parentheses, brackets and an arrow).  It also prints
-# "TEST_VECTORS" to the file before the header containing signal names.
+# "TEST_VECTORS" to the file before the header containing signal names.  If
+# outputs is None, then just an '.X.' is put for all outputs
 #
 # Arguments: openfile (file_descriptor) - File to write to
 #            inputs ([string]) - Input signal names
@@ -172,6 +203,8 @@ def print_comment(openfile, comment):
 # Returns:   Nothing
 #
 # Revisions: 11/03/16 - Tim Menninger: Created
+#            11/10/16 - Tim Menninger: Added capability to not care about
+#               outputs
 #
 def print_test_header(openfile, inputs, outputs):
     '''
@@ -183,13 +216,17 @@ def print_test_header(openfile, inputs, outputs):
     for i in inputs:
         header += str(i) + ','
     # Remove last comma and put arrow to next list
-    header = header[:-1] + ']->['
+    header = header[:-1] + ']->'
 
-    # Put all Out signals
-    for i in outputs:
-        header += str(i) + ','
-    # Remove last comma and finish line
-    header = header[:-1] + '])\n'
+    if (outputs == None):
+        header += '.X.)\n'
+    else:
+        header += '['
+        # Put all Out signals
+        for i in outputs:
+            header += str(i) + ','
+        # Remove last comma and finish line
+        header = header[:-1] + '])\n'
 
     # Add the header to the file
     openfile.write(header)
@@ -198,7 +235,8 @@ def print_test_header(openfile, inputs, outputs):
 # print_test_vector
 #
 # Prints a test vector to the file in its correct syntax.  The inputs and
-# outputs are retrieved from arguments.
+# outputs are retrieved from arguments.  If the outputs value is None, it
+# assumes the outputs do not matter and a '.X.' is placed.
 #
 # Arguments: openfile (file_descriptor) - The file to write to
 #            inputs ([union]) - List of values to print as inputs
@@ -219,15 +257,20 @@ def print_test_vector(openfile, inputs, outputs):
         test_vector += ','
     # Remove last comma to put end bracket
     test_vector = test_vector[:-1]
-    test_vector += ']->['
+    test_vector += ']->'
 
-    # Create output list
-    for i in outputs:
-        test_vector += str(i)
-        test_vector += ','
-    # Remove last comma to put end bracket
-    test_vector = test_vector[:-1]
-    test_vector += '];\n'
+    if (outputs == None):
+        # Outputs don't matter
+        test_vector += '.X.;\n'
+    else:
+        test_vector += '['
+        # Create output list
+        for i in outputs:
+            test_vector += str(i)
+            test_vector += ','
+        # Remove last comma to put end bracket
+        test_vector = test_vector[:-1]
+        test_vector += '];\n'
 
     # Add the test vector to the file
     openfile.write(test_vector)
