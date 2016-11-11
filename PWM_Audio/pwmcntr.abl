@@ -167,8 +167,8 @@ SW2Edge    = !Run & !SW1 &  SW2 & !SW3 & !SW4; " button 2 edge pushed
 SW3Edge    = !Run & !SW1 & !SW2 &  SW3 & !SW4; " button 3 edge pushed
 SW4Edge    = !Run & !SW1 & !SW2 & !SW3 &  SW4; " button 4 edge pushed
 
-" Shorthand for zeroing the PWM value (used to suppress outputs)
-DataZero  = [ 0, 0, 0, 0, 0, 0, 0, 0 ];
+" Shorthand for zeroing values (PWM zeroed to suppress outputs, addr for testing)
+DataZero  = 0;
 
 " When the PWM LFSR counter is 0, it is stuck, so we need to detect that
 PWMZeroed = !PWMCount7 & !PWMCount6 & !PWMCount5 & !PWMCount4 &
@@ -200,10 +200,10 @@ AudioAddrCin12  =  AudioAddrCin9  & AudioAddr9  & AudioAddr10 & AudioAddr11;
 AudioAddrCin15  =  AudioAddrCin12 & AudioAddr12 & AudioAddr13 & AudioAddr14;
 
 " Start addresses corresponding to each of the switches
-StartSW1 = [ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]; " 0x7C000
-StartSW2 = [ 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]; " 0x58000
-StartSW3 = [ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]; " 0x48000
-StartSW4 = [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]; " 0x40000
+StartSW1 = ^h7C000;
+StartSW2 = ^h58000;
+StartSW3 = ^h48000;
+StartSW4 = ^h40000;
 
 " Flags set when the end of data is reached for respective switches
 " SW1 started at 0x7C000, runs for 0x04000, ends at 0x7FFFF
