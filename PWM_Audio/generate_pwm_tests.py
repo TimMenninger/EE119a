@@ -14,19 +14,19 @@ SW3  = button_codes[3]
 SW4  = button_codes[4]
 
 # State machine bit encodings for each buttonpress
-machine_bits    = [   None,
+machine_bits    = [ [ 0, 0 ],  # NoSW, state arbitrary
                     [ 0, 1 ],  # SW1
                     [ 1, 0 ],  # SW2
                     [ 1, 1 ],  # SW3
                     [ 0, 0 ] ] # SW4
 
 # Start and end (inclusive) addresses for each buttonpress, in binary
-start_addresses = [   None,
+start_addresses = [ [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ],  # NoSW
                     [ 1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ],  # SW1 0x7C000
                     [ 1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ],  # SW2 0x58000
                     [ 1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ],  # SW3 0x48000
                     [ 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ] ] # SW4 0x40000
-end_addresses   = [   None,
+end_addresses   = [ [ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ],  # NoSW
                     [ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ],  # SW1 0x7FFFF
                     [ 1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ],  # SW2 0x7BFFF
                     [ 1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 ],  # SW3 0x57FFF
@@ -68,28 +68,29 @@ def test_lfsr(openfile):
     #   Clock
     #   Switches
     #   Data In
-    #   Run, PWMCycle, AddrInc
     #   State bits
-    #   AudioAddr
-    #   AudioData
+    #   Run, PWMCycle, AddrInc
     #   AddrClock
-    #   PWMCount
+    #   PWMCount (lfsr)
+    #   AudioData (registered)
+    #   AudioAddr (registered)
     inputs = [ 'P' ] + \
              NoSW + \
+             [ 0 ] + \
              [ 0 ] + \
              [ 0, 0, 0 ] + \
              [ 0 ] + \
              [ 0 ] + \
-             [ 0 ] + \
-             [ 0 ] + \
-             [ str(lfsr) ]
+             [ str(lfsr) ] + \
+             [ 0 ]
     # Output format:
+    #   PWM out
     #   State bits
-    #   PWM out, Run, PWMCycle, AddrInc
+    #   Run, PWMCycle, AddrInc
     #   AddrClock
-    #   lfsr value
-    #   Data bits
-    #   Address registers
+    #   PWMCount (lfsr)
+    #   AudioData (registered)
+    #   AudioAddr (registered)
     outputs = None
     print_test_vector(openfile, inputs, outputs)
 
@@ -97,7 +98,8 @@ def test_lfsr(openfile):
     inputs  = [ 0 ] + \
               [ 'X' ] * 13
     outputs = [ 'X' ] + \
-              [ 'X', 'X', 0, 'X' ] + \
+              [ 'X' ] + \
+              [ 'X', 0, 'X' ] + \
               [ 0 ] + \
               [ str(lfsr) ] + \
               [ 'X' ] + \
@@ -110,15 +112,16 @@ def test_lfsr(openfile):
         inputs = [ 'C' ] + \
                  NoSW + \
                  [ 'X' ] * 9
+        # PWM cycle true on last iteration (1000 0000B)
+        PWM_cycle = int(lfsr == [1,0,0,0,0,0,0,0])
         # We increment the AddrClock from 0000 to 0001 on a PWM_cycle (which
         # is AddrClock's CLK)
         inc = int(inc or PWM_cycle)
-        # PWM cycle true on last iteration (1000 0000B)
-        PWM_cycle = int(lfsr == [1,0,0,0,0,0,0,0])
         # Update lfsr
         lfsr = next_8bit_lfsr(lfsr)
         outputs = [ 'X' ] + \
-                  [ 'X', 'X', PWM_cycle, 'X' ] + \
+                  [ 'X' ] + \
+                  [ 'X', PWM_cycle, 'X' ] + \
                   [ inc ] + \
                   [ str(lfsr) ] + \
                   [ 'X' ] + \
@@ -165,28 +168,28 @@ def test_pwm_cycle_counter(openfile):
         # Input format:
         #   Clock
         #   Switches
-        #   Run, PWMCycle, AddrInc
         #   State bits
-        #   AudioAddr
-        #   AudioData
+        #   Run, PWMCycle, AddrInc
         #   AddrClock
         #   PWMCount
+        #   AudioData
+        #   AudioAddr
         inputs  = [ 'P' ] + \
                   NoSW + \
                   [ 0 ] + \
+                  [ 0 ] + \
                   [ 0, 0, 0 ] + \
-                  [ 0 ] + \
-                  [ 0 ] + \
-                  [ 0 ] + \
                   [ i % 16 ] + \
-                  [ '^b10000000' ]
+                  [ '^b01000000' ] + \
+                  [ 0 ] + \
+                  [ 0 ]
         # Output format:
         #   State bits
         #   PWM out, Run, PWMCycle, AddrInc
         #   AddrClock
-        #   lfsr value
-        #   Data bits
-        #   Address registers
+        #   PWMCount (lfsr)
+        #   AudioData (registered)
+        #   AudioAddr (registered)
         outputs = None
         print_test_vector(openfile, inputs, outputs)
 
@@ -194,40 +197,41 @@ def test_pwm_cycle_counter(openfile):
         inputs  = [ 0 ] + \
                   [ 'X' ] * 13
         outputs = [ 'X' ] + \
-                  [ 'X', 'X', 0, 0 ] + \
+                  [ 'X' ] + \
+                  [ 'X', 0, 0 ] + \
                   [ i % 16 ] + \
-                  [ '^b10000000' ] + \
+                  [ '^b01000000' ] + \
                   [ 'X' ] + \
                   [ 'X' ]
         print_test_vector(openfile, inputs, outputs)
 
-        # Update lfsr from 1000 0000 ==> 0000 0001
+        # Update lfsr from 0100 0000 ==> 1000 0000
 
+        # AddrInc is set when PWMCycle is 1 and address counter = 1111
+        AddrInc = int((i + 1) == 15)
         # Increment PWM counter.  Counter state implies PWM cycle.
         inputs  = [ 'C' ] + \
                   NoSW + \
                   [ 'X' ] * 9
         outputs = [ 'X' ] + \
                   [ 'X' ] * 2 + \
-                  [ 1 ] + [ 0 ] + \
+                  [ 1 ] + [ AddrInc ] + \
                   [ (i + 1) % 16 ] + \
-                  [ '^b00000001' ] + \
+                  [ '^b10000000' ] + \
                   [ 'X' ] + \
                   [ 'X' ]
         print_test_vector(openfile, inputs, outputs)
 
         # Update lfsr from 0000 0001 ==> 0000 0010
-        # AddrInc is set when PWMCycle is 1 and address counter = 1111
-        AddrInc = int((i + 1) == '^b1111')
         # Increment PWM counter
         inputs  = [ 'C' ] + \
                   NoSW + \
                   [ 'X' ] * 9
         outputs = [ 'X' ] + \
                   [ 'X' ] * 2 + \
-                  [ 0 ] + [ AddrInc ] + \
+                  [ 0 ] + [ 0 ] + \
                   [ (i + 1) % 16 ] + \
-                  [ '^b00000010' ] + \
+                  [ '^b00000001' ] + \
                   [ 'X' ] + \
                   [ 'X' ]
         print_test_vector(openfile, inputs, outputs)
@@ -267,28 +271,29 @@ def test_pwm_out(openfile, pwm):
     #   Clock
     #   Switches
     #   Data In
-    #   Run, PWMCycle, AddrInc
     #   State bits
-    #   AudioAddr
-    #   AudioData
+    #   Run, PWMCycle, AddrInc
     #   AddrClock
     #   PWMCount
+    #   AudioData
+    #   AudioAddr
     inputs  = [ 'P' ] + \
               NoSW + \
               [ pwm ] + \
-              [ 0 ] * 3 + \
               [ 0 ] + \
+              [ 0, 0, 0 ] + \
               [ 0 ] + \
+              [ str(lfsr) ] + \
               [ pwm ] + \
-              [ 0 ] + \
-              [ str(lfsr) ]
+              [ 0 ]
     # Output format
+    #   PWM out
     #   State bits
-    #   PWM out, Run, PWMCycle, AddrInc
+    #   Run, PWMCycle, AddrInc
     #   AddrClock
-    #   lfsr value
-    #   Data bits
-    #   Address registers
+    #   PWMCount (lfsr)
+    #   AudioData (registered)
+    #   AudioAddr (registered)
     outputs = None
     print_test_vector(openfile, inputs, outputs)
 
@@ -296,7 +301,8 @@ def test_pwm_out(openfile, pwm):
     inputs  = [ 0 ] + \
               [ 'X' ] * 13
     outputs = [ 'X' ] + \
-              [ 'X' ] * 4 + \
+              [ 'X' ] + \
+              [ 'X', 'X', 'X' ] + \
               [ 0 ] + \
               [ str(lfsr) ] + \
               [ pwm ] + \
@@ -305,17 +311,18 @@ def test_pwm_out(openfile, pwm):
 
     # Run through an entire 256 PWM lfsr cycle and output 1s when necessary
     for i in range(256):
-        # The PWM out is true if current lfsr is less than data
-        PWM_out = int(binary_list_to_int(lfsr) < pwm)
         # Update lfsr
         lfsr = next_8bit_lfsr(lfsr)
+        # The PWM out is true if current lfsr is less than data
+        PWM_out = int(binary_list_to_int(lfsr) < pwm)
 
         inputs  = [ 'C' ] + \
                   NoSW + \
                   [ pwm ] + \
                   [ 'X' ] * 8
-        outputs = [ 'X' ] + \
-                  [ PWM_out ] + [ 'X' ] * 3 + \
+        outputs = [ PWM_out ] + \
+                  [ 'X' ] + \
+                  [ 'X', 'X', 'X' ] + \
                   [ 'X' ] + \
                   [ str(lfsr) ] + \
                   [ pwm ] + \
@@ -346,38 +353,40 @@ def test_switch_release(openfile, initial_sw):
     #   Clock
     #   Switches
     #   Data In
-    #   Run, PWMCycle, AddrInc
     #   State bits
-    #   AudioAddr
-    #   AudioData
+    #   Run, PWMCycle, AddrInc
     #   AddrClock
     #   PWMCount
+    #   AudioData
+    #   AudioAddr
     inputs  = [ 'P' ] + \
               button_codes[initial_sw] + \
               [ 255 ] + \
-              [ 1, 0, 0 ] + \
               [ str(machine_bits[initial_sw]) ] + \
-              [ 0 ] + \
+              [ 1, 0, 0 ] + \
+              [ '^b1110' ] + \
+              [ '^b10100000' ] + \
               [ 255 ] + \
-              [ '^b1111' ] + \
-              [ '^b01000000' ]
+              [ 0 ]
     # Output format:
+    #   PWM out
     #   State bits
-    #   PWM out, Run, PWMCycle, AddrInc
+    #   Run, PWMCycle, AddrInc
     #   AddrClock
-    #   lfsr value
-    #   Data bits
-    #   Address registers
+    #   PWMCount (lfsr)
+    #   AudioData (registered)
+    #   AudioAddr (registered)
     outputs = None
     print_test_vector(openfile, inputs, outputs)
 
     # Verify preload
     inputs  = [ 0 ] + \
               [ 'X' ] * 13
-    outputs = [ str(machine_bits[initial_sw]) ] + \
-              [ 'X', 1, 0, 0 ] + \
-              [ '^b1111' ] + \
-              [ '^b01000000' ] + \
+    outputs = [ 'X' ] + \
+              [ str(machine_bits[initial_sw]) ] + \
+              [ 1, 0, 0 ] + \
+              [ '^b1110' ] + \
+              [ '^b10100000' ] + \
               [ 255 ] + \
               [ 0 ]
     print_test_vector(openfile, inputs, outputs)
@@ -387,49 +396,39 @@ def test_switch_release(openfile, initial_sw):
               NoSW + \
               [ 255 ] + \
               [ 'X' ] * 8
-    outputs = [ str(machine_bits[initial_sw]) ] + \
-              [ 'X', 1, 0, 0] + \
+    outputs = [ 'X' ] + \
+              [ str(machine_bits[initial_sw]) ] + \
+              [ 1, 0, 0 ] + \
+              [ '^b1110' ] + \
+              [ '^b01000000' ] + \
+              [ 255 ] + \
+              [ 0 ]
+    print_test_vector(openfile, inputs, outputs)
+
+    # AddrInc is now active. Data zeroes
+    inputs  = [ 'C' ] + NoSW + \
+              [ 255 ] + \
+              [ 'X' ] * 8
+    outputs = [ 'X' ] + \
+              [ str(machine_bits[initial_sw]) ] + \
+              [ 1, 1, 1 ] + \
               [ '^b1111' ] + \
               [ '^b10000000' ] + \
-              [ 255 ] + \
+              [ 0 ] + \
               [ 0 ]
     print_test_vector(openfile, inputs, outputs)
 
-    # AddrInc is now in the process of being clocked
+    # Data should still be zeroed
     inputs  = [ 'C' ] + NoSW + \
               [ 255 ] + \
               [ 'X' ] * 8
-    outputs = [ str(machine_bits[initial_sw]) ] + \
-              [ 'X', 1, 1, 0] + \
-              [ '^b1111' ] + \
+    outputs = [ 'X' ] + \
+              [ str(machine_bits[initial_sw]) ] + \
+              [ 1, 0, 0 ] + \
+              [ 0 ] + \
               [ '^b00000001' ] + \
-              [ 255 ] + \
+              [ 0 ] + \
               [ 0 ]
-    print_test_vector(openfile, inputs, outputs)
-
-    # AddrInc now high, next clock should see data be zeroed
-    inputs  = [ 'C' ] + NoSW + \
-              [ 255 ] + \
-              [ 'X' ] * 8
-    outputs = machine_bits[initial_sw] + \
-              [ 'X', 1, 0, 1] + \
-              [ 0 ] + \
-              [ '^b00000010' ] + \
-              [ 255 ] + \
-              [ 0 ]
-    print_test_vector(openfile, inputs, outputs)
-
-    # AddrInc now high, next clock should see data be zeroed and address
-    # incremented, but the state should stay the same.
-    inputs  = [ 'C' ] + NoSW + \
-              [ 255 ] + \
-              [ 'X' ] * 8
-    outputs = [ str(machine_bits[initial_sw]) ] + \
-              [ 'X', 0, 0, 0] + \
-              [ 0 ] + \
-              [ '^b00000010' ] + \
-              [ 0 ] + \
-              [ 1 ]
     print_test_vector(openfile, inputs, outputs)
 
 #
@@ -460,38 +459,40 @@ def test_switch_edge(openfile, sw, initial_state):
     #   Clock
     #   Switches
     #   Data In
-    #   Run, PWMCycle, AddrInc
     #   State bits
-    #   AudioAddr
-    #   AudioData
+    #   Run, PWMCycle, AddrInc
     #   AddrClock
     #   PWMCount
+    #   AudioData
+    #   AudioAddr
     inputs  = [ 'P' ] + \
               NoSW + \
               [ 0 ] + \
-              [ 1, 0, 0 ] + \
               [ str(initial_state) ] + \
+              [ 1, 0, 0 ] + \
+              [ '^b1110' ] + \
+              [ '^b10100000' ] + \
               [ 0 ] + \
-              [ 0 ] + \
-              [ '^b1111' ] + \
-              [ '^b01000000' ]
+              [ 0 ]
     # Output format:
+    #   PWM out
     #   State bits
-    #   PWM out, Run, PWMCycle, AddrInc
+    #   Run, PWMCycle, AddrInc
     #   AddrClock
-    #   lfsr value
-    #   Data bits
-    #   Address registers
+    #   PWMCount (lfsr)
+    #   AudioData (registered)
+    #   AudioAddr (registered)
     outputs = None
     print_test_vector(openfile, inputs, outputs)
 
     # Verify preload
     inputs  = [ 0 ] + \
               [ 'X' ] * 13
-    outputs = [ str(initial_state) ] + \
-              [ 'X', 1, 0, 0 ] + \
-              [ '^b1111' ] + \
-              [ '^b01000000' ] + \
+    outputs = [ 'X' ] + \
+              [ str(initial_state) ] + \
+              [ 1, 0, 0 ] + \
+              [ '^b1110' ] + \
+              [ '^b10100000' ] + \
               [ 0 ] + \
               [ 0 ]
     print_test_vector(openfile, inputs, outputs)
@@ -501,57 +502,46 @@ def test_switch_edge(openfile, sw, initial_state):
     inputs  = [ 'C' ] + button_codes[sw] + \
               [ 255 ] + \
               [ 'X' ] * 8
-    outputs = [ str(initial_state) ] + \
-              [ 'X', 1, 0, 0] + \
+    outputs = [ 'X' ] + \
+              [ str(initial_state) ] + \
+              [ 1, 0, 0] + \
+              [ '^b1110' ] + \
+              [ '^b01000000' ] + \
+              [ 0 ] + \
+              [ 0 ]
+    print_test_vector(openfile, inputs, outputs)
+
+    # AddrInc goes high.  Data registers should reflect data input
+    inputs  = [ 'C' ] + button_codes[sw] + \
+              [ 255 ] + \
+              [ 'X' ] * 8
+    outputs = [ 'X' ] + \
+              [ str(initial_state) ] + \
+              [ 1, 1, 1] + \
               [ '^b1111' ] + \
               [ '^b10000000' ] + \
-              [ 0 ] + \
+              [ 255 ] + \
               [ 0 ]
     print_test_vector(openfile, inputs, outputs)
 
-    # AddrInc is about to go high
+    # Data should still be reflected
     inputs  = [ 'C' ] + button_codes[sw] + \
               [ 255 ] + \
               [ 'X' ] * 8
-    outputs = [ str(initial_state) ] + \
-              [ 'X', 1, 1, 0] + \
-              [ '^b0000' ] + \
+    outputs = [ 'X' ] + \
+              [ str(initial_state) ] + \
+              [ 1, 0, 0] + \
+              [ '^b1111' ] + \
               [ '^b00000001' ] + \
-              [ 0 ] + \
-              [ 0 ]
-    print_test_vector(openfile, inputs, outputs)
-
-    # AddrInc now high, next clock should see transition with initial address
-    # and data relayed to output
-    inputs  = [ 'C' ] + button_codes[sw] + \
               [ 255 ] + \
-              [ 'X' ] * 8
-    outputs = [ str(initial_state) ] + \
-              [ 'X', 1, 0, 1] + \
-              [ '^b0000' ] + \
-              [ '^b00000010' ] + \
-              [ 0 ] + \
               [ 0 ]
-    print_test_vector(openfile, inputs, outputs)
-
-    # Should now have message address and data zeroed.  Data is zeroed because
-    # before the first read, we don't know what to play.
-    inputs  = [ 'C' ] + button_codes[sw] + \
-              [ 255 ] + \
-              [ 'X' ] * 8
-    outputs = [ str(machine_bits[sw]) ] + \
-              [ 'X', 1, 0, 0] + \
-              [ '^b0000' ] + \
-              [ '^b00000100' ] + \
-              [ 0 ] + \
-              [ binary_list_to_hex_str(start_addresses[sw]) ]
     print_test_vector(openfile, inputs, outputs)
 
 #
 # test_switches
 #
-# Tests a switch press.  IIf multiple buttons are pressed, the system plays
-# the switch whose index is closest to 1.
+# Tests a switch press.  If multiple buttons are pressed, the system acts as if
+# no switches are pressed.
 #
 # Arguments: openfile (file) - The file to write test vectors to.
 #            switches ([int]) - The switches that are pressed.
@@ -567,14 +557,14 @@ def test_switch_edge(openfile, sw, initial_state):
 def test_switches(openfile, sws, addr=None, clocks=None):
     '''
     Tests that the system reacts as expected when switches are pressed.  This
-    works such that the switch whose number is closest to 1 is the one that is
-    recognized as being pushed. It will also show that the data is properly
-    registered, but not until the correct clock edge.  It does not test the
-    switch trigger or release.
+    only plays if exactly one switch is pressed.  Otherwise, nothing will be
+    played.
     '''
     # Figure out which switch we are emulating
     sw_idx = 4
-    if (sws[0] == 1):
+    if (sum(sws) != 1):
+        sw_idx = 0
+    elif (sws[0] == 1):
         sw_idx = 1
     elif (sws[1] == 1):
         sw_idx = 2
@@ -619,38 +609,39 @@ def test_switches(openfile, sws, addr=None, clocks=None):
         #   Clock
         #   Switches
         #   Data In
-        #   Run, PWMCycle, AddrInc
         #   State bits
-        #   AudioAddr
-        #   AudioData
+        #   Run, PWMCycle, AddrInc
         #   AddrClock
         #   PWMCount
+        #   AudioData
+        #   AudioAddr
         inputs  = [ 'P' ] + \
                   sws + \
                   [ binary_list_to_hex_str(data_reg) ] + \
-                  [ 1, 1, 0 ] + \
                   [ str(state) ] + \
-                  [ binary_list_to_hex_str(addr) ] + \
+                  [ 1, 0, 0 ] + \
+                  [ '^b1110' ] + \
+                  [ '^b10100000' ] + \
                   [ binary_list_to_hex_str(data_reg) ] + \
-                  [ '^b0000' ] + \
-                  [ '^b00000001' ]
+                  [ binary_list_to_hex_str(addr) ]
         # Output format:
         #   State bits
         #   PWM out, Run, PWMCycle, AddrInc
         #   AddrClock
-        #   lfsr value
-        #   Data bits
-        #   Address registers
+        #   PWMCount (lfsr)
+        #   AudioData (registered)
+        #   AudioAddr (registered)
         outputs = None
         print_test_vector(openfile, inputs, outputs)
 
         # Verify preload
         inputs  = [ 0 ] + \
                   [ 'X' ] * 13
-        outputs = [ str(state) ] + \
-                  [ 'X', 1, 1, 0 ] + \
-                  [ '^b0000' ] + \
-                  [ '^00000001' ] + \
+        outputs = [ 'X' ] + \
+                  [ str(state) ] + \
+                  [ 1, 0, 0 ] + \
+                  [ '^b1110' ] + \
+                  [ '^b10100000' ] + \
                   [ binary_list_to_hex_str(data_reg) ] + \
                   [ binary_list_to_hex_str(addr) ]
         print_test_vector(openfile, inputs, outputs)
@@ -659,10 +650,11 @@ def test_switches(openfile, sws, addr=None, clocks=None):
         inputs  = [ 'C' ] + sws + \
                   [ binary_list_to_hex_str(data_in) ] + \
                   [ 'X' ] * 8
-        outputs = [ str(state) ] + \
-                  [ 'X', 1, 0, 1 ] + \
-                  [ '^b0000' ] + \
-                  [ '^b00000010' ] + \
+        outputs = [ 'X' ] + \
+                  [ str(state) ] + \
+                  [ 1, 0, 0 ] + \
+                  [ '^b1110' ] + \
+                  [ '^b01000000' ] + \
                   [ binary_list_to_hex_str(data_reg) ] + \
                   [ binary_list_to_hex_str(addr) ]
         print_test_vector(openfile, inputs, outputs)
@@ -674,16 +666,30 @@ def test_switches(openfile, sws, addr=None, clocks=None):
         inputs  = [ 'C' ] + sws + \
                   [ binary_list_to_hex_str(data_in) ] + \
                   [ 'X' ] * 8
-        outputs = [ str(state) ] + \
-                  [ 'X', 1, 0, 0] + \
-                  [ '^b0000' ] + \
-                  [ '^b00000100' ] + \
+        outputs = [ 'X' ] + \
+                  [ str(state) ] + \
+                  [ 1, 1, 1 ] + \
+                  [ '^b1111' ] + \
+                  [ '^b10000000' ] + \
+                  [ binary_list_to_hex_str(data_reg) ] + \
+                  [ binary_list_to_hex_str(addr) ]
+        print_test_vector(openfile, inputs, outputs)
+
+        # Data stays the same now (until next AddrInc clock)
+        inputs  = [ 'C' ] + sws + \
+                  [ binary_list_to_hex_str(data_in) ] + \
+                  [ 'X' ] * 8
+        outputs = [ 'X' ] + \
+                  [ str(state) ] + \
+                  [ 1, 0, 0 ] + \
+                  [ '^b1111' ] + \
+                  [ '^b00000001' ] + \
                   [ binary_list_to_hex_str(data_reg) ] + \
                   [ binary_list_to_hex_str(addr) ]
         print_test_vector(openfile, inputs, outputs)
 
 #
-# test_button_change
+# test_switch_change
 #
 # Tests when the system goes from one valid buttonpress to another valid
 # buttonpress without going to no buttons pressed in between.
@@ -695,7 +701,7 @@ def test_switches(openfile, sws, addr=None, clocks=None):
 #
 # Revisions: 11/10/16 - Tim Menninger: Created
 #
-def test_button_change(openfile, initial_sw, final_sw):
+def test_switch_change(openfile, initial_sw, final_sw):
     '''
     Shows that going from one switch to the next plays the second without
     stopping or blowing up.
@@ -711,79 +717,81 @@ def test_button_change(openfile, initial_sw, final_sw):
     #   Clock
     #   Switches
     #   Data In
-    #   Run, PWMCycle, AddrInc
     #   State bits
-    #   AudioAddr
-    #   AudioData
+    #   Run, PWMCycle, AddrInc
     #   AddrClock
     #   PWMCount
+    #   AudioData
+    #   AudioAddr
     inputs  = [ 'P' ] + \
               button_codes[initial_sw] + \
-              [ 'X', 1, 0 ] + \
-              [ str(machine_bits[initial_sw]) ] + \
-              [ 0 ] + \
               [ 255 ] + \
-              [ '^b1111' ] + \
-              [ '^b01000000' ]
+              [ str(machine_bits[initial_sw]) ] + \
+              [ 1, 0, 0 ] + \
+              [ '^b1110' ] + \
+              [ '^b10100000' ] + \
+              [ 255 ] + \
+              [ start_addresses[initial_sw] ]
     # Output format:
+    #   PWM out
     #   State bits
-    #   PWM out, Run, PWMCycle, AddrInc
+    #   Run, PWMCycle, AddrInc
     #   AddrClock
-    #   lfsr value
-    #   Data bits
-    #   Address registers
+    #   PWMCount (lfsr)
+    #   AudioData (registered)
+    #   AudioAddr (registered)
     outputs = None
     print_test_vector(openfile, inputs, outputs)
+
+    # Verify preload
+    inputs  = [ 0 ] + \
+              [ 'X' ] * 13
+    outputs = [ 'X' ] + \
+              [ str(machine_bits[initial_sw]) ] + \
+              [ 1, 0, 0 ] + \
+              [ '^b1110' ] + \
+              [ '^b10100000' ] + \
+              [ 255 ] + \
+              [ str(start_addresses[initial_sw]) ]
 
     # Simulate change in switch (from one valid to another valid push). No
     # change in AddrInc clocked values yet
     inputs  = [ 'C' ] + button_codes[final_sw] + \
               [ 255 ] + \
               [ 'X' ] * 8
-    outputs = [ str(machine_bits[initial_sw]) ] + \
-              [ 'X', 1, 0, 0] + \
+    outputs = [ 'X' ] + \
+              [ str(machine_bits[initial_sw]) ] + \
+              [ 1, 0, 0 ] + \
+              [ '^b1110' ] + \
+              [ '^b01000000' ] + \
+              [ 255 ] + \
+              [ str(start_addresses[initial_sw]) ]
+    print_test_vector(openfile, inputs, outputs)
+
+    # AddrInc active, state should change
+    inputs  = [ 'C' ] + button_codes[final_sw] + \
+              [ 255 ] + \
+              [ 'X' ] * 8
+    outputs = [ 'X' ] + \
+              [ str(machine_bits[final_sw]) ] + \
+              [ 1, 1, 1 ] + \
               [ '^b1111' ] + \
               [ '^b10000000' ] + \
               [ 255 ] + \
-              [ 0 ]
+              [ str(start_addresses[final_sw]) ]
     print_test_vector(openfile, inputs, outputs)
 
-    # AddrInc is now in the process of being clocked
+    # Continuing, should see same outputs
     inputs  = [ 'C' ] + button_codes[final_sw] + \
               [ 255 ] + \
               [ 'X' ] * 8
-    outputs = [ str(machine_bits[initial_sw]) ] + \
-              [ 'X', 1, 1, 0] + \
-              [ '^b0000' ] + \
+    outputs = [ 'X' ] + \
+              [ str(machine_bits[final_sw]) ] + \
+              [ 1, 0, 0 ] + \
+              [ '^b1111' ] + \
               [ '^b00000001' ] + \
               [ 255 ] + \
-              [ 0 ]
-    print_test_vector(openfile, inputs, outputs)
-
-    # AddrInc now high, next clock should see system move to start playing
-    # other switch
-    inputs  = [ 'C' ] + button_codes[final_sw] + \
-              [ 255 ] + \
-              [ 'X' ] * 8
-    outputs = [ str(machine_bits[initial_sw]) ] + \
-              [ 'X', 1, 0, 1] + \
-              [ '^b0000' ] + \
-              [ '^b00000010' ] + \
-              [ 255 ] + \
-              [ 0 ]
-    print_test_vector(openfile, inputs, outputs)
-
-    # AddrInc now high, next clock should see data be zeroed and address
-    # incremented, but the state should stay the same.
-    inputs  = [ 'C' ] + button_codes[final_sw] + \
-              [ 255 ] + \
-              [ 'X' ] * 8
-    outputs = [ str(machine_bits[final_sw]) ] + \
-              [ 'X', 1, 0, 0] + \
-              [ '^b0000' ] + \
-              [ '^b00000010' ] + \
-              [ 255 ] + \
-              [ binary_list_to_hex_str(start_addresses[final_sw]) ]
+              [ str(start_addresses[final_sw]) ]
     print_test_vector(openfile, inputs, outputs)
 
 #
@@ -802,10 +810,10 @@ def generate_test_vectors(openfile):
     '''
     # The header contains inputs and outputs of our test vectors
     inputs  = [ 'CLK32', 'SW1', 'SW2', 'SW3', 'SW4', 'DataIn',
-               'Run', 'PWMCycle', 'AddrInc', 'AddrBits',
-               'AudioAddr', 'AudioData', 'AddrClock', 'PWMCount' ]
-    outputs = [ 'AddrBits', 'AudioPWMOut', 'Run', 'PWMCycle', 'AddrInc',
-               'AddrClock', 'PWMCount', 'AudioData', 'AudioAddr' ]
+                'AddrBits', 'Run', 'PWMCycle', 'AddrInc',
+                'AddrClock', 'PWMCount', 'AudioData', 'AudioAddr' ]
+    outputs = [ 'AudioPWMOut', 'AddrBits', 'Run', 'PWMCycle', 'AddrInc',
+                'AddrClock', 'PWMCount', 'AudioData', 'AudioAddr' ]
     print_test_header(openfile, inputs, outputs)
 
     # Test the LFSR
@@ -843,7 +851,7 @@ def generate_test_vectors(openfile):
         for j in range(1, 5):
             if (i == j):
                 continue
-            test_button_change(openfile, i, j)
+            test_switch_change(openfile, i, j)
 
     # Test rising edges of buttons, when they are pressed from no buttons.
     # Test each combination of button and start state
