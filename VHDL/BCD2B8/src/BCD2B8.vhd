@@ -69,12 +69,12 @@ begin
     B(0) <= BCD(0);
     B(1) <= BCD(1) xor BCD(4);
     B(2) <= (BCD(1) and BCD(4)) xor BCD(2) xor BCD(5);  -- Both B(1) factors causes carry
-    B(3) <= (BCD(2) and BCD(5) or                       -- Two+ B(2) factors causes carry
+    B(3) <= ((BCD(2) and BCD(5)) or                     -- Two+ B(2) factors causes carry
             ((BCD(1) and BCD(4)) and BCD(2)) or
             ((BCD(1) and BCD(4)) and BCD(5)))
         xor BCD(3) xor BCD(4) xor BCD(6);
 
-    -- BIts 4..7 were defined with the help of Karnaugh maps, and correspond to the tens BCD digit
+    -- Bits 4..7 were defined with the help of Karnaugh maps, and correspond to the tens BCD digit
     B(4) <= (BCD(7) and not BCD(4)) or
             (not BCD(6) and BCD(5) and not BCD(4)) or
             (BCD(5) and not BCD(4) and not BCD(3) and not BCD(2)) or
