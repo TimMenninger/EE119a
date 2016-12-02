@@ -68,8 +68,8 @@ begin
     -- in finding the patterns.  They correspond to the ones digit of BCD
     B(0) <= BCD(0);
     B(1) <= BCD(1) xor BCD(4);
-    B(2) <= (BCD(1) and BCD(4)) xor BCD(2) xor BCD(5); -- Both B(1) factors causes carry
-    B(3) <= ((BCD(2) and BCD(5)) or                       -- Two+ B(2) factors causes carry
+    B(2) <= (BCD(1) and BCD(4)) xor BCD(2) xor BCD(5);  -- Both B(1) factors causes carry
+    B(3) <= ((BCD(2) and BCD(5)) or                     -- Two+ B(2) factors causes carry
             ((BCD(1) and BCD(4)) and BCD(2)) or
             ((BCD(1) and BCD(4)) and BCD(5)))
         xor BCD(3) xor BCD(4) xor BCD(6);
@@ -97,3 +97,5 @@ begin
             (BCD(6) and BCD(5) and BCD(2));
     B(7) <= '0';
 end converter;
+
+---------------------------------------------------------------------------------------------------

@@ -42,7 +42,6 @@
 
 library ieee;
 use     ieee.std_logic_1164.all;
-use     ieee.numeric_std.all;
 
 entity ic74194 is
     --
@@ -127,7 +126,6 @@ end shifter4bit;
 
 library ieee;
 use     ieee.std_logic_1164.all;
-use     ieee.numeric_std.all;
 
 entity UniversalSR8 is
     --
