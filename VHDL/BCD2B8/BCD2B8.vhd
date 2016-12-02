@@ -15,7 +15,7 @@
 --  Inputs: BCD[7..0] - A two-digit BCD value, where each nibble represents one decimal value,
 --              the high bit being the high bit of the tens digit (which is the high nibble)
 --
---  Outputs: B[7..0] - The binary representation of the input BCD value. 
+--  Outputs: B[7..0] - The binary representation of the input BCD value.
 --
 --  Revision History:
 --      12/01/16  Tim Menninger   Created
@@ -27,6 +27,9 @@ use     ieee.std_logic_1164.all;
 use     ieee.numeric_std.all;
 
 ---------------------------------------------------------------------------------------------------
+--
+--  BCD2binary8 entity declaration
+--
 
 entity BCD2binary8 is
     port (
@@ -36,58 +39,57 @@ entity BCD2binary8 is
 end entity;
 
 ---------------------------------------------------------------------------------------------------
+--
+-- BCD2binary conversion architecture
+--
 
 architecture converter of BCD2binary8 is
+-- Process will convert the BCD to a binary value
+-- Each digit in the BCD (lhs) corresponds to B (rhs), so we just add the corresponding
+-- bit values for each BCD into B:
+--          BCD bit =>    B
+--             0    => 00000001
+--             1    => 00000010
+--             2    => 00000100
+--             3    => 00001000
+--             4    => 00001010
+--             5    => 00010100
+--             6    => 00101000
+--             7    => 01010000
 begin
-    -- Process will convert the BCD to a binary value
-    -- Each digit in the BCD (lhs) corresponds to B (rhs), so we just add the corresponding
-    -- bit values for each BCD into B:
-    --          BCD bit =>    B
-    --             0    => 00000001
-    --             1    => 00000010
-    --             2    => 00000100
-    --             3    => 00001000
-    --             4    => 00001010
-    --             5    => 00010100
-    --             6    => 00101000
-    --             7    => 01010000
-    process(BCD)
-    begin
-        -- Set each bit as sum of bits and carries from rightmore bits.  The sum of any one bit
-        -- is the XOR of {the bit immediately to its right, and any set bits in the binary
-        -- representation shown above the process}.  In these, the "factors" referred to in
-        -- comments are terms XOR'd together.
-        B(0) <= BCD(0);
-        B(1) <= BCD(1) xor BCD(4);
-        B(2) <= (BCD(1) and BCD(4)) xor BCD(2) xor BCD(5);  -- Both B(1) factors causes carry
-        B(3) <= (BCD(2) and BCD(5) or                       -- Two+ B(2) factors causes carry
-                ((BCD(1) and BCD(4)) and BCD(2)) or
-                ((BCD(1) and BCD(4)) and BCD(5)))
-            xor BCD(3) xor BCD(4) xor BCD(6);
+    -- Set each bit as sum of bits and carries from rightmore bits.  The sum of any one bit
+    -- is the XOR of {the bit immediately to its right, and any set bits in the binary
+    -- representation shown above the process}.  In these, the "factors" referred to in
+    -- comments are terms XOR'd together.
+    B(0) <= BCD(0);
+    B(1) <= BCD(1) xor BCD(4);
+    B(2) <= (BCD(1) and BCD(4)) xor BCD(2) xor BCD(5);  -- Both B(1) factors causes carry
+    B(3) <= (BCD(2) and BCD(5) or                       -- Two+ B(2) factors causes carry
+            ((BCD(1) and BCD(4)) and BCD(2)) or
+            ((BCD(1) and BCD(4)) and BCD(5)))
+        xor BCD(3) xor BCD(4) xor BCD(6);
 
-        -- Rest of these were done with Karnaugh maps, and correspond to the tens BCD digit
-        B(4) <= (BCD(7) and not BCD(4)) or
-                (not BCD(6) and BCD(5) and not BCD(4)) or
-                (BCD(5) and not BCD(4) and not BCD(3) and not BCD(2)) or
-                (BCD(6) and not BCD(5) and not BCD(4)) or
-                (BCD(6) and not BCD(5) and BCD(3)) or
-                (BCD(7) and not BCD(3) and not BCD(2)) or
-                (BCD(7) and BCD(2) and not BCD(1)) or
-                (not BCD(7) and not BCD(6) and not BCD(5) and BCD(4) and BCD(3)) or
-                (not BCD(6) and BCD(5) and not BCD(3) and not BCD(2) and not BCD(1)) or
-                (not BCD(7) and not BCD(6) and not BCD(5) and BCD(4) and BCD(2) and BCD(1));
-        B(5) <= (BCD(6) and not BCD(5)) or
-                (BCD(7) and BCD(4) and BCD(3)) or
-                (BCD(7) and BCD(4) and BCD(2) and BCD(1)) or
-                (not BCD(6) and BCD(5) and BCD(4) and BCD(2)) or
-                (not BCD(6) and BCD(5) and BCD(4) and BCD(1));
-        B(6) <= (BCD(7)) or
-                (BCD(6) and BCD(5) and BCD(4)) or
-                (BCD(6) and BCD(5) and BCD(3)) or
-                (BCD(6) and BCD(5) and BCD(2));
-        B(7) <= 0;
-
-    end process;
+    -- Rest of these were done with Karnaugh maps, and correspond to the tens BCD digit
+    B(4) <= (BCD(7) and not BCD(4)) or
+            (not BCD(6) and BCD(5) and not BCD(4)) or
+            (BCD(5) and not BCD(4) and not BCD(3) and not BCD(2)) or
+            (BCD(6) and not BCD(5) and not BCD(4)) or
+            (BCD(6) and not BCD(5) and BCD(3)) or
+            (BCD(7) and not BCD(3) and not BCD(2)) or
+            (BCD(7) and BCD(2) and not BCD(1)) or
+            (not BCD(7) and not BCD(6) and not BCD(5) and BCD(4) and BCD(3)) or
+            (not BCD(6) and BCD(5) and not BCD(3) and not BCD(2) and not BCD(1)) or
+            (not BCD(7) and not BCD(6) and not BCD(5) and BCD(4) and BCD(2) and BCD(1));
+    B(5) <= (BCD(6) and not BCD(5)) or
+            (BCD(7) and BCD(4) and BCD(3)) or
+            (BCD(7) and BCD(4) and BCD(2) and BCD(1)) or
+            (not BCD(6) and BCD(5) and BCD(4) and BCD(2)) or
+            (not BCD(6) and BCD(5) and BCD(4) and BCD(1));
+    B(6) <= (BCD(7)) or
+            (BCD(6) and BCD(5) and BCD(4)) or
+            (BCD(6) and BCD(5) and BCD(3)) or
+            (BCD(6) and BCD(5) and BCD(2));
+    B(7) <= '0';
 end architecture;
 
 ---------------------------------------------------------------------------------------------------
