@@ -12,7 +12,7 @@
 --  B1, as there is no potential for carry from the B0 bit).  Note that B7 is always 0--there is
 --  no set of inputs that cause a carry to spill to bit 7.
 --
---  Entities: BCD2binary8 - Converts 2-digit BCD to 8-bit binary
+--  Entities: BCD2Binary8 - Converts 2-digit BCD to 8-bit binary
 --
 --  Inputs: BCD[7..0] - A two-digit BCD value, where each nibble represents one decimal value,
 --              the high bit being the high bit of the tens digit (which is the high nibble)
@@ -30,22 +30,22 @@ use     ieee.numeric_std.all;
 
 ---------------------------------------------------------------------------------------------------
 --
---  BCD2binary8 entity declaration
+--  BCD2Binary8 entity declaration
 --
 
-entity BCD2binary8 is
+entity BCD2Binary8 is
     port (
         BCD         : in  std_logic_vector(7 downto 0);  -- BCD value
         B           : out std_logic_vector(7 downto 0)   -- value in binary
     );
-end BCD2binary8;
+end BCD2Binary8;
 
 ---------------------------------------------------------------------------------------------------
 --
 -- BCD2binary conversion architecture
 --
 
-architecture converter of BCD2binary8 is
+architecture converter of BCD2Binary8 is
 -- Process will convert the BCD to a binary value
 -- Each digit in the BCD (lhs) corresponds to B (rhs), so we just add the corresponding
 -- bit values for each BCD into B:
