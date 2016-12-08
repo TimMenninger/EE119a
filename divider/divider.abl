@@ -20,31 +20,32 @@ TITLE       '16-bit divider'
 "
 "
 
+
 " reset input
-!Reset       pin   4;                " active low reset signal (for
-                                     "   testing) tied high in hardware
+!Reset       pin   4;		        " active low reset signal (for
+                                 	"   testing) tied high in hardware
 " switch inputs
-!Calculate   pin   5;                 " calculate the quotient
-InDivisor    pin   6;                 " input the divisor (not the dividend)
+!Calculate   pin   5;               " calculate the quotient
+InDivisor    pin   6;               " input the divisor (not the dividend)
 
 " keypad inputs
-KeypadRDY    pin  33;                 " there is a key available
-Keypad0      pin  25;                 " keypad key code bit 0
-Keypad1      pin  26;                 " keypad key code bit 1
-Keypad2      pin  31;                " keypad key code bit 2
-Keypad3      pin  32;                 " keypad key code bit 3
+KeypadRDY    pin  33;               " there is a key available
+Keypad0      pin  25;               " keypad key code bit 0
+Keypad1      pin  26;               " keypad key code bit 1
+Keypad2      pin  31;               " keypad key code bit 2
+Keypad3      pin  32;               " keypad key code bit 3
 
 " keypad scanning inputs
-KeypadRow0  pin  14;                 " row 0 of the keypad
-KeypadRow1  pin  13;                 " row 1 of the keypad
-KeypadRow2  pin  11;                 " row 2 of the keypad
-KeypadRow3  pin   7;                 " row 3 of the keypad
+KeypadRow0   pin  14;               " row 0 of the keypad
+KeypadRow1   pin  13;               " row 1 of the keypad
+KeypadRow2   pin  11;               " row 2 of the keypad
+KeypadRow3   pin   7;               " row 3 of the keypad
 
 " keypad scanning outputs
-KeypadCol0  pin   15  ISTYPE 'reg'; " column 0 of the keypad
-KeypadCol1  pin   17  ISTYPE 'reg'; " column 1 of the keypad
-KeypadCol2  pin   18  ISTYPE 'reg'; " column 2 of the keypad
-KeypadCol3  pin   19  ISTYPE 'reg'; " column 3 of the keypad
+KeypadCol0   pin  15  ISTYPE 'reg'; " column 0 of the keypad
+KeypadCol1   pin  17  ISTYPE 'reg'; " column 1 of the keypad
+KeypadCol2   pin  18  ISTYPE 'reg'; " column 2 of the keypad
+KeypadCol3   pin  19  ISTYPE 'reg'; " column 3 of the keypad
 
 " Hex digit outputs (to 16L8 seven segment decoder)
 HexDigit0    pin  24  ISTYPE 'com'; " bit 0 of the hex digit to display
@@ -53,34 +54,34 @@ HexDigit2    pin  21  ISTYPE 'com'; " bit 2 of the hex digit to display
 HexDigit3    pin  20  ISTYPE 'com'; " bit 3 of the hex digit to display
 
 " 7-segment segment outputs (all active low)
-!Segmenta    pin  72  ISTYPE 'com';    " segment a of the LEDs
-!Segmentb    pin  71  ISTYPE 'com';    " segment b of the LEDs
-!Segmentc    pin  70  ISTYPE 'com';    " segment c of the LEDs
-!Segmentd    pin  69  ISTYPE 'com';    " segment d of the LEDs
-!Segmente    pin  66  ISTYPE 'com';    " segment e of the LEDs
-!Segmentf    pin  65  ISTYPE 'com';    " segment f of the LEDs
-!Segmentg    pin  63  ISTYPE 'com';    " segment g of the LEDs
+!Segmenta    pin  72  ISTYPE 'com'; " segment a of the LEDs
+!Segmentb    pin  71  ISTYPE 'com'; " segment b of the LEDs
+!Segmentc    pin  70  ISTYPE 'com'; " segment c of the LEDs
+!Segmentd    pin  69  ISTYPE 'com'; " segment d of the LEDs
+!Segmente    pin  66  ISTYPE 'com'; " segment e of the LEDs
+!Segmentf    pin  65  ISTYPE 'com'; " segment f of the LEDs
+!Segmentg    pin  63  ISTYPE 'com'; " segment g of the LEDs
 
 " 4:12 decoder outputs (to 29M16 digit decoder)
 DecoderEn    pin  44  ISTYPE 'com'; " enable for the decoder
 DecoderBit0  pin  43  ISTYPE 'reg'; " bit 0 of the decoder
 DecoderBit1  pin  41  ISTYPE 'reg'; " bit 1 of the decoder
 DecoderBit2  pin  40  ISTYPE 'reg'; " bit 2 of the decoder
-DecoderBit3  pin  39  ISTYPE 'reg';    " bit 3 of the decoder
+DecoderBit3  pin  39  ISTYPE 'reg'; " bit 3 of the decoder
 
 " 7-segment digit outputs
-Digit0       pin  57  ISTYPE 'reg';    " digit 0 (1st digit of dividend)
-Digit1       pin  56  ISTYPE 'reg';    " digit 1 (2nd digit of dividend)
-Digit2       pin  55  ISTYPE 'reg';    " digit 2 (3rd digit of dividend)
-Digit3       pin  54  ISTYPE 'reg';    " digit 3 (4th digit of dividend)
-Digit4       pin  53  ISTYPE 'reg';    " digit 4 (1st digit of divisor)
-Digit5       pin  52  ISTYPE 'reg';    " digit 5 (2nd digit of divisor)
-Digit6       pin  51  ISTYPE 'reg';    " digit 6 (3rd digit of divisor)
-Digit7       pin  50  ISTYPE 'reg';    " digit 7 (4th digit of divisor)
-Digit8       pin  48  ISTYPE 'reg';    " digit 8 (1st digit of quotient)
-Digit9       pin  47  ISTYPE 'reg';    " digit 9 (2nd digit of quotient)
-Digit10      pin  46  ISTYPE 'reg';    " digit 10 (3rd digit of quotient)
-Digit11      pin  45  ISTYPE 'reg';    " digit 11 (4th digit of quotient)
+Digit0       pin  57  ISTYPE 'reg'; " digit 0 (1st digit of dividend)
+Digit1       pin  56  ISTYPE 'reg'; " digit 1 (2nd digit of dividend)
+Digit2       pin  55  ISTYPE 'reg'; " digit 2 (3rd digit of dividend)
+Digit3       pin  54  ISTYPE 'reg'; " digit 3 (4th digit of dividend)
+Digit4       pin  53  ISTYPE 'reg'; " digit 4 (1st digit of divisor)
+Digit5       pin  52  ISTYPE 'reg'; " digit 5 (2nd digit of divisor)
+Digit6       pin  51  ISTYPE 'reg'; " digit 6 (3rd digit of divisor)
+Digit7       pin  50  ISTYPE 'reg'; " digit 7 (4th digit of divisor)
+Digit8       pin  48  ISTYPE 'reg'; " digit 8 (1st digit of quotient)
+Digit9       pin  47  ISTYPE 'reg'; " digit 9 (2nd digit of quotient)
+Digit10      pin  46  ISTYPE 'reg'; " digit 10 (3rd digit of quotient)
+Digit11      pin  45  ISTYPE 'reg'; " digit 11 (4th digit of quotient)
 
 " Clocks
 CLK          pin   9;                " the clock (1 MHz)
@@ -139,41 +140,61 @@ CLK          pin   9;                " the clock (1 MHz)
 "
 
 " Enable signals
-DigitClkEn   node  ISTYPE 'reg';    "enable for the digit clock
+DigitClkEn              node  ISTYPE 'reg';    "enable for the digit clock
 
 " multiplex counter (bits 0 to 9)
-MuxCntr9..MuxCntr0 node ISTYPE 'reg';
-MuxCntr = [ Muxcntr9..MuxCntr0 ];
+MuxCntr9..MuxCntr0      node ISTYPE 'reg';
+MuxCntr = [ MuxCntr9..MuxCntr0 ];
 
 " Registered remainder used in computation
-RemainderBit16..RemainderBit0 node istype 'reg';
-Remainder = [ RemainderBit16..RemainderBit0 ];
+Remainder16..Remainder0  node ISTYPE 'reg';
+Remainder = [ Remainder16..Remainder0 ];
 
 " Stored hex digits
-DBit47..DBit0 node ISTYPE 'reg';
-Digits   = [ DBit47..DBit0 ];
+DBit47..DBit0           node ISTYPE 'reg';
+Dividend = [ DBit47..DBit32 ];
+Divisor  = [ DBit31..DBit16 ];
+Quotient = [ DBit15..DBit0  ];
+
+" Digit outputs
+Digits  = [ Digit11..Digit0 ];
+
+" Columns of buttons
+KeypadCols = [ KeypadCol3..KeypadCol0 ];
 
 " nodes for synchronization and edge detection of KeypadRDY
-KeypadRDYS1       node ISTYPE 'reg';    "first DFF for edge detection
-KeypadRDYS2       node ISTYPE 'reg';    "second DFF for edge detection
-KeypadRDYS3       node ISTYPE 'reg';    "third DFF for edge detection
-HaveKey           node ISTYPE 'reg';    "have a key from the keypad
+KeypadRDYS1             node ISTYPE 'reg';    "first DFF for edge detection
+KeypadRDYS2             node ISTYPE 'reg';    "second DFF for edge detection
+KeypadRDYS3             node ISTYPE 'reg';    "third DFF for edge detection
+HaveKey                 node ISTYPE 'reg';    "have a key from the keypad
 
 " signals to select shift register operation
-ShiftHold         node ISTYPE 'com';
-ShiftInit         node ISTYPE 'com';
-ShiftKeyIn        node ISTYPE 'com';
-ShiftAS           node ISTYPE 'com';
-ShiftRS           node ISTYPE 'com';
-ShiftMisc         node ISTYPE 'com';
-ShiftDisplay      node ISTYPE 'com';
+ShiftHold               node ISTYPE 'com';
+ShiftInit               node ISTYPE 'com';
+ShiftKeyIn              node ISTYPE 'com';
+ShiftAS                 node ISTYPE 'com';
+ShiftRS                 node ISTYPE 'com';
+ShiftMisc               node ISTYPE 'com';
+ShiftDisplay            node ISTYPE 'com';
+
+" Some shift operations happen only at certain mux values
+DoInit                  node ISTYPE 'com';
+DoKeyIn                 node ISTYPE 'com';
+DoAS                    node ISTYPE 'com';
+DoRS                    node ISTYPE 'com';
+DoMisc                  node ISTYPE 'com';
 
 " Flags used in arithmetic
-CarryFlag         node ISTYPE 'reg';    "carry flag for adder/subtracter
-AddSubFlag        node ISTYPE 'reg';    "flag when adding/subtracting
+CarryFlag               node ISTYPE 'reg';    "carry flag for adder/subtracter
+AddingState             node ISTYPE 'reg';    "flag when adding/subtracting
 
 " Used to latch calculate signal
-DoCalculate       node ISTYPE 'reg';
+DoCalculate             node ISTYPE 'reg';
+
+" Signals telling us when we are on dividend or divisor
+OnDigit3                node ISTYPE 'com';
+OnDigit7                node ISTYPE 'com';
+OnDigit11               node ISTYPE 'com';
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -182,21 +203,14 @@ DoCalculate       node ISTYPE 'reg';
 "
 "
 
-" Digits on the display
-Dividend        = [ DBit47..DBit32 ];
-Divisor         = [ DBit31..DBit16 ];
-Quotient        = [ DBit15..DBit0 ];
-
 " Hex digits
-HexDigits       = [ HexDigit3..HexDigit0 ];
+HexDigits           = [ HexDigit3..HexDigit0 ];
 
 " Keypad input
-Keypad          = [ Keypad3..Keypad0 ];
+Keypad              = [ Keypad3..Keypad0 ];
 
 " Specific multiplex digits
-DecoderBits     = [ DecoderBit3..DecoderBit0 ];
-OnDigit3        = (DecoderBits == 3);
-OnDigit7        = (DecoderBits == 7);
+DecoderBits         = [ DecoderBit3..DecoderBit0 ];
 
 
 EQUATIONS
@@ -210,14 +224,18 @@ EQUATIONS
 DigitClkEn.CLK      = CLK;
 MuxCntr.CLK         = CLK;
 Remainder.CLK       = CLK;
-Digits.CLK          = CLK;
+Dividend.CLK        = CLK;
+Divisor.CLK         = CLK;
+Quotient.CLK        = CLK;
 KeypadRDYS1.CLK     = CLK;
 KeypadRDYS2.CLK     = CLK;
 KeypadRDYS3.CLK     = CLK;
 HaveKey.CLK         = CLK;
 CarryFlag.CLK       = CLK;
-AddSubFlag.CLK      = CLK;
+AddingState.CLK     = CLK;
 DoCalculate.CLK     = CLK;
+DecoderBits.CLK     = CLK;
+Digits.CLK          = CLK;
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -227,24 +245,28 @@ DoCalculate.CLK     = CLK;
 "
 
 " Display
-HexDigit0.OE        =  1;
-HexDigit1.OE        =  1;
-HexDigit2.OE        =  1;
-HexDigit3.OE        =  1;
+HexDigits.OE        =  1;
 
 " Decoder
 DecoderEn.OE        =  1;
-DecoderBit0.OE      =  1;
-DecoderBit1.OE      =  1;
-DecoderBit2.OE      =  1;
-DecoderBit3.OE      =  1;
+DecoderBits.OE      =  1;
+
+" Tri-state output to unused outputs
+Segmenta.OE         =  0;
+Segmentb.OE         =  0;
+Segmentc.OE         =  0;
+Segmentd.OE         =  0;
+Segmente.OE         =  0;
+Segmentf.OE         =  0;
+Segmentg.OE         =  0;
+Digits.OE           =  0;
+KeypadCols.OE       =  0;
 
 " Disable I/O pins that are used strictly as inputs
 Calculate.OE        =  0;
 InDivisor.OE        =  0;
 KeypadRDY.OE        =  0;
 Keypad.OE           =  0;
-Reset.OE            =  0;
 KeypadRow3.OE       =  0;
 KeypadRow2.OE       =  0;
 KeypadRow1.OE       =  0;
@@ -258,10 +280,25 @@ KeypadRow0.OE       =  0;
 "
 
 " signals the end of a multiplexed digit
-DigitClkEn  := (MuxCntr == ^h3FF);
+DigitClkEn  := (MuxCntr == ^h3ff);
 
-" Always enable decoder to 29M16
-DecoderEn   := 1;
+" Always enable 29M16 decoder
+DecoderEn    = 1;
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Chronology
+"
+"
+
+DoInit       = (MuxCntr[9..0] == ^b0000000000); " Initialize
+DoKeyIn      = (MuxCntr[9..0] == ^b0000000001); " Shift in next key
+DoRS         = (MuxCntr[5..0] ==     ^b000010); " Shift remainder
+DoAS         = (MuxCntr[5..4] ==     ^b01    ); " Add remainder and divisor
+DoCarry      = (MuxCntr[5..0] ==     ^b100000); " Set carry before shifting quotient
+DoMisc       = (MuxCntr[5..0] ==     ^b100001); " Shift bit into quotient
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -269,15 +306,16 @@ DecoderEn   := 1;
 "
 "
 
-AddSubFlag := !(Calculate & OnDigit3 & MuxCntr5) &
-              ((AddSubFlag & !ShiftMisc) #
-              ((AddSubFlag $ CarryFlag $ Remainder[16]) & ShiftMisc));
+" Set when we are adding remainder and divisor
+AddingState := !(DoCalculate & OnDigit3 & DoAS) &
+               ((AddingState & !ShiftMisc) #
+			 	   ((AddingState $ CarryFlag $ Remainder[16]) & ShiftMisc));
 
-CarryFlag  := (AddSubFlag & !MuxCntr5) #
-              (CarryFlag & !(DigitClkEn & OnDigit3)) # " Maybe?
-              (ShiftAS & ((!Remainder0 & CarryFlag) #
-                         ((DBits31 $ AddSubFlag) & !Remainder0) #
-                         ((DBits31 $ AddSubFlag) & CarryFlag)));
+" Set according to remainder + divisor sum
+CarryFlag   := (AddingState & DoCarry) #
+               (ShiftAS & ((!Remainder0 & CarryFlag) #
+                          ((DBit31 $ AddingState) & !Remainder0) #
+                          ((DBit31 $ AddingState) & CarryFlag)));
 
 " Store calculate signal, and when released, hold it until on digit 3
 DoCalculate := (DoCalculate & !(DigitClkEn & OnDigit3)) # Calculate;
@@ -332,6 +370,12 @@ DecoderBit3  :=  !Reset & ((!DigitClkEn & DecoderBit3) #
                                            (DecoderBit3 & !DecoderBit1 &
                                             !DecoderBit0)))));
 
+" Use decoder to know what digit we are on, or in the case of OnDigitQ,
+" if we are on the quotient (bottom) row
+OnDigit3            = (DecoderBits == 3);
+OnDigit7            = (DecoderBits == 7);
+OnDigitQ            = DecoderBit3;
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -339,23 +383,23 @@ DecoderBit3  :=  !Reset & ((!DigitClkEn & DecoderBit3) #
 "
 "
 
-ShiftHold    := !(ShiftInit # ShiftKeyIn # ShiftDisplay # ShiftAS # ShiftRS # ShiftMisc);
-ShiftInit    := (MuxCntr[9..0] == ^b0000000000) &
-                !DigitClkEn & HaveKey & !DoCalculate &
-                OnDigit3;
-ShiftKeyIn   := (MuxCntr[9..0] == ^b0000000001) &
-                !DigitClkEn & !HaveKey & DoCalculate &
-                ((OnDigit3 & !Divisor) # (OnDigit7 & Divisor));
-ShiftAS      := (MuxCntr[5..4] == ^b01) &
-                !DigitClkEn & !HaveKey & DoCalculate &
-                OnDigit3;
-ShiftRS      := (MuxCntr[5..0] == ^b000001) &
-                !DigitClkEn & !HaveKey & DoCalculate &
-                OnDigit3;
-ShiftMisc    := (MuxCntr[5..0] == ^b100000) &
-                !DigitClkEn & !HaveKey & DoCalculate &
-                OnDigit3;
-ShiftDisplay := DigitClkEn;
+ShiftHold    = !(ShiftInit # ShiftKeyIn # ShiftDisplay # ShiftAS # ShiftRS # ShiftMisc);
+ShiftInit    = DoInit &
+               !DigitClkEn & HaveKey & !DoCalculate &
+               OnDigit3;
+ShiftKeyIn   = DoKeyIn &
+               !DigitClkEn & !HaveKey & DoCalculate &
+               ((OnDigit3 & !InDivisor) # (OnDigit7 & InDivisor));
+ShiftAS      = DoAS &
+               !DigitClkEn & !HaveKey & DoCalculate &
+               OnDigit3;
+ShiftRS      = DoRS &
+               !DigitClkEn & !HaveKey & DoCalculate &
+               OnDigit3;
+ShiftMisc    = DoMisc &
+               !DigitClkEn & !HaveKey & DoCalculate &
+               OnDigit3;
+ShiftDisplay = DigitClkEn;
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -383,64 +427,65 @@ HaveKey  :=  (HaveKey & !(DigitClkEn & ((OnDigit3 & !InDivisor) #
 "
 "
 
-" the hex digit to output is just the low nibble of the shift register
-HexDigits := Digits[3..0];
+" Use divisor/dividend switch to toggle quotient/divisor
+HexDigits = ((InDivisor # !OnDigitQ) & [ DBit3..DBit0 ]) #
+            (!InDivisor & OnDigitQ & Remainder[3..0]);
 
 " All hex digits
-Digits[47]       := (ShiftInit    & 0) #
-                    (ShiftHold    & Digits[47]) #
-                    (ShiftRS      & Digits[47]) #
-                    (ShiftAS      & Digits[47]) #
-                    (ShiftMisc    & Digits[46]) #
-                    (ShiftKeyIn   & Digits[47]) #
-                    (ShiftDisplay & Digits[3]);
+Dividend[15]     := (ShiftInit    & 0) #
+                    (ShiftHold    & Dividend[15]) #
+                    (ShiftRS      & Dividend[15]) #
+                    (ShiftAS      & Dividend[15]) #
+                    (ShiftMisc    & Dividend[14]) #
+                    (ShiftKeyIn   & Dividend[15]) #
+                    (ShiftDisplay & DBit3);
 
-Digits[46..33]   := (ShiftInit    & 0) #
-                    (ShiftHold    & Digits[46..33]) #
-                    (ShiftRS      & Digits[46..33]) #
-                    (ShiftAS      & Digits[46..33]) #
-                    (ShiftMisc    & Digits[45..32]) #
-                    (ShiftKeyIn   & Digits[46..33]) #
-                    (ShiftDisplay & Digits[2..0,47..37]);
+Dividend[14..1]  := (ShiftInit    & 0) #
+                    (ShiftHold    & Dividend[14..1]) #
+                    (ShiftRS      & Dividend[14..1]) #
+                    (ShiftAS      & Dividend[14..1]) #
+                    (ShiftMisc    & Dividend[13..0]) #
+                    (ShiftKeyIn   & Dividend[14..1]) #
+                    (ShiftDisplay & [ DBit2..DBit0, DBit47..DBit37 ]);
 
-Digits[32]       := (ShiftInit    & 0) #
-                    (ShiftHold    & Digits[32]) #
-                    (ShiftRS      & Digits[32]) #
-                    (ShiftAS      & Digits[32]) #
-                    (ShiftMisc    & !(AddSubFlag $ CarryFlag $ Remainder[16])) #
-                    (ShiftKeyIn   & Digits[32]) #
-                    (ShiftDisplay & Digits[36]);
+Dividend[0]      := (ShiftInit    & 0) #
+                    (ShiftHold    & Dividend[0]) #
+                    (ShiftRS      & Dividend[0]) #
+                    (ShiftAS      & Dividend[0]) #
+                    (ShiftMisc    & !(AddingState $ CarryFlag $ Remainder[16])) #
+                    (ShiftKeyIn   & Dividend[0]) #
+                    (ShiftDisplay & DBit36);
 
-Digits[31..16]   := (ShiftInit    & Digits[31..16]) #
-                    (ShiftHold    & Digits[31..16]) #
-                    (ShiftRS      & Digits[31..16]) #
-                    (ShiftAS      & Digits[16,31..17]) #
-                    (ShiftMisc    & Digits[31..16]) #
-                    (ShiftKeyIn   & Digits[31..16]) #
-                    (ShiftDisplay & Digits[23..05]);
+Divisor[15..0]   := (ShiftInit    & Divisor[15..0]) #
+                    (ShiftHold    & Divisor[15..0]) #
+                    (ShiftRS      & Divisor[15..0]) #
+                    (ShiftAS      & Divisor[0,15..1]) #
+                    (ShiftMisc    & Divisor[15..0]) #
+                    (ShiftKeyIn   & Divisor[15..0]) #
+                    (ShiftDisplay & [ DBit35..DBit20 ]);
 
-Digits[15..4]    := (ShiftInit    & Digits[15..4]) #
-                    (ShiftHold    & Digits[15..4]) #
-                    (ShiftRS      & Digits[15..4]) #
-                    (ShiftAS      & Digits[15..4]) #
-                    (ShiftMisc    & Digits[14..3]) #
-                    (ShiftKeyIn   & Digits[11..0]) #
-                    (ShiftDisplay & Digits[19..8]);
+Quotient[15..4]  := (ShiftInit    & Quotient[15..4]) #
+                    (ShiftHold    & Quotient[15..4]) #
+                    (ShiftRS      & Quotient[15..4]) #
+                    (ShiftAS      & Quotient[15..4]) #
+                    (ShiftMisc    & Quotient[14..3]) #
+                    (ShiftKeyIn   & Quotient[11..0]) #
+                    (ShiftDisplay & [ DBit19..DBit8 ]);
 
-Digits[3..0]     := (ShiftInit    & Digits[3..0]) #
-                    (ShiftHold    & Digits[3..0]) #
-                    (ShiftRS      & Digits[3..0]) #
-                    (ShiftAS      & Digits[3..0]) #
-                    (ShiftMisc    & Digits[2..0,15])#
+Quotient[3..0]   := (ShiftInit    & Quotient[3..0]) #
+                    (ShiftHold    & Quotient[3..0]) #
+                    (ShiftRS      & Quotient[3..0]) #
+                    (ShiftAS      & Quotient[3..0]) #
+                    (ShiftMisc    & Quotient[2..0,15])#
                     (ShiftKeyIn   & Keypad[3..0])    #
-                    (ShiftDisplay & Digits[4..7]);
+                    (ShiftDisplay & [ DBit7..DBit4 ]);
 
 " Remainder, used for carry
 Remainder[16]    := (ShiftInit    & 0) #
                     (ShiftHold    & Remainder[16]) #
                     (ShiftRS      & Remainder[15]) #
                     (ShiftAS      & Remainder[16]) #
-                    (ShiftMisc    & ((AddSubFlag $ CarryFlag) $ Remainder[16])) #
+                    (ShiftMisc    & ((AddingState $ CarryFlag) $ Remainder[16])) #
                     (ShiftKeyIn   & Remainder[16]) #
                     (ShiftDisplay & Remainder[16]);
 
@@ -448,28 +493,27 @@ Remainder[16]    := (ShiftInit    & 0) #
 Remainder[15]    := (ShiftInit    & 0) #
                     (ShiftHold    & Remainder[15]) #
                     (ShiftRS      & Remainder[14]) #
-                    (ShiftAS      & (Digits[16] $ AddSubFlag $
-                                    Remainder[0] $ CarryFlag)) #
+                    (ShiftAS      & (Divisor[0] $ AddingState $
+                                     Remainder[0] $ CarryFlag)) #
                     (ShiftMisc    & Remainder[15]) #
                     (ShiftKeyIn   & Remainder[15]) #
-                    (ShiftDisplay & Remainder[15]);
-
+                    (ShiftDisplay & Remainder[3]);
 
 Remainder[14..1] := (ShiftInit    & 0) #
                     (ShiftHold    & Remainder[14..1]) #
                     (ShiftRS      & Remainder[13..0]) #
                     (ShiftAS      & Remainder[15..2]) #
-                    (ShiftMisc    & Remainder[14..1])#
+                    (ShiftMisc    & Remainder[14..1]) #
                     (ShiftKeyIn   & Remainder[14..1]) #
-                    (ShiftDisplay & Remainder[14..1]);
+                    (ShiftDisplay & Remainder[2..0,15..5]);
 
 Remainder[0]     := (ShiftInit    & 0) #
                     (ShiftHold    & Remainder[0]) #
-                    (ShiftRS      & Digits[15]) #
+                    (ShiftRS      & Quotient[15]) #
                     (ShiftAS      & Remainder[1]) #
-                    (ShiftMisc    & Remainder[0])#
+                    (ShiftMisc    & Remainder[0]) #
                     (ShiftKeyIn   & Remainder[0]) #
-                    (ShiftDisplay & Remainder[0]);
+                    (ShiftDisplay & Remainder[4]);
 
 
 END  Divider
