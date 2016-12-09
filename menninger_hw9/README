@@ -1,0 +1,17 @@
+For whatever reason, no software I've tried to download has worked for me.
+The only way I've been able to test was with timing simulations in Quartus,
+but haven't been able to run any test bench files.  That said, my solutions
+seem to be correct, but if they don't run with the test benches, let me know
+and when I come back on Saturday, I'll fix them when I can use the machines in
+Moore.  The issue is likely something with nomenclature.
+
+Notes:
+RLLEncoder: Without running the tests, I don't know if this is correct.  But
+from reading the test bench, it looks like it assumes the first output bit
+lags the first input bit by 5 clocks.  My solution only lagged by four clocks.
+The hard copy is this 4-clock-delayed solution, but I submitted both that
+file as well as an identical file with a dummy wait flag when START goes
+active.  This causes a fifth bit lag.  This is in the RLLEnc5.vhd file.
+
+SerialMultiplier: I wrote a test bench the way I would have if I were testing,
+but I haven't run it for aforementioned reasons.
