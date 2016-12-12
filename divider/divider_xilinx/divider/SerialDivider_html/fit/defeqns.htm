@@ -1,0 +1,839 @@
+<html><head><link type='text/css' href='style.css' rel='stylesheet'></head><body class='pgBgnd'>
+<h3 align='center'>Equations</h3>
+<table width='90%' align='center' border='1' cellpadding='0' cellspacing='0'>
+<tr><td>
+</td></tr><tr><td>
+********** Mapped Logic **********
+</td></tr><tr><td>
+FTCPE_Carry: FTCPE port map (Carry,Carry_T,CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carry_T <= ((Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Carry)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Carry)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND NOT Carry AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(0) AND Divisor(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Carry AND NOT HexDigits(0) AND NOT Divisor(0)));
+</td></tr><tr><td>
+FTCPE_DecoderCntr0: FTCPE port map (DecoderCntr(0),DecoderCntr_T(0),CLK,'0',NOT Reset);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DecoderCntr_T(0) <= (MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(9) AND MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(6) AND MuxCntr(7) AND MuxCntr(8));
+</td></tr><tr><td>
+FTCPE_DecoderCntr1: FTCPE port map (DecoderCntr(1),DecoderCntr_T(1),CLK,'0',NOT Reset);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DecoderCntr_T(1) <= (NOT DecoderCntr(0) AND MuxCntr(4) AND MuxCntr(5) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(0) AND MuxCntr(9) AND MuxCntr(1) AND MuxCntr(2) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(3) AND MuxCntr(6) AND MuxCntr(7) AND MuxCntr(8));
+</td></tr><tr><td>
+FTCPE_DecoderCntr2: FTCPE port map (DecoderCntr(2),DecoderCntr_T(2),CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DecoderCntr_T(2) <= ((NOT DecoderCntr(2) AND NOT DecoderCntr(0) AND NOT DecoderCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND MuxCntr(9) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND MuxCntr(6) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(7) AND MuxCntr(8))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT DecoderCntr(0) AND NOT DecoderCntr(1) AND DecoderCntr(3) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND MuxCntr(9) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND MuxCntr(6) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(7) AND MuxCntr(8)));
+</td></tr><tr><td>
+FTCPE_DecoderCntr3: FTCPE port map (DecoderCntr(3),DecoderCntr_T(3),CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DecoderCntr_T(3) <= ((DecoderCntr(2) AND NOT DecoderCntr(0) AND NOT DecoderCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT DecoderCntr(3) AND MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(9) AND MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(6) AND MuxCntr(7) AND MuxCntr(8))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT DecoderCntr(2) AND NOT DecoderCntr(0) AND NOT DecoderCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	DecoderCntr(3) AND MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(9) AND MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(6) AND MuxCntr(7) AND MuxCntr(8)));
+</td></tr><tr><td>
+</td></tr><tr><td>
+DecoderEn <= Divider_FSM_FFd2.EXP;
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(0) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(0) <= Digits_I(0) when Digits_OE(0) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(0) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(1) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(1) <= Digits_I(1) when Digits_OE(1) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(1) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(2) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(2) <= Digits_I(2) when Digits_OE(2) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(2) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(3) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(3) <= Digits_I(3) when Digits_OE(3) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(3) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(4) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(4) <= Digits_I(4) when Digits_OE(4) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(4) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(5) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(5) <= Digits_I(5) when Digits_OE(5) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(5) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(6) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(6) <= Digits_I(6) when Digits_OE(6) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(6) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(7) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(7) <= Digits_I(7) when Digits_OE(7) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(7) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(8) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(8) <= Digits_I(8) when Digits_OE(8) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(8) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(9) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(9) <= Digits_I(9) when Digits_OE(9) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(9) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(10) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(10) <= Digits_I(10) when Digits_OE(10) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(10) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Digits_I(11) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits(11) <= Digits_I(11) when Digits_OE(11) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Digits_OE(11) <= '0';
+</td></tr><tr><td>
+FTCPE_Dividend4: FTCPE port map (Dividend(4),Dividend_T(4),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_T(4) <= ((NOT Reset)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (N0$BUF0.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (EXP13_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND NOT HexDigits(3)_BUFR AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(4) AND NOT Dividend(5)));
+</td></tr><tr><td>
+FTCPE_Dividend5: FTCPE port map (Dividend(5),Dividend_T(5),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_T(5) <= ((NOT Reset)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (EXP12_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divisor(1).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(5))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND NOT Dividend(4) AND NOT Dividend(5) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(6)));
+</td></tr><tr><td>
+FTCPE_Dividend6: FTCPE port map (Dividend(6),Dividend_T(6),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_T(6) <= ((NOT Reset)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divisor(13).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (EXP9_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(6))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND NOT Dividend(5) AND NOT Dividend(6) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(7)));
+</td></tr><tr><td>
+FTCPE_Dividend7: FTCPE port map (Dividend(7),Dividend_T(7),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_T(7) <= ((NOT Reset)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (EXP10_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(7))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND NOT Dividend(6) AND NOT Dividend(7) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(8)));
+</td></tr><tr><td>
+FTCPE_Dividend8: FTCPE port map (Dividend(8),Dividend_T(8),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_T(8) <= ((NOT Reset)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (N0.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (EXP8_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(8))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND NOT Dividend(7) AND NOT Dividend(8) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(9)));
+</td></tr><tr><td>
+FTCPE_Dividend9: FTCPE port map (Dividend(9),Dividend_T(9),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_T(9) <= ((EXP2_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(9))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND NOT Dividend(10) AND NOT Dividend(8) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(9)));
+</td></tr><tr><td>
+FTCPE_Dividend10: FTCPE port map (Dividend(10),Dividend_T(10),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_T(10) <= ((NOT Reset)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (EXP0_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (MuxCntr(3).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(10))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND NOT Dividend(10) AND NOT Dividend(11) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(9)));
+</td></tr><tr><td>
+FTCPE_Dividend11: FTCPE port map (Dividend(11),Dividend_T(11),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_T(11) <= ((NOT Reset)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (EXP7_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(11))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND NOT Dividend(10) AND NOT Dividend(11) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(12)));
+</td></tr><tr><td>
+FTCPE_Dividend12: FTCPE port map (Dividend(12),Dividend_T(12),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_T(12) <= ((NOT Reset)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Dividend(13).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (EXP5_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(12))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND NOT Dividend(11) AND NOT Dividend(12) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(13)));
+</td></tr><tr><td>
+FTCPE_Dividend13: FTCPE port map (Dividend(13),Dividend_T(13),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_T(13) <= ((EXP4_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(13)));
+</td></tr><tr><td>
+FTCPE_Dividend14: FTCPE port map (Dividend(14),Dividend_T(14),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_T(14) <= ((NOT Reset)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (MuxCntr(9).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (DecoderEn_OBUF.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(14))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND NOT Dividend(13) AND NOT Dividend(14) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Dividend(15)));
+</td></tr><tr><td>
+FTCPE_Divider_FSM_FFd1: FTCPE port map (Divider_FSM_FFd1,Divider_FSM_FFd1_T,CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divider_FSM_FFd1_T <= ((NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND NOT MuxCntr(5))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND MuxCntr(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND NOT MuxCntr(9) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	highBit));
+</td></tr><tr><td>
+FDCPE_Divider_FSM_FFd2: FDCPE port map (Divider_FSM_FFd2,Divider_FSM_FFd2_D,CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divider_FSM_FFd2_D <= ((DecoderCntr_0.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND NOT MuxCntr(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND NOT MuxCntr(5)));
+</td></tr><tr><td>
+FTCPE_Divisor0: FTCPE port map (Divisor(0),Divisor_T(0),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(0) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(0) AND Divisor(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Divisor(0) AND NOT Divisor(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(0) AND NOT Divisor(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT Divisor(0) AND Divisor(4)));
+</td></tr><tr><td>
+FTCPE_Divisor1: FTCPE port map (Divisor(1),Divisor_T(1),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(1) <= ((MuxCntr(4).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(1) AND Divisor(2)));
+</td></tr><tr><td>
+FTCPE_Divisor2: FTCPE port map (Divisor(2),Divisor_T(2),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(2) <= ((Divisor(3).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(2) AND Divisor(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(2) AND NOT Divisor(6)));
+</td></tr><tr><td>
+FTCPE_Divisor3: FTCPE port map (Divisor(3),Divisor_T(3),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(3) <= ((Divisor(4).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(3) AND Divisor(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Divisor(3) AND NOT Divisor(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(3) AND NOT Divisor(7)));
+</td></tr><tr><td>
+FTCPE_Divisor4: FTCPE port map (Divisor(4),Divisor_T(4),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(4) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(4) AND Divisor(5))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Divisor(4) AND NOT Divisor(5))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(4) AND NOT Divisor(8))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT Divisor(4) AND Divisor(8)));
+</td></tr><tr><td>
+FTCPE_Divisor5: FTCPE port map (Divisor(5),Divisor_T(5),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(5) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(5) AND Divisor(6))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Divisor(5) AND NOT Divisor(6))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(5) AND NOT Divisor(9))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT Divisor(5) AND Divisor(9)));
+</td></tr><tr><td>
+FTCPE_Divisor6: FTCPE port map (Divisor(6),Divisor_T(6),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(6) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(6) AND Divisor(7))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Divisor(6) AND NOT Divisor(7))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(10) AND NOT Divisor(6))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT Divisor(10) AND Divisor(6)));
+</td></tr><tr><td>
+FTCPE_Divisor7: FTCPE port map (Divisor(7),Divisor_T(7),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(7) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(7) AND Divisor(8))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Divisor(7) AND NOT Divisor(8))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(11) AND NOT Divisor(7))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT Divisor(11) AND Divisor(7)));
+</td></tr><tr><td>
+FTCPE_Divisor8: FTCPE port map (Divisor(8),Divisor_T(8),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(8) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(8) AND Divisor(9))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Divisor(8) AND NOT Divisor(9))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(12) AND NOT Divisor(8))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT Divisor(12) AND Divisor(8)));
+</td></tr><tr><td>
+FTCPE_Divisor9: FTCPE port map (Divisor(9),Divisor_T(9),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(9) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divisor(10) AND NOT Divisor(9))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND NOT Divisor(10) AND Divisor(9))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(13) AND NOT Divisor(9))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT Divisor(13) AND Divisor(9)));
+</td></tr><tr><td>
+FTCPE_Divisor10: FTCPE port map (Divisor(10),Divisor_T(10),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(10) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(10) AND Divisor(11))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Divisor(10) AND NOT Divisor(11))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(10) AND NOT Divisor(14))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT Divisor(10) AND Divisor(14)));
+</td></tr><tr><td>
+FTCPE_Divisor11: FTCPE port map (Divisor(11),Divisor_T(11),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(11) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(11) AND Divisor(12))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Divisor(11) AND NOT Divisor(12))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(11) AND NOT Divisor(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT Divisor(11) AND Divisor(15)));
+</td></tr><tr><td>
+FTCPE_Divisor12: FTCPE port map (Divisor(12),Divisor_T(12),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(12) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(12) AND Divisor(13))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Divisor(12) AND NOT Divisor(13))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND HexDigits(0) AND NOT Divisor(12))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT HexDigits(0) AND Divisor(12)));
+</td></tr><tr><td>
+FTCPE_Divisor13: FTCPE port map (Divisor(13),Divisor_T(13),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(13) <= ((Divisor(14).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(13) AND Divisor(14))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT HexDigits(1) AND Divisor(13)));
+</td></tr><tr><td>
+FTCPE_Divisor14: FTCPE port map (Divisor(14),Divisor_T(14),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(14) <= ((Divisor(15).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divisor(14) AND Divisor(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Divisor(14) AND NOT Divisor(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT HexDigits(2) AND Divisor(14)));
+</td></tr><tr><td>
+FTCPE_Divisor15: FTCPE port map (Divisor(15),Divisor_T(15),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor_T(15) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divisor(0) AND NOT Divisor(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND NOT Divisor(0) AND Divisor(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND HexDigits(3)_BUFR AND NOT Divisor(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT HexDigits(3)_BUFR AND Divisor(15)));
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+</td></tr><tr><td>
+FDCPE_HexDigits0: FDCPE port map (HexDigits(0),HexDigits_D(0),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HexDigits_D(0) <= ((EXP16_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND HexDigits(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND HexDigits(0)));
+</td></tr><tr><td>
+FDCPE_HexDigits1: FDCPE port map (HexDigits(1),HexDigits_D(1),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HexDigits_D(1) <= ((Dividend(2).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (EXP15_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND HexDigits(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(2))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(2))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND HexDigits(1)));
+</td></tr><tr><td>
+FDCPE_HexDigits2: FDCPE port map (HexDigits(2),HexDigits_D(2),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HexDigits_D(2) <= ((EXP14_.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND HexDigits(2))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(3)_BUFR));
+</td></tr><tr><td>
+</td></tr><tr><td>
+HexDigits(3) <= HexDigits(3)_BUFR;
+</td></tr><tr><td>
+FDCPE_HexDigits3_BUFR: FDCPE port map (HexDigits(3)_BUFR,HexDigits_D(3)_BUFR,CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HexDigits_D(3)_BUFR <= ((MuxCntr(1).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (N0$BUF9.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND HexDigits(3)_BUFR)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(2))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Dividend(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Dividend(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND HexDigits(3)_BUFR));
+</td></tr><tr><td>
+</td></tr><tr><td>
+KeypadCols_I(0) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeypadCols(0) <= KeypadCols_I(0) when KeypadCols_OE(0) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeypadCols_OE(0) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+KeypadCols_I(1) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeypadCols(1) <= KeypadCols_I(1) when KeypadCols_OE(1) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeypadCols_OE(1) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+KeypadCols_I(2) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeypadCols(2) <= KeypadCols_I(2) when KeypadCols_OE(2) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeypadCols_OE(2) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+KeypadCols_I(3) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeypadCols(3) <= KeypadCols_I(3) when KeypadCols_OE(3) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeypadCols_OE(3) <= '0';
+</td></tr><tr><td>
+FTCPE_KeypadRDYS: FTCPE port map (KeypadRDYS,KeypadRDYS_T,CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeypadRDYS_T <= ((DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT DecoderCntr(3) AND NOT MuxCntr(4) AND NOT MuxCntr(5) AND MuxCntr(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT MuxCntr(9) AND NOT MuxCntr(1) AND NOT MuxCntr(2) AND NOT MuxCntr(3) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT MuxCntr(6) AND NOT MuxCntr(7) AND NOT MuxCntr(8) AND KeypadRDYS AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT InDivisor AND NOT KeypadRDY)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT DecoderCntr(3) AND NOT MuxCntr(4) AND NOT MuxCntr(5) AND MuxCntr(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT MuxCntr(9) AND NOT MuxCntr(1) AND NOT MuxCntr(2) AND NOT MuxCntr(3) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT MuxCntr(6) AND NOT MuxCntr(7) AND NOT MuxCntr(8) AND NOT KeypadRDYS AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT InDivisor AND KeypadRDY)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT DecoderCntr(3) AND NOT MuxCntr(4) AND NOT MuxCntr(5) AND MuxCntr(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT MuxCntr(9) AND NOT MuxCntr(1) AND NOT MuxCntr(2) AND NOT MuxCntr(3) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT MuxCntr(6) AND NOT MuxCntr(7) AND NOT MuxCntr(8) AND KeypadRDYS AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	InDivisor AND NOT KeypadRDY)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT DecoderCntr(3) AND NOT MuxCntr(4) AND NOT MuxCntr(5) AND MuxCntr(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT MuxCntr(9) AND NOT MuxCntr(1) AND NOT MuxCntr(2) AND NOT MuxCntr(3) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT MuxCntr(6) AND NOT MuxCntr(7) AND NOT MuxCntr(8) AND NOT KeypadRDYS AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	InDivisor AND KeypadRDY));
+</td></tr><tr><td>
+FTCPE_MuxCntr0: FTCPE port map (MuxCntr(0),'1',CLK,NOT Reset,'0');
+</td></tr><tr><td>
+FTCPE_MuxCntr1: FTCPE port map (MuxCntr(1),MuxCntr(0),CLK,NOT Reset,'0');
+</td></tr><tr><td>
+FTCPE_MuxCntr2: FTCPE port map (MuxCntr(2),MuxCntr_T(2),CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MuxCntr_T(2) <= (MuxCntr(0) AND MuxCntr(1));
+</td></tr><tr><td>
+FTCPE_MuxCntr3: FTCPE port map (MuxCntr(3),MuxCntr_T(3),CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MuxCntr_T(3) <= (MuxCntr(0) AND MuxCntr(1) AND MuxCntr(2));
+</td></tr><tr><td>
+FTCPE_MuxCntr4: FTCPE port map (MuxCntr(4),MuxCntr_T(4),CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MuxCntr_T(4) <= (MuxCntr(0) AND MuxCntr(1) AND MuxCntr(2) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(3));
+</td></tr><tr><td>
+FTCPE_MuxCntr5: FTCPE port map (MuxCntr(5),MuxCntr_T(5),CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MuxCntr_T(5) <= (MuxCntr(4) AND MuxCntr(0) AND MuxCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(2) AND MuxCntr(3));
+</td></tr><tr><td>
+FTCPE_MuxCntr6: FTCPE port map (MuxCntr(6),MuxCntr_T(6),CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MuxCntr_T(6) <= (MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3));
+</td></tr><tr><td>
+FTCPE_MuxCntr7: FTCPE port map (MuxCntr(7),MuxCntr_T(7),CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MuxCntr_T(7) <= (MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND MuxCntr(6));
+</td></tr><tr><td>
+FTCPE_MuxCntr8: FTCPE port map (MuxCntr(8),MuxCntr_T(8),CLK,NOT Reset,'0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MuxCntr_T(8) <= (MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND MuxCntr(6) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr(7));
+</td></tr><tr><td>
+FTCPE_MuxCntr9: FTCPE port map (MuxCntr(9),MuxCntr(8).EXP,CLK,NOT Reset,'0');
+</td></tr><tr><td>
+FTCPE_Quotient0: FTCPE port map (Quotient(0),Quotient_T(0),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_T(0) <= ((Divisor(2).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT Quotient(0) AND Quotient(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(0) AND NOT Divisor(0) AND NOT Quotient(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND HexDigits(0) AND NOT Quotient(0)));
+</td></tr><tr><td>
+FDCPE_Quotient1: FDCPE port map (Quotient(1),Quotient_D(1),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(1) <= ((NOT Reset AND Quotient(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Quotient(5))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND HexDigits(1)));
+</td></tr><tr><td>
+FDCPE_Quotient2: FDCPE port map (Quotient(2),Quotient_D(2),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(2) <= ((N0$BUF18.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(2))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(2))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(2))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(1))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Quotient(6)));
+</td></tr><tr><td>
+FDCPE_Quotient3: FDCPE port map (Quotient(3),Quotient_D(3),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(3) <= ((N0$BUF17.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(2))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Quotient(7)));
+</td></tr><tr><td>
+FDCPE_Quotient4: FDCPE port map (Quotient(4),Quotient_D(4),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(4) <= ((N0$BUF15.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Quotient(8)));
+</td></tr><tr><td>
+FDCPE_Quotient5: FDCPE port map (Quotient(5),Quotient_D(5),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(5) <= ((N0$BUF13.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(5))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(5))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(5))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Quotient(9)));
+</td></tr><tr><td>
+FDCPE_Quotient6: FDCPE port map (Quotient(6),Quotient_D(6),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(6) <= ((N0$BUF5.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(6))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(6))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(6)));
+</td></tr><tr><td>
+FDCPE_Quotient7: FDCPE port map (Quotient(7),Quotient_D(7),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(7) <= ((Quotient(6).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(7))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(7))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(7))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(6)));
+</td></tr><tr><td>
+FDCPE_Quotient8: FDCPE port map (Quotient(8),Quotient_D(8),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(8) <= ((Quotient(7).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(8))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(8))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(8))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(7))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Quotient(12)));
+</td></tr><tr><td>
+FDCPE_Quotient9: FDCPE port map (Quotient(9),Quotient_D(9),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(9) <= ((Divisor(0).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(9))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(9))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(9))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(8))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Quotient(13)));
+</td></tr><tr><td>
+FDCPE_Quotient10: FDCPE port map (Quotient(10),Quotient_D(10),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(10) <= ((Divisor(12).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(10))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(10))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(10))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(9))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Quotient(14)));
+</td></tr><tr><td>
+FDCPE_Quotient11: FDCPE port map (Quotient(11),Quotient_D(11),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(11) <= ((N0$BUF1.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(11))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(11))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(11))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(10))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Quotient(15)));
+</td></tr><tr><td>
+FDCPE_Quotient12: FDCPE port map (Quotient(12),Quotient_D(12),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(12) <= ((N0$BUF2.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(12))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(12))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(12))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(11)));
+</td></tr><tr><td>
+FDCPE_Quotient13: FDCPE port map (Quotient(13),Quotient_D(13),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(13) <= ((Quotient(12).EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(13))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(13))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(13))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(12))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(1)));
+</td></tr><tr><td>
+FDCPE_Quotient14: FDCPE port map (Quotient(14),Quotient_D(14),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(14) <= ((N0$BUF3.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(14))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(14))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(14))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(13))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(2)));
+</td></tr><tr><td>
+FDCPE_Quotient15: FDCPE port map (Quotient(15),Quotient_D(15),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient_D(15) <= ((N0$BUF4.EXP)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Reset AND Quotient(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd3 AND Quotient(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Quotient(14))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Divisor(3)));
+</td></tr><tr><td>
+</td></tr><tr><td>
+Segments_I(0) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments(0) <= Segments_I(0) when Segments_OE(0) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments_OE(0) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Segments_I(1) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments(1) <= Segments_I(1) when Segments_OE(1) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments_OE(1) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Segments_I(2) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments(2) <= Segments_I(2) when Segments_OE(2) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments_OE(2) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Segments_I(3) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments(3) <= Segments_I(3) when Segments_OE(3) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments_OE(3) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Segments_I(4) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments(4) <= Segments_I(4) when Segments_OE(4) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments_OE(4) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Segments_I(5) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments(5) <= Segments_I(5) when Segments_OE(5) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments_OE(5) <= '0';
+</td></tr><tr><td>
+</td></tr><tr><td>
+Segments_I(6) <= '0';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments(6) <= Segments_I(6) when Segments_OE(6) = '1' else 'Z';
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segments_OE(6) <= '0';
+</td></tr><tr><td>
+FDCPE_highBit: FDCPE port map (highBit,MuxCntr(9),CLK,NOT Reset,'0');
+</td></tr><tr><td>
+********** UnMapped Logic **********
+</td></tr><tr><td>
+** Buried Nodes **
+</td></tr><tr><td>
+FDCPE_Dividend15: FDCPE port map (Dividend(15),Dividend_D(15),CLK,'0','0');
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dividend_D(15) <= ((NOT Reset AND Dividend(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Dividend(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Divider_FSM_FFd3 AND Dividend(15))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Dividend(14))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT HexDigits(0) AND Divisor(0) AND Quotient(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(0) AND NOT Divisor(0) AND Quotient(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	HexDigits(0) AND Divisor(0) AND NOT Quotient(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT HexDigits(0) AND NOT Divisor(0) AND NOT Quotient(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Carry AND HexDigits(0) AND Divisor(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Carry AND NOT HexDigits(0) AND NOT Divisor(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Carry AND NOT HexDigits(0) AND Divisor(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Carry AND HexDigits(0) AND NOT Divisor(0))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND NOT DecoderCntr(0) AND Divider_FSM_FFd2 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND Quotient(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND NOT DecoderCntr(1) AND Divider_FSM_FFd2 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND Quotient(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND DecoderCntr(3) AND Divider_FSM_FFd2 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND Quotient(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND Quotient(3) AND NOT KeypadRDY)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND KeypadRDYS AND Quotient(3))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND NOT DecoderCntr(2) AND Divider_FSM_FFd2 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND Quotient(3) AND InDivisor)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Reset AND DecoderCntr(2) AND Divider_FSM_FFd2 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND Quotient(3) AND NOT InDivisor)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT DecoderCntr(3) AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT KeypadRDYS AND Dividend(15) AND InDivisor AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	KeypadRDY)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT DecoderCntr(3) AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3 AND NOT KeypadRDYS AND Dividend(15) AND NOT InDivisor AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	KeypadRDY));
+</td></tr><tr><td>
+FDCPE_Divider_FSM_FFd3: FDCPE port map (Divider_FSM_FFd3,Divider_FSM_FFd3_D,CLK,'0',NOT Reset);
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divider_FSM_FFd3_D <= ((Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Divider_FSM_FFd3)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND MuxCntr(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND MuxCntr(4))
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND MuxCntr(5) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT Carry)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND NOT MuxCntr(9) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	highBit)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND NOT MuxCntr(9) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	highBit)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (NOT DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT DecoderCntr(3) AND NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND NOT Calculate AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	InDivisor)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	OR (DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT DecoderCntr(3) AND NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND NOT Calculate AND 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	NOT InDivisor));
+</td></tr><tr><td>
+Register Legend:
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FDCPE (Q,D,C,CLR,PRE); 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FTCPE (Q,D,C,CLR,PRE); 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LDCP  (Q,D,G,CLR,PRE); 
+</td></tr><tr><td>
+</td></tr>
+</table>
+<form><span class="pgRef"><table width="90%" align="center"><tr>
+<td align="left"><input type="button" onclick="javascript:parent.leftnav.showTop()" onmouseover="window.status='goto top of page'; return true;" onmouseout="window.status=''" value="back to top"></td>
+<td align="right"><input type="button" onclick="window.print()" onmouseover="window.status='print page'; return true;" onmouseout="window.status=''" value="print page"></td>
+</tr></table></span></form>
+</body></html>

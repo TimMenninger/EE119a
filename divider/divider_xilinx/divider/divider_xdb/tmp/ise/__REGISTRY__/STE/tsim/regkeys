@@ -1,0 +1,6 @@
+CommandLine
+C:\Program Files\Xilinx\10.1\ISE\bin\nt\unwrapped\tsim.exe -ise C:/Documents and Settings/micro/Desktop/tmenning/divider/divider_xilinx/divider/divider.ise -intstyle ise SerialDivider SerialDivider.nga
+s
+FormatString
+tsim <design[.vm6]> [--intstyle ise|xflow|silent] [<outfile>] 
+s

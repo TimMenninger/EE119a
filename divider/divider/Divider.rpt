@@ -1,0 +1,571 @@
+ 
+cpldfit:  version K.39                              Xilinx Inc.
+                                  Fitter Report
+Design Name: Divider                             Date: 12- 4-2016,  6:34AM
+Device Used: XC95108-7-PC84
+Fitting Status: Successful
+
+*************************  Mapped Resource Summary  **************************
+
+Macrocells     Product Terms    Function Block   Registers      Pins           
+Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
+20 /108 ( 19%) 34  /540  (  6%) 16 /216 (  7%)   15 /108 ( 14%) 11 /69  ( 16%)
+
+** Function Block Resources **
+
+Function    Mcells      FB Inps     Signals     Pterms      IO          
+Block       Used/Tot    Used/Tot    Used        Used/Tot    Used/Tot    
+FB1           0/18        0/36        0           0/90       0/12
+FB2           0/18        0/36        0           0/90       0/12
+FB3           4/18        0/36        0           0/90       4/12
+FB4           0/18        0/36        0           0/90       0/11
+FB5          16/18       16/36       16          34/90       5/11
+FB6           0/18        0/36        0           0/90       0/11
+             -----       -----                   -----       -----     
+             20/108      16/216                  34/540      9/69 
+
+* - Resource is exhausted
+
+** Global Control Resources **
+
+Signal 'CLK' mapped onto global clock net GCK1.
+Global output enable net(s) unused.
+Global set/reset net(s) unused.
+
+** Pin Resources **
+
+Signal Type    Required     Mapped  |  Pin Type            Used    Total 
+------------------------------------|------------------------------------
+Input         :    1           1    |  I/O              :    10      63
+Output        :    9           9    |  GCK/IO           :     1       3
+Bidirectional :    0           0    |  GTS/IO           :     0       2
+GCK           :    1           1    |  GSR/IO           :     0       1
+GTS           :    0           0    |
+GSR           :    0           0    |
+                 ----        ----
+        Total     11          11
+
+** Power Data **
+
+There are 20 macrocells in high performance mode (MCHP).
+There are 0 macrocells in low power mode (MCLP).
+End of Mapped Resource Summary
+**************************  Errors and Warnings  ***************************
+
+INFO:Cpld - Inferring BUFG constraint for signal 'CLK' based upon the LOC
+   constraint 'P9'. It is recommended that you declare this BUFG explicitedly in
+   your design. Note that for certain device families the output of a BUFG
+   constraint can not drive a gated clock, and the BUFG constraint will be
+   ignored.
+WARNING:Cpld:1007 - Removing unused input(s) 'Calculate'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit0'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit10'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit11'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit1'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit2'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit3'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit4'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit5'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit6'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit7'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit8'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Digit9'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Keypad0'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Keypad1'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Keypad2'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Keypad3'.  The input(s) are unused
+   after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'KeypadCol0'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'KeypadCol1'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'KeypadCol2'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'KeypadCol3'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'KeypadRDY'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'KeypadRow0'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'KeypadRow1'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'KeypadRow2'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'KeypadRow3'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Segmenta'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Segmentb'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Segmentc'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Segmentd'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Segmente'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Segmentf'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+WARNING:Cpld:1007 - Removing unused input(s) 'Segmentg'.  The input(s) are
+   unused after optimization. Please verify functionality via simulation.
+*************************  Summary of Mapped Logic  ************************
+
+** 9 Outputs **
+
+Signal              Total Total Loc     Pin  Pin     Pin     Pwr  Slew Reg Init
+Name                Pts   Inps          No.  Type    Use     Mode Rate State
+HexDigit3           0     0     FB3_9   20   I/O     O       STD  FAST 
+HexDigit2           0     0     FB3_11  21   I/O     O       STD  FAST 
+HexDigit1           0     0     FB3_12  23   I/O     O       STD  FAST 
+HexDigit0           0     0     FB3_14  24   I/O     O       STD  FAST 
+DecoderBit3         3     6     FB5_11  39   I/O     O       STD  FAST RESET
+DecoderBit2         2     5     FB5_12  40   I/O     O       STD  FAST RESET
+DecoderBit1         5     6     FB5_14  41   I/O     O       STD  FAST RESET
+DecoderBit0         4     6     FB5_15  43   I/O     O       STD  FAST RESET
+DecoderEn           0     0     FB5_17  44   I/O     O       STD  FAST 
+
+** 11 Buried Nodes **
+
+Signal              Total Total Loc     Pwr  Reg Init
+Name                Pts   Inps          Mode State
+MuxCntr0            1     2     FB5_3   STD  RESET
+DigitClkEn          1     10    FB5_4   STD  RESET
+MuxCntr9            2     11    FB5_5   STD  RESET
+MuxCntr8            2     10    FB5_6   STD  RESET
+MuxCntr7            2     9     FB5_7   STD  RESET
+MuxCntr6            2     8     FB5_8   STD  RESET
+MuxCntr5            2     7     FB5_9   STD  RESET
+MuxCntr4            2     6     FB5_10  STD  RESET
+MuxCntr3            2     5     FB5_13  STD  RESET
+MuxCntr2            2     4     FB5_16  STD  RESET
+MuxCntr1            2     3     FB5_18  STD  RESET
+
+** 2 Inputs **
+
+Signal              Loc     Pin  Pin     Pin     
+Name                        No.  Type    Use     
+Reset               FB1_6   4    I/O     I
+CLK                 FB1_12  9    GCK/I/O GCK
+
+Legend:
+Pin No. - ~ - User Assigned
+**************************  Function Block Details  ************************
+Legend:
+Total Pt     - Total product terms used by the macrocell signal
+Imp Pt       - Product terms imported from other macrocells
+Exp Pt       - Product terms exported to other macrocells
+               in direction shown
+Unused Pt    - Unused local product terms remaining in macrocell
+Loc          - Location where logic was mapped in device
+Pin Type/Use - I  - Input             GCK - Global Clock
+               O  - Output            GTS - Global Output Enable
+              (b) - Buried macrocell  GSR - Global Set/Reset
+X(@)         - Signal used as input (wire-AND input) to the macrocell logic.
+               The number of Signals Used may exceed the number of FB Inputs
+               Used due to wire-ANDing in the switch matrix.
+Pin No.      - ~  - User Assigned
+*********************************** FB1  ***********************************
+Number of function block inputs used/remaining:               0/36
+Number of signals used by logic mapping into function block:  0
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB1_1         (b)     
+(unused)              0       0     0   5     FB1_2   1     I/O     
+(unused)              0       0     0   5     FB1_3   2     I/O     
+(unused)              0       0     0   5     FB1_4         (b)     
+(unused)              0       0     0   5     FB1_5   3     I/O     
+(unused)              0       0     0   5     FB1_6   4     I/O     I
+(unused)              0       0     0   5     FB1_7         (b)     
+(unused)              0       0     0   5     FB1_8   5     I/O     
+(unused)              0       0     0   5     FB1_9   6     I/O     
+(unused)              0       0     0   5     FB1_10        (b)     
+(unused)              0       0     0   5     FB1_11  7     I/O     
+(unused)              0       0     0   5     FB1_12  9     GCK/I/O GCK
+(unused)              0       0     0   5     FB1_13        (b)     
+(unused)              0       0     0   5     FB1_14  10    GCK/I/O 
+(unused)              0       0     0   5     FB1_15  11    I/O     
+(unused)              0       0     0   5     FB1_16  12    GCK/I/O 
+(unused)              0       0     0   5     FB1_17  13    I/O     
+(unused)              0       0     0   5     FB1_18        (b)     
+*********************************** FB2  ***********************************
+Number of function block inputs used/remaining:               0/36
+Number of signals used by logic mapping into function block:  0
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB2_1         (b)     
+(unused)              0       0     0   5     FB2_2   71    I/O     
+(unused)              0       0     0   5     FB2_3   72    I/O     
+(unused)              0       0     0   5     FB2_4         (b)     
+(unused)              0       0     0   5     FB2_5   74    GSR/I/O 
+(unused)              0       0     0   5     FB2_6   75    I/O     
+(unused)              0       0     0   5     FB2_7         (b)     
+(unused)              0       0     0   5     FB2_8   76    GTS/I/O 
+(unused)              0       0     0   5     FB2_9   77    GTS/I/O 
+(unused)              0       0     0   5     FB2_10        (b)     
+(unused)              0       0     0   5     FB2_11  79    I/O     
+(unused)              0       0     0   5     FB2_12  80    I/O     
+(unused)              0       0     0   5     FB2_13        (b)     
+(unused)              0       0     0   5     FB2_14  81    I/O     
+(unused)              0       0     0   5     FB2_15  82    I/O     
+(unused)              0       0     0   5     FB2_16  83    I/O     
+(unused)              0       0     0   5     FB2_17  84    I/O     
+(unused)              0       0     0   5     FB2_18        (b)     
+*********************************** FB3  ***********************************
+Number of function block inputs used/remaining:               0/36
+Number of signals used by logic mapping into function block:  0
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB3_1         (b)     
+(unused)              0       0     0   5     FB3_2   14    I/O     
+(unused)              0       0     0   5     FB3_3   15    I/O     
+(unused)              0       0     0   5     FB3_4         (b)     
+(unused)              0       0     0   5     FB3_5   17    I/O     
+(unused)              0       0     0   5     FB3_6   18    I/O     
+(unused)              0       0     0   5     FB3_7         (b)     
+(unused)              0       0     0   5     FB3_8   19    I/O     
+HexDigit3             0       0     0   5     FB3_9   20    I/O     O
+(unused)              0       0     0   5     FB3_10        (b)     
+HexDigit2             0       0     0   5     FB3_11  21    I/O     O
+HexDigit1             0       0     0   5     FB3_12  23    I/O     O
+(unused)              0       0     0   5     FB3_13        (b)     
+HexDigit0             0       0     0   5     FB3_14  24    I/O     O
+(unused)              0       0     0   5     FB3_15  25    I/O     
+(unused)              0       0     0   5     FB3_16  26    I/O     
+(unused)              0       0     0   5     FB3_17  31    I/O     
+(unused)              0       0     0   5     FB3_18        (b)     
+
+Signals Used by Logic in Function Block
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+HexDigit3            ........................................ 0       0
+HexDigit2            ........................................ 0       0
+HexDigit1            ........................................ 0       0
+HexDigit0            ........................................ 0       0
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB4  ***********************************
+Number of function block inputs used/remaining:               0/36
+Number of signals used by logic mapping into function block:  0
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB4_1         (b)     
+(unused)              0       0     0   5     FB4_2   57    I/O     
+(unused)              0       0     0   5     FB4_3   58    I/O     
+(unused)              0       0     0   5     FB4_4         (b)     
+(unused)              0       0     0   5     FB4_5   61    I/O     
+(unused)              0       0     0   5     FB4_6   62    I/O     
+(unused)              0       0     0   5     FB4_7         (b)     
+(unused)              0       0     0   5     FB4_8   63    I/O     
+(unused)              0       0     0   5     FB4_9   65    I/O     
+(unused)              0       0     0   5     FB4_10        (b)     
+(unused)              0       0     0   5     FB4_11  66    I/O     
+(unused)              0       0     0   5     FB4_12  67    I/O     
+(unused)              0       0     0   5     FB4_13        (b)     
+(unused)              0       0     0   5     FB4_14  68    I/O     
+(unused)              0       0     0   5     FB4_15  69    I/O     
+(unused)              0       0     0   5     FB4_16        (b)     
+(unused)              0       0     0   5     FB4_17  70    I/O     
+(unused)              0       0     0   5     FB4_18        (b)     
+*********************************** FB5  ***********************************
+Number of function block inputs used/remaining:               16/20
+Number of signals used by logic mapping into function block:  16
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB5_1         (b)     
+(unused)              0       0     0   5     FB5_2   32    I/O     
+MuxCntr0              1       0     0   4     FB5_3   33    I/O     (b)
+DigitClkEn            1       0     0   4     FB5_4         (b)     (b)
+MuxCntr9              2       0     0   3     FB5_5   34    I/O     (b)
+MuxCntr8              2       0     0   3     FB5_6   35    I/O     (b)
+MuxCntr7              2       0     0   3     FB5_7         (b)     (b)
+MuxCntr6              2       0     0   3     FB5_8   36    I/O     (b)
+MuxCntr5              2       0     0   3     FB5_9   37    I/O     (b)
+MuxCntr4              2       0     0   3     FB5_10        (b)     (b)
+DecoderBit3           3       0     0   2     FB5_11  39    I/O     O
+DecoderBit2           2       0     0   3     FB5_12  40    I/O     O
+MuxCntr3              2       0     0   3     FB5_13        (b)     (b)
+DecoderBit1           5       0     0   0     FB5_14  41    I/O     O
+DecoderBit0           4       0     0   1     FB5_15  43    I/O     O
+MuxCntr2              2       0     0   3     FB5_16        (b)     (b)
+DecoderEn             0       0     0   5     FB5_17  44    I/O     O
+MuxCntr1              2       0     0   3     FB5_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: DecoderBit0_OBUF.LFBK   7: MuxCntr1.LFBK     12: MuxCntr6.LFBK 
+  2: DecoderBit1_OBUF.LFBK   8: MuxCntr2.LFBK     13: MuxCntr7.LFBK 
+  3: DecoderBit2_OBUF.LFBK   9: MuxCntr3.LFBK     14: MuxCntr8.LFBK 
+  4: DecoderBit3_OBUF.LFBK  10: MuxCntr4.LFBK     15: MuxCntr9.LFBK 
+  5: DigitClkEn.LFBK        11: MuxCntr5.LFBK     16: Reset 
+  6: MuxCntr0.LFBK         
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+MuxCntr0             .....X.........X........................ 2       2
+DigitClkEn           .....XXXXXXXXXX......................... 10      10
+MuxCntr9             .....XXXXXXXXXXX........................ 11      11
+MuxCntr8             .....XXXXXXXXX.X........................ 10      10
+MuxCntr7             .....XXXXXXXX..X........................ 9       9
+MuxCntr6             .....XXXXXXX...X........................ 8       8
+MuxCntr5             .....XXXXXX....X........................ 7       7
+MuxCntr4             .....XXXXX.....X........................ 6       6
+DecoderBit3          XXXXX..........X........................ 6       6
+DecoderBit2          XXX.X..........X........................ 5       5
+MuxCntr3             .....XXXX......X........................ 5       5
+DecoderBit1          XXXXX..........X........................ 6       6
+DecoderBit0          XXXXX..........X........................ 6       6
+MuxCntr2             .....XXX.......X........................ 4       4
+DecoderEn            ........................................ 0       0
+MuxCntr1             .....XX........X........................ 3       3
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB6  ***********************************
+Number of function block inputs used/remaining:               0/36
+Number of signals used by logic mapping into function block:  0
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0     0   5     FB6_1         (b)     
+(unused)              0       0     0   5     FB6_2   45    I/O     
+(unused)              0       0     0   5     FB6_3   46    I/O     
+(unused)              0       0     0   5     FB6_4         (b)     
+(unused)              0       0     0   5     FB6_5   47    I/O     
+(unused)              0       0     0   5     FB6_6   48    I/O     
+(unused)              0       0     0   5     FB6_7         (b)     
+(unused)              0       0     0   5     FB6_8   50    I/O     
+(unused)              0       0     0   5     FB6_9   51    I/O     
+(unused)              0       0     0   5     FB6_10        (b)     
+(unused)              0       0     0   5     FB6_11  52    I/O     
+(unused)              0       0     0   5     FB6_12  53    I/O     
+(unused)              0       0     0   5     FB6_13        (b)     
+(unused)              0       0     0   5     FB6_14  54    I/O     
+(unused)              0       0     0   5     FB6_15  55    I/O     
+(unused)              0       0     0   5     FB6_16        (b)     
+(unused)              0       0     0   5     FB6_17  56    I/O     
+(unused)              0       0     0   5     FB6_18        (b)     
+*******************************  Equations  ********************************
+
+********** Mapped Logic **********
+
+!DecoderBit0.D = Reset & !DecoderBit0_OBUF.LFBK & !DigitClkEn.LFBK
+	# Reset & DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+	!DecoderBit2_OBUF.LFBK
+	# Reset & DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+	!DecoderBit3_OBUF.LFBK
+	# Reset & DigitClkEn.LFBK & !DecoderBit2_OBUF.LFBK & 
+	DecoderBit3_OBUF.LFBK & !DecoderBit1_OBUF.LFBK;
+   DecoderBit0.CLK = CLK;	// GCK    
+
+!DecoderBit1.D = Reset & !DigitClkEn.LFBK & !DecoderBit1_OBUF.LFBK
+	# Reset & DecoderBit0_OBUF.LFBK & 
+	!DecoderBit3_OBUF.LFBK & !DecoderBit1_OBUF.LFBK
+	# Reset & !DecoderBit2_OBUF.LFBK & 
+	DecoderBit3_OBUF.LFBK & !DecoderBit1_OBUF.LFBK
+	# Reset & !DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+	!DecoderBit2_OBUF.LFBK & DecoderBit3_OBUF.LFBK
+	# Reset & !DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+	!DecoderBit3_OBUF.LFBK & DecoderBit1_OBUF.LFBK;
+   DecoderBit1.CLK = CLK;	// GCK    
+
+DecoderBit2.T = !Reset & DecoderBit2_OBUF.LFBK
+	# Reset & !DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+	!DecoderBit1_OBUF.LFBK;
+   DecoderBit2.CLK = CLK;	// GCK    
+
+DecoderBit3.D = Reset & !DigitClkEn.LFBK & DecoderBit3_OBUF.LFBK
+	# Reset & !DecoderBit2_OBUF.LFBK & 
+	DecoderBit3_OBUF.LFBK
+	# Reset & !DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+	DecoderBit2_OBUF.LFBK & !DecoderBit3_OBUF.LFBK & !DecoderBit1_OBUF.LFBK;
+   DecoderBit3.CLK = CLK;	// GCK    
+
+DecoderEn = Vcc;    
+
+DigitClkEn.D = MuxCntr0.LFBK & MuxCntr1.LFBK & MuxCntr2.LFBK & 
+	MuxCntr3.LFBK & MuxCntr4.LFBK & MuxCntr5.LFBK & MuxCntr6.LFBK & 
+	MuxCntr7.LFBK & MuxCntr8.LFBK & MuxCntr9.LFBK;
+   DigitClkEn.CLK = CLK;	// GCK    
+
+HexDigit0 = Gnd;    
+
+HexDigit1 = Gnd;    
+
+HexDigit2 = Gnd;    
+
+HexDigit3 = Gnd;    
+
+MuxCntr0.D = Reset & !MuxCntr0.LFBK;
+   MuxCntr0.CLK = CLK;	// GCK    
+
+MuxCntr1.D = Reset & MuxCntr0.LFBK & !MuxCntr1.LFBK
+	# Reset & !MuxCntr0.LFBK & MuxCntr1.LFBK;
+   MuxCntr1.CLK = CLK;	// GCK    
+
+MuxCntr2.T = !Reset & MuxCntr2.LFBK
+	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK;
+   MuxCntr2.CLK = CLK;	// GCK    
+
+MuxCntr3.T = !Reset & MuxCntr3.LFBK
+	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+	MuxCntr2.LFBK;
+   MuxCntr3.CLK = CLK;	// GCK    
+
+MuxCntr4.T = !Reset & MuxCntr4.LFBK
+	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+	MuxCntr2.LFBK & MuxCntr3.LFBK;
+   MuxCntr4.CLK = CLK;	// GCK    
+
+MuxCntr5.T = !Reset & MuxCntr5.LFBK
+	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+	MuxCntr2.LFBK & MuxCntr3.LFBK & MuxCntr4.LFBK;
+   MuxCntr5.CLK = CLK;	// GCK    
+
+MuxCntr6.T = !Reset & MuxCntr6.LFBK
+	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+	MuxCntr2.LFBK & MuxCntr3.LFBK & MuxCntr4.LFBK & MuxCntr5.LFBK;
+   MuxCntr6.CLK = CLK;	// GCK    
+
+MuxCntr7.T = !Reset & MuxCntr7.LFBK
+	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+	MuxCntr2.LFBK & MuxCntr3.LFBK & MuxCntr4.LFBK & MuxCntr5.LFBK & 
+	MuxCntr6.LFBK;
+   MuxCntr7.CLK = CLK;	// GCK    
+
+MuxCntr8.T = !Reset & MuxCntr8.LFBK
+	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+	MuxCntr2.LFBK & MuxCntr3.LFBK & MuxCntr4.LFBK & MuxCntr5.LFBK & 
+	MuxCntr6.LFBK & MuxCntr7.LFBK;
+   MuxCntr8.CLK = CLK;	// GCK    
+
+MuxCntr9.T = !Reset & MuxCntr9.LFBK
+	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+	MuxCntr2.LFBK & MuxCntr3.LFBK & MuxCntr4.LFBK & MuxCntr5.LFBK & 
+	MuxCntr6.LFBK & MuxCntr7.LFBK & MuxCntr8.LFBK;
+   MuxCntr9.CLK = CLK;	// GCK    
+
+******************************  Device Pin Out *****************************
+
+Device : XC95108-7-PC84
+
+
+   --------------------------------------------------------------  
+  /11 10 9  8  7  6  5  4  3  2  1  84 83 82 81 80 79 78 77 76 75 \
+ | 12                                                          74 | 
+ | 13                                                          73 | 
+ | 14                                                          72 | 
+ | 15                                                          71 | 
+ | 16                                                          70 | 
+ | 17                                                          69 | 
+ | 18                                                          68 | 
+ | 19                                                          67 | 
+ | 20                                                          66 | 
+ | 21                       XC95108-7-PC84                     65 | 
+ | 22                                                          64 | 
+ | 23                                                          63 | 
+ | 24                                                          62 | 
+ | 25                                                          61 | 
+ | 26                                                          60 | 
+ | 27                                                          59 | 
+ | 28                                                          58 | 
+ | 29                                                          57 | 
+ | 30                                                          56 | 
+ | 31                                                          55 | 
+ | 32                                                          54 | 
+ \ 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 /
+   --------------------------------------------------------------  
+
+
+Pin Signal                         Pin Signal                        
+No. Name                           No. Name                          
+  1 TIE                              43 DecoderBit0                   
+  2 TIE                              44 DecoderEn                     
+  3 TIE                              45 TIE                           
+  4 Reset                            46 TIE                           
+  5 TIE                              47 TIE                           
+  6 TIE                              48 TIE                           
+  7 TIE                              49 GND                           
+  8 GND                              50 TIE                           
+  9 CLK                              51 TIE                           
+ 10 TIE                              52 TIE                           
+ 11 TIE                              53 TIE                           
+ 12 TIE                              54 TIE                           
+ 13 TIE                              55 TIE                           
+ 14 TIE                              56 TIE                           
+ 15 TIE                              57 TIE                           
+ 16 GND                              58 TIE                           
+ 17 TIE                              59 TDO                           
+ 18 TIE                              60 GND                           
+ 19 TIE                              61 TIE                           
+ 20 HexDigit3                        62 TIE                           
+ 21 HexDigit2                        63 TIE                           
+ 22 VCC                              64 VCC                           
+ 23 HexDigit1                        65 TIE                           
+ 24 HexDigit0                        66 TIE                           
+ 25 TIE                              67 TIE                           
+ 26 TIE                              68 TIE                           
+ 27 GND                              69 TIE                           
+ 28 TDI                              70 TIE                           
+ 29 TMS                              71 TIE                           
+ 30 TCK                              72 TIE                           
+ 31 TIE                              73 VCC                           
+ 32 TIE                              74 TIE                           
+ 33 TIE                              75 TIE                           
+ 34 TIE                              76 TIE                           
+ 35 TIE                              77 TIE                           
+ 36 TIE                              78 VCC                           
+ 37 TIE                              79 TIE                           
+ 38 VCC                              80 TIE                           
+ 39 DecoderBit3                      81 TIE                           
+ 40 DecoderBit2                      82 TIE                           
+ 41 DecoderBit1                      83 TIE                           
+ 42 GND                              84 TIE                           
+
+
+Legend :  NC  = Not Connected, unbonded pin
+         PGND = Unused I/O configured as additional Ground pin
+         TIE  = Unused I/O floating -- must tie to VCC, GND or other signal
+         VCC  = Dedicated Power Pin
+         GND  = Dedicated Ground Pin
+         TDI  = Test Data In, JTAG pin
+         TDO  = Test Data Out, JTAG pin
+         TCK  = Test Clock, JTAG pin
+         TMS  = Test Mode Select, JTAG pin
+  PROHIBITED  = User reserved pin
+****************************  Compiler Options  ****************************
+
+Following is a list of all global compiler options used by the fitter run.
+
+Device(s) Specified                         : xc95108-7-PC84
+Optimization Method                         : SPEED
+Multi-Level Logic Optimization              : ON
+Ignore Timing Specifications                : OFF
+Default Register Power Up Value             : LOW
+Keep User Location Constraints              : ON
+What-You-See-Is-What-You-Get                : OFF
+Exhaustive Fitting                          : OFF
+Keep Unused Inputs                          : OFF
+Slew Rate                                   : FAST
+Power Mode                                  : STD
+Ground on Unused IOs                        : OFF
+Global Clock Optimization                   : ON
+Global Set/Reset Optimization               : ON
+Global Ouput Enable Optimization            : ON
+FASTConnect/UIM optimzation                 : ON
+Local Feedback                              : ON
+Pin Feedback                                : ON
+Input Limit                                 : 36
+Pterm Limit                                 : 25

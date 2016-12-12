@@ -1,0 +1,418 @@
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+tsim -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise Divider Divider.nga
+taengine -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -f Divider -w --format html1 -l C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider_html/tim/timing_report.htm
+hprep6 -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -s IEEE1149 -n Divider -i Divider
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+tsim -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise Divider Divider.nga
+taengine -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -f Divider -w --format html1 -l C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider_html/tim/timing_report.htm
+hprep6 -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -s IEEE1149 -n Divider -i Divider
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+tsim -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise Divider Divider.nga
+taengine -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -f Divider -w --format html1 -l C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider_html/tim/timing_report.htm
+hprep6 -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -s IEEE1149 -n Divider -i Divider
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+tsim -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise Divider Divider.nga
+taengine -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -f Divider -w --format html1 -l C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider_html/tim/timing_report.htm
+hprep6 -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -s IEEE1149 -n Divider -i Divider
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 verilog_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\vlgflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+ahdl2blf "divider.abl" -module Divider -ojhd compile  -list  -strategy infer_max_width=32 vhdl_flow oa2ext=bl0 infer_addsub infer_compare infer_xor carry=8
+ahdl2blf "divider.abl" -module Divider -syntax -list
+blif2eqn "Divider.bl0" -o "Divider.eq0"
+bliffsm "Divider.bl0" -o "Divider.bl1"
+diofft "Divider.bl1" -o "Divider.bl2" -idevice epld -device CPLD_DTsynd -lib "C:/Program Files/Xilinx/10.1/ISE/data/lib5"
+blif2eqn "Divider.bl2" -o "Divider.eq1"
+pifg_xa -i "Divider.bl1" -o "Divider.if0"
+blf2lang -i "Divider.bl2" -o "Divider.vhf" -idev "C:\\Program Files\\Xilinx\\10.1\\ISE\\data\\xlnxlib\\plsflow_syn2.rul" -strategy defaultvalue MAX_PTERMS=0 top -inc Divider.if0
+xst -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -ifn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.xst" -ofn "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.syr"
+ngdbuild -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -dd _ngo  -i -p xc95108-PC84-7 "Divider.ngc" Divider.ngd
+cpldfit -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -p xc95108-7-PC84 -ofmt abel -optimize speed -htmlrpt -loc on -slew fast -init low -inputs 36 -pterms 25 -power std -localfbk -pinfbk Divider.ngd
+XSLTProcess -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" Divider_build.xml
+tsim -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise Divider Divider.nga
+taengine -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -intstyle ise -f Divider -w --format html1 -l C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider_html/tim/timing_report.htm
+hprep6 -ise "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/divider.ise" -s IEEE1149 -n Divider -i Divider

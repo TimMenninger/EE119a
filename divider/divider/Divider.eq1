@@ -1,0 +1,1657 @@
+XAbel
+
+Design Divider created Sun Dec 04 06:34:02 2016
+
+Title: 16-bit Divider for EE 119 Serial Divider Board
+
+ P-Terms   Fan-in  Fan-out  Type  Name (attributes)
+---------  ------  -------  ----  -----------------
+   0          0        1    Pin   Calculate.OE 
+   0          0        1    Pin   Divisor.OE 
+   0          0        1    Pin   KeypadRDY.OE 
+   0          0        1    Pin   Keypad0.OE 
+   0          0        1    Pin   Keypad1.OE 
+   0          0        1    Pin   Keypad2.OE 
+   0          0        1    Pin   Keypad3.OE 
+   1/1        1        1    Pin   HexDigit0 
+   1          0        1    Pin   HexDigit0.OE 
+   1/1        1        1    Pin   HexDigit1 
+   1          0        1    Pin   HexDigit1.OE 
+   1/1        1        1    Pin   HexDigit2 
+   1          0        1    Pin   HexDigit2.OE 
+   1/1        1        1    Pin   HexDigit3 
+   1          0        1    Pin   HexDigit3.OE 
+   1          0        1    Pin   DecoderEn 
+   1          0        1    Pin   DecoderEn.OE 
+   1          0        1    Pin   DecoderBit0.OE 
+   5          6        1    Pin   DecoderBit0.D 
+   1/1        1        1    Pin   DecoderBit0.C 
+   1          0        1    Pin   DecoderBit1.OE 
+   5          6        1    Pin   DecoderBit1.D 
+   1/1        1        1    Pin   DecoderBit1.C 
+   1          0        1    Pin   DecoderBit2.OE 
+   4          5        1    Pin   DecoderBit2.D 
+   1/1        1        1    Pin   DecoderBit2.C 
+   1          0        1    Pin   DecoderBit3.OE 
+   3          6        1    Pin   DecoderBit3.D 
+   1/1        1        1    Pin   DecoderBit3.C 
+   1/1        1        1    Node  KeypadRDYS1.D 
+   1/1        1        1    Node  KeypadRDYS1.C 
+   1/1        1        1    Node  KeypadRDYS2.D 
+   1/1        1        1    Node  KeypadRDYS2.C 
+   1/1        1        1    Node  KeypadRDYS3.D 
+   1/1        1        1    Node  KeypadRDYS3.C 
+   7          9        1    Node  HaveKey.D 
+   1/1        1        1    Node  HaveKey.C 
+   1          2        1    Node  MuxCntr0.D 
+   1/1        1        1    Node  MuxCntr0.C 
+   2          3        1    Node  MuxCntr1.D 
+   1/1        1        1    Node  MuxCntr1.C 
+   3          4        1    Node  MuxCntr2.D 
+   1/1        1        1    Node  MuxCntr2.C 
+   4          5        1    Node  MuxCntr3.D 
+   1/1        1        1    Node  MuxCntr3.C 
+   5          6        1    Node  MuxCntr4.D 
+   1/1        1        1    Node  MuxCntr4.C 
+   6          7        1    Node  MuxCntr5.D 
+   1/1        1        1    Node  MuxCntr5.C 
+   7          8        1    Node  MuxCntr6.D 
+   1/1        1        1    Node  MuxCntr6.C 
+   8          9        1    Node  MuxCntr7.D 
+   1/1        1        1    Node  MuxCntr7.C 
+   9         10        1    Node  MuxCntr8.D 
+   1/1        1        1    Node  MuxCntr8.C 
+  10         11        1    Node  MuxCntr9.D 
+   1/1        1        1    Node  MuxCntr9.C 
+   1         10        1    Node  DigitClkEn.D 
+   1/1        1        1    Node  DigitClkEn.C 
+   1         10        1    Node  KeyEn.D 
+   1/1        1        1    Node  KeyEn.C 
+   1         10        1    Node  InitEn.D 
+   1/1        1        1    Node  InitEn.C 
+   1          6        1    Node  RemainderEn.D 
+   1/1        1        1    Node  RemainderEn.C 
+   1          2        1    Node  AddSubEn.D 
+   1/1        1        1    Node  AddSubEn.C 
+   1          6        1    Node  QuotientEn.D 
+   1/1        1        1    Node  QuotientEn.C 
+   1          6        1    Node  CarryEn.D 
+   1/1        1        1    Node  CarryEn.C 
+   8          7        1    Node  CalcLatch.D 
+   1/1        1        1    Node  CalcLatch.C 
+   1          1        1    Node  CalcRDYS1.D 
+   1/1        1        1    Node  CalcRDYS1.C 
+   1/1        1        1    Node  CalcRDYS2.D 
+   1/1        1        1    Node  CalcRDYS2.C 
+   1/1        1        1    Node  CalcRDYS3.D 
+   1/1        1        1    Node  CalcRDYS3.C 
+   1          7        1    Node  CalcCond 
+   6          6        1    Node  CarryFlag0.D 
+   1/1        1        1    Node  CarryFlag0.C 
+  40         13        1    Node  AddSubFlag0.D 
+   1/1        1        1    Node  AddSubFlag0.C 
+   3          3        1    Node  NewKey0 
+   5          4        1    Node  NewKey1 
+   5          4        1    Node  NewKey2 
+   1/1        1        1    NodeX1  NewKey3.X1 
+   1/1        1        1    NodeX2  NewKey3.X2 
+   9         10        1    Node  Remainder16.D 
+   1/1        1        1    Node  Remainder16.C 
+  13         12        1    Node  Remainder15.D 
+   1/1        1        1    Node  Remainder15.C 
+   6          9        1    Node  Remainder14.D 
+   1/1        1        1    Node  Remainder14.C 
+   6          9        1    Node  Remainder13.D 
+   1/1        1        1    Node  Remainder13.C 
+   6          9        1    Node  Remainder12.D 
+   1/1        1        1    Node  Remainder12.C 
+   6          9        1    Node  Remainder11.D 
+   1/1        1        1    Node  Remainder11.C 
+   6          9        1    Node  Remainder10.D 
+   1/1        1        1    Node  Remainder10.C 
+   6          9        1    Node  Remainder9.D 
+   1/1        1        1    Node  Remainder9.C 
+   6          9        1    Node  Remainder8.D 
+   1/1        1        1    Node  Remainder8.C 
+   6          9        1    Node  Remainder7.D 
+   1/1        1        1    Node  Remainder7.C 
+   6          9        1    Node  Remainder6.D 
+   1/1        1        1    Node  Remainder6.C 
+   6          9        1    Node  Remainder5.D 
+   1/1        1        1    Node  Remainder5.C 
+   6          9        1    Node  Remainder4.D 
+   1/1        1        1    Node  Remainder4.C 
+   6          9        1    Node  Remainder3.D 
+   1/1        1        1    Node  Remainder3.C 
+   6          9        1    Node  Remainder2.D 
+   1/1        1        1    Node  Remainder2.C 
+   6          9        1    Node  Remainder1.D 
+   1/1        1        1    Node  Remainder1.C 
+   6          9        1    Node  Remainder0.D 
+   1/1        1        1    Node  Remainder0.C 
+   1/1        1        1    Node  DBits0 
+   6          9        1    Node  DBits0.REG 
+   1/1        1        1    Node  DBits0.C 
+   1/1        1        1    Node  DBits1 
+   6          9        1    Node  DBits1.REG 
+   1/1        1        1    Node  DBits1.C 
+   1/1        1        1    Node  DBits2 
+   6          9        1    Node  DBits2.REG 
+   1/1        1        1    Node  DBits2.C 
+   1/1        1        1    Node  DBits3 
+   6          9        1    Node  DBits3.REG 
+   1/1        1        1    Node  DBits3.C 
+   1/1        1        1    Node  DBits4 
+   6          9        1    Node  DBits4.REG 
+   1/1        1        1    Node  DBits4.C 
+   1/1        1        1    Node  DBits5 
+   6          9        1    Node  DBits5.REG 
+   1/1        1        1    Node  DBits5.C 
+   1/1        1        1    Node  DBits6 
+   6          9        1    Node  DBits6.REG 
+   1/1        1        1    Node  DBits6.C 
+   1/1        1        1    Node  DBits7 
+   6          9        1    Node  DBits7.REG 
+   1/1        1        1    Node  DBits7.C 
+   1/1        1        1    Node  DBits8 
+   6          9        1    Node  DBits8.REG 
+   1/1        1        1    Node  DBits8.C 
+   1/1        1        1    Node  DBits9 
+   6          9        1    Node  DBits9.REG 
+   1/1        1        1    Node  DBits9.C 
+   1/1        1        1    Node  DBits10 
+   6          9        1    Node  DBits10.REG 
+   1/1        1        1    Node  DBits10.C 
+   1/1        1        1    Node  DBits11 
+   6          9        1    Node  DBits11.REG 
+   1/1        1        1    Node  DBits11.C 
+   1/1        1        1    Node  DBits12 
+   6          9        1    Node  DBits12.REG 
+   1/1        1        1    Node  DBits12.C 
+   1/1        1        1    Node  DBits13 
+   6          9        1    Node  DBits13.REG 
+   1/1        1        1    Node  DBits13.C 
+   1/1        1        1    Node  DBits14 
+   6          9        1    Node  DBits14.REG 
+   1/1        1        1    Node  DBits14.C 
+   1/1        1        1    Node  DBits15 
+   9         11        1    Node  DBits15.REG 
+   1/1        1        1    Node  DBits15.C 
+   1/1        1        1    Node  DBits16 
+   7         10        1    Node  DBits16.REG 
+   1/1        1        1    Node  DBits16.C 
+   1/1        1        1    Node  DBits17 
+   7         10        1    Node  DBits17.REG 
+   1/1        1        1    Node  DBits17.C 
+   1/1        1        1    Node  DBits18 
+   7         10        1    Node  DBits18.REG 
+   1/1        1        1    Node  DBits18.C 
+   1/1        1        1    Node  DBits19 
+   7         10        1    Node  DBits19.REG 
+   1/1        1        1    Node  DBits19.C 
+   1/1        1        1    Node  DBits20 
+   7         10        1    Node  DBits20.REG 
+   1/1        1        1    Node  DBits20.C 
+   1/1        1        1    Node  DBits21 
+   7         10        1    Node  DBits21.REG 
+   1/1        1        1    Node  DBits21.C 
+   1/1        1        1    Node  DBits22 
+   7         10        1    Node  DBits22.REG 
+   1/1        1        1    Node  DBits22.C 
+   1/1        1        1    Node  DBits23 
+   7         10        1    Node  DBits23.REG 
+   1/1        1        1    Node  DBits23.C 
+   1/1        1        1    Node  DBits24 
+   7         10        1    Node  DBits24.REG 
+   1/1        1        1    Node  DBits24.C 
+   1/1        1        1    Node  DBits25 
+   7         10        1    Node  DBits25.REG 
+   1/1        1        1    Node  DBits25.C 
+   1/1        1        1    Node  DBits26 
+   7         10        1    Node  DBits26.REG 
+   1/1        1        1    Node  DBits26.C 
+   1/1        1        1    Node  DBits27 
+   7         10        1    Node  DBits27.REG 
+   1/1        1        1    Node  DBits27.C 
+   1/1        1        1    Node  DBits28 
+   7         10        1    Node  DBits28.REG 
+   1/1        1        1    Node  DBits28.C 
+   1/1        1        1    Node  DBits29 
+   7         10        1    Node  DBits29.REG 
+   1/1        1        1    Node  DBits29.C 
+   1/1        1        1    Node  DBits30 
+   7         10        1    Node  DBits30.REG 
+   1/1        1        1    Node  DBits30.C 
+   1/1        1        1    Node  DBits31 
+   7         10        1    Node  DBits31.REG 
+   1/1        1        1    Node  DBits31.C 
+   1/1        1        1    Node  DBits32 
+   7         11        1    Node  DBits32.REG 
+   1/1        1        1    Node  DBits32.C 
+   1/1        1        1    Node  DBits33 
+   7         11        1    Node  DBits33.REG 
+   1/1        1        1    Node  DBits33.C 
+   1/1        1        1    Node  DBits34 
+   7         11        1    Node  DBits34.REG 
+   1/1        1        1    Node  DBits34.C 
+   1/1        1        1    Node  DBits35 
+   7         11        1    Node  DBits35.REG 
+   1/1        1        1    Node  DBits35.C 
+   1/1        1        1    Node  DBits36 
+   7         11        1    Node  DBits36.REG 
+   1/1        1        1    Node  DBits36.C 
+   1/1        1        1    Node  DBits37 
+   7         11        1    Node  DBits37.REG 
+   1/1        1        1    Node  DBits37.C 
+   1/1        1        1    Node  DBits38 
+   7         11        1    Node  DBits38.REG 
+   1/1        1        1    Node  DBits38.C 
+   1/1        1        1    Node  DBits39 
+   7         11        1    Node  DBits39.REG 
+   1/1        1        1    Node  DBits39.C 
+   1/1        1        1    Node  DBits40 
+   7         11        1    Node  DBits40.REG 
+   1/1        1        1    Node  DBits40.C 
+   1/1        1        1    Node  DBits41 
+   7         11        1    Node  DBits41.REG 
+   1/1        1        1    Node  DBits41.C 
+   1/1        1        1    Node  DBits42 
+   7         11        1    Node  DBits42.REG 
+   1/1        1        1    Node  DBits42.C 
+   1/1        1        1    Node  DBits43 
+   7         11        1    Node  DBits43.REG 
+   1/1        1        1    Node  DBits43.C 
+   1/1        1        1    Node  DBits44 
+   7         11        1    Node  DBits44.REG 
+   1/1        1        1    Node  DBits44.C 
+   1/1        1        1    Node  DBits45 
+   7         11        1    Node  DBits45.REG 
+   1/1        1        1    Node  DBits45.C 
+   1/1        1        1    Node  DBits46 
+   7         11        1    Node  DBits46.REG 
+   1/1        1        1    Node  DBits46.C 
+   1/1        1        1    Node  DBits47 
+   7         11        1    Node  DBits47.REG 
+   1/1        1        1    Node  DBits47.C 
+   1          6        1    Node  ShiftHold 
+   2          9        1    Node  ShiftKeyIn 
+   4          5        1    Node  ShiftDisplay 
+   1          2        1    Node  ShiftAddSub 
+   1          2        1    Node  ShiftInit 
+   1          2        1    Node  ShiftRem 
+   1          2        1    Node  ShiftQuo 
+   1          8        1    Node  CARRY@0 
+   1          8        1    Node  CARRY@1 
+=========
+ 768/155        Best P-Term Total: 768
+                       Total Pins: 45
+                      Total Nodes: 106
+            Average P-Term/Output: 4
+
+
+Equations:
+
+Calculate.OE = (0);
+
+Divisor.OE = (0);
+
+KeypadRDY.OE = (0);
+
+Keypad0.OE = (0);
+
+Keypad1.OE = (0);
+
+Keypad2.OE = (0);
+
+Keypad3.OE = (0);
+
+HexDigit0 = (DBits47);
+
+HexDigit0.OE = (1);
+
+HexDigit1 = (DBits46);
+
+HexDigit1.OE = (1);
+
+HexDigit2 = (DBits45);
+
+HexDigit2.OE = (1);
+
+HexDigit3 = (DBits44);
+
+HexDigit3.OE = (1);
+
+DecoderEn = (1);
+
+DecoderEn.OE = (1);
+
+DecoderBit0.OE = (1);
+
+DecoderBit0.D = (DigitClkEn.Q & DecoderBit3.PIN & DecoderBit2.PIN
+     # DigitClkEn.Q & DecoderBit1.PIN & !DecoderBit0.PIN
+     # DigitClkEn.Q & !DecoderBit3.PIN & !DecoderBit0.PIN
+     # !DigitClkEn.Q & DecoderBit0.PIN
+     # !Reset);
+
+DecoderBit0.C = (CLK);
+
+DecoderBit1.OE = (1);
+
+DecoderBit1.D = (DigitClkEn.Q & !DecoderBit3.PIN & !DecoderBit1.PIN & !DecoderBit0.PIN
+     # DigitClkEn.Q & DecoderBit3.PIN & DecoderBit2.PIN
+     # DecoderBit1.PIN & DecoderBit0.PIN
+     # !DigitClkEn.Q & DecoderBit1.PIN
+     # !Reset);
+
+DecoderBit1.C = (CLK);
+
+DecoderBit2.OE = (1);
+
+DecoderBit2.D = (DigitClkEn.Q & !DecoderBit2.PIN & !DecoderBit1.PIN & !DecoderBit0.PIN & Reset
+     # DecoderBit2.PIN & DecoderBit0.PIN & Reset
+     # DecoderBit2.PIN & DecoderBit1.PIN & Reset
+     # !DigitClkEn.Q & DecoderBit2.PIN & Reset);
+
+DecoderBit2.C = (CLK);
+
+DecoderBit3.OE = (1);
+
+DecoderBit3.D = (DigitClkEn.Q & !DecoderBit3.PIN & DecoderBit2.PIN & !DecoderBit1.PIN & !DecoderBit0.PIN & Reset
+     # DecoderBit3.PIN & !DecoderBit2.PIN & Reset
+     # !DigitClkEn.Q & DecoderBit3.PIN & Reset);
+
+DecoderBit3.C = (CLK);
+
+KeypadRDYS1.D = (KeypadRDY.PIN);
+
+KeypadRDYS1.C = (CLK);
+
+KeypadRDYS2.D = (KeypadRDYS1.Q);
+
+KeypadRDYS2.C = (CLK);
+
+KeypadRDYS3.D = (KeypadRDYS2.Q);
+
+KeypadRDYS3.C = (CLK);
+
+HaveKey.D = (HaveKey.Q & DecoderBit2.PIN & !Divisor.PIN
+     # HaveKey.Q & !DecoderBit2.PIN & Divisor.PIN
+     # HaveKey.Q & !DecoderBit0.PIN
+     # HaveKey.Q & !DecoderBit1.PIN
+     # HaveKey.Q & DecoderBit3.PIN
+     # HaveKey.Q & !DigitClkEn.Q
+     # KeypadRDYS2.Q & !KeypadRDYS3.Q);
+
+HaveKey.C = (CLK);
+
+MuxCntr0.D = (Reset & !MuxCntr0.Q);
+
+MuxCntr0.C = (CLK);
+
+MuxCntr1.D = (Reset & MuxCntr0.Q & !MuxCntr1.Q
+     # Reset & !MuxCntr0.Q & MuxCntr1.Q);
+
+MuxCntr1.C = (CLK);
+
+MuxCntr2.D = (Reset & MuxCntr0.Q & MuxCntr1.Q & !MuxCntr2.Q
+     # Reset & !MuxCntr1.Q & MuxCntr2.Q
+     # Reset & !MuxCntr0.Q & MuxCntr2.Q);
+
+MuxCntr2.C = (CLK);
+
+MuxCntr3.D = (Reset & MuxCntr0.Q & MuxCntr1.Q & MuxCntr2.Q & !MuxCntr3.Q
+     # Reset & !MuxCntr2.Q & MuxCntr3.Q
+     # Reset & !MuxCntr1.Q & MuxCntr3.Q
+     # Reset & !MuxCntr0.Q & MuxCntr3.Q);
+
+MuxCntr3.C = (CLK);
+
+MuxCntr4.D = (Reset & MuxCntr0.Q & MuxCntr1.Q & MuxCntr2.Q & MuxCntr3.Q & !MuxCntr4.Q
+     # Reset & !MuxCntr3.Q & MuxCntr4.Q
+     # Reset & !MuxCntr2.Q & MuxCntr4.Q
+     # Reset & !MuxCntr1.Q & MuxCntr4.Q
+     # Reset & !MuxCntr0.Q & MuxCntr4.Q);
+
+MuxCntr4.C = (CLK);
+
+MuxCntr5.D = (Reset & MuxCntr0.Q & MuxCntr1.Q & MuxCntr2.Q & MuxCntr3.Q & MuxCntr4.Q & !MuxCntr5.Q
+     # Reset & !MuxCntr4.Q & MuxCntr5.Q
+     # Reset & !MuxCntr3.Q & MuxCntr5.Q
+     # Reset & !MuxCntr2.Q & MuxCntr5.Q
+     # Reset & !MuxCntr1.Q & MuxCntr5.Q
+     # Reset & !MuxCntr0.Q & MuxCntr5.Q);
+
+MuxCntr5.C = (CLK);
+
+MuxCntr6.D = (Reset & MuxCntr0.Q & MuxCntr1.Q & MuxCntr2.Q & MuxCntr3.Q & MuxCntr4.Q & MuxCntr5.Q & !MuxCntr6.Q
+     # Reset & !MuxCntr5.Q & MuxCntr6.Q
+     # Reset & !MuxCntr4.Q & MuxCntr6.Q
+     # Reset & !MuxCntr3.Q & MuxCntr6.Q
+     # Reset & !MuxCntr2.Q & MuxCntr6.Q
+     # Reset & !MuxCntr1.Q & MuxCntr6.Q
+     # Reset & !MuxCntr0.Q & MuxCntr6.Q);
+
+MuxCntr6.C = (CLK);
+
+MuxCntr7.D = (Reset & MuxCntr0.Q & MuxCntr1.Q & MuxCntr2.Q & MuxCntr3.Q & MuxCntr4.Q & MuxCntr5.Q & MuxCntr6.Q & !MuxCntr7.Q
+     # Reset & !MuxCntr6.Q & MuxCntr7.Q
+     # Reset & !MuxCntr5.Q & MuxCntr7.Q
+     # Reset & !MuxCntr4.Q & MuxCntr7.Q
+     # Reset & !MuxCntr3.Q & MuxCntr7.Q
+     # Reset & !MuxCntr2.Q & MuxCntr7.Q
+     # Reset & !MuxCntr1.Q & MuxCntr7.Q
+     # Reset & !MuxCntr0.Q & MuxCntr7.Q);
+
+MuxCntr7.C = (CLK);
+
+MuxCntr8.D = (Reset & MuxCntr0.Q & MuxCntr1.Q & MuxCntr2.Q & MuxCntr3.Q & MuxCntr4.Q & MuxCntr5.Q & MuxCntr6.Q & MuxCntr7.Q & !MuxCntr8.Q
+     # Reset & !MuxCntr7.Q & MuxCntr8.Q
+     # Reset & !MuxCntr6.Q & MuxCntr8.Q
+     # Reset & !MuxCntr5.Q & MuxCntr8.Q
+     # Reset & !MuxCntr4.Q & MuxCntr8.Q
+     # Reset & !MuxCntr3.Q & MuxCntr8.Q
+     # Reset & !MuxCntr2.Q & MuxCntr8.Q
+     # Reset & !MuxCntr1.Q & MuxCntr8.Q
+     # Reset & !MuxCntr0.Q & MuxCntr8.Q);
+
+MuxCntr8.C = (CLK);
+
+MuxCntr9.D = (Reset & MuxCntr0.Q & MuxCntr1.Q & MuxCntr2.Q & MuxCntr3.Q & MuxCntr4.Q & MuxCntr5.Q & MuxCntr6.Q & MuxCntr7.Q & MuxCntr8.Q & !MuxCntr9.Q
+     # Reset & !MuxCntr8.Q & MuxCntr9.Q
+     # Reset & !MuxCntr7.Q & MuxCntr9.Q
+     # Reset & !MuxCntr6.Q & MuxCntr9.Q
+     # Reset & !MuxCntr5.Q & MuxCntr9.Q
+     # Reset & !MuxCntr4.Q & MuxCntr9.Q
+     # Reset & !MuxCntr3.Q & MuxCntr9.Q
+     # Reset & !MuxCntr2.Q & MuxCntr9.Q
+     # Reset & !MuxCntr1.Q & MuxCntr9.Q
+     # Reset & !MuxCntr0.Q & MuxCntr9.Q);
+
+MuxCntr9.C = (CLK);
+
+DigitClkEn.D = (MuxCntr0.Q & MuxCntr1.Q & MuxCntr2.Q & MuxCntr3.Q & MuxCntr4.Q & MuxCntr5.Q & MuxCntr6.Q & MuxCntr7.Q & MuxCntr8.Q & MuxCntr9.Q);
+
+DigitClkEn.C = (CLK);
+
+KeyEn.D = (MuxCntr0.Q & !MuxCntr1.Q & !MuxCntr2.Q & !MuxCntr3.Q & !MuxCntr4.Q & !MuxCntr5.Q & !MuxCntr6.Q & !MuxCntr7.Q & !MuxCntr8.Q & !MuxCntr9.Q);
+
+KeyEn.C = (CLK);
+
+InitEn.D = (!MuxCntr0.Q & !MuxCntr1.Q & !MuxCntr2.Q & !MuxCntr3.Q & !MuxCntr4.Q & !MuxCntr5.Q & !MuxCntr6.Q & !MuxCntr7.Q & !MuxCntr8.Q & !MuxCntr9.Q);
+
+InitEn.C = (CLK);
+
+RemainderEn.D = (MuxCntr0.Q & !MuxCntr1.Q & !MuxCntr2.Q & !MuxCntr3.Q & !MuxCntr4.Q & !MuxCntr5.Q);
+
+RemainderEn.C = (CLK);
+
+AddSubEn.D = (MuxCntr4.Q & !MuxCntr5.Q);
+
+AddSubEn.C = (CLK);
+
+QuotientEn.D = (!MuxCntr0.Q & !MuxCntr1.Q & !MuxCntr2.Q & !MuxCntr3.Q & !MuxCntr4.Q & MuxCntr5.Q);
+
+QuotientEn.C = (CLK);
+
+CarryEn.D = (MuxCntr0.Q & MuxCntr1.Q & MuxCntr2.Q & MuxCntr3.Q & !MuxCntr4.Q & !MuxCntr5.Q);
+
+CarryEn.C = (CLK);
+
+CalcLatch.D = (DecoderBit0.PIN & CalcRDYS2.Q & !CalcRDYS3.Q
+     # DecoderBit1.PIN & CalcRDYS2.Q & !CalcRDYS3.Q
+     # !DecoderBit2.PIN & CalcRDYS2.Q & !CalcRDYS3.Q
+     # !DecoderBit3.PIN & CalcRDYS2.Q & !CalcRDYS3.Q
+     # !DecoderBit0.PIN & CalcLatch.Q
+     # !DecoderBit1.PIN & CalcLatch.Q
+     # DecoderBit2.PIN & CalcLatch.Q
+     # DecoderBit3.PIN & CalcLatch.Q);
+
+CalcLatch.C = (CLK);
+
+CalcRDYS1.D = (!Calculate.PIN);
+
+CalcRDYS1.C = (CLK);
+
+CalcRDYS2.D = (CalcRDYS1.Q);
+
+CalcRDYS2.C = (CLK);
+
+CalcRDYS3.D = (CalcRDYS2.Q);
+
+CalcRDYS3.C = (CLK);
+
+CalcCond = (!HaveKey.Q & !DigitClkEn.Q & DecoderBit3.PIN & DecoderBit2.PIN & !DecoderBit1.PIN & !DecoderBit0.PIN & CalcLatch.Q);
+
+CarryFlag0.D = (ShiftAddSub & !DBits31 & AddSubFlag0.Q & !Remainder0.Q
+     # ShiftAddSub & !DBits31 & AddSubFlag0.Q & CarryFlag0.Q
+     # ShiftAddSub & DBits31 & !AddSubFlag0.Q & !Remainder0.Q
+     # ShiftAddSub & DBits31 & !AddSubFlag0.Q & CarryFlag0.Q
+     # ShiftAddSub & CarryFlag0.Q & !Remainder0.Q
+     # AddSubFlag0.Q & CarryEn.Q);
+
+CarryFlag0.C = (CLK);
+
+AddSubFlag0.D = (Calculate.PIN & ShiftQuo & !AddSubFlag0.Q & CarryFlag0.Q & !Remainder16.Q
+     # MuxCntr9.Q & ShiftQuo & !AddSubFlag0.Q & CarryFlag0.Q & !Remainder16.Q
+     # MuxCntr8.Q & ShiftQuo & !AddSubFlag0.Q & CarryFlag0.Q & !Remainder16.Q
+     # DecoderBit0.PIN & ShiftQuo & !AddSubFlag0.Q & CarryFlag0.Q & !Remainder16.Q
+     # DecoderBit1.PIN & ShiftQuo & !AddSubFlag0.Q & CarryFlag0.Q & !Remainder16.Q
+     # !DecoderBit2.PIN & ShiftQuo & !AddSubFlag0.Q & CarryFlag0.Q & !Remainder16.Q
+     # !DecoderBit3.PIN & ShiftQuo & !AddSubFlag0.Q & CarryFlag0.Q & !Remainder16.Q
+     # Calculate.PIN & ShiftQuo & !AddSubFlag0.Q & !CarryFlag0.Q & Remainder16.Q
+     # MuxCntr9.Q & ShiftQuo & !AddSubFlag0.Q & !CarryFlag0.Q & Remainder16.Q
+     # MuxCntr8.Q & ShiftQuo & !AddSubFlag0.Q & !CarryFlag0.Q & Remainder16.Q
+     # DecoderBit0.PIN & ShiftQuo & !AddSubFlag0.Q & !CarryFlag0.Q & Remainder16.Q
+     # DecoderBit1.PIN & ShiftQuo & !AddSubFlag0.Q & !CarryFlag0.Q & Remainder16.Q
+     # !DecoderBit2.PIN & ShiftQuo & !AddSubFlag0.Q & !CarryFlag0.Q & Remainder16.Q
+     # !DecoderBit3.PIN & ShiftQuo & !AddSubFlag0.Q & !CarryFlag0.Q & Remainder16.Q
+     # ShiftQuo & !AddSubFlag0.Q & CarryFlag0.Q & !Remainder16.Q & !CARRY@1
+     # ShiftQuo & !AddSubFlag0.Q & !CarryFlag0.Q & Remainder16.Q & !CARRY@1
+     # Calculate.PIN & AddSubFlag0.Q & !CarryFlag0.Q & !Remainder16.Q
+     # MuxCntr9.Q & AddSubFlag0.Q & !CarryFlag0.Q & !Remainder16.Q
+     # MuxCntr8.Q & AddSubFlag0.Q & !CarryFlag0.Q & !Remainder16.Q
+     # DecoderBit0.PIN & AddSubFlag0.Q & !CarryFlag0.Q & !Remainder16.Q
+     # DecoderBit1.PIN & AddSubFlag0.Q & !CarryFlag0.Q & !Remainder16.Q
+     # !DecoderBit2.PIN & AddSubFlag0.Q & !CarryFlag0.Q & !Remainder16.Q
+     # !DecoderBit3.PIN & AddSubFlag0.Q & !CarryFlag0.Q & !Remainder16.Q
+     # Calculate.PIN & AddSubFlag0.Q & CarryFlag0.Q & Remainder16.Q
+     # MuxCntr9.Q & AddSubFlag0.Q & CarryFlag0.Q & Remainder16.Q
+     # MuxCntr8.Q & AddSubFlag0.Q & CarryFlag0.Q & Remainder16.Q
+     # DecoderBit0.PIN & AddSubFlag0.Q & CarryFlag0.Q & Remainder16.Q
+     # DecoderBit1.PIN & AddSubFlag0.Q & CarryFlag0.Q & Remainder16.Q
+     # !DecoderBit2.PIN & AddSubFlag0.Q & CarryFlag0.Q & Remainder16.Q
+     # !DecoderBit3.PIN & AddSubFlag0.Q & CarryFlag0.Q & Remainder16.Q
+     # ShiftQuo & AddSubFlag0.Q & !CarryFlag0.Q & !Remainder16.Q & !CARRY@1
+     # ShiftQuo & AddSubFlag0.Q & CarryFlag0.Q & Remainder16.Q & !CARRY@1
+     # !ShiftQuo & AddSubFlag0.Q & !CARRY@0
+     # Calculate.PIN & !ShiftQuo & AddSubFlag0.Q
+     # MuxCntr9.Q & !ShiftQuo & AddSubFlag0.Q
+     # MuxCntr8.Q & !ShiftQuo & AddSubFlag0.Q
+     # DecoderBit0.PIN & !ShiftQuo & AddSubFlag0.Q
+     # DecoderBit1.PIN & !ShiftQuo & AddSubFlag0.Q
+     # !DecoderBit2.PIN & !ShiftQuo & AddSubFlag0.Q
+     # !DecoderBit3.PIN & !ShiftQuo & AddSubFlag0.Q);
+
+AddSubFlag0.C = (CLK);
+
+NewKey0 = (!Keypad1.PIN & Keypad3.PIN
+     # !Keypad0.PIN & Keypad3.PIN
+     # !Keypad0.PIN & !Keypad1.PIN);
+
+NewKey1 = (Keypad0.PIN & Keypad1.PIN & Keypad3.PIN & !Keypad2.PIN
+     # !Keypad0.PIN & !Keypad1.PIN & Keypad3.PIN
+     # Keypad1.PIN & !Keypad3.PIN & Keypad2.PIN
+     # Keypad0.PIN & !Keypad1.PIN & Keypad2.PIN
+     # !Keypad0.PIN & Keypad1.PIN & Keypad2.PIN);
+
+NewKey2 = (Keypad0.PIN & Keypad1.PIN & Keypad3.PIN & !Keypad2.PIN
+     # !Keypad0.PIN & Keypad1.PIN & Keypad3.PIN & Keypad2.PIN
+     # !Keypad0.PIN & !Keypad3.PIN & !Keypad2.PIN
+     # Keypad0.PIN & !Keypad1.PIN & Keypad2.PIN
+     # !Keypad1.PIN & !Keypad3.PIN);
+
+NewKey3.X1 = (Keypad0.PIN);
+
+NewKey3.X2 = (Keypad2.PIN);
+
+Remainder16.D = (ShiftQuo & AddSubFlag0.Q & !CarryFlag0.Q & !Remainder16.Q
+     # ShiftQuo & !AddSubFlag0.Q & CarryFlag0.Q & !Remainder16.Q
+     # ShiftQuo & !AddSubFlag0.Q & !CarryFlag0.Q & Remainder16.Q
+     # ShiftQuo & AddSubFlag0.Q & CarryFlag0.Q & Remainder16.Q
+     # ShiftHold & Remainder16.Q
+     # ShiftDisplay & Remainder16.Q
+     # ShiftAddSub & Remainder16.Q
+     # ShiftKeyIn & Remainder16.Q
+     # ShiftRem & Remainder15.Q);
+
+Remainder16.C = (CLK);
+
+Remainder15.D = (ShiftAddSub & DBits31 & !AddSubFlag0.Q & !CarryFlag0.Q & !Remainder0.Q
+     # ShiftAddSub & !DBits31 & AddSubFlag0.Q & !CarryFlag0.Q & !Remainder0.Q
+     # ShiftAddSub & !DBits31 & !AddSubFlag0.Q & CarryFlag0.Q & !Remainder0.Q
+     # ShiftAddSub & DBits31 & AddSubFlag0.Q & CarryFlag0.Q & !Remainder0.Q
+     # ShiftAddSub & !DBits31 & !AddSubFlag0.Q & !CarryFlag0.Q & Remainder0.Q
+     # ShiftAddSub & DBits31 & AddSubFlag0.Q & !CarryFlag0.Q & Remainder0.Q
+     # ShiftAddSub & DBits31 & !AddSubFlag0.Q & CarryFlag0.Q & Remainder0.Q
+     # ShiftAddSub & !DBits31 & AddSubFlag0.Q & CarryFlag0.Q & Remainder0.Q
+     # ShiftRem & Remainder14.Q
+     # ShiftHold & Remainder15.Q
+     # ShiftDisplay & Remainder15.Q
+     # ShiftQuo & Remainder15.Q
+     # ShiftKeyIn & Remainder15.Q);
+
+Remainder15.C = (CLK);
+
+Remainder14.D = (ShiftAddSub & Remainder15.Q
+     # ShiftHold & Remainder14.Q
+     # ShiftDisplay & Remainder14.Q
+     # ShiftQuo & Remainder14.Q
+     # ShiftKeyIn & Remainder14.Q
+     # ShiftRem & Remainder13.Q);
+
+Remainder14.C = (CLK);
+
+Remainder13.D = (ShiftAddSub & Remainder14.Q
+     # ShiftHold & Remainder13.Q
+     # ShiftDisplay & Remainder13.Q
+     # ShiftQuo & Remainder13.Q
+     # ShiftKeyIn & Remainder13.Q
+     # ShiftRem & Remainder12.Q);
+
+Remainder13.C = (CLK);
+
+Remainder12.D = (ShiftAddSub & Remainder13.Q
+     # ShiftHold & Remainder12.Q
+     # ShiftDisplay & Remainder12.Q
+     # ShiftQuo & Remainder12.Q
+     # ShiftKeyIn & Remainder12.Q
+     # ShiftRem & Remainder11.Q);
+
+Remainder12.C = (CLK);
+
+Remainder11.D = (ShiftAddSub & Remainder12.Q
+     # ShiftHold & Remainder11.Q
+     # ShiftDisplay & Remainder11.Q
+     # ShiftQuo & Remainder11.Q
+     # ShiftKeyIn & Remainder11.Q
+     # ShiftRem & Remainder10.Q);
+
+Remainder11.C = (CLK);
+
+Remainder10.D = (ShiftAddSub & Remainder11.Q
+     # ShiftHold & Remainder10.Q
+     # ShiftDisplay & Remainder10.Q
+     # ShiftQuo & Remainder10.Q
+     # ShiftKeyIn & Remainder10.Q
+     # ShiftRem & Remainder9.Q);
+
+Remainder10.C = (CLK);
+
+Remainder9.D = (ShiftAddSub & Remainder10.Q
+     # ShiftHold & Remainder9.Q
+     # ShiftDisplay & Remainder9.Q
+     # ShiftQuo & Remainder9.Q
+     # ShiftKeyIn & Remainder9.Q
+     # ShiftRem & Remainder8.Q);
+
+Remainder9.C = (CLK);
+
+Remainder8.D = (ShiftAddSub & Remainder9.Q
+     # ShiftHold & Remainder8.Q
+     # ShiftDisplay & Remainder8.Q
+     # ShiftQuo & Remainder8.Q
+     # ShiftKeyIn & Remainder8.Q
+     # ShiftRem & Remainder7.Q);
+
+Remainder8.C = (CLK);
+
+Remainder7.D = (ShiftAddSub & Remainder8.Q
+     # ShiftHold & Remainder7.Q
+     # ShiftDisplay & Remainder7.Q
+     # ShiftQuo & Remainder7.Q
+     # ShiftKeyIn & Remainder7.Q
+     # ShiftRem & Remainder6.Q);
+
+Remainder7.C = (CLK);
+
+Remainder6.D = (ShiftAddSub & Remainder7.Q
+     # ShiftHold & Remainder6.Q
+     # ShiftDisplay & Remainder6.Q
+     # ShiftQuo & Remainder6.Q
+     # ShiftKeyIn & Remainder6.Q
+     # ShiftRem & Remainder5.Q);
+
+Remainder6.C = (CLK);
+
+Remainder5.D = (ShiftAddSub & Remainder6.Q
+     # ShiftHold & Remainder5.Q
+     # ShiftDisplay & Remainder5.Q
+     # ShiftQuo & Remainder5.Q
+     # ShiftKeyIn & Remainder5.Q
+     # ShiftRem & Remainder4.Q);
+
+Remainder5.C = (CLK);
+
+Remainder4.D = (ShiftAddSub & Remainder5.Q
+     # ShiftHold & Remainder4.Q
+     # ShiftDisplay & Remainder4.Q
+     # ShiftQuo & Remainder4.Q
+     # ShiftKeyIn & Remainder4.Q
+     # ShiftRem & Remainder3.Q);
+
+Remainder4.C = (CLK);
+
+Remainder3.D = (ShiftAddSub & Remainder4.Q
+     # ShiftHold & Remainder3.Q
+     # ShiftDisplay & Remainder3.Q
+     # ShiftQuo & Remainder3.Q
+     # ShiftKeyIn & Remainder3.Q
+     # ShiftRem & Remainder2.Q);
+
+Remainder3.C = (CLK);
+
+Remainder2.D = (ShiftAddSub & Remainder3.Q
+     # ShiftHold & Remainder2.Q
+     # ShiftDisplay & Remainder2.Q
+     # ShiftQuo & Remainder2.Q
+     # ShiftKeyIn & Remainder2.Q
+     # ShiftRem & Remainder1.Q);
+
+Remainder2.C = (CLK);
+
+Remainder1.D = (ShiftAddSub & Remainder2.Q
+     # ShiftRem & Remainder0.Q
+     # ShiftHold & Remainder1.Q
+     # ShiftDisplay & Remainder1.Q
+     # ShiftQuo & Remainder1.Q
+     # ShiftKeyIn & Remainder1.Q);
+
+Remainder1.C = (CLK);
+
+Remainder0.D = (ShiftRem & DBits32
+     # ShiftHold & Remainder0.Q
+     # ShiftDisplay & Remainder0.Q
+     # ShiftQuo & Remainder0.Q
+     # ShiftKeyIn & Remainder0.Q
+     # ShiftAddSub & Remainder1.Q);
+
+Remainder0.C = (CLK);
+
+DBits0 = (DBits0);
+
+DBits0 := (ShiftQuo & DBits1
+     # DBits44 & ShiftDisplay
+     # DBits0 & ShiftHold
+     # ShiftAddSub & DBits0
+     # ShiftRem & DBits0
+     # ShiftKeyIn & DBits0);
+
+DBits0.C = (CLK);
+
+DBits1 = (DBits1);
+
+DBits1 := (ShiftQuo & DBits2
+     # DBits45 & ShiftDisplay
+     # DBits1 & ShiftHold
+     # ShiftAddSub & DBits1
+     # ShiftRem & DBits1
+     # ShiftKeyIn & DBits1);
+
+DBits1.C = (CLK);
+
+DBits2 = (DBits2);
+
+DBits2 := (ShiftQuo & DBits3
+     # DBits46 & ShiftDisplay
+     # DBits2 & ShiftHold
+     # ShiftAddSub & DBits2
+     # ShiftRem & DBits2
+     # ShiftKeyIn & DBits2);
+
+DBits2.C = (CLK);
+
+DBits3 = (DBits3);
+
+DBits3 := (ShiftQuo & DBits4
+     # DBits47 & ShiftDisplay
+     # DBits3 & ShiftHold
+     # ShiftAddSub & DBits3
+     # ShiftRem & DBits3
+     # ShiftKeyIn & DBits3);
+
+DBits3.C = (CLK);
+
+DBits4 = (DBits4);
+
+DBits4 := (ShiftQuo & DBits5
+     # ShiftDisplay & DBits0
+     # DBits4 & ShiftHold
+     # ShiftAddSub & DBits4
+     # ShiftRem & DBits4
+     # ShiftKeyIn & DBits4);
+
+DBits4.C = (CLK);
+
+DBits5 = (DBits5);
+
+DBits5 := (ShiftQuo & DBits6
+     # ShiftDisplay & DBits1
+     # DBits5 & ShiftHold
+     # ShiftAddSub & DBits5
+     # ShiftRem & DBits5
+     # ShiftKeyIn & DBits5);
+
+DBits5.C = (CLK);
+
+DBits6 = (DBits6);
+
+DBits6 := (ShiftQuo & DBits7
+     # ShiftDisplay & DBits2
+     # DBits6 & ShiftHold
+     # ShiftAddSub & DBits6
+     # ShiftRem & DBits6
+     # ShiftKeyIn & DBits6);
+
+DBits6.C = (CLK);
+
+DBits7 = (DBits7);
+
+DBits7 := (ShiftQuo & DBits8
+     # ShiftDisplay & DBits3
+     # DBits7 & ShiftHold
+     # ShiftAddSub & DBits7
+     # ShiftRem & DBits7
+     # ShiftKeyIn & DBits7);
+
+DBits7.C = (CLK);
+
+DBits8 = (DBits8);
+
+DBits8 := (ShiftQuo & DBits9
+     # ShiftDisplay & DBits4
+     # DBits8 & ShiftHold
+     # ShiftAddSub & DBits8
+     # ShiftRem & DBits8
+     # ShiftKeyIn & DBits8);
+
+DBits8.C = (CLK);
+
+DBits9 = (DBits9);
+
+DBits9 := (ShiftQuo & DBits10
+     # ShiftDisplay & DBits5
+     # DBits9 & ShiftHold
+     # ShiftAddSub & DBits9
+     # ShiftRem & DBits9
+     # ShiftKeyIn & DBits9);
+
+DBits9.C = (CLK);
+
+DBits10 = (DBits10);
+
+DBits10 := (ShiftQuo & DBits11
+     # ShiftDisplay & DBits6
+     # DBits10 & ShiftHold
+     # ShiftAddSub & DBits10
+     # ShiftRem & DBits10
+     # ShiftKeyIn & DBits10);
+
+DBits10.C = (CLK);
+
+DBits11 = (DBits11);
+
+DBits11 := (ShiftQuo & DBits12
+     # ShiftDisplay & DBits7
+     # DBits11 & ShiftHold
+     # ShiftAddSub & DBits11
+     # ShiftRem & DBits11
+     # ShiftKeyIn & DBits11);
+
+DBits11.C = (CLK);
+
+DBits12 = (DBits12);
+
+DBits12 := (ShiftQuo & DBits13
+     # ShiftDisplay & DBits8
+     # DBits12 & ShiftHold
+     # ShiftAddSub & DBits12
+     # ShiftRem & DBits12
+     # ShiftKeyIn & DBits12);
+
+DBits12.C = (CLK);
+
+DBits13 = (DBits13);
+
+DBits13 := (ShiftQuo & DBits14
+     # ShiftDisplay & DBits9
+     # DBits13 & ShiftHold
+     # ShiftAddSub & DBits13
+     # ShiftRem & DBits13
+     # ShiftKeyIn & DBits13);
+
+DBits13.C = (CLK);
+
+DBits14 = (DBits14);
+
+DBits14 := (ShiftQuo & DBits15
+     # ShiftDisplay & DBits10
+     # DBits14 & ShiftHold
+     # ShiftAddSub & DBits14
+     # ShiftRem & DBits14
+     # ShiftKeyIn & DBits14);
+
+DBits14.C = (CLK);
+
+DBits15 = (DBits15);
+
+DBits15 := (ShiftQuo & !AddSubFlag0.Q & !CarryFlag0.Q & !Remainder16.Q
+     # ShiftQuo & AddSubFlag0.Q & CarryFlag0.Q & !Remainder16.Q
+     # ShiftQuo & AddSubFlag0.Q & !CarryFlag0.Q & Remainder16.Q
+     # ShiftQuo & !AddSubFlag0.Q & CarryFlag0.Q & Remainder16.Q
+     # ShiftDisplay & DBits11
+     # DBits15 & ShiftHold
+     # ShiftAddSub & DBits15
+     # ShiftRem & DBits15
+     # ShiftKeyIn & DBits15);
+
+DBits15.C = (CLK);
+
+DBits16 = (DBits16);
+
+DBits16 := (ShiftAddSub & DBits31
+     # ShiftDisplay & DBits12
+     # DBits16 & ShiftHold
+     # ShiftQuo & DBits16
+     # ShiftRem & DBits16
+     # ShiftInit & DBits16
+     # ShiftKeyIn & DBits16);
+
+DBits16.C = (CLK);
+
+DBits17 = (DBits17);
+
+DBits17 := (ShiftAddSub & DBits16
+     # ShiftDisplay & DBits13
+     # DBits17 & ShiftHold
+     # ShiftQuo & DBits17
+     # ShiftRem & DBits17
+     # ShiftInit & DBits17
+     # ShiftKeyIn & DBits17);
+
+DBits17.C = (CLK);
+
+DBits18 = (DBits18);
+
+DBits18 := (ShiftAddSub & DBits17
+     # ShiftDisplay & DBits14
+     # DBits18 & ShiftHold
+     # ShiftQuo & DBits18
+     # ShiftRem & DBits18
+     # ShiftInit & DBits18
+     # ShiftKeyIn & DBits18);
+
+DBits18.C = (CLK);
+
+DBits19 = (DBits19);
+
+DBits19 := (ShiftAddSub & DBits18
+     # ShiftDisplay & DBits15
+     # DBits19 & ShiftHold
+     # ShiftQuo & DBits19
+     # ShiftRem & DBits19
+     # ShiftInit & DBits19
+     # ShiftKeyIn & DBits19);
+
+DBits19.C = (CLK);
+
+DBits20 = (DBits20);
+
+DBits20 := (ShiftAddSub & DBits19
+     # ShiftDisplay & DBits16
+     # DBits20 & ShiftHold
+     # ShiftQuo & DBits20
+     # ShiftRem & DBits20
+     # ShiftInit & DBits20
+     # ShiftKeyIn & DBits20);
+
+DBits20.C = (CLK);
+
+DBits21 = (DBits21);
+
+DBits21 := (ShiftAddSub & DBits20
+     # ShiftDisplay & DBits17
+     # DBits21 & ShiftHold
+     # ShiftQuo & DBits21
+     # ShiftRem & DBits21
+     # ShiftInit & DBits21
+     # ShiftKeyIn & DBits21);
+
+DBits21.C = (CLK);
+
+DBits22 = (DBits22);
+
+DBits22 := (ShiftAddSub & DBits21
+     # ShiftDisplay & DBits18
+     # DBits22 & ShiftHold
+     # ShiftQuo & DBits22
+     # ShiftRem & DBits22
+     # ShiftInit & DBits22
+     # ShiftKeyIn & DBits22);
+
+DBits22.C = (CLK);
+
+DBits23 = (DBits23);
+
+DBits23 := (ShiftAddSub & DBits22
+     # ShiftDisplay & DBits19
+     # DBits23 & ShiftHold
+     # ShiftQuo & DBits23
+     # ShiftRem & DBits23
+     # ShiftInit & DBits23
+     # ShiftKeyIn & DBits23);
+
+DBits23.C = (CLK);
+
+DBits24 = (DBits24);
+
+DBits24 := (ShiftAddSub & DBits23
+     # ShiftDisplay & DBits20
+     # DBits24 & ShiftHold
+     # ShiftQuo & DBits24
+     # ShiftRem & DBits24
+     # ShiftInit & DBits24
+     # ShiftKeyIn & DBits24);
+
+DBits24.C = (CLK);
+
+DBits25 = (DBits25);
+
+DBits25 := (ShiftAddSub & DBits24
+     # ShiftDisplay & DBits21
+     # DBits25 & ShiftHold
+     # ShiftQuo & DBits25
+     # ShiftRem & DBits25
+     # ShiftInit & DBits25
+     # ShiftKeyIn & DBits25);
+
+DBits25.C = (CLK);
+
+DBits26 = (DBits26);
+
+DBits26 := (ShiftAddSub & DBits25
+     # ShiftDisplay & DBits22
+     # DBits26 & ShiftHold
+     # ShiftQuo & DBits26
+     # ShiftRem & DBits26
+     # ShiftInit & DBits26
+     # ShiftKeyIn & DBits26);
+
+DBits26.C = (CLK);
+
+DBits27 = (DBits27);
+
+DBits27 := (ShiftAddSub & DBits26
+     # ShiftDisplay & DBits23
+     # DBits27 & ShiftHold
+     # ShiftQuo & DBits27
+     # ShiftRem & DBits27
+     # ShiftInit & DBits27
+     # ShiftKeyIn & DBits27);
+
+DBits27.C = (CLK);
+
+DBits28 = (DBits28);
+
+DBits28 := (ShiftAddSub & DBits27
+     # ShiftDisplay & DBits24
+     # DBits28 & ShiftHold
+     # ShiftQuo & DBits28
+     # ShiftRem & DBits28
+     # ShiftInit & DBits28
+     # ShiftKeyIn & DBits28);
+
+DBits28.C = (CLK);
+
+DBits29 = (DBits29);
+
+DBits29 := (ShiftAddSub & DBits28
+     # ShiftDisplay & DBits25
+     # DBits29 & ShiftHold
+     # ShiftQuo & DBits29
+     # ShiftRem & DBits29
+     # ShiftInit & DBits29
+     # ShiftKeyIn & DBits29);
+
+DBits29.C = (CLK);
+
+DBits30 = (DBits30);
+
+DBits30 := (ShiftAddSub & DBits29
+     # ShiftDisplay & DBits26
+     # DBits30 & ShiftHold
+     # ShiftQuo & DBits30
+     # ShiftRem & DBits30
+     # ShiftInit & DBits30
+     # ShiftKeyIn & DBits30);
+
+DBits30.C = (CLK);
+
+DBits31 = (DBits31);
+
+DBits31 := (ShiftAddSub & DBits30
+     # ShiftDisplay & DBits27
+     # DBits31 & ShiftHold
+     # ShiftQuo & DBits31
+     # ShiftRem & DBits31
+     # ShiftInit & DBits31
+     # ShiftKeyIn & DBits31);
+
+DBits31.C = (CLK);
+
+DBits32 = (DBits32);
+
+DBits32 := (ShiftKeyIn & DBits36
+     # ShiftQuo & DBits33
+     # ShiftDisplay & DBits28
+     # DBits32 & ShiftHold
+     # ShiftAddSub & DBits32
+     # ShiftRem & DBits32
+     # ShiftInit & DBits32);
+
+DBits32.C = (CLK);
+
+DBits33 = (DBits33);
+
+DBits33 := (ShiftKeyIn & DBits37
+     # ShiftQuo & DBits34
+     # ShiftDisplay & DBits29
+     # DBits33 & ShiftHold
+     # ShiftAddSub & DBits33
+     # ShiftRem & DBits33
+     # ShiftInit & DBits33);
+
+DBits33.C = (CLK);
+
+DBits34 = (DBits34);
+
+DBits34 := (ShiftKeyIn & DBits38
+     # ShiftQuo & DBits35
+     # ShiftDisplay & DBits30
+     # DBits34 & ShiftHold
+     # ShiftAddSub & DBits34
+     # ShiftRem & DBits34
+     # ShiftInit & DBits34);
+
+DBits34.C = (CLK);
+
+DBits35 = (DBits35);
+
+DBits35 := (ShiftKeyIn & DBits39
+     # ShiftQuo & DBits36
+     # ShiftDisplay & DBits31
+     # DBits35 & ShiftHold
+     # ShiftAddSub & DBits35
+     # ShiftRem & DBits35
+     # ShiftInit & DBits35);
+
+DBits35.C = (CLK);
+
+DBits36 = (DBits36);
+
+DBits36 := (ShiftKeyIn & DBits40
+     # ShiftQuo & DBits37
+     # ShiftDisplay & DBits32
+     # DBits36 & ShiftHold
+     # ShiftAddSub & DBits36
+     # ShiftRem & DBits36
+     # ShiftInit & DBits36);
+
+DBits36.C = (CLK);
+
+DBits37 = (DBits37);
+
+DBits37 := (ShiftKeyIn & DBits41
+     # ShiftQuo & DBits38
+     # ShiftDisplay & DBits33
+     # DBits37 & ShiftHold
+     # ShiftAddSub & DBits37
+     # ShiftRem & DBits37
+     # ShiftInit & DBits37);
+
+DBits37.C = (CLK);
+
+DBits38 = (DBits38);
+
+DBits38 := (ShiftKeyIn & DBits42
+     # ShiftQuo & DBits39
+     # ShiftDisplay & DBits34
+     # DBits38 & ShiftHold
+     # ShiftAddSub & DBits38
+     # ShiftRem & DBits38
+     # ShiftInit & DBits38);
+
+DBits38.C = (CLK);
+
+DBits39 = (DBits39);
+
+DBits39 := (ShiftKeyIn & DBits43
+     # ShiftQuo & DBits40
+     # ShiftDisplay & DBits35
+     # DBits39 & ShiftHold
+     # ShiftAddSub & DBits39
+     # ShiftRem & DBits39
+     # ShiftInit & DBits39);
+
+DBits39.C = (CLK);
+
+DBits40 = (DBits40);
+
+DBits40 := (ShiftQuo & DBits41
+     # ShiftDisplay & DBits36
+     # DBits44 & ShiftKeyIn
+     # DBits40 & ShiftHold
+     # ShiftAddSub & DBits40
+     # ShiftRem & DBits40
+     # ShiftInit & DBits40);
+
+DBits40.C = (CLK);
+
+DBits41 = (DBits41);
+
+DBits41 := (ShiftQuo & DBits42
+     # ShiftDisplay & DBits37
+     # DBits45 & ShiftKeyIn
+     # DBits41 & ShiftHold
+     # ShiftAddSub & DBits41
+     # ShiftRem & DBits41
+     # ShiftInit & DBits41);
+
+DBits41.C = (CLK);
+
+DBits42 = (DBits42);
+
+DBits42 := (ShiftQuo & DBits43
+     # ShiftDisplay & DBits38
+     # DBits46 & ShiftKeyIn
+     # DBits42 & ShiftHold
+     # ShiftAddSub & DBits42
+     # ShiftRem & DBits42
+     # ShiftInit & DBits42);
+
+DBits42.C = (CLK);
+
+DBits43 = (DBits43);
+
+DBits43 := (ShiftDisplay & DBits39
+     # DBits44 & ShiftQuo
+     # DBits47 & ShiftKeyIn
+     # DBits43 & ShiftHold
+     # ShiftAddSub & DBits43
+     # ShiftRem & DBits43
+     # ShiftInit & DBits43);
+
+DBits43.C = (CLK);
+
+DBits44 = (DBits44);
+
+DBits44 := (ShiftKeyIn & NewKey0
+     # ShiftDisplay & DBits40
+     # DBits45 & ShiftQuo
+     # DBits44 & ShiftHold
+     # DBits44 & ShiftAddSub
+     # DBits44 & ShiftRem
+     # DBits44 & ShiftInit);
+
+DBits44.C = (CLK);
+
+DBits45 = (DBits45);
+
+DBits45 := (ShiftKeyIn & NewKey1
+     # ShiftDisplay & DBits41
+     # DBits46 & ShiftQuo
+     # DBits45 & ShiftHold
+     # DBits45 & ShiftAddSub
+     # DBits45 & ShiftRem
+     # DBits45 & ShiftInit);
+
+DBits45.C = (CLK);
+
+DBits46 = (DBits46);
+
+DBits46 := (ShiftKeyIn & NewKey2
+     # ShiftDisplay & DBits42
+     # DBits47 & ShiftQuo
+     # DBits46 & ShiftHold
+     # DBits46 & ShiftAddSub
+     # DBits46 & ShiftRem
+     # DBits46 & ShiftInit);
+
+DBits46.C = (CLK);
+
+DBits47 = (DBits47);
+
+DBits47 := (ShiftKeyIn & NewKey3
+     # ShiftDisplay & DBits43
+     # ShiftQuo & DBits32
+     # DBits47 & ShiftHold
+     # DBits47 & ShiftAddSub
+     # DBits47 & ShiftRem
+     # DBits47 & ShiftInit);
+
+DBits47.C = (CLK);
+
+ShiftHold = (!ShiftKeyIn & !ShiftInit & !ShiftRem & !ShiftAddSub & !ShiftQuo & !ShiftDisplay);
+
+ShiftKeyIn = (HaveKey.Q & !DigitClkEn.Q & !DecoderBit3.PIN & !DecoderBit2.PIN & DecoderBit1.PIN & DecoderBit0.PIN & !Divisor.PIN & !CalcLatch.Q & KeyEn.Q
+     # HaveKey.Q & !DigitClkEn.Q & !DecoderBit3.PIN & DecoderBit2.PIN & DecoderBit1.PIN & DecoderBit0.PIN & Divisor.PIN & !CalcLatch.Q & KeyEn.Q);
+
+ShiftDisplay = (DigitClkEn.Q & DecoderBit0.PIN
+     # DigitClkEn.Q & DecoderBit1.PIN
+     # DigitClkEn.Q & !DecoderBit2.PIN
+     # DigitClkEn.Q & !DecoderBit3.PIN);
+
+ShiftAddSub = (CalcCond & AddSubEn.Q);
+
+ShiftInit = (InitEn.Q & CalcCond);
+
+ShiftRem = (CalcCond & RemainderEn.Q);
+
+ShiftQuo = (CalcCond & QuotientEn.Q);
+
+CARRY@0 = (!MuxCntr0.Q & !MuxCntr1.Q & !MuxCntr2.Q & !MuxCntr3.Q & MuxCntr4.Q & !MuxCntr5.Q & !MuxCntr6.Q & !MuxCntr7.Q);
+
+CARRY@1 = (!MuxCntr0.Q & !MuxCntr1.Q & !MuxCntr2.Q & !MuxCntr3.Q & MuxCntr4.Q & !MuxCntr5.Q & !MuxCntr6.Q & !MuxCntr7.Q);
+
+
+Reverse-Polarity Equations:
+
+!HexDigit0 = (!DBits47);
+
+!HexDigit1 = (!DBits46);
+
+!HexDigit2 = (!DBits45);
+
+!HexDigit3 = (!DBits44);
+
+!DecoderBit0.C = (!CLK);
+
+!DecoderBit1.C = (!CLK);
+
+!DecoderBit2.C = (!CLK);
+
+!DecoderBit3.C = (!CLK);
+
+!KeypadRDYS1.D = (!KeypadRDY.PIN);
+
+!KeypadRDYS1.C = (!CLK);
+
+!KeypadRDYS2.D = (!KeypadRDYS1.Q);
+
+!KeypadRDYS2.C = (!CLK);
+
+!KeypadRDYS3.D = (!KeypadRDYS2.Q);
+
+!KeypadRDYS3.C = (!CLK);
+
+!HaveKey.C = (!CLK);
+
+!MuxCntr0.C = (!CLK);
+
+!MuxCntr1.C = (!CLK);
+
+!MuxCntr2.C = (!CLK);
+
+!MuxCntr3.C = (!CLK);
+
+!MuxCntr4.C = (!CLK);
+
+!MuxCntr5.C = (!CLK);
+
+!MuxCntr6.C = (!CLK);
+
+!MuxCntr7.C = (!CLK);
+
+!MuxCntr8.C = (!CLK);
+
+!MuxCntr9.C = (!CLK);
+
+!DigitClkEn.C = (!CLK);
+
+!KeyEn.C = (!CLK);
+
+!InitEn.C = (!CLK);
+
+!RemainderEn.C = (!CLK);
+
+!AddSubEn.C = (!CLK);
+
+!QuotientEn.C = (!CLK);
+
+!CarryEn.C = (!CLK);
+
+!CalcLatch.C = (!CLK);
+
+!CalcRDYS1.C = (!CLK);
+
+!CalcRDYS2.D = (!CalcRDYS1.Q);
+
+!CalcRDYS2.C = (!CLK);
+
+!CalcRDYS3.D = (!CalcRDYS2.Q);
+
+!CalcRDYS3.C = (!CLK);
+
+!CarryFlag0.C = (!CLK);
+
+!AddSubFlag0.C = (!CLK);
+
+!NewKey3.X1 = (!Keypad0.PIN);
+
+!NewKey3.X2 = (!Keypad2.PIN);
+
+!Remainder16.C = (!CLK);
+
+!Remainder15.C = (!CLK);
+
+!Remainder14.C = (!CLK);
+
+!Remainder13.C = (!CLK);
+
+!Remainder12.C = (!CLK);
+
+!Remainder11.C = (!CLK);
+
+!Remainder10.C = (!CLK);
+
+!Remainder9.C = (!CLK);
+
+!Remainder8.C = (!CLK);
+
+!Remainder7.C = (!CLK);
+
+!Remainder6.C = (!CLK);
+
+!Remainder5.C = (!CLK);
+
+!Remainder4.C = (!CLK);
+
+!Remainder3.C = (!CLK);
+
+!Remainder2.C = (!CLK);
+
+!Remainder1.C = (!CLK);
+
+!Remainder0.C = (!CLK);
+
+!DBits0 = (!DBits0);
+
+!DBits0.C = (!CLK);
+
+!DBits1 = (!DBits1);
+
+!DBits1.C = (!CLK);
+
+!DBits2 = (!DBits2);
+
+!DBits2.C = (!CLK);
+
+!DBits3 = (!DBits3);
+
+!DBits3.C = (!CLK);
+
+!DBits4 = (!DBits4);
+
+!DBits4.C = (!CLK);
+
+!DBits5 = (!DBits5);
+
+!DBits5.C = (!CLK);
+
+!DBits6 = (!DBits6);
+
+!DBits6.C = (!CLK);
+
+!DBits7 = (!DBits7);
+
+!DBits7.C = (!CLK);
+
+!DBits8 = (!DBits8);
+
+!DBits8.C = (!CLK);
+
+!DBits9 = (!DBits9);
+
+!DBits9.C = (!CLK);
+
+!DBits10 = (!DBits10);
+
+!DBits10.C = (!CLK);
+
+!DBits11 = (!DBits11);
+
+!DBits11.C = (!CLK);
+
+!DBits12 = (!DBits12);
+
+!DBits12.C = (!CLK);
+
+!DBits13 = (!DBits13);
+
+!DBits13.C = (!CLK);
+
+!DBits14 = (!DBits14);
+
+!DBits14.C = (!CLK);
+
+!DBits15 = (!DBits15);
+
+!DBits15.C = (!CLK);
+
+!DBits16 = (!DBits16);
+
+!DBits16.C = (!CLK);
+
+!DBits17 = (!DBits17);
+
+!DBits17.C = (!CLK);
+
+!DBits18 = (!DBits18);
+
+!DBits18.C = (!CLK);
+
+!DBits19 = (!DBits19);
+
+!DBits19.C = (!CLK);
+
+!DBits20 = (!DBits20);
+
+!DBits20.C = (!CLK);
+
+!DBits21 = (!DBits21);
+
+!DBits21.C = (!CLK);
+
+!DBits22 = (!DBits22);
+
+!DBits22.C = (!CLK);
+
+!DBits23 = (!DBits23);
+
+!DBits23.C = (!CLK);
+
+!DBits24 = (!DBits24);
+
+!DBits24.C = (!CLK);
+
+!DBits25 = (!DBits25);
+
+!DBits25.C = (!CLK);
+
+!DBits26 = (!DBits26);
+
+!DBits26.C = (!CLK);
+
+!DBits27 = (!DBits27);
+
+!DBits27.C = (!CLK);
+
+!DBits28 = (!DBits28);
+
+!DBits28.C = (!CLK);
+
+!DBits29 = (!DBits29);
+
+!DBits29.C = (!CLK);
+
+!DBits30 = (!DBits30);
+
+!DBits30.C = (!CLK);
+
+!DBits31 = (!DBits31);
+
+!DBits31.C = (!CLK);
+
+!DBits32 = (!DBits32);
+
+!DBits32.C = (!CLK);
+
+!DBits33 = (!DBits33);
+
+!DBits33.C = (!CLK);
+
+!DBits34 = (!DBits34);
+
+!DBits34.C = (!CLK);
+
+!DBits35 = (!DBits35);
+
+!DBits35.C = (!CLK);
+
+!DBits36 = (!DBits36);
+
+!DBits36.C = (!CLK);
+
+!DBits37 = (!DBits37);
+
+!DBits37.C = (!CLK);
+
+!DBits38 = (!DBits38);
+
+!DBits38.C = (!CLK);
+
+!DBits39 = (!DBits39);
+
+!DBits39.C = (!CLK);
+
+!DBits40 = (!DBits40);
+
+!DBits40.C = (!CLK);
+
+!DBits41 = (!DBits41);
+
+!DBits41.C = (!CLK);
+
+!DBits42 = (!DBits42);
+
+!DBits42.C = (!CLK);
+
+!DBits43 = (!DBits43);
+
+!DBits43.C = (!CLK);
+
+!DBits44 = (!DBits44);
+
+!DBits44.C = (!CLK);
+
+!DBits45 = (!DBits45);
+
+!DBits45.C = (!CLK);
+
+!DBits46 = (!DBits46);
+
+!DBits46.C = (!CLK);
+
+!DBits47 = (!DBits47);
+
+!DBits47.C = (!CLK);
+

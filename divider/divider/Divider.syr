@@ -1,0 +1,533 @@
+Release 10.1 - xst K.39 (nt)
+Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.05 secs
+ 
+--> Parameter xsthdpdir set to C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.05 secs
+ 
+--> Reading design: Divider.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "Divider.prj"
+Input Format                       : mixed
+
+---- Target Parameters
+Output File Name                   : "Divider"
+Output Format                      : NGC
+Target Device                      : XC9500 CPLDs
+
+---- Source Options
+Top Module Name                    : Divider
+Safe Implementation                : No
+Mux Extraction                     : YES
+
+---- Target Options
+Add IO Buffers                     : YES
+MACRO Preserve                     : YES
+XOR Preserve                       : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : YES
+RTL Output                         : Yes
+
+---- Other Options
+wysiwyg                            : NO
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.vhf" in Library work.
+WARNING:HDLParsers:3530 - Time stamp of file "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.vhf" is newer than current system time.
+Entity <divider> compiled.
+Entity <divider> (Architecture <equation>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <Divider> in library <work> (architecture <equation>).
+
+Analyzing hierarchy for entity <G_DEC> in library <aim> (architecture <behavioral>) with generics.
+	InitState = '0'
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <Divider> in library <work> (Architecture <equation>).
+    Set user-defined property "LOC =  P4" for signal <Reset> in unit <Divider>.
+    Set user-defined property "LOC =  P9" for signal <CLK> in unit <Divider>.
+    Set user-defined property "LOC =  P14" for signal <KeypadRow0> in unit <Divider>.
+    Set user-defined property "LOC =  P13" for signal <KeypadRow1> in unit <Divider>.
+    Set user-defined property "LOC =  P11" for signal <KeypadRow2> in unit <Divider>.
+    Set user-defined property "LOC =  P7" for signal <KeypadRow3> in unit <Divider>.
+    Set user-defined property "LOC =  P15" for signal <KeypadCol0> in unit <Divider>.
+    Set user-defined property "LOC =  P17" for signal <KeypadCol1> in unit <Divider>.
+    Set user-defined property "LOC =  P18" for signal <KeypadCol2> in unit <Divider>.
+    Set user-defined property "LOC =  P19" for signal <KeypadCol3> in unit <Divider>.
+    Set user-defined property "LOC =  P72" for signal <Segmenta> in unit <Divider>.
+    Set user-defined property "LOC =  P71" for signal <Segmentb> in unit <Divider>.
+    Set user-defined property "LOC =  P70" for signal <Segmentc> in unit <Divider>.
+    Set user-defined property "LOC =  P69" for signal <Segmentd> in unit <Divider>.
+    Set user-defined property "LOC =  P66" for signal <Segmente> in unit <Divider>.
+    Set user-defined property "LOC =  P65" for signal <Segmentf> in unit <Divider>.
+    Set user-defined property "LOC =  P63" for signal <Segmentg> in unit <Divider>.
+    Set user-defined property "LOC =  P57" for signal <Digit0> in unit <Divider>.
+    Set user-defined property "LOC =  P56" for signal <Digit1> in unit <Divider>.
+    Set user-defined property "LOC =  P55" for signal <Digit2> in unit <Divider>.
+    Set user-defined property "LOC =  P54" for signal <Digit3> in unit <Divider>.
+    Set user-defined property "LOC =  P53" for signal <Digit4> in unit <Divider>.
+    Set user-defined property "LOC =  P52" for signal <Digit5> in unit <Divider>.
+    Set user-defined property "LOC =  P51" for signal <Digit6> in unit <Divider>.
+    Set user-defined property "LOC =  P50" for signal <Digit7> in unit <Divider>.
+    Set user-defined property "LOC =  P48" for signal <Digit8> in unit <Divider>.
+    Set user-defined property "LOC =  P47" for signal <Digit9> in unit <Divider>.
+    Set user-defined property "LOC =  P46" for signal <Digit10> in unit <Divider>.
+    Set user-defined property "LOC =  P45" for signal <Digit11> in unit <Divider>.
+    Set user-defined property "LOC =  P5" for signal <Calculate> in unit <Divider>.
+    Set user-defined property "LOC =  P6" for signal <Divisor> in unit <Divider>.
+    Set user-defined property "LOC =  P33" for signal <KeypadRDY> in unit <Divider>.
+    Set user-defined property "LOC =  P25" for signal <Keypad0> in unit <Divider>.
+    Set user-defined property "LOC =  P26" for signal <Keypad1> in unit <Divider>.
+    Set user-defined property "LOC =  P31" for signal <Keypad2> in unit <Divider>.
+    Set user-defined property "LOC =  P32" for signal <Keypad3> in unit <Divider>.
+    Set user-defined property "LOC =  P24" for signal <HexDigit0> in unit <Divider>.
+    Set user-defined property "LOC =  P23" for signal <HexDigit1> in unit <Divider>.
+    Set user-defined property "LOC =  P21" for signal <HexDigit2> in unit <Divider>.
+    Set user-defined property "LOC =  P20" for signal <HexDigit3> in unit <Divider>.
+    Set user-defined property "LOC =  P44" for signal <DecoderEn> in unit <Divider>.
+    Set user-defined property "LOC =  P43" for signal <DecoderBit0> in unit <Divider>.
+    Set user-defined property "LOC =  P41" for signal <DecoderBit1> in unit <Divider>.
+    Set user-defined property "LOC =  P40" for signal <DecoderBit2> in unit <Divider>.
+    Set user-defined property "LOC =  P39" for signal <DecoderBit3> in unit <Divider>.
+Entity <Divider> analyzed. Unit <Divider> generated.
+
+Analyzing generic Entity <G_DEC> in library <aim> (Architecture <behavioral>).
+	InitState = '0'
+Entity <G_DEC> analyzed. Unit <G_DEC> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+INFO:Xst:2561 - Always blocking tristate driving signal <KeypadRDY> in unit <Divider> is removed.
+INFO:Xst:2561 - Always blocking tristate driving signal <Divisor> in unit <Divider> is removed.
+INFO:Xst:2561 - Always blocking tristate driving signal <Calculate> in unit <Divider> is removed.
+INFO:Xst:2561 - Always blocking tristate driving signal <Keypad0> in unit <Divider> is removed.
+INFO:Xst:2561 - Always blocking tristate driving signal <Keypad1> in unit <Divider> is removed.
+INFO:Xst:2561 - Always blocking tristate driving signal <Keypad2> in unit <Divider> is removed.
+INFO:Xst:2561 - Always blocking tristate driving signal <Keypad3> in unit <Divider> is removed.
+
+Synthesizing Unit <G_DEC>.
+    Related source file is "/build/xfndry/K.39/rtf/vhdl/src/iSE/abel/aim.vhd".
+    Found 1-bit register for signal <Q>.
+    Summary:
+	inferred   1 D-type flip-flop(s).
+Unit <G_DEC> synthesized.
+
+
+Synthesizing Unit <Divider>.
+    Related source file is "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.vhf".
+WARNING:Xst:647 - Input <Segmenta> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Segmentb> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Segmentc> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Segmentd> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Segmente> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Segmentf> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Segmentg> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit0> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit1> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit2> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit3> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit4> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit5> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit6> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit7> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit8> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit9> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <KeypadRow0> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <KeypadCol0> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <KeypadRow1> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <KeypadCol1> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <KeypadRow2> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <KeypadCol2> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <KeypadRow3> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <KeypadCol3> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit10> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Digit11> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:1780 - Signal <RemainderEn_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder9_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder8_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder7_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder6_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder5_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder4_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder3_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder2_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder1_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder16_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder15_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder14_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder13_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder12_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder11_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder10_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Remainder0_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <QuotientEn_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <NewKey3> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <NewKey2> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <NewKey1> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <NewKey0> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <MuxCntr9_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <MuxCntr8_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <MuxCntr7_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <MuxCntr6_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <MuxCntr5_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <MuxCntr4_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <MuxCntr3_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <MuxCntr2_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <MuxCntr1_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <MuxCntr0_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <KeypadRDY_xcBUF> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <KeypadRDYS3_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <KeypadRDYS2_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <KeypadRDYS1_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Keypad3_xcBUF> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Keypad2_xcBUF> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Keypad1_xcBUF> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Keypad0_xcBUF> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <KeyEn_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <InitEn_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <HaveKey_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Divisor_xcBUF> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DigitClkEn_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits9> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits8> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits7> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits6> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits5> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:653 - Signal <DBits47> is used but never assigned. This sourceless signal will be automatically connected to value 0.
+WARNING:Xst:653 - Signal <DBits46> is used but never assigned. This sourceless signal will be automatically connected to value 0.
+WARNING:Xst:653 - Signal <DBits45> is used but never assigned. This sourceless signal will be automatically connected to value 0.
+WARNING:Xst:653 - Signal <DBits44> is used but never assigned. This sourceless signal will be automatically connected to value 0.
+WARNING:Xst:1780 - Signal <DBits43> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits42> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits41> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits40> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits4> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits39> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits38> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits37> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits36> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits35> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits34> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits33> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:653 - Signal <DBits32> is used but never assigned. This sourceless signal will be automatically connected to value 0.
+WARNING:Xst:653 - Signal <DBits31> is used but never assigned. This sourceless signal will be automatically connected to value 0.
+WARNING:Xst:1780 - Signal <DBits30> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits3> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits29> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits28> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits27> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits26> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits25> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits24> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits23> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits22> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits21> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits20> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits2> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits19> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits18> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits17> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits16> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits15> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits14> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits13> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits12> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits11> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits10> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits1> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <DBits0> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <CarryFlag0_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <CarryEn_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <Calculate_xcBUF> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <CalcRDYS3_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <CalcRDYS2_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <CalcRDYS1_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <CalcLatch_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <AddSubFlag0_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <AddSubEn_xcQ> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+Unit <Divider> synthesized.
+
+WARNING:Xst:524 - All outputs of the instance <KeypadRDYS1_B2LINST_5> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <KeypadRDYS2_B2LINST_6> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <KeypadRDYS3_B2LINST_7> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <HaveKey_B2LINST_8> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <KeyEn_B2LINST_20> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <InitEn_B2LINST_21> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <RemainderEn_B2LINST_22> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <AddSubEn_B2LINST_23> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <QuotientEn_B2LINST_24> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <CarryEn_B2LINST_25> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <CalcLatch_B2LINST_26> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <CalcRDYS1_B2LINST_27> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <CalcRDYS2_B2LINST_28> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <CalcRDYS3_B2LINST_29> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <CarryFlag0_B2LINST_30> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <AddSubFlag0_B2LINST_31> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder16_B2LINST_32> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder15_B2LINST_33> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder14_B2LINST_34> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder13_B2LINST_35> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder12_B2LINST_36> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder11_B2LINST_37> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder10_B2LINST_38> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder9_B2LINST_39> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder8_B2LINST_40> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder7_B2LINST_41> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder6_B2LINST_42> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder5_B2LINST_43> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder4_B2LINST_44> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder3_B2LINST_45> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder2_B2LINST_46> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder1_B2LINST_47> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+WARNING:Xst:524 - All outputs of the instance <Remainder0_B2LINST_48> of the block <G_DEC> are unconnected in block <Divider>.
+   This instance will be removed from the design along with all underlying logic
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Registers                                            : 15
+ 1-bit register                                        : 15
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Registers                                            : 15
+ Flip-Flops                                            : 15
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <Divider> ...
+  implementation constraint: LOC=P33	 : KeypadRDY
+  implementation constraint: LOC=P6	 : Divisor
+  implementation constraint: LOC=P5	 : Calculate
+  implementation constraint: LOC=P25	 : Keypad0
+  implementation constraint: LOC=P26	 : Keypad1
+  implementation constraint: LOC=P31	 : Keypad2
+  implementation constraint: LOC=P32	 : Keypad3
+  implementation constraint: LOC=P9	 : CLK
+  implementation constraint: LOC=P4	 : Reset
+  implementation constraint: LOC=P72	 : Segmenta
+  implementation constraint: LOC=P71	 : Segmentb
+  implementation constraint: LOC=P70	 : Segmentc
+  implementation constraint: LOC=P69	 : Segmentd
+  implementation constraint: LOC=P66	 : Segmente
+  implementation constraint: LOC=P65	 : Segmentf
+  implementation constraint: LOC=P63	 : Segmentg
+  implementation constraint: LOC=P57	 : Digit0
+  implementation constraint: LOC=P56	 : Digit1
+  implementation constraint: LOC=P55	 : Digit2
+  implementation constraint: LOC=P54	 : Digit3
+  implementation constraint: LOC=P53	 : Digit4
+  implementation constraint: LOC=P52	 : Digit5
+  implementation constraint: LOC=P51	 : Digit6
+  implementation constraint: LOC=P50	 : Digit7
+  implementation constraint: LOC=P48	 : Digit8
+  implementation constraint: LOC=P47	 : Digit9
+  implementation constraint: LOC=P14	 : KeypadRow0
+  implementation constraint: LOC=P15	 : KeypadCol0
+  implementation constraint: LOC=P13	 : KeypadRow1
+  implementation constraint: LOC=P17	 : KeypadCol1
+  implementation constraint: LOC=P11	 : KeypadRow2
+  implementation constraint: LOC=P18	 : KeypadCol2
+  implementation constraint: LOC=P7	 : KeypadRow3
+  implementation constraint: LOC=P19	 : KeypadCol3
+  implementation constraint: LOC=P46	 : Digit10
+  implementation constraint: LOC=P45	 : Digit11
+  implementation constraint: LOC=P43	 : DecoderBit0
+  implementation constraint: LOC=P41	 : DecoderBit1
+  implementation constraint: LOC=P40	 : DecoderBit2
+  implementation constraint: LOC=P39	 : DecoderBit3
+  implementation constraint: LOC=P44	 : DecoderEn
+  implementation constraint: LOC=P24	 : HexDigit0
+  implementation constraint: LOC=P23	 : HexDigit1
+  implementation constraint: LOC=P21	 : HexDigit2
+  implementation constraint: LOC=P20	 : HexDigit3
+WARNING:Xst:1354 - Port KeypadRDY is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Divisor is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Calculate is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Keypad0 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Keypad1 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Keypad2 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Keypad3 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Segmenta is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Segmentb is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Segmentc is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Segmentd is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Segmente is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Segmentf is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Segmentg is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit0 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit1 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit2 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit3 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit4 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit5 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit6 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit7 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit8 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit9 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port KeypadRow0 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port KeypadCol0 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port KeypadRow1 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port KeypadCol1 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port KeypadRow2 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port KeypadCol2 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port KeypadRow3 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port KeypadCol3 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit10 is not connected, attached property removed (LOC)
+WARNING:Xst:1354 - Port Digit11 is not connected, attached property removed (LOC)
+
+Optimizing unit <G_DEC> ...
+  implementation constraint: INIT=r	 : Q
+
+=========================================================================
+*                           Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : Divider.ngr
+Top Level Output File Name         : Divider
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : YES
+Target Technology                  : XC9500 CPLDs
+Macro Preserve                     : YES
+XOR Preserve                       : YES
+wysiwyg                            : NO
+
+Design Statistics
+# IOs                              : 45
+
+Cell Usage :
+# BELS                             : 167
+#      AND2                        : 51
+#      AND3                        : 3
+#      AND4                        : 5
+#      AND8                        : 3
+#      GND                         : 1
+#      INV                         : 74
+#      OR2                         : 20
+#      OR3                         : 2
+#      OR4                         : 1
+#      OR5                         : 1
+#      OR6                         : 1
+#      OR7                         : 1
+#      OR8                         : 2
+#      VCC                         : 1
+#      XOR2                        : 1
+# FlipFlops/Latches                : 15
+#      FDC                         : 15
+# IO Buffers                       : 11
+#      IBUF                        : 2
+#      OBUF                        : 9
+=========================================================================
+
+
+Total REAL time to Xst completion: 2.00 secs
+Total CPU time to Xst completion: 1.45 secs
+ 
+--> 
+
+Total memory usage is 116612 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :  198 (   0 filtered)
+Number of infos    :    7 (   0 filtered)
+

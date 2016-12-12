@@ -1,0 +1,285 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="paths.js"></script><script src="eqns.js"></script><script>
+      var design = "Divider";
+      var device = "XC95108";
+      signals = new Array("DecoderBit0","DecoderBit1","DecoderBit2","DecoderBit3","DecoderEn","DigitClkEn","HexDigit0","HexDigit1","HexDigit2","HexDigit3","MuxCntr0","MuxCntr1","MuxCntr2","MuxCntr3","MuxCntr4","MuxCntr5","MuxCntr6","MuxCntr7","MuxCntr8","MuxCntr9");
+      sigNegs = new Array("ON","ON","","","","","","","","","","","","","","","","","","");
+      sigTypes = new Array("D","D","T","D","","D","","","","","D","D","T","T","T","T","T","T","T","T");
+
+      
+        specSig["b_SPECSIG"]=new Array("(b)");
+      
+        specSig["DecoderBit0_OBUFLFBK_SPECSIG"]=new Array("DecoderBit0_OBUF.LFBK");
+      
+        specSig["DecoderBit1_OBUFLFBK_SPECSIG"]=new Array("DecoderBit1_OBUF.LFBK");
+      
+        specSig["DecoderBit2_OBUFLFBK_SPECSIG"]=new Array("DecoderBit2_OBUF.LFBK");
+      
+        specSig["DecoderBit3_OBUFLFBK_SPECSIG"]=new Array("DecoderBit3_OBUF.LFBK");
+      
+        specSig["DigitClkEnLFBK_SPECSIG"]=new Array("DigitClkEn.LFBK");
+      
+        specSig["MuxCntr0LFBK_SPECSIG"]=new Array("MuxCntr0.LFBK");
+      
+        specSig["MuxCntr1LFBK_SPECSIG"]=new Array("MuxCntr1.LFBK");
+      
+        specSig["MuxCntr2LFBK_SPECSIG"]=new Array("MuxCntr2.LFBK");
+      
+        specSig["MuxCntr3LFBK_SPECSIG"]=new Array("MuxCntr3.LFBK");
+      
+        specSig["MuxCntr4LFBK_SPECSIG"]=new Array("MuxCntr4.LFBK");
+      
+        specSig["MuxCntr5LFBK_SPECSIG"]=new Array("MuxCntr5.LFBK");
+      
+        specSig["MuxCntr6LFBK_SPECSIG"]=new Array("MuxCntr6.LFBK");
+      
+        specSig["MuxCntr7LFBK_SPECSIG"]=new Array("MuxCntr7.LFBK");
+      
+        specSig["MuxCntr8LFBK_SPECSIG"]=new Array("MuxCntr8.LFBK");
+      
+        specSig["MuxCntr9LFBK_SPECSIG"]=new Array("MuxCntr9.LFBK");
+      
+            pterms["FB5_3_1"]=new Array("Reset","/MuxCntr0LFBK_SPECSIG");
+          
+            pterms["FB5_4_1"]=new Array("MuxCntr0LFBK_SPECSIG","MuxCntr1LFBK_SPECSIG","MuxCntr2LFBK_SPECSIG","MuxCntr3LFBK_SPECSIG","MuxCntr4LFBK_SPECSIG","MuxCntr5LFBK_SPECSIG","MuxCntr6LFBK_SPECSIG","MuxCntr7LFBK_SPECSIG","MuxCntr8LFBK_SPECSIG","MuxCntr9LFBK_SPECSIG");
+          
+            pterms["FB5_5_1"]=new Array("/Reset","MuxCntr9LFBK_SPECSIG");
+          
+            pterms["FB5_5_2"]=new Array("Reset","MuxCntr0LFBK_SPECSIG","MuxCntr1LFBK_SPECSIG","MuxCntr2LFBK_SPECSIG","MuxCntr3LFBK_SPECSIG","MuxCntr4LFBK_SPECSIG","MuxCntr5LFBK_SPECSIG","MuxCntr6LFBK_SPECSIG","MuxCntr7LFBK_SPECSIG","MuxCntr8LFBK_SPECSIG");
+          
+            pterms["FB5_6_1"]=new Array("/Reset","MuxCntr8LFBK_SPECSIG");
+          
+            pterms["FB5_6_2"]=new Array("Reset","MuxCntr0LFBK_SPECSIG","MuxCntr1LFBK_SPECSIG","MuxCntr2LFBK_SPECSIG","MuxCntr3LFBK_SPECSIG","MuxCntr4LFBK_SPECSIG","MuxCntr5LFBK_SPECSIG","MuxCntr6LFBK_SPECSIG","MuxCntr7LFBK_SPECSIG");
+          
+            pterms["FB5_7_1"]=new Array("/Reset","MuxCntr7LFBK_SPECSIG");
+          
+            pterms["FB5_7_2"]=new Array("Reset","MuxCntr0LFBK_SPECSIG","MuxCntr1LFBK_SPECSIG","MuxCntr2LFBK_SPECSIG","MuxCntr3LFBK_SPECSIG","MuxCntr4LFBK_SPECSIG","MuxCntr5LFBK_SPECSIG","MuxCntr6LFBK_SPECSIG");
+          
+            pterms["FB5_8_1"]=new Array("/Reset","MuxCntr6LFBK_SPECSIG");
+          
+            pterms["FB5_8_2"]=new Array("Reset","MuxCntr0LFBK_SPECSIG","MuxCntr1LFBK_SPECSIG","MuxCntr2LFBK_SPECSIG","MuxCntr3LFBK_SPECSIG","MuxCntr4LFBK_SPECSIG","MuxCntr5LFBK_SPECSIG");
+          
+            pterms["FB5_9_1"]=new Array("/Reset","MuxCntr5LFBK_SPECSIG");
+          
+            pterms["FB5_9_2"]=new Array("Reset","MuxCntr0LFBK_SPECSIG","MuxCntr1LFBK_SPECSIG","MuxCntr2LFBK_SPECSIG","MuxCntr3LFBK_SPECSIG","MuxCntr4LFBK_SPECSIG");
+          
+            pterms["FB5_10_1"]=new Array("/Reset","MuxCntr4LFBK_SPECSIG");
+          
+            pterms["FB5_10_2"]=new Array("Reset","MuxCntr0LFBK_SPECSIG","MuxCntr1LFBK_SPECSIG","MuxCntr2LFBK_SPECSIG","MuxCntr3LFBK_SPECSIG");
+          
+            pterms["FB5_11_1"]=new Array("Reset","/DigitClkEnLFBK_SPECSIG","DecoderBit3_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_11_2"]=new Array("Reset","/DecoderBit2_OBUFLFBK_SPECSIG","DecoderBit3_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_11_3"]=new Array("Reset","/DecoderBit0_OBUFLFBK_SPECSIG","DigitClkEnLFBK_SPECSIG","DecoderBit2_OBUFLFBK_SPECSIG","/DecoderBit3_OBUFLFBK_SPECSIG","/DecoderBit1_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_12_1"]=new Array("/Reset","DecoderBit2_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_12_2"]=new Array("Reset","/DecoderBit0_OBUFLFBK_SPECSIG","DigitClkEnLFBK_SPECSIG","/DecoderBit1_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_13_1"]=new Array("/Reset","MuxCntr3LFBK_SPECSIG");
+          
+            pterms["FB5_13_2"]=new Array("Reset","MuxCntr0LFBK_SPECSIG","MuxCntr1LFBK_SPECSIG","MuxCntr2LFBK_SPECSIG");
+          
+            pterms["FB5_14_1"]=new Array("Reset","/DigitClkEnLFBK_SPECSIG","/DecoderBit1_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_14_2"]=new Array("Reset","DecoderBit0_OBUFLFBK_SPECSIG","/DecoderBit3_OBUFLFBK_SPECSIG","/DecoderBit1_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_14_3"]=new Array("Reset","/DecoderBit2_OBUFLFBK_SPECSIG","DecoderBit3_OBUFLFBK_SPECSIG","/DecoderBit1_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_14_4"]=new Array("Reset","/DecoderBit0_OBUFLFBK_SPECSIG","DigitClkEnLFBK_SPECSIG","/DecoderBit2_OBUFLFBK_SPECSIG","DecoderBit3_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_14_5"]=new Array("Reset","/DecoderBit0_OBUFLFBK_SPECSIG","DigitClkEnLFBK_SPECSIG","/DecoderBit3_OBUFLFBK_SPECSIG","DecoderBit1_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_15_1"]=new Array("Reset","/DecoderBit0_OBUFLFBK_SPECSIG","/DigitClkEnLFBK_SPECSIG");
+          
+            pterms["FB5_15_2"]=new Array("Reset","DecoderBit0_OBUFLFBK_SPECSIG","DigitClkEnLFBK_SPECSIG","/DecoderBit2_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_15_3"]=new Array("Reset","DecoderBit0_OBUFLFBK_SPECSIG","DigitClkEnLFBK_SPECSIG","/DecoderBit3_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_15_4"]=new Array("Reset","DigitClkEnLFBK_SPECSIG","/DecoderBit2_OBUFLFBK_SPECSIG","DecoderBit3_OBUFLFBK_SPECSIG","/DecoderBit1_OBUFLFBK_SPECSIG");
+          
+            pterms["FB5_16_1"]=new Array("/Reset","MuxCntr2LFBK_SPECSIG");
+          
+            pterms["FB5_16_2"]=new Array("Reset","MuxCntr0LFBK_SPECSIG","MuxCntr1LFBK_SPECSIG");
+          
+            pterms["FB5_18_1"]=new Array("Reset","MuxCntr0LFBK_SPECSIG","/MuxCntr1LFBK_SPECSIG");
+          
+            pterms["FB5_18_2"]=new Array("Reset","/MuxCntr0LFBK_SPECSIG","MuxCntr1LFBK_SPECSIG");
+          
+          d2["HexDigit3"]=new Array("GND");
+          
+            d2imp["HexDigit3"]=new Array("");
+          
+          d2["HexDigit2"]=new Array("GND");
+          
+            d2imp["HexDigit2"]=new Array("");
+          
+          d2["HexDigit1"]=new Array("GND");
+          
+            d2imp["HexDigit1"]=new Array("");
+          
+          d2["HexDigit0"]=new Array("GND");
+          
+            d2imp["HexDigit0"]=new Array("");
+          
+          d2["MuxCntr0"]=new Array("FB5_3_1");
+          
+            d2imp["MuxCntr0"]=new Array("");
+          
+              gblclk["MuxCntr0"]=new Array("CLK");
+            prld["MuxCntr0"]="GND";
+          d2["DigitClkEn"]=new Array("FB5_4_1");
+          
+            d2imp["DigitClkEn"]=new Array("");
+          
+              gblclk["DigitClkEn"]=new Array("CLK");
+            prld["DigitClkEn"]="GND";
+          d2["MuxCntr9"]=new Array("FB5_5_1","FB5_5_2");
+          
+            d2imp["MuxCntr9"]=new Array("","");
+          
+              gblclk["MuxCntr9"]=new Array("CLK");
+            prld["MuxCntr9"]="GND";
+          d2["MuxCntr8"]=new Array("FB5_6_1","FB5_6_2");
+          
+            d2imp["MuxCntr8"]=new Array("","");
+          
+              gblclk["MuxCntr8"]=new Array("CLK");
+            prld["MuxCntr8"]="GND";
+          d2["MuxCntr7"]=new Array("FB5_7_1","FB5_7_2");
+          
+            d2imp["MuxCntr7"]=new Array("","");
+          
+              gblclk["MuxCntr7"]=new Array("CLK");
+            prld["MuxCntr7"]="GND";
+          d2["MuxCntr6"]=new Array("FB5_8_1","FB5_8_2");
+          
+            d2imp["MuxCntr6"]=new Array("","");
+          
+              gblclk["MuxCntr6"]=new Array("CLK");
+            prld["MuxCntr6"]="GND";
+          d2["MuxCntr5"]=new Array("FB5_9_1","FB5_9_2");
+          
+            d2imp["MuxCntr5"]=new Array("","");
+          
+              gblclk["MuxCntr5"]=new Array("CLK");
+            prld["MuxCntr5"]="GND";
+          d2["MuxCntr4"]=new Array("FB5_10_1","FB5_10_2");
+          
+            d2imp["MuxCntr4"]=new Array("","");
+          
+              gblclk["MuxCntr4"]=new Array("CLK");
+            prld["MuxCntr4"]="GND";
+          d2["DecoderBit3"]=new Array("FB5_11_1","FB5_11_2","FB5_11_3");
+          
+            d2imp["DecoderBit3"]=new Array("","","");
+          
+              gblclk["DecoderBit3"]=new Array("CLK");
+            prld["DecoderBit3"]="GND";
+          d2["DecoderBit2"]=new Array("FB5_12_1","FB5_12_2");
+          
+            d2imp["DecoderBit2"]=new Array("","");
+          
+              gblclk["DecoderBit2"]=new Array("CLK");
+            prld["DecoderBit2"]="GND";
+          d2["MuxCntr3"]=new Array("FB5_13_1","FB5_13_2");
+          
+            d2imp["MuxCntr3"]=new Array("","");
+          
+              gblclk["MuxCntr3"]=new Array("CLK");
+            prld["MuxCntr3"]="GND";
+          d2["DecoderBit1"]=new Array("FB5_14_1","FB5_14_2","FB5_14_3","FB5_14_4","FB5_14_5");
+          
+            d2imp["DecoderBit1"]=new Array("","","","","");
+          
+              gblclk["DecoderBit1"]=new Array("CLK");
+            prld["DecoderBit1"]="GND";
+          d2["DecoderBit0"]=new Array("FB5_15_1","FB5_15_2","FB5_15_3","FB5_15_4");
+          
+            d2imp["DecoderBit0"]=new Array("","","","");
+          
+              gblclk["DecoderBit0"]=new Array("CLK");
+            prld["DecoderBit0"]="GND";
+          d2["MuxCntr2"]=new Array("FB5_16_1","FB5_16_2");
+          
+            d2imp["MuxCntr2"]=new Array("","");
+          
+              gblclk["MuxCntr2"]=new Array("CLK");
+            prld["MuxCntr2"]="GND";
+          d2["DecoderEn"]=new Array("VCC");
+          
+            d2imp["DecoderEn"]=new Array("");
+          
+          d2["MuxCntr1"]=new Array("FB5_18_1","FB5_18_2");
+          
+            d2imp["MuxCntr1"]=new Array("","");
+          
+              gblclk["MuxCntr1"]=new Array("CLK");
+            prld["MuxCntr1"]="GND";
+
+      uimSignals = new Array();
+
+      uimSigNegs = new Array();
+
+      uimPterms = new Array();
+      
+
+      
+        function getEqnList() {
+          var str = "<html><head><link type='text/css' href='style.css' rel='stylesheet'></head><body class='pgBgnd'>";
+          str += "<center><h3>Equations</h3></center>";
+          str += "<table width='90%' align='center' border='1' cellpadding='0' cellspacing='0'>";
+          for (s=0; s<uimSignals.length; s++) {
+            str += "<tr><td>";
+            str += retUimEqn(uimSignals[s]);
+            str += "</td></tr>";
+          }
+          for (s=0; s<signals.length; s++) {
+            str += "<tr><td>";
+            str += retEqn(signals[s]);
+            str += "</td></tr>";
+          }
+
+          var legend = retLegend();
+		      if (legend != "") {
+		        str += "<tr><td>" + legend + "</td></tr>";
+		      }
+
+          str += "</table>";
+          str += "<form><span class='pgRef'>";
+
+          if (!parent.leftnav.IsNS()) {
+            str += "<table width='90%' align='center'>";
+            str += "<tr><td align='left'><input type='button' value='back to top' ";
+            str += "onclick='javascript:parent.leftnav.showEqnAll()' ";
+            str += "onmouseover=\"window.status='goto top of page'; return true;\" ";
+            str += "onmouseout=\"window.status=''\">";
+            str += "</td>";
+            str += "<td align='right'>";
+            str += "<input type='button' value='print page' ";
+            str += "onclick='javascript:window.print()' ";
+            str += "onmouseover=\"window.status='print page'; return true;\" ";
+            str += "onmouseout=\"window.status=''\">";
+            str += "</td>";
+            str += "</tr></table>";
+          }
+          else {
+            str += "<table width='90%' align='center'>";
+            str += "<tr><td align='left'><a href='javascript:parent.leftnav.showEqnAll()'>back to top</a>";
+            str += "</td>";
+            str += "<td align='right'>";
+            str += "<a href='javascript:window.print()'>";
+            str += "print page</a>";
+            str += "</td>";
+            str += "</tr></table>";
+          }
+
+          str += "</span></form>";
+          str += "</body></html>";
+          return str;
+        }
+      
+    </script>
+</head></html>

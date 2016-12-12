@@ -1,0 +1,6 @@
+CommandLine
+C:\Program Files\Xilinx\10.1\ISE\bin\nt\unwrapped\XSLTProcess.exe -ise C:/Documents and Settings/micro/Desktop/tmenning/divider/divider_xilinx/divider/divider.ise SerialDivider_build.xml
+s
+FormatString
+xsltprocess [--intstyle ise|xflow|silent] <xmlfile> [-a] [-w] [--libxslt <limit:-1,10>] 
+s

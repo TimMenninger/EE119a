@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="info" file="Cpld" num="0" delta="unknown" >Inferring BUFG constraint for signal &apos;<arg fmt="%s" index="1">CLK</arg>&apos; based upon the LOC constraint &apos;<arg fmt="%s" index="2">P9</arg>&apos;. It is recommended that you declare this BUFG explicitedly in your design. Note that for certain device families the output of a BUFG constraint can not drive a gated clock, and the BUFG constraint will be ignored.
+</msg>
+
+<msg type="warning" file="Cpld" num="896" delta="unknown" >Unable to map all desired signals into function block, FB<arg fmt="%d" index="1">3</arg>, because too many function block product terms are required. Buffering output signal <arg fmt="%s" index="2">HexDigits&lt;3&gt;</arg> to allow all signals assigned to this function block to be placed.
+</msg>
+
+<msg type="error" file="Cpld" num="892" delta="unknown" >Cannot place signal <arg fmt="%s" index="1">Dividend&lt;15&gt;</arg>. Consider reducing the collapsing input limit or the product term limit to prevent the fitter from creating high input and/or high product term functions.
+</msg>
+
+<msg type="error" file="Cpld" num="868" delta="unknown" >Cannot fit the design into any of the specified devices with the selected implementation options.
+</msg>
+
+</messages>
+

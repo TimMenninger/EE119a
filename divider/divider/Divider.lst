@@ -1,0 +1,630 @@
+0002 |TITLE       '16-bit Divider for EE 119 Serial Divider Board'
+0003 |
+0004 |
+0005 |
+0006 |" DividerChip     DEVICE  'XC95108'
+0007 |
+0008 |
+0009 |
+0010 |" Description: This file contains a design for doing division of two 16-bit 
+0011 |" numbers. The design will take input from the keypad and displa it on the 
+0012 |" 7-segment LEDs. The Dividend/Divisor switch can be used to 
+0013 |" choose whether or not to input the Dividend value (top row of 7-segment LEDs) 
+0014 |" or the Divisor value (middle row of 7-segment LEDs). When the calculate button 
+0015 |" is pressed, the Quotient of the Dividend and Divisor will appear on the third 
+0016 |" row of the 7 segment LEDs while the Dividend and Divisor values from the 
+0017 |" division stay displayed. The remainder of the division is not displayed. The 
+0018 |" input keypad and displayed values are all in hexadecimal. For both input values
+0019 |" only the last 4 hex digits (16 bits) are used. The keypad is remapped to a 
+0020 |" more natural order so each key will display the appropriate value. If division 
+0021 |" by 0 occurs, the system will just display FFFF as the quotient. 
+0022 |
+0023 |
+0024 |" Revision History
+0025 |"    21 November 09   Glen George       initial version (from 11/22/07 version
+0026 |"                                       of divider0.pds)
+0027 |"    25 November 12   Glen George       fixed the pinout for the keypad
+0028 |"                                       columns
+0029 |"    25 November 16   Yuan Ma           initial version of code 
+0030 |"    26 November 16   Yuan Ma           finished coding logic 
+0031 |"    27 November 16   Yuan Ma           debugged some fitting issues 
+0032 |"    28 November 16   Yuan Ma           debugged errors with AddSubFlag, 
+0033 |"                                       CarryFlag, and latching 
+0034 |"    29 November 16   Yuan Ma           finished calculating OnDigit3 to 12
+0035 |"    30 November 16   Yuan Ma           added comments and test vectors 
+0036 |    
+0037 |" pin
+0038 |
+0039 | 
+0040 |" reset input 
+0041 |!Reset       pin   4;			" active low reset signal (for 
+0042 |								" testing) tied high in hardware 
+0043 |								
+0044 |" switch inputs 
+0045 |!Calculate   pin   5;           " calculate the quotient
+0046 |Divisor      pin   6;           " input the divisor (not the dividend)
+0047 |
+0048 |
+0049 |" keypad inputs
+0050 |
+0051 |KeypadRDY    pin  33;           " there is a key available
+0052 |Keypad0      pin  25;           " keypad key code bit 0
+0053 |Keypad1      pin  26;           " keypad key code bit 1
+0054 |Keypad2      pin  31;           " keypad key code bit 2
+0055 |Keypad3      pin  32;           " keypad key code bit 3
+0056 |
+0057 | 
+0058 |" raw keypad I/O (these are not used) 
+0059 |
+0060 |" keypad scanning inputs (not used) 
+0061 |
+0062 |KeypadRow0  pin  14;            " row 0 of the keypad
+0063 |KeypadRow1  pin  13;            " row 1 of the keypad
+0064 |KeypadRow2  pin  11;            " row 2 of the keypad
+0065 |KeypadRow3  pin   7;            " row 3 of the keypad
+0066 |
+0067 |" keypad scanning outputs (not used) 
+0068 |
+0069 |KeypadCol0  pin   15  ISTYPE 'reg';     " column 0 of the keypad
+0070 |KeypadCol1  pin   17  ISTYPE 'reg';     " column 1 of the keypad
+0071 |KeypadCol2  pin   18  ISTYPE 'reg';     " column 2 of the keypad
+0072 |KeypadCol3  pin   19  ISTYPE 'reg';     " column 3 of the keypad
+0073 |
+0074 |
+0075 |" Hex digit outputs (to 16L8 seven segment decoder)
+0076 |
+0077 |HexDigit0    pin  24  ISTYPE 'com';     " bit 0 of the hex digit to display
+0078 |HexDigit1    pin  23  ISTYPE 'com';     " bit 1 of the hex digit to display
+0079 |HexDigit2    pin  21  ISTYPE 'com';     " bit 2 of the hex digit to display
+0080 |HexDigit3    pin  20  ISTYPE 'com';     " bit 3 of the hex digit to display
+0081 |
+0082 |
+0083 |" 7-segment segment outputs (all active low)
+0084 |
+0085 |!Segmenta    pin  72  ISTYPE 'com'; " segment a of the LEDs
+0086 |!Segmentb    pin  71  ISTYPE 'com'; " segment b of the LEDs
+0087 |!Segmentc    pin  70  ISTYPE 'com'; " segment c of the LEDs
+0088 |!Segmentd    pin  69  ISTYPE 'com'; " segment d of the LEDs
+0089 |!Segmente    pin  66  ISTYPE 'com'; " segment e of the LEDs
+0090 |!Segmentf    pin  65  ISTYPE 'com'; " segment f of the LEDs
+0091 |!Segmentg    pin  63  ISTYPE 'com'; " segment g of the LEDs
+0092 |
+0093 |
+0094 |" 4:12 decoder outputs (to 29M16 digit decoder)
+0095 |
+0096 |DecoderEn    pin  44  ISTYPE 'com';     " enable for the decoder
+0097 |DecoderBit0  pin  43  ISTYPE 'reg';     " bit 0 of the decoder
+0098 |DecoderBit1  pin  41  ISTYPE 'reg';     " bit 1 of the decoder
+0099 |DecoderBit2  pin  40  ISTYPE 'reg';     " bit 2 of the decoder
+0100 |DecoderBit3  pin  39  ISTYPE 'reg';  	" bit 3 of the decoder
+0101 |
+0102 |
+0103 |" 7-segment digit outputs
+0104 |
+0105 |Digit0       pin  57  ISTYPE 'reg'; " digit 0 (1st digit of dividend)
+0106 |Digit1       pin  56  ISTYPE 'reg'; " digit 1 (2nd digit of dividend)
+0107 |Digit2       pin  55  ISTYPE 'reg'; " digit 2 (3rd digit of dividend)
+0108 |Digit3       pin  54  ISTYPE 'reg'; " digit 3 (4th digit of dividend)
+0109 |Digit4       pin  53  ISTYPE 'reg'; " digit 4 (1st digit of divisor)
+0110 |Digit5       pin  52  ISTYPE 'reg'; " digit 5 (2nd digit of divisor)
+0111 |Digit6       pin  51  ISTYPE 'reg'; " digit 6 (3rd digit of divisor)
+0112 |Digit7       pin  50  ISTYPE 'reg'; " digit 7 (4th digit of divisor)
+0113 |Digit8       pin  48  ISTYPE 'reg'; " digit 8 (1st digit of quotient)
+0114 |Digit9       pin  47  ISTYPE 'reg'; " digit 9 (2nd digit of quotient)
+0115 |Digit10      pin  46  ISTYPE 'reg'; " digit 10 (3rd digit of quotient)
+0116 |Digit11      pin  45  ISTYPE 'reg'; " digit 11 (4th digit of quotient)
+0117 |
+0118 |
+0119 |" Clocks
+0120 |
+0121 |CLK          pin   9;               " the clock (1 MHz)
+0122 |
+0123 |
+0124 |" Unconnected Pins
+0125 |
+0126 |"IO0         pin   1                      input/output
+0127 |"IO1         pin   2                      input/output
+0128 |"IO2         pin   3                      input/output
+0129 |"IO3         pin   4                      input/output
+0130 |"IO23        pin  34                      input/output
+0131 |"IO24        pin  35                      input/output
+0132 |"IO25        pin  36                      input/output
+0133 |"IO26        pin  37                      input/output
+0134 |"IO44        pin  58                      input/output
+0135 |"IO45        pin  61                      input/output
+0136 |"IO46        pin  62                      input/output
+0137 |"IO50        pin  67                      input/output
+0138 |"IO51        pin  68                      input/output
+0139 |"IO56        pin  75                      input/output
+0140 |"IO57        pin  79                      input/output
+0141 |"IO58        pin  80                      input/output
+0142 |"IO59        pin  81                      input/output
+0143 |"IO60        pin  82                      input/output
+0144 |"IO61        pin  83                      input/output
+0145 |"IO62        pin  84                      input/output
+0146 |
+0147 |"IOGTS1      pin  76                      input/output/output enable
+0148 |"IOGTS2      pin  77                      input/output/output enable
+0149 |"IOGSR       pin  74                      input/output/set/reset
+0150 |"IOGCK2      pin  10                      input/output/clock
+0151 |"IOGCK3      pin  12                      input/output/clock
+0152 |
+0153 |
+0154 |" Programming Pins (not available for use in the design
+0155 |
+0156 |"TCK         pin  30                      pgm     programming interface TCK
+0157 |"TDI         pin  28                      pgm     programming interface TDI
+0158 |"TDO         pin  59                      pgm     programming interface TDO
+0159 |"TMS         pin  29                      pgm     programming interface TMS
+0160 |
+0161 |
+0162 |" Power Pins
+0163 |
+0164 |"GND         pin   8                      supply  power ground
+0165 |"GND         pin  16                      supply  power ground
+0166 |"GND         pin  27                      supply  power ground
+0167 |"GND         pin  42                      supply  power ground
+0168 |"GND         pin  49                      supply  power ground
+0169 |"GND         pin  60                      supply  power ground
+0170 |"VCC         pin  38                      supply  power Vcc
+0171 |"VCC         pin  73                      supply  power Vcc
+0172 |"VCC         pin  78                      supply  power Vcc
+0173 |"VCCIO       pin  22                      supply  power Vcc I/O
+0174 |"VCCIO       pin  64                      supply  power Vcc I/O
+0175 |
+0176 |
+0177 |
+0178 |" internal nodes 
+0179 |
+0180 |
+0181 |" nodes for synchronization and edge detection of KeypadRDY
+0182 |
+0183 |KeypadRDYS1  node  ISTYPE 'reg';    "first DFF for edge detection
+0184 |KeypadRDYS2  node  ISTYPE 'reg';    "second DFF for edge detection
+0185 |KeypadRDYS3  node  ISTYPE 'reg';    "third DFF for edge detection
+0186 |HaveKey      node  ISTYPE 'reg';    "have a key from the keypad
+0187 |
+0188 |
+0189 |" multiplex counter (bits 0 to 9)
+0190 |
+0191 |MuxCntr0     node  ISTYPE 'reg';    "multiplex counter bit 0
+0192 |MuxCntr1     node  ISTYPE 'reg';    "multiplex counter bit 1
+0193 |MuxCntr2     node  ISTYPE 'reg';    "multiplex counter bit 2
+0194 |MuxCntr3     node  ISTYPE 'reg';    "multiplex counter bit 3
+0195 |MuxCntr4     node  ISTYPE 'reg';    "multiplex counter bit 4
+0196 |MuxCntr5     node  ISTYPE 'reg';    "multiplex counter bit 5
+0197 |MuxCntr6     node  ISTYPE 'reg';    "multiplex counter bit 6
+0198 |MuxCntr7     node  ISTYPE 'reg';    "multiplex counter bit 7
+0199 |MuxCntr8     node  ISTYPE 'reg';    "multiplex counter bit 8
+0200 |MuxCntr9     node  ISTYPE 'reg';    "multiplex counter bit 9
+0201 |
+0202 |
+0203 |" detection of end of multiplex counter count conditions
+0204 |
+0205 |DigitClkEn   node  ISTYPE 'reg';    "enable for the digit clock
+0206 |KeyEn        node  ISTYPE 'reg';    "enable for key presses
+0207 |InitEn       node  ISTYPE 'reg';    "enable for Init 
+0208 |RemainderEn  node  ISTYPE 'reg';    "enable for remainder append cycle 
+0209 |AddSubEn     node  ISTYPE 'reg';    "enable for 16 bit addition/ subtraction
+0210 |QuotientEn   node  ISTYPE 'reg';    "enable for setting quotient
+0211 |CarryEn      node  ISTYPE 'reg';    "enable for Carry set/clear
+0212 |
+0213 |
+0214 |" nodes for synchronization, edge detection and latching of Calculate 
+0215 |CalcLatch 	 node  ISTYPE 'reg';    "used to latch calculate signal 
+0216 |CalcRDYS1 	 node  ISTYPE 'reg';	"first DFF for edge detection 
+0217 |CalcRDYS2	 node  ISTYPE 'reg';    "second DFF for edge detection 
+0218 |CalcRDYS3 	 node  ISTYPE 'reg'; 	"third DFF for edge detection 
+0219 |
+0220 |" node for simplifying Shift equations 
+0221 |CalcCond     node  ISTYPE 'com'; 	"must be true for calculate to work
+0222 |
+0223 |" nodes to make flags a set 
+0224 |CarryFlag0   node  ISTYPE 'reg'; 	"carry flag for adding/subtracting
+0225 |AddSubFlag0  node  ISTYPE 'reg';    "flag to indicate add or subtract
+0226 |
+0227 |
+0228 |" nodes for remapping the keypad 
+0229 |NewKey0 	 node  ISTYPE 'com'; 
+0230 |NewKey1 	 node  ISTYPE 'com'; 
+0231 |NewKey2 	 node  ISTYPE 'com'; 
+0232 |NewKey3 	 node  ISTYPE 'com';  
+0233 |
+0234 |
+0235 |" nodes for a separate 17-bit remainder register 
+0236 |Remainder16..Remainder0 	node  ISTYPE 'reg'; 
+0237 |
+0238 |" nodes for 12 stored hex digits (48 bits) 
+0239 |DBits0..DBits47 				node  ISTYPE 'reg'; 
+0240 |
+0241 |
+0242 |
+0243 |" nodes for each shift operation 
+0244 |ShiftHold 		node  ISTYPE 'com';   "hold register values
+0245 |ShiftKeyIn 		node  ISTYPE 'com';   "getting a key in
+0246 |ShiftDisplay 	node  ISTYPE 'com';   "shifting for display
+0247 |ShiftAddSub   	node  ISTYPE 'com';   "adding or subtracting values
+0248 |ShiftInit 		node  ISTYPE 'com';   "initalizing remainder 
+0249 |									  " and quotient with zeros 
+0250 |ShiftRem   		node  ISTYPE 'com';   "appending high bit of 
+0251 |									  "dividend as low bit of remainder
+0252 |ShiftQuo 		node  ISTYPE 'com';   "setting low bit of quotient 
+0253 |
+0254 |
+0255 |
+0256 |
+0257 |" set and macro definitions 
+0258 |
+0259 |
+0260 |
+0261 |" the digit bits (48 of them for 12 digits) 
+0262 |DigitBits = [ DBits0..DBits47 ]; 
+0263 |
+0264 |" the remainder bits 
+0265 |RBits = [ Remainder16..Remainder0]; 
+0266 |
+0267 |" represent flags as sets 
+0268 |CarryFlag = [ CarryFlag0 ]; 
+0269 |AddSubFlag = [AddSubFlag0 ]; 
+0270 |
+0271 |" the multiplex counter 
+0272 |MuxCounter  =  [ MuxCntr9..MuxCntr0 ];
+0273 |
+0274 |" specific multiplex digits
+0275 |OnDigit2  =  (!DecoderBit3 & !DecoderBit2 &  DecoderBit1 &  !DecoderBit0);
+0276 |OnDigit3  =  (!DecoderBit3 & !DecoderBit2 &  DecoderBit1 &  DecoderBit0);
+0277 |OnDigit7  =  (!DecoderBit3 &  DecoderBit2 &  DecoderBit1 &  DecoderBit0);
+0278 |OnDigit12 =  (DecoderBit3  & DecoderBit2  & !DecoderBit1 & !DecoderBit0); 
+0279 |
+0280 |
+0281 |" Keypad Inputs 
+0282 |KeypadIn = [ Keypad0..Keypad3 ]; 
+0283 |
+0284 |" remapped keypad 
+0285 |Keypad = [NewKey0..NewKey3]; 
+0286 |
+0287 |" buses used for testing 
+0288 |QuotientBus = [ DBits0..DBits15 ];
+0289 |DivisorBus = [ DBits16..DBits31 ]; 
+0290 |DividendBus = [ DBits32..DBits47 ]; 
+0291 |
+0292 |
+0293 |
+0294 |
+0295 |
+0296 |EQUATIONS 
+0297 |
+0298 |" edge (and key) detection on KeypadRDY 
+0299 |
+0300 |KeypadRDYS1  :=  KeypadRDY;
+0301 |KeypadRDYS2  :=  KeypadRDYS1;
+0302 |KeypadRDYS3  :=  KeypadRDYS2;	"delay signal by 3 DFFs in order to synchronize
+0303 |
+0304 |" have a key if have one already that hasn't been processed or a new one
+0305 |" is coming in (rising edge of KeypadRDY), reset if on the last clock of
+0306 |" Digit 3 or Digit 7 (depending on position of Divisor switch)
+0307 |
+0308 |HaveKey  :=  (HaveKey & !(DigitClkEn & ((OnDigit3 & !Divisor) #
+0309 |             (OnDigit7 & Divisor)))) # (!KeypadRDYS3 & KeypadRDYS2);
+0310 |
+0311 |			 
+0312 |			 
+0313 |" counter for mux rate of 1 KHz (1 MHz / 1024)
+0314 |
+0315 |MuxCntr0  :=  !Reset & (!MuxCntr0);     " it's a 10 bit counter
+0316 |MuxCntr1  :=  !Reset & (MuxCntr1 $ MuxCntr0);
+0317 |MuxCntr2  :=  !Reset & (MuxCntr2 $ (MuxCntr1 & MuxCntr0));
+0318 |MuxCntr3  :=  !Reset & (MuxCntr3 $ (MuxCntr2 & MuxCntr1 & MuxCntr0));
+0319 |MuxCntr4  :=  !Reset & (MuxCntr4 $ (MuxCntr3 & MuxCntr2 & MuxCntr1 &
+0320 |                                    MuxCntr0));
+0321 |MuxCntr5  :=  !Reset & (MuxCntr5 $ (MuxCntr4 & MuxCntr3 & MuxCntr2 &
+0322 |                                    MuxCntr1 & MuxCntr0));
+0323 |MuxCntr6  :=  !Reset & (MuxCntr6 $ (MuxCntr5 & MuxCntr4 & MuxCntr3 &
+0324 |                                    MuxCntr2 & MuxCntr1 & MuxCntr0));
+0325 |MuxCntr7  :=  !Reset & (MuxCntr7 $ (MuxCntr6 & MuxCntr5 & MuxCntr4 &
+0326 |                                    MuxCntr3 & MuxCntr2 & MuxCntr1 &
+0327 |                                    MuxCntr0));
+0328 |MuxCntr8  :=  !Reset & (MuxCntr8 $ (MuxCntr7 & MuxCntr6 & MuxCntr5 &
+0329 |                                    MuxCntr4 & MuxCntr3 & MuxCntr2 &
+0330 |                                    MuxCntr1 & MuxCntr0));
+0331 |MuxCntr9  :=  !Reset & (MuxCntr9 $ (MuxCntr8 & MuxCntr7 & MuxCntr6 &
+0332 |                                    MuxCntr5 & MuxCntr4 & MuxCntr3 &
+0333 |                                    MuxCntr2 & MuxCntr1 & MuxCntr0));
+0334 |									
+0335 |									
+0336 |" the multiplex counter is also used for controlling the operation of the 
+0337 |" circuit. In order to properly implement the division algorithm, we 
+0338 |" wish to first Initialize the quotient and remainder with 0 (InitEn). 
+0339 |" We only want this to happen once per MuxCntr cycle. InitEn is set 
+0340 |" to occur at (MuxCntr = 0). 
+0341 |" 2. Next we shift the remainder left and append the high bit of the dividend 
+0342 |" as the low bit of the remainder (RemainderEn). We want this to happen 16 
+0343 |" times (once per addition/subtraction) per MuxCntr cycle. RemainderEn is set 
+0344 |" to occur at (MuxCntr = xxxx000001). 
+0345 |" 3. We actually execute the 16-bit addition or subtraction (AddSubEn). Since
+0346 |" each addition or subtraction takes 16 clocks and we need 16 additions or 
+0347 |" subtractions for division, we want this to happen 256 times per MuxCntr cycle. 
+0348 |" AddSubEn is set to occur at (MuxCntr = xxxx01xxxx).
+0349 |" 4. Finally we set the low bit of the Quotient (QuotientEn). During this cycle 
+0350 |" we also calculate the 17th bit of the remainder since we are only doing 16-bit
+0351 |" addition/subtraction. We want this to happen 16 times (once per addition/
+0352 |" subtraction) per MuxCntr cycle. QuotientEn is set to occur at 
+0353 |" (MuxCntr = xxxx100000). 
+0354 |" 5. CarryEn allows us to set the carry or borrow flag appropriately before the 
+0355 |" next round of addition/subtraction occurs. We want this to occur 16 times 
+0356 |" (once per addition/subtraction) per MuxCntr cycle. CarryEn is set to occur 
+0357 |" at (MuxCntr = xxxx001111). 
+0358 |" DigitClkEn signals the end of a multiplexed digit (MuxCntr = 3FF)
+0359 |" KeyEn signals a keypress (MuxCntr = 1) 
+0360 |
+0361 |DigitClkEn  :=  MuxCntr9 & MuxCntr8 & MuxCntr7 & MuxCntr6 & MuxCntr5 &
+0362 |                MuxCntr4 & MuxCntr3 & MuxCntr2 & MuxCntr1 & MuxCntr0;
+0363 |
+0364 |KeyEn       := !MuxCntr9 & !MuxCntr8 & !MuxCntr7 & !MuxCntr6 & !MuxCntr5 &
+0365 |                !MuxCntr4 & !MuxCntr3 & !MuxCntr2 & !MuxCntr1 & MuxCntr0;
+0366 |InitEn      := !MuxCntr9 & !MuxCntr8 & !MuxCntr7 & !MuxCntr6 & !MuxCntr5 &
+0367 |                !MuxCntr4 & !MuxCntr3 & !MuxCntr2 & !MuxCntr1 & !MuxCntr0;
+0368 |RemainderEn := !MuxCntr5 & !MuxCntr4 & !MuxCntr3 & !MuxCntr2 & !MuxCntr1 & 
+0369 |																MuxCntr0;
+0370 |AddSubEn    := !MuxCntr5 & MuxCntr4; 
+0371 |QuotientEn  :=  MuxCntr5 & !MuxCntr4 & !MuxCntr3 & !MuxCntr2 & !MuxCntr1 & 
+0372 |																!MuxCntr0; 
+0373 |CarryEn     := !MuxCntr5 & !MuxCntr4 & MuxCntr3 & MuxCntr2 & MuxCntr1 & MuxCntr0;
+0374 |				
+0375 |
+0376 |
+0377 |" use a counter for digit outputs - order is 3, 2, 1, 0, 7, 6, 5, 4,
+0378 |" 11, 10, 9, 8, then 12 
+0379 |
+0380 |DecoderBit0  :=  Reset # (!DigitClkEn & DecoderBit0) #
+0381 |                 (DigitClkEn & ((DecoderBit3 & DecoderBit2) # 
+0382 |                 (DecoderBit1 & !DecoderBit0) # 
+0383 |                 (!DecoderBit3 & !DecoderBit0)));
+0384 |DecoderBit1  :=  Reset # (!DigitClkEn & DecoderBit1) #
+0385 |                 (DigitClkEn & ((DecoderBit3 & DecoderBit2) # 
+0386 |                 (DecoderBit1 & DecoderBit0) # 
+0387 |                 (!DecoderBit3 & !DecoderBit1 & !DecoderBit0)));
+0388 |DecoderBit2  :=  !Reset & ((!DigitClkEn & DecoderBit2) #
+0389 |                 (DigitClkEn & ((!DecoderBit2 & !DecoderBit1 & !DecoderBit0) # 
+0390 |                 (DecoderBit2 & DecoderBit0) # 
+0391 |                 (DecoderBit2 & DecoderBit1))));
+0392 |DecoderBit3  :=  !Reset & ((!DigitClkEn & DecoderBit3) #
+0393 |                 (DigitClkEn & ((DecoderBit3 & !DecoderBit2) # 
+0394 |                 (!DecoderBit3 & DecoderBit2 & !DecoderBit1 & !DecoderBit0))));
+0395 |
+0396 |
+0397 |" always enable the digit decoder
+0398 |DecoderEn  =  1;
+0399 |
+0400 |
+0401 |" the hex digit to output is just the low nibble of the shift register
+0402 |
+0403 |HexDigit0  =  (DigitBits[0] == 1);
+0404 |HexDigit1  =  (DigitBits[1] == 1);
+0405 |HexDigit2  =  (DigitBits[2] == 1);
+0406 |HexDigit3  =  (DigitBits[3] == 1);
+0407 |
+0408 |				 
+0409 |" edge detection, syncronization, and latching of Calculate signal  
+0410 |CalcRDYS1 := Calculate;
+0411 |CalcRDYS2 := CalcRDYS1;
+0412 |CalcRDYS3 := CalcRDYS2;
+0413 |
+0414 |CalcLatch  := (CalcLatch & !(OnDigit3)) # (!CalcRDYS3 & CalcRDYS2 & !OnDigit12);
+0415 |
+0416 |" Define the calcuting condition
+0417 |" We want to not be displaying, not getting a key in, make sure calculate is 
+0418 |" latched, and do all the calculations during OnDigit12 
+0419 |CalcCond = !DigitClkEn & CalcLatch & !HaveKey & OnDigit12; 
+0420 |
+0421 |
+0422 |
+0423 |" shift operation commands 
+0424 |" ShiftHold: Hold everything if none of the other operations are taking place 
+0425 |" ShiftKeyIn: Get a key in if not displaying, not calculating, at the correct
+0426 |" time, and we have a key. If Divisor switch low, we have a dividend key. 
+0427 |" If Divisor switch high, we have a divisor key. 
+0428 |" ShiftInit: Make sure we are at the correct time and that we are calulating
+0429 |" ShiftRem: Make sure we are at the correct time and that we are calcuting 
+0430 |" ShiftAddSub: Make sure we are in the correct range of time and that we 
+0431 |" are calculating  
+0432 |" ShiftQuo: Make sure we are at the correct time and that we are calculating 
+0433 |" ShiftDisplay: Make sure we are at the end of the MuxCntr and that we are 
+0434 |" not OnDigit12 since all calculations happen during OnDigit12 
+0435 |ShiftHold 	 = !(ShiftKeyIn # ShiftInit # ShiftRem # ShiftAddSub # ShiftQuo # 
+0436 |				ShiftDisplay); 
+0437 |ShiftKeyIn 	 = !DigitClkEn & KeyEn & !CalcLatch & HaveKey & 
+0438 |				((OnDigit3 & !Divisor) # (OnDigit7 & Divisor));
+0439 |ShiftInit 	 = InitEn & CalcCond; 
+0440 |ShiftRem 	 = RemainderEn & CalcCond; 
+0441 |ShiftAddSub  = AddSubEn & CalcCond; 
+0442 |ShiftQuo 	 = QuotientEn & CalcCond; 
+0443 |ShiftDisplay = DigitClkEn & !OnDigit12; 
+0444 |
+0445 |
+0446 |
+0447 |QuotientBus = [ DBits0..DBits15 ];
+0448 |DivisorBus = [ DBits16..DBits31 ]; 
+0449 |DividendBus = [ DBits32..DBits47 ]; 
+0450 |
+0451 |" the shift register 
+0452 |" 	DigitBits[0..15] = DBits47..DBits32 = Dividend
+0453 |"   DigitBits[16..31] = DBits31..DBits16 = Divisor
+0454 |"   DigitBits[32..47] = DBits15..DBits0 = Quotient 
+0455 |" 	RBits[16..0] = Remainder 
+0456 |" operations 
+0457 |" ShiftHold: keep all bits the same as they were
+0458 |" ShiftKeyIn: Shift keypad value into DigitBits[0..3] and shift  
+0459 |" DigitsBits[4..15] to the left. Other bits remain the same as before
+0460 |" ShiftInit: Set Remainder and Quotient to 0, all other bits remain same 
+0461 |" ShiftRem: Shift Remainder one bit to left and append high bit of dividend 
+0462 |" (DigitBit[15]) as low bit of Remainder; all other bits remain same 
+0463 |" ShiftAddSub: Shift right and wrap around Divisor and RBits[15..0]; all other 
+0464 |" bits remain the same. 
+0465 |" ShiftQuo: Shift right and wrap around Dividend, Shift left and set lowest 
+0466 |" bit of Quotient, manually calulate RBits[16] based on the CarryFlag to 
+0467 |" finish 17 bit addition; all other bits remain the same 
+0468 |" ShiftDisplay: Shift all DigitBits left by 4 bits 
+0469 |
+0470 |DigitBits[0..3]   	:=  (ShiftHold    & DigitBits[0..3]) #
+0471 |               		   	(ShiftKeyIn   & Keypad[0..3])    #
+0472 |               		   	(ShiftInit    & DigitBits[0..3]) # 
+0473 |               		   	(ShiftRem     & DigitBits[0..3]) # 
+0474 |               		   	(ShiftAddSub  & DigitBits[0..3]) # 
+0475 |               		   	(ShiftQuo     & DigitBits[15,0..2]) # 
+0476 |               		   	(ShiftDisplay & DigitBits[4..7]); 
+0477 |
+0478 |DigitBits[4..15]  	:=  (ShiftHold    & DigitBits[4..15]) #
+0479 |               		   	(ShiftKeyIn   & DigitBits[0..11]) #
+0480 |               		   	(ShiftInit    & DigitBits[4..15]) # 
+0481 |               		   	(ShiftRem     & DigitBits[4..15]) # 
+0482 |               		   	(ShiftAddSub & DigitBits[4..15]) # 
+0483 |               		   	(ShiftQuo     & DigitBits[3..14]) #  
+0484 |               		   	(ShiftDisplay & DigitBits[8..19]); 
+0485 |
+0486 |DigitBits[16..31]  	:=  (ShiftHold    & DigitBits[16..31]) #
+0487 |               		   	(ShiftKeyIn   & DigitBits[16..31]) #
+0488 |               		   	(ShiftInit    & DigitBits[16..31]) # 
+0489 |               		   	(ShiftRem     & DigitBits[16..31]) # 
+0490 |               		   	(ShiftAddSub  & DigitBits[17..31,16]) # 
+0491 |               		   	(ShiftQuo     & DigitBits[16..31]) #
+0492 |               		   	(ShiftDisplay & DigitBits[20..35]);  
+0493 |
+0494 |DigitBits[32]      	:=  (ShiftHold    & DigitBits[32]) # 
+0495 |               		   	(ShiftKeyIn   & DigitBits[32]) # 
+0496 |            		   	(ShiftInit    & 0) 			   # 
+0497 |               		   	(ShiftRem     & DigitBits[32]) # 
+0498 |                   	   	(ShiftAddSub  & DigitBits[32]) # 
+0499 |                   	   	(ShiftQuo     & !((AddSubFlag $ CarryFlag) $
+0500 |                   	   	 RBits[16])) # 
+0501 |                   	   	(ShiftDisplay & DigitBits[36]); 
+0502 |
+0503 |DigitBits[33..46]  	:=  (ShiftHold    & DigitBits[33..46]) #
+0504 |               		   	(ShiftKeyIn   & DigitBits[33..46]) #
+0505 |            		   	(ShiftInit    & 0) 				   # 
+0506 |               		   	(ShiftRem     & DigitBits[33..46]) # 
+0507 |               		   	(ShiftAddSub  & DigitBits[33..46]) # 
+0508 |               	       	(ShiftQuo     & DigitBits[32..45]) # 
+0509 |               	       	(ShiftDisplay & DigitBits[37..47,0..2]); 
+0510 |
+0511 |DigitBits[47]      	:=  (ShiftHold    & DigitBits[47]) #
+0512 |               		   	(ShiftKeyIn   & DigitBits[47]) #
+0513 |            		   	(ShiftInit    & 0) 			   #  
+0514 |              		   	(ShiftRem     & DigitBits[47]) # 
+0515 |              		   	(ShiftAddSub  & DigitBits[47]) # 
+0516 |              		   	(ShiftQuo     & DigitBits[46]) # 
+0517 |              		   	(ShiftDisplay & DigitBits[3]); 
+0518 |
+0519 |RBits[16]          	:=  (ShiftHold    & RBits[16]) # 
+0520 |               		    (ShiftKeyIn   & RBits[16]) # 
+0521 |            		   	(ShiftInit    & 0) 				   # 
+0522 |               		   	(ShiftRem     & RBits[15]) # 
+0523 |               		   	(ShiftAddSub  & RBits[16]) # 
+0524 |               		   	(ShiftQuo     & ((AddSubFlag $ CarryFlag) $ 	
+0525 |               		   	RBits[16])) # 
+0526 |               		   	(ShiftDisplay & RBits[16]); 
+0527 |
+0528 |RBits[15]      	   	:=  (ShiftHold    & RBits[15]) # 
+0529 |               		   	(ShiftKeyIn   & RBits[15]) # 
+0530 |            			(ShiftInit    & 0) 				   #  
+0531 |                   		(ShiftRem     & RBits[14]) # 
+0532 |               			(ShiftAddSub  & (DigitBits[16] $ AddSubFlag $ 
+0533 |               			RBits[0] $ CarryFlag)) # 
+0534 |                   		(ShiftQuo    & RBits[15])  # 
+0535 |						(ShiftDisplay & RBits[15]); 
+0536 |
+0537 |RBits[14..1]       	:=  (ShiftHold    & RBits[14..1]) # 
+0538 |               			(ShiftKeyIn   & RBits[14..1]) # 
+0539 |            			(ShiftInit    & 0) 					  # 
+0540 |               			(ShiftRem     & RBits[13..0]) # 
+0541 |               			(ShiftAddSub  & RBits[15..2]) # 
+0542 |               			(ShiftQuo     & RBits[14..1]) # 
+0543 |               			(ShiftDisplay & RBits[14..1]); 
+0544 |
+0545 |RBits[0]           	:=  (ShiftHold    & RBits[0]) # 
+0546 |               			(ShiftKeyIn   & RBits[0]) # 
+0547 |            			(ShiftInit    & 0) 				  # 
+0548 |              			(ShiftRem     & DigitBits[15]) 	  #  
+0549 |               			(ShiftAddSub  & RBits[1]) # 
+0550 |               			(ShiftQuo     & RBits[0]) # 
+0551 |               			(ShiftDisplay & RBits[0]);      
+0552 |
+0553 |
+0554 |" equation for setting the AddSubFlag 
+0555 |AddSubFlag := 	(AddSubFlag & !ShiftQuo & 
+0556 |			  	!(Calculate & OnDigit12 & (MuxCounter == 16))) # 
+0557 |          	  	(((AddSubFlag $ CarryFlag) $ RBits[16]) & ShiftQuo & 
+0558 |        	  	!(Calculate & OnDigit12 & (MuxCounter == 16)));
+0559 |
+0560 |" equation for setting the CarryFlag 
+0561 |CarryFlag  :=  	(AddSubFlag & CarryEn) #
+0562 |        		(ShiftAddSub & ((!Remainder0 & CarryFlag) # 
+0563 |        		((DBits31 $ AddSubFlag) & !Remainder0) #
+0564 |        		((DBits31 $ AddSubFlag) & CarryFlag))); 
+0565 |
+0566 |
+0567 |
+0568 |" equations for remapping the keypad 
+0569 |NewKey0 = (!Keypad0 & !Keypad1) # (!Keypad0 & Keypad3) # (!Keypad1 & Keypad3); 
+0570 |NewKey1 = (!Keypad0 & !Keypad1 & Keypad3) # (!Keypad0 & Keypad1 & Keypad2) #
+0571 |		  (Keypad1 & Keypad2 & !Keypad3) # (Keypad0 & !Keypad1 & Keypad2) #
+0572 |		  (Keypad0 & Keypad1 & !Keypad2 & Keypad3);
+0573 |NewKey2 = (!Keypad0 & !Keypad2 & !Keypad3) # (Keypad0 & !Keypad1 & Keypad2) #
+0574 |		  (!Keypad1 & !Keypad3) # (!Keypad0 & Keypad1 & Keypad2 & Keypad3) #
+0575 |		  (Keypad0 & Keypad1 & !Keypad2 & Keypad3);
+0576 |NewKey3 = (Keypad0 $ Keypad2);
+0577 |
+0578 |
+0579 |
+0580 |" set all the clocks off of the main clock
+0581 |
+0582 |MuxCounter.CLK 	    = CLK; 
+0583 |RBits.CLK 			= CLK; 
+0584 |DigitBits.CLk 		= CLK; 
+0585 |KeypadRDYS1.CLK 	= CLK; 
+0586 |KeypadRDYS2.CLK  	= CLK;
+0587 |KeypadRDYS3.CLK  	= CLK;
+0588 |HaveKey.CLK      	= CLK; 
+0589 |
+0590 |DigitClkEn.CLK 		= CLK; 
+0591 |KeyEn.CLK 			= CLK; 
+0592 |InitEn.CLK 			= CLK; 
+0593 |RemainderEn.CLK 	= CLK; 
+0594 |AddSubEn.CLK 		= CLK; 
+0595 |QuotientEn.CLK 		= CLK; 
+0596 |CarryEn.CLK 		= CLK; 
+0597 |
+0598 |CalcLatch.CLK 		= CLK;
+0599 |CalcRDYS1.CLK 		= CLK; 
+0600 |CalcRDYS2.CLK 		= CLK; 
+0601 |CalcRDYS3.CLK 		= CLK; 
+0602 |CarryFlag0.CLK 		= CLK; 
+0603 |AddSubFlag0.CLk 	= CLK; 
+0604 |
+0605 |DecoderBit0.CLK  	=  CLK;    
+0606 |DecoderBit1.CLK  	=  CLK;
+0607 |DecoderBit2.CLK  	=  CLK;
+0608 |DecoderBit3.CLK  	=  CLK;
+0609 |
+0610 |
+0611 |
+0612 |"enable all of the used outputs, but no inputs 
+0613 |
+0614 |HexDigit0.OE    =  1;   " enable the digit pattern to be display
+0615 |HexDigit1.OE    =  1;
+0616 |HexDigit2.OE    =  1;
+0617 |HexDigit3.OE    =  1;
+0618 |
+0619 |DecoderEn.OE    =  1;   " enable the decoder outputs
+0620 |DecoderBit0.OE  =  1;
+0621 |DecoderBit1.OE  =  1;
+0622 |DecoderBit2.OE  =  1;
+0623 |DecoderBit3.OE  =  1;
+0624 |
+0625 |Calculate.OE    =  0;  "disable I/O pins that are inputs
+0626 |Divisor.OE      =  0;
+0627 |KeypadRDY.OE    =  0;
+0628 |KeypadIn.OE     =  0;
+0629 |
+0630 |
+0631 |END Divider

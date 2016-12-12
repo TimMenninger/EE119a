@@ -1,0 +1,19 @@
+set -tmpdir "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/xst/projnav.tmp"
+set -xsthdpdir "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/xst"
+run
+-ifn Divider.prj
+-ifmt mixed
+-ofn Divider
+-ofmt NGC
+-p xc9500
+-top Divider
+-opt_mode Speed
+-opt_level 1
+-keep_hierarchy YES
+-rtlview Yes
+-safe_implementation No
+-mux_extract YES
+-iobuf YES
+-pld_mp YES
+-pld_xp YES
+-wysiwyg NO

@@ -1,0 +1,33 @@
+Pin Freeze File:  version K.39
+
+9510884 XC95108-7-PC84
+CLK S:PIN9
+Reset S:PIN4
+DecoderBit0 S:PIN43
+DecoderBit1 S:PIN41
+DecoderBit2 S:PIN40
+DecoderBit3 S:PIN39
+DecoderEn S:PIN44
+HexDigit3 S:PIN20
+HexDigit2 S:PIN21
+HexDigit1 S:PIN23
+HexDigit0 S:PIN24
+
+
+;The remaining section of the .gyd file is for documentation purposes only.
+;It shows where your internal equations were placed in the last successful fit.
+
+
+
+PARTITION FB3_9 HexDigit3_OBUF
+PARTITION FB3_11 HexDigit3_OBUF$BUF0 HexDigit3_OBUF$BUF1
+PARTITION FB3_14 HexDigit3_OBUF$BUF2
+
+
+PARTITION FB5_3 MuxCntr0 DigitClkEn MuxCntr9 MuxCntr8
+		 MuxCntr7 MuxCntr6 MuxCntr5 MuxCntr4
+		 DecoderBit3_OBUF DecoderBit2_OBUF MuxCntr3 DecoderBit1_OBUF
+		 DecoderBit0_OBUF MuxCntr2 DecoderEn_OBUF MuxCntr1
+		
+
+

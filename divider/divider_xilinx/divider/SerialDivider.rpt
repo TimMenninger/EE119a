@@ -1,0 +1,1404 @@
+ 
+cpldfit:  version K.39                              Xilinx Inc.
+                                  No Fit Report
+Design Name: SerialDivider                       Date: 12-11-2016,  3:56PM
+Device Used: XC95108-7-PC84
+Fitting Status: Placement Failed
+
+**************************  Errors and Warnings  ***************************
+
+INFO:Cpld - Inferring BUFG constraint for signal 'CLK' based upon the LOC
+   constraint 'P9'. It is recommended that you declare this BUFG explicitedly in
+   your design. Note that for certain device families the output of a BUFG
+   constraint can not drive a gated clock, and the BUFG constraint will be
+   ignored.
+WARNING:Cpld:896 - Unable to map all desired signals into function block, FB3,
+   because too many function block product terms are required. Buffering output
+   signal HexDigits<3> to allow all signals assigned to this function block to
+   be placed.
+ERROR:Cpld:892 - Cannot place signal Dividend<15>. Consider reducing the
+   collapsing input limit or the product term limit to prevent the fitter from
+   creating high input and/or high product term functions.
+ERROR:Cpld:868 - Cannot fit the design into any of the specified devices with
+   the selected implementation options.
+*************************  Mapped Resource Summary  **************************
+
+Macrocells     Product Terms    Function Block   Registers      Pins           
+Used/Tot       Used/Tot         Inps Used/Tot    Used/Tot       Used/Tot       
+91 /108 ( 84%) 415 /540  ( 77%) 189/216 ( 87%)   66 /108 ( 61%) 41 /69  ( 59%)
+
+** Function Block Resources **
+
+Function    Mcells      FB Inps     Signals     Pterms      IO          
+Block       Used/Tot    Used/Tot    Used        Used/Tot    Used/Tot    
+FB1          10/18       34/36       34          90/90*      0/12
+FB2          12/18       34/36       34          88/90       2/12
+FB3          15/18       29/36       33          64/90       8/12
+FB4          18/18*      33/36       33          68/90       6/11
+FB5          18/18*      36/36*      36          68/90       5/11
+FB6          18/18*      23/36       23          37/90      11/11*
+             -----       -----                   -----       -----     
+             91/108     189/216                 415/540     32/69 
+
+* - Resource is exhausted
+
+** Global Control Resources **
+
+Global clock net(s) unused.
+Global output enable net(s) unused.
+Global set/reset net(s) unused.
+
+** Pin Resources **
+
+Signal Type    Required     Mapped  |  Pin Type            Used    Total 
+------------------------------------|------------------------------------
+Input         :    8           8    |  I/O              :    40      63
+Output        :   32          32    |  GCK/IO           :     1       3
+Bidirectional :    0           0    |  GTS/IO           :     0       2
+GCK           :    1           1    |  GSR/IO           :     0       1
+GTS           :    0           0    |
+GSR           :    0           0    |
+                 ----        ----
+        Total     41          41
+
+** Power Data **
+
+There are 93 macrocells in high performance mode (MCHP).
+There are 0 macrocells in low power mode (MCLP).
+End of Mapped Resource Summary
+*************************  Summary of Mapped Logic  ************************
+
+** 32 Outputs **
+
+Signal              Total Total Loc     Pin  Pin     Pin     
+Name                Pts   Inps          No.  Type    Use     
+Segments<5>         0     0     FB2_2   71   I/O     O       
+Segments<6>         0     0     FB2_3   72   I/O     O       
+KeypadCols<0>       0     0     FB3_3   15   I/O     O       
+KeypadCols<1>       0     0     FB3_5   17   I/O     O       
+KeypadCols<2>       0     0     FB3_6   18   I/O     O       
+KeypadCols<3>       0     0     FB3_8   19   I/O     O       
+HexDigits<3>        1     1     FB3_9   20   I/O     O       
+HexDigits<2>        12    17    FB3_11  21   I/O     O       
+HexDigits<1>        12    17    FB3_12  23   I/O     O       
+HexDigits<0>        12    17    FB3_14  24   I/O     O       
+Digits<0>           0     0     FB4_2   57   I/O     O       
+Segments<0>         0     0     FB4_8   63   I/O     O       
+Segments<1>         0     0     FB4_9   65   I/O     O       
+Segments<2>         0     0     FB4_11  66   I/O     O       
+Segments<3>         0     0     FB4_15  69   I/O     O       
+Segments<4>         0     0     FB4_17  70   I/O     O       
+DecoderCntr<3>      3     15    FB5_11  39   I/O     O       
+DecoderCntr<2>      3     15    FB5_12  40   I/O     O       
+DecoderCntr<1>      2     12    FB5_14  41   I/O     O       
+DecoderCntr<0>      2     11    FB5_15  43   I/O     O       
+DecoderEn           1     0     FB5_17  44   I/O     O       
+Digits<11>          0     0     FB6_2   45   I/O     O       
+Digits<10>          0     0     FB6_3   46   I/O     O       
+Digits<9>           0     0     FB6_5   47   I/O     O       
+Digits<8>           0     0     FB6_6   48   I/O     O       
+Digits<7>           0     0     FB6_8   50   I/O     O       
+Digits<6>           0     0     FB6_9   51   I/O     O       
+Digits<5>           0     0     FB6_11  52   I/O     O       
+Digits<4>           0     0     FB6_12  53   I/O     O       
+Digits<3>           0     0     FB6_14  54   I/O     O       
+Digits<2>           0     0     FB6_15  55   I/O     O       
+Digits<1>           0     0     FB6_17  56   I/O     O       
+
+** 59 Buried Nodes **
+
+Signal              Total Total Loc     
+Name                Pts   Inps          
+Dividend<10>        14    15    FB1_2   
+MuxCntr<3>          2     4     FB1_3   
+Divisor<4>          4     7     FB1_4   
+Divisor<3>          4     7     FB1_5   
+Divisor<2>          4     7     FB1_6   
+Quotient<0>         6     8     FB1_7   
+Dividend<9>         14    15    FB1_10  
+Dividend<13>        14    15    FB1_13  
+Dividend<12>        14    15    FB1_14  
+Dividend<11>        14    15    FB1_18  
+Dividend<4>         14    15    FB2_1   
+Dividend<8>         14    15    FB2_4   
+Divisor<15>         4     7     FB2_6   
+Divisor<14>         4     7     FB2_7   
+Divisor<13>         4     7     FB2_8   
+Dividend<6>         14    15    FB2_9   
+Dividend<7>         14    15    FB2_11  
+Dividend<5>         14    15    FB2_15  
+Divisor<1>          4     7     FB2_16  
+MuxCntr<4>          2     5     FB2_17  
+MuxCntr<1>          2     2     FB3_1   
+HexDigits<3>_BUFR   12    17    FB3_2   
+Divisor<8>          4     7     FB3_4   
+Divisor<9>          4     7     FB3_7   
+MuxCntr<2>          2     3     FB3_16  
+highBit             2     2     FB3_17  
+MuxCntr<0>          1     1     FB3_18  
+Divisor<12>         4     7     FB4_1   
+Divisor<0>          4     7     FB4_3   
+Quotient<9>         6     8     FB4_4   
+Quotient<8>         6     8     FB4_5   
+Quotient<7>         6     8     FB4_6   
+Quotient<6>         6     8     FB4_7   
+Quotient<15>        6     8     FB4_10  
+Quotient<14>        6     8     FB4_12  
+Quotient<13>        6     8     FB4_13  
+Quotient<12>        6     8     FB4_14  
+Quotient<11>        6     8     FB4_16  
+Quotient<10>        6     8     FB4_18  
+MuxCntr<9>          2     10    FB5_1   
+
+Signal              Total Total Loc     
+Name                Pts   Inps          
+MuxCntr<8>          2     9     FB5_2   
+MuxCntr<7>          2     8     FB5_3   
+MuxCntr<6>          2     7     FB5_4   
+MuxCntr<5>          2     6     FB5_5   
+Divisor<7>          4     7     FB5_6   
+Divisor<6>          4     7     FB5_7   
+Divisor<5>          4     7     FB5_8   
+KeypadRDYS          5     18    FB5_9   
+Divider_FSM_FFd1    5     8     FB5_10  
+Carry               5     7     FB5_13  
+Divider_FSM_FFd2    6     8     FB5_16  
+Dividend<14>        14    15    FB5_18  
+Divisor<11>         4     7     FB6_1   
+Divisor<10>         4     7     FB6_4   
+Quotient<1>         5     7     FB6_7   
+Quotient<5>         6     8     FB6_10  
+Quotient<4>         6     8     FB6_13  
+Quotient<3>         6     8     FB6_16  
+Quotient<2>         6     8     FB6_18  
+
+** 9 Inputs **
+
+Signal              Loc     Pin  Pin     Pin     
+Name                        No.  Type    Use     
+Reset               FB1_6   4    I/O     I
+Calculate           FB1_8   5    I/O     I
+InDivisor           FB1_9   6    I/O     I
+CLK                 FB1_12  9    GCK/I/O GCK
+Keypad<0>           FB3_15  25   I/O     I
+Keypad<1>           FB3_16  26   I/O     I
+Keypad<2>           FB3_17  31   I/O     I
+Keypad<3>           FB5_2   32   I/O     I
+KeypadRDY           FB5_3   33   I/O     I
+
+Legend:
+Pin No. - ~ - User Assigned
+*************************  Summary of UnMapped Logic  ************************
+
+** 2 Buried Nodes **
+
+Signal              Total Total User
+Name                Pts   Inps  Assignment
+Dividend<15>        21    18    
+Divider_FSM_FFd3    10    15    
+
+**************************  Function Block Details  ************************
+Legend:
+Total Pt     - Total product terms used by the macrocell signal
+Imp Pt       - Product terms imported from other macrocells
+Exp Pt       - Product terms exported to other macrocells
+               in direction shown
+Unused Pt    - Unused local product terms remaining in macrocell
+Loc          - Location where logic was mapped in device
+Pin Type/Use - I  - Input             GCK - Global Clock
+               O  - Output            GTS - Global Output Enable
+              (b) - Buried macrocell  GSR - Global Set/Reset
+X(@)         - Signal used as input (wire-AND input) to the macrocell logic.
+               The number of Signals Used may exceed the number of FB Inputs
+               Used due to wire-ANDing in the switch matrix.
+Pin No.      - ~  - User Assigned
+*********************************** FB1  ***********************************
+Number of function block inputs used/remaining:               34/2
+Number of signals used by logic mapping into function block:  34
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+(unused)              0       0   \/5   0     FB1_1         (b)     (b)
+Dividend<10>         14       9<-   0   0     FB1_2   1     I/O     (b)
+MuxCntr<3>            2       0   /\3   0     FB1_3   2     I/O     (b)
+Divisor<4>            4       0   \/1   0     FB1_4         (b)     (b)
+Divisor<3>            4       1<- \/2   0     FB1_5   3     I/O     (b)
+Divisor<2>            4       2<- \/3   0     FB1_6   4     I/O     I
+Quotient<0>           6       3<- \/2   0     FB1_7         (b)     (b)
+(unused)              0       0   \/5   0     FB1_8   5     I/O     I
+(unused)              0       0   \/5   0     FB1_9   6     I/O     I
+Dividend<9>          14      12<- \/3   0     FB1_10        (b)     (b)
+(unused)              0       0   \/5   0     FB1_11  7     I/O     (b)
+(unused)              0       0   \/5   0     FB1_12  9     GCK/I/O GCK
+Dividend<13>         14      13<- \/4   0     FB1_13        (b)     (b)
+Dividend<12>         14       9<-   0   0     FB1_14  10    GCK/I/O (b)
+(unused)              0       0   /\5   0     FB1_15  11    I/O     (b)
+(unused)              0       0   \/5   0     FB1_16  12    GCK/I/O (b)
+(unused)              0       0   \/5   0     FB1_17  13    I/O     (b)
+Dividend<11>         14      10<- \/1   0     FB1_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: DecoderCntr<0>    13: Divider_FSM_FFd1  24: HexDigits<0> 
+  2: DecoderCntr<1>    14: Divider_FSM_FFd2  25: InDivisor 
+  3: DecoderCntr<2>    15: Divider_FSM_FFd3  26: KeypadRDYS 
+  4: DecoderCntr<3>    16: Divisor<0>        27: KeypadRDY 
+  5: Dividend<10>      17: Divisor<2>        28: MuxCntr<0> 
+  6: Dividend<11>      18: Divisor<3>        29: MuxCntr<1> 
+  7: Dividend<12>      19: Divisor<4>        30: MuxCntr<2> 
+  8: Dividend<13>      20: Divisor<5>        31: Quotient<0> 
+  9: Dividend<14>      21: Divisor<6>        32: Quotient<1> 
+ 10: Dividend<15>      22: Divisor<7>        33: Quotient<4> 
+ 11: Dividend<8>       23: Divisor<8>        34: Reset 
+ 12: Dividend<9>      
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+Dividend<10>         XXXXXX..X..XXXX.........XXX......X...... 15      15
+MuxCntr<3>           ...........................XXX...X...... 4       4
+Divisor<4>           ............XXX...XX..X..........X...... 7       7
+Divisor<3>           ............XXX..XX..X...........X...... 7       7
+Divisor<2>           ............XXX.XX..X............X...... 7       7
+Quotient<0>          ............XXXX.......X......X.XX...... 8       8
+Dividend<9>          XXXXX..X..XXXXX.........XXX......X...... 15      15
+Dividend<13>         XXXX..XXX...XXX.........XXX....X.X...... 15      15
+Dividend<12>         XXXX.XXX....XXX.........XXX...X..X...... 15      15
+Dividend<11>         XXXXXXX..X..XXX.........XXX......X...... 15      15
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB2  ***********************************
+Number of function block inputs used/remaining:               34/2
+Number of signals used by logic mapping into function block:  34
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+Dividend<4>          14       9<-   0   0     FB2_1         (b)     (b)
+Segments<5>           0       0   /\4   1     FB2_2   71    I/O     O
+Segments<6>           0       0   \/4   1     FB2_3   72    I/O     O
+Dividend<8>          14       9<-   0   0     FB2_4         (b)     (b)
+(unused)              0       0   /\5   0     FB2_5   74    GSR/I/O (b)
+Divisor<15>           4       0   \/1   0     FB2_6   75    I/O     (b)
+Divisor<14>           4       1<- \/2   0     FB2_7         (b)     (b)
+Divisor<13>           4       2<- \/3   0     FB2_8   76    GTS/I/O (b)
+Dividend<6>          14       9<-   0   0     FB2_9   77    GTS/I/O (b)
+(unused)              0       0   /\5   0     FB2_10        (b)     (b)
+Dividend<7>          14      10<- /\1   0     FB2_11  79    I/O     (b)
+(unused)              0       0   /\5   0     FB2_12  80    I/O     (b)
+(unused)              0       0   /\5   0     FB2_13        (b)     (b)
+(unused)              0       0   \/5   0     FB2_14  81    I/O     (b)
+Dividend<5>          14       9<-   0   0     FB2_15  82    I/O     (b)
+Divisor<1>            4       3<- /\4   0     FB2_16  83    I/O     (b)
+MuxCntr<4>            2       0   /\3   0     FB2_17  84    I/O     (b)
+(unused)              0       0   \/5   0     FB2_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: DecoderCntr<0>    13: Dividend<9>       24: HexDigits<1> 
+  2: DecoderCntr<1>    14: Divider_FSM_FFd1  25: HexDigits<2> 
+  3: DecoderCntr<2>    15: Divider_FSM_FFd2  26: HexDigits<3>_BUFR 
+  4: DecoderCntr<3>    16: Divider_FSM_FFd3  27: InDivisor 
+  5: Dividend<10>      17: Divisor<0>        28: KeypadRDYS 
+  6: Dividend<11>      18: Divisor<13>       29: KeypadRDY 
+  7: Dividend<12>      19: Divisor<14>       30: MuxCntr<0> 
+  8: Dividend<4>       20: Divisor<15>       31: MuxCntr<1> 
+  9: Dividend<5>       21: Divisor<1>        32: MuxCntr<2> 
+ 10: Dividend<6>       22: Divisor<2>        33: MuxCntr<3> 
+ 11: Dividend<7>       23: Divisor<5>        34: Reset 
+ 12: Dividend<8>      
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+Dividend<4>          XXXX...XX..X.XXX.........XXXX....X...... 15      15
+Segments<5>          ........................................ 0       0
+Segments<6>          ........................................ 0       0
+Dividend<8>          XXXX..X...XXXXXX..........XXX....X...... 15      15
+Divisor<15>          .............XXXX..X.....X.......X...... 7       7
+Divisor<14>          .............XXX..XX....X........X...... 7       7
+Divisor<13>          .............XXX.XX....X.........X...... 7       7
+Dividend<6>          XXXXX...XXX..XXX..........XXX....X...... 15      15
+Dividend<7>          XXXX.X...XXX.XXX..........XXX....X...... 15      15
+Dividend<5>          XXXX...XXX..XXXX..........XXX....X...... 15      15
+Divisor<1>           .............XXX....XXX..........X...... 7       7
+MuxCntr<4>           .............................XXXXX...... 5       5
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB3  ***********************************
+Number of function block inputs used/remaining:               29/7
+Number of signals used by logic mapping into function block:  33
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+MuxCntr<1>            2       0   \/3   0     FB3_1         (b)     (b)
+HexDigits<3>_BUFR    12       7<-   0   0     FB3_2   14    I/O     (b)
+KeypadCols<0>         0       0   /\4   1     FB3_3   15    I/O     O
+Divisor<8>            4       0     0   1     FB3_4         (b)     (b)
+KeypadCols<1>         0       0     0   5     FB3_5   17    I/O     O
+KeypadCols<2>         0       0     0   5     FB3_6   18    I/O     O
+Divisor<9>            4       0     0   1     FB3_7         (b)     (b)
+KeypadCols<3>         0       0     0   5     FB3_8   19    I/O     O
+HexDigits<3>          1       0   \/4   0     FB3_9   20    I/O     O
+(unused)              0       0   \/5   0     FB3_10        (b)     (b)
+HexDigits<2>         12       9<- \/2   0     FB3_11  21    I/O     O
+HexDigits<1>         12       7<-   0   0     FB3_12  23    I/O     O
+(unused)              0       0   /\5   0     FB3_13        (b)     (b)
+HexDigits<0>         12       7<-   0   0     FB3_14  24    I/O     O
+(unused)              0       0   /\5   0     FB3_15  25    I/O     I
+MuxCntr<2>            2       0   /\2   1     FB3_16  26    I/O     I
+highBit               2       0     0   3     FB3_17  31    I/O     I
+MuxCntr<0>            1       0     0   4     FB3_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: DecoderCntr<0>    12: Divisor<10>        23: KeypadRDYS 
+  2: DecoderCntr<1>    13: Divisor<12>        24: KeypadRDY 
+  3: DecoderCntr<2>    14: Divisor<13>        25: Keypad<0> 
+  4: DecoderCntr<3>    15: Divisor<8>         26: Keypad<1> 
+  5: Dividend<4>       16: Divisor<9>         27: Keypad<2> 
+  6: Dividend<5>       17: FC_0_.OUT          28: Keypad<3> 
+  7: Dividend<6>       18: HexDigits<0>       29: MuxCntr<0> 
+  8: Dividend<7>       19: HexDigits<1>       30: MuxCntr<1> 
+  9: Divider_FSM_FFd1  20: HexDigits<2>       31: MuxCntr<9> 
+ 10: Divider_FSM_FFd2  21: HexDigits<3>_BUFR  32: Quotient<15> 
+ 11: Divider_FSM_FFd3  22: InDivisor          33: Reset 
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+MuxCntr<1>           ............................X...X....... 2       2
+HexDigits<3>_BUFR    XXXXX..XXXX.....X..XXXXX...X....X....... 17      17
+KeypadCols<0>        ........................................ 0       0
+Divisor<8>           ........XXX.X.XX................X....... 7       7
+KeypadCols<1>        ........................................ 0       0
+KeypadCols<2>        ........................................ 0       0
+Divisor<9>           ........XXXX.X.X................X....... 7       7
+KeypadCols<3>        ........................................ 0       0
+HexDigits<3>         ....................X................... 1       1
+HexDigits<2>         XXXX..X.XXX.....X.XXXXXX..X.....X....... 17      17
+HexDigits<1>         XXXX.X..XXX.....XXXX.XXX.X......X....... 17      17
+HexDigits<0>         XXXXX...XXX.....XXX..XXXX......XX....... 17      17
+MuxCntr<2>           ............................XX..X....... 3       3
+highBit              ..............................X.X....... 2       2
+MuxCntr<0>           ................................X....... 1       1
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB4  ***********************************
+Number of function block inputs used/remaining:               33/3
+Number of signals used by logic mapping into function block:  33
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+Divisor<12>           4       0   /\1   0     FB4_1         (b)     (b)
+Digits<0>             0       0     0   5     FB4_2   57    I/O     O
+Divisor<0>            4       0   \/1   0     FB4_3   58    I/O     (b)
+Quotient<9>           6       1<-   0   0     FB4_4         (b)     (b)
+Quotient<8>           6       1<-   0   0     FB4_5   61    I/O     (b)
+Quotient<7>           6       2<- /\1   0     FB4_6   62    I/O     (b)
+Quotient<6>           6       3<- /\2   0     FB4_7         (b)     (b)
+Segments<0>           0       0   /\3   2     FB4_8   63    I/O     O
+Segments<1>           0       0   \/1   4     FB4_9   65    I/O     O
+Quotient<15>          6       1<-   0   0     FB4_10        (b)     (b)
+Segments<2>           0       0   \/1   4     FB4_11  66    I/O     O
+Quotient<14>          6       1<-   0   0     FB4_12  67    I/O     (b)
+Quotient<13>          6       1<-   0   0     FB4_13        (b)     (b)
+Quotient<12>          6       2<- /\1   0     FB4_14  68    I/O     (b)
+Segments<3>           0       0   /\2   3     FB4_15  69    I/O     O
+Quotient<11>          6       1<-   0   0     FB4_16        (b)     (b)
+Segments<4>           0       0   /\1   4     FB4_17  70    I/O     O
+Quotient<10>          6       1<-   0   0     FB4_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: Dividend<10>      12: Divider_FSM_FFd2  23: Quotient<11> 
+  2: Dividend<11>      13: Divider_FSM_FFd3  24: Quotient<12> 
+  3: Dividend<12>      14: Divisor<0>        25: Quotient<13> 
+  4: Dividend<13>      15: Divisor<12>       26: Quotient<14> 
+  5: Dividend<14>      16: Divisor<13>       27: Quotient<15> 
+  6: Dividend<15>      17: Divisor<1>        28: Quotient<5> 
+  7: Dividend<6>       18: Divisor<2>        29: Quotient<6> 
+  8: Dividend<7>       19: Divisor<3>        30: Quotient<7> 
+  9: Dividend<8>       20: Divisor<4>        31: Quotient<8> 
+ 10: Dividend<9>       21: HexDigits<0>      32: Quotient<9> 
+ 11: Divider_FSM_FFd1  22: Quotient<10>      33: Reset 
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+Divisor<12>          ..........XXX.XX....X...........X....... 7       7
+Digits<0>            ........................................ 0       0
+Divisor<0>           ..........XXXX..X..X............X....... 7       7
+Quotient<9>          .........XXXX...........X.....XXX....... 8       8
+Quotient<8>          ........X.XXX..........X.....XX.X....... 8       8
+Quotient<7>          .......X..XXX.........X.....XX..X....... 8       8
+Quotient<6>          ......X...XXX........X.....XX...X....... 8       8
+Segments<0>          ........................................ 0       0
+Segments<1>          ........................................ 0       0
+Quotient<15>         .....X....XXX.....X......XX.....X....... 8       8
+Segments<2>          ........................................ 0       0
+Quotient<14>         ....X.....XXX....X......XX......X....... 8       8
+Quotient<13>         ...X......XXX...X......XX.......X....... 8       8
+Quotient<12>         ..X.......XXXX........XX........X....... 8       8
+Segments<3>          ........................................ 0       0
+Quotient<11>         .X........XXX........XX...X.....X....... 8       8
+Segments<4>          ........................................ 0       0
+Quotient<10>         X.........XXX........X...X.....XX....... 8       8
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB5  ***********************************
+Number of function block inputs used/remaining:               36/0
+Number of signals used by logic mapping into function block:  36
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+MuxCntr<9>            2       1<- /\4   0     FB5_1         (b)     (b)
+MuxCntr<8>            2       0   /\1   2     FB5_2   32    I/O     I
+MuxCntr<7>            2       0     0   3     FB5_3   33    I/O     I
+MuxCntr<6>            2       0     0   3     FB5_4         (b)     (b)
+MuxCntr<5>            2       0     0   3     FB5_5   34    I/O     (b)
+Divisor<7>            4       0     0   1     FB5_6   35    I/O     (b)
+Divisor<6>            4       0     0   1     FB5_7         (b)     (b)
+Divisor<5>            4       0     0   1     FB5_8   36    I/O     (b)
+KeypadRDYS            5       0     0   0     FB5_9   37    I/O     (b)
+Divider_FSM_FFd1      5       0     0   0     FB5_10        (b)     (b)
+DecoderCntr<3>        3       0     0   2     FB5_11  39    I/O     O
+DecoderCntr<2>        3       0     0   2     FB5_12  40    I/O     O
+Carry                 5       0     0   0     FB5_13        (b)     (b)
+DecoderCntr<1>        2       0     0   3     FB5_14  41    I/O     O
+DecoderCntr<0>        2       0   \/2   1     FB5_15  43    I/O     O
+Divider_FSM_FFd2      6       2<- \/1   0     FB5_16        (b)     (b)
+DecoderEn             1       1<- \/5   0     FB5_17  44    I/O     O
+Dividend<14>         14       9<-   0   0     FB5_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: Carry             13: Divisor<10>       25: MuxCntr<1> 
+  2: DecoderCntr<0>    14: Divisor<11>       26: MuxCntr<2> 
+  3: DecoderCntr<1>    15: Divisor<5>        27: MuxCntr<3> 
+  4: DecoderCntr<2>    16: Divisor<6>        28: MuxCntr<4> 
+  5: DecoderCntr<3>    17: Divisor<7>        29: MuxCntr<5> 
+  6: Dividend<13>      18: Divisor<8>        30: MuxCntr<6> 
+  7: Dividend<14>      19: Divisor<9>        31: MuxCntr<7> 
+  8: Dividend<15>      20: HexDigits<0>      32: MuxCntr<8> 
+  9: Divider_FSM_FFd1  21: InDivisor         33: MuxCntr<9> 
+ 10: Divider_FSM_FFd2  22: KeypadRDYS        34: Quotient<2> 
+ 11: Divider_FSM_FFd3  23: KeypadRDY         35: Reset 
+ 12: Divisor<0>        24: MuxCntr<0>        36: highBit 
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+MuxCntr<9>           .......................XXXXXXXXX..X..... 10      10
+MuxCntr<8>           .......................XXXXXXXX...X..... 9       9
+MuxCntr<7>           .......................XXXXXXX....X..... 8       8
+MuxCntr<6>           .......................XXXXXX.....X..... 7       7
+MuxCntr<5>           .......................XXXXX......X..... 6       6
+Divisor<7>           ........XXX..X..XX................X..... 7       7
+Divisor<6>           ........XXX.X..XX.................X..... 7       7
+Divisor<5>           ........XXX...XX..X...............X..... 7       7
+KeypadRDYS           .XXXX...............XXXXXXXXXXXXX.X..... 18      18
+Divider_FSM_FFd1     ........XXX................XX...X.XX.... 8       8
+DecoderCntr<3>       .XXXX..................XXXXXXXXXX.X..... 15      15
+DecoderCntr<2>       .XXXX..................XXXXXXXXXX.X..... 15      15
+Carry                X.......XXXX.......X..............X..... 7       7
+DecoderCntr<1>       .X.....................XXXXXXXXXX.X..... 12      12
+DecoderCntr<0>       .......................XXXXXXXXXX.X..... 11      11
+Divider_FSM_FFd2     ........XXX................XX...X.XX.... 8       8
+DecoderEn            ........................................ 0       0
+Dividend<14>         .XXXXXXXXXX.........XXX..........XX..... 15      15
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*********************************** FB6  ***********************************
+Number of function block inputs used/remaining:               23/13
+Number of signals used by logic mapping into function block:  23
+Signal              Total   Imp   Exp Unused  Loc     Pin   Pin     Pin
+Name                Pt      Pt    Pt  Pt               #    Type    Use
+Divisor<11>           4       0     0   1     FB6_1         (b)     (b)
+Digits<11>            0       0     0   5     FB6_2   45    I/O     O
+Digits<10>            0       0     0   5     FB6_3   46    I/O     O
+Divisor<10>           4       0     0   1     FB6_4         (b)     (b)
+Digits<9>             0       0     0   5     FB6_5   47    I/O     O
+Digits<8>             0       0     0   5     FB6_6   48    I/O     O
+Quotient<1>           5       0     0   0     FB6_7         (b)     (b)
+Digits<7>             0       0     0   5     FB6_8   50    I/O     O
+Digits<6>             0       0   \/1   4     FB6_9   51    I/O     O
+Quotient<5>           6       1<-   0   0     FB6_10        (b)     (b)
+Digits<5>             0       0     0   5     FB6_11  52    I/O     O
+Digits<4>             0       0   \/1   4     FB6_12  53    I/O     O
+Quotient<4>           6       1<-   0   0     FB6_13        (b)     (b)
+Digits<3>             0       0     0   5     FB6_14  54    I/O     O
+Digits<2>             0       0   \/1   4     FB6_15  55    I/O     O
+Quotient<3>           6       1<-   0   0     FB6_16        (b)     (b)
+Digits<1>             0       0   \/1   4     FB6_17  56    I/O     O
+Quotient<2>           6       1<-   0   0     FB6_18        (b)     (b)
+
+Signals Used by Logic in Function Block
+  1: Dividend<4>        9: Divisor<14>        17: Quotient<4> 
+  2: Dividend<5>       10: Divisor<15>        18: Quotient<5> 
+  3: Divider_FSM_FFd1  11: HexDigits<1>       19: Quotient<6> 
+  4: Divider_FSM_FFd2  12: HexDigits<2>       20: Quotient<7> 
+  5: Divider_FSM_FFd3  13: HexDigits<3>_BUFR  21: Quotient<8> 
+  6: Divisor<10>       14: Quotient<1>        22: Quotient<9> 
+  7: Divisor<11>       15: Quotient<2>        23: Reset 
+  8: Divisor<12>       16: Quotient<3>       
+
+Signal                        1         2         3         4 Signals FB
+Name                0----+----0----+----0----+----0----+----0 Used    Inputs
+Divisor<11>          ..XXX.XX.X............X................. 7       7
+Digits<11>           ........................................ 0       0
+Digits<10>           ........................................ 0       0
+Divisor<10>          ..XXXXX.X.............X................. 7       7
+Digits<9>            ........................................ 0       0
+Digits<8>            ........................................ 0       0
+Quotient<1>          ..XXX.....X..X...X....X................. 7       7
+Digits<7>            ........................................ 0       0
+Digits<6>            ........................................ 0       0
+Quotient<5>          .XXXX...........XX...XX................. 8       8
+Digits<5>            ........................................ 0       0
+Digits<4>            ........................................ 0       0
+Quotient<4>          X.XXX..........XX...X.X................. 8       8
+Digits<3>            ........................................ 0       0
+Digits<2>            ........................................ 0       0
+Quotient<3>          ..XXX.......X.XX...X..X................. 8       8
+Digits<1>            ........................................ 0       0
+Quotient<2>          ..XXX......X.XX...X...X................. 8       8
+                    0----+----1----+----2----+----3----+----4
+                              0         0         0         0
+*******************************  Equations  ********************************
+
+********** Mapped Logic **********
+
+FTCPE_Carry: FTCPE port map (Carry,Carry_T,CLK,NOT Reset,'0');
+Carry_T <= ((Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Carry)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Carry)
+	OR (Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND NOT Carry AND 
+	HexDigits(0) AND Divisor(0))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Carry AND NOT HexDigits(0) AND NOT Divisor(0)));
+
+FTCPE_DecoderCntr0: FTCPE port map (DecoderCntr(0),DecoderCntr_T(0),CLK,'0',NOT Reset);
+DecoderCntr_T(0) <= (MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+	MuxCntr(9) AND MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND 
+	MuxCntr(6) AND MuxCntr(7) AND MuxCntr(8));
+
+FTCPE_DecoderCntr1: FTCPE port map (DecoderCntr(1),DecoderCntr_T(1),CLK,'0',NOT Reset);
+DecoderCntr_T(1) <= (NOT DecoderCntr(0) AND MuxCntr(4) AND MuxCntr(5) AND 
+	MuxCntr(0) AND MuxCntr(9) AND MuxCntr(1) AND MuxCntr(2) AND 
+	MuxCntr(3) AND MuxCntr(6) AND MuxCntr(7) AND MuxCntr(8));
+
+FTCPE_DecoderCntr2: FTCPE port map (DecoderCntr(2),DecoderCntr_T(2),CLK,NOT Reset,'0');
+DecoderCntr_T(2) <= ((NOT DecoderCntr(2) AND NOT DecoderCntr(0) AND NOT DecoderCntr(1) AND 
+	MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND MuxCntr(9) AND 
+	MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND MuxCntr(6) AND 
+	MuxCntr(7) AND MuxCntr(8))
+	OR (NOT DecoderCntr(0) AND NOT DecoderCntr(1) AND DecoderCntr(3) AND 
+	MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND MuxCntr(9) AND 
+	MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND MuxCntr(6) AND 
+	MuxCntr(7) AND MuxCntr(8)));
+
+FTCPE_DecoderCntr3: FTCPE port map (DecoderCntr(3),DecoderCntr_T(3),CLK,NOT Reset,'0');
+DecoderCntr_T(3) <= ((DecoderCntr(2) AND NOT DecoderCntr(0) AND NOT DecoderCntr(1) AND 
+	NOT DecoderCntr(3) AND MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+	MuxCntr(9) AND MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND 
+	MuxCntr(6) AND MuxCntr(7) AND MuxCntr(8))
+	OR (NOT DecoderCntr(2) AND NOT DecoderCntr(0) AND NOT DecoderCntr(1) AND 
+	DecoderCntr(3) AND MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+	MuxCntr(9) AND MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND 
+	MuxCntr(6) AND MuxCntr(7) AND MuxCntr(8)));
+
+
+DecoderEn <= Divider_FSM_FFd2.EXP;
+
+
+Digits_I(0) <= '0';
+Digits(0) <= Digits_I(0) when Digits_OE(0) = '1' else 'Z';
+Digits_OE(0) <= '0';
+
+
+Digits_I(1) <= '0';
+Digits(1) <= Digits_I(1) when Digits_OE(1) = '1' else 'Z';
+Digits_OE(1) <= '0';
+
+
+Digits_I(2) <= '0';
+Digits(2) <= Digits_I(2) when Digits_OE(2) = '1' else 'Z';
+Digits_OE(2) <= '0';
+
+
+Digits_I(3) <= '0';
+Digits(3) <= Digits_I(3) when Digits_OE(3) = '1' else 'Z';
+Digits_OE(3) <= '0';
+
+
+Digits_I(4) <= '0';
+Digits(4) <= Digits_I(4) when Digits_OE(4) = '1' else 'Z';
+Digits_OE(4) <= '0';
+
+
+Digits_I(5) <= '0';
+Digits(5) <= Digits_I(5) when Digits_OE(5) = '1' else 'Z';
+Digits_OE(5) <= '0';
+
+
+Digits_I(6) <= '0';
+Digits(6) <= Digits_I(6) when Digits_OE(6) = '1' else 'Z';
+Digits_OE(6) <= '0';
+
+
+Digits_I(7) <= '0';
+Digits(7) <= Digits_I(7) when Digits_OE(7) = '1' else 'Z';
+Digits_OE(7) <= '0';
+
+
+Digits_I(8) <= '0';
+Digits(8) <= Digits_I(8) when Digits_OE(8) = '1' else 'Z';
+Digits_OE(8) <= '0';
+
+
+Digits_I(9) <= '0';
+Digits(9) <= Digits_I(9) when Digits_OE(9) = '1' else 'Z';
+Digits_OE(9) <= '0';
+
+
+Digits_I(10) <= '0';
+Digits(10) <= Digits_I(10) when Digits_OE(10) = '1' else 'Z';
+Digits_OE(10) <= '0';
+
+
+Digits_I(11) <= '0';
+Digits(11) <= Digits_I(11) when Digits_OE(11) = '1' else 'Z';
+Digits_OE(11) <= '0';
+
+FTCPE_Dividend4: FTCPE port map (Dividend(4),Dividend_T(4),CLK,'0','0');
+Dividend_T(4) <= ((NOT Reset)
+	OR (N0$BUF0.EXP)
+	OR (EXP13_.EXP)
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+	NOT Dividend(4))
+	OR (Divider_FSM_FFd3 AND NOT HexDigits(3)_BUFR AND 
+	NOT Dividend(4) AND NOT Dividend(5)));
+
+FTCPE_Dividend5: FTCPE port map (Dividend(5),Dividend_T(5),CLK,'0','0');
+Dividend_T(5) <= ((NOT Reset)
+	OR (EXP12_.EXP)
+	OR (Divisor(1).EXP)
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+	NOT Dividend(5))
+	OR (Divider_FSM_FFd3 AND NOT Dividend(4) AND NOT Dividend(5) AND 
+	NOT Dividend(6)));
+
+FTCPE_Dividend6: FTCPE port map (Dividend(6),Dividend_T(6),CLK,'0','0');
+Dividend_T(6) <= ((NOT Reset)
+	OR (Divisor(13).EXP)
+	OR (EXP9_.EXP)
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+	NOT Dividend(6))
+	OR (Divider_FSM_FFd3 AND NOT Dividend(5) AND NOT Dividend(6) AND 
+	NOT Dividend(7)));
+
+FTCPE_Dividend7: FTCPE port map (Dividend(7),Dividend_T(7),CLK,'0','0');
+Dividend_T(7) <= ((NOT Reset)
+	OR (EXP10_.EXP)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+	NOT Dividend(7))
+	OR (Divider_FSM_FFd3 AND NOT Dividend(6) AND NOT Dividend(7) AND 
+	NOT Dividend(8)));
+
+FTCPE_Dividend8: FTCPE port map (Dividend(8),Dividend_T(8),CLK,'0','0');
+Dividend_T(8) <= ((NOT Reset)
+	OR (N0.EXP)
+	OR (EXP8_.EXP)
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+	NOT Dividend(8))
+	OR (Divider_FSM_FFd3 AND NOT Dividend(7) AND NOT Dividend(8) AND 
+	NOT Dividend(9)));
+
+FTCPE_Dividend9: FTCPE port map (Dividend(9),Dividend_T(9),CLK,'0','0');
+Dividend_T(9) <= ((EXP2_.EXP)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+	NOT Dividend(9))
+	OR (Divider_FSM_FFd3 AND NOT Dividend(10) AND NOT Dividend(8) AND 
+	NOT Dividend(9)));
+
+FTCPE_Dividend10: FTCPE port map (Dividend(10),Dividend_T(10),CLK,'0','0');
+Dividend_T(10) <= ((NOT Reset)
+	OR (EXP0_.EXP)
+	OR (MuxCntr(3).EXP)
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+	NOT Dividend(10))
+	OR (Divider_FSM_FFd3 AND NOT Dividend(10) AND NOT Dividend(11) AND 
+	NOT Dividend(9)));
+
+FTCPE_Dividend11: FTCPE port map (Dividend(11),Dividend_T(11),CLK,'0','0');
+Dividend_T(11) <= ((NOT Reset)
+	OR (EXP7_.EXP)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+	NOT Dividend(11))
+	OR (Divider_FSM_FFd3 AND NOT Dividend(10) AND NOT Dividend(11) AND 
+	NOT Dividend(12)));
+
+FTCPE_Dividend12: FTCPE port map (Dividend(12),Dividend_T(12),CLK,'0','0');
+Dividend_T(12) <= ((NOT Reset)
+	OR (Dividend(13).EXP)
+	OR (EXP5_.EXP)
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+	NOT Dividend(12))
+	OR (Divider_FSM_FFd3 AND NOT Dividend(11) AND NOT Dividend(12) AND 
+	NOT Dividend(13)));
+
+FTCPE_Dividend13: FTCPE port map (Dividend(13),Dividend_T(13),CLK,'0','0');
+Dividend_T(13) <= ((EXP4_.EXP)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+	NOT Dividend(13)));
+
+FTCPE_Dividend14: FTCPE port map (Dividend(14),Dividend_T(14),CLK,'0','0');
+Dividend_T(14) <= ((NOT Reset)
+	OR (MuxCntr(9).EXP)
+	OR (DecoderEn_OBUF.EXP)
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND 
+	NOT Dividend(14))
+	OR (Divider_FSM_FFd3 AND NOT Dividend(13) AND NOT Dividend(14) AND 
+	NOT Dividend(15)));
+
+FTCPE_Divider_FSM_FFd1: FTCPE port map (Divider_FSM_FFd1,Divider_FSM_FFd1_T,CLK,NOT Reset,'0');
+Divider_FSM_FFd1_T <= ((NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND NOT MuxCntr(5))
+	OR (Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND MuxCntr(4))
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND NOT MuxCntr(9) AND 
+	highBit));
+
+FDCPE_Divider_FSM_FFd2: FDCPE port map (Divider_FSM_FFd2,Divider_FSM_FFd2_D,CLK,NOT Reset,'0');
+Divider_FSM_FFd2_D <= ((DecoderCntr_0.EXP)
+	OR (Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND NOT MuxCntr(4))
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd3 AND NOT MuxCntr(5)));
+
+FTCPE_Divisor0: FTCPE port map (Divisor(0),Divisor_T(0),CLK,'0','0');
+Divisor_T(0) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(0) AND Divisor(1))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Divisor(0) AND NOT Divisor(1))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(0) AND NOT Divisor(4))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT Divisor(0) AND Divisor(4)));
+
+FTCPE_Divisor1: FTCPE port map (Divisor(1),Divisor_T(1),CLK,'0','0');
+Divisor_T(1) <= ((MuxCntr(4).EXP)
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(1) AND Divisor(2)));
+
+FTCPE_Divisor2: FTCPE port map (Divisor(2),Divisor_T(2),CLK,'0','0');
+Divisor_T(2) <= ((Divisor(3).EXP)
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(2) AND Divisor(3))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(2) AND NOT Divisor(6)));
+
+FTCPE_Divisor3: FTCPE port map (Divisor(3),Divisor_T(3),CLK,'0','0');
+Divisor_T(3) <= ((Divisor(4).EXP)
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(3) AND Divisor(4))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Divisor(3) AND NOT Divisor(4))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(3) AND NOT Divisor(7)));
+
+FTCPE_Divisor4: FTCPE port map (Divisor(4),Divisor_T(4),CLK,'0','0');
+Divisor_T(4) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(4) AND Divisor(5))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Divisor(4) AND NOT Divisor(5))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(4) AND NOT Divisor(8))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT Divisor(4) AND Divisor(8)));
+
+FTCPE_Divisor5: FTCPE port map (Divisor(5),Divisor_T(5),CLK,'0','0');
+Divisor_T(5) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(5) AND Divisor(6))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Divisor(5) AND NOT Divisor(6))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(5) AND NOT Divisor(9))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT Divisor(5) AND Divisor(9)));
+
+FTCPE_Divisor6: FTCPE port map (Divisor(6),Divisor_T(6),CLK,'0','0');
+Divisor_T(6) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(6) AND Divisor(7))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Divisor(6) AND NOT Divisor(7))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(10) AND NOT Divisor(6))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT Divisor(10) AND Divisor(6)));
+
+FTCPE_Divisor7: FTCPE port map (Divisor(7),Divisor_T(7),CLK,'0','0');
+Divisor_T(7) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(7) AND Divisor(8))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Divisor(7) AND NOT Divisor(8))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(11) AND NOT Divisor(7))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT Divisor(11) AND Divisor(7)));
+
+FTCPE_Divisor8: FTCPE port map (Divisor(8),Divisor_T(8),CLK,'0','0');
+Divisor_T(8) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(8) AND Divisor(9))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Divisor(8) AND NOT Divisor(9))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(12) AND NOT Divisor(8))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT Divisor(12) AND Divisor(8)));
+
+FTCPE_Divisor9: FTCPE port map (Divisor(9),Divisor_T(9),CLK,'0','0');
+Divisor_T(9) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	Divisor(10) AND NOT Divisor(9))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND NOT Divisor(10) AND Divisor(9))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(13) AND NOT Divisor(9))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT Divisor(13) AND Divisor(9)));
+
+FTCPE_Divisor10: FTCPE port map (Divisor(10),Divisor_T(10),CLK,'0','0');
+Divisor_T(10) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(10) AND Divisor(11))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Divisor(10) AND NOT Divisor(11))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(10) AND NOT Divisor(14))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT Divisor(10) AND Divisor(14)));
+
+FTCPE_Divisor11: FTCPE port map (Divisor(11),Divisor_T(11),CLK,'0','0');
+Divisor_T(11) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(11) AND Divisor(12))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Divisor(11) AND NOT Divisor(12))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(11) AND NOT Divisor(15))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT Divisor(11) AND Divisor(15)));
+
+FTCPE_Divisor12: FTCPE port map (Divisor(12),Divisor_T(12),CLK,'0','0');
+Divisor_T(12) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(12) AND Divisor(13))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Divisor(12) AND NOT Divisor(13))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND HexDigits(0) AND NOT Divisor(12))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT HexDigits(0) AND Divisor(12)));
+
+FTCPE_Divisor13: FTCPE port map (Divisor(13),Divisor_T(13),CLK,'0','0');
+Divisor_T(13) <= ((Divisor(14).EXP)
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(13) AND Divisor(14))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT HexDigits(1) AND Divisor(13)));
+
+FTCPE_Divisor14: FTCPE port map (Divisor(14),Divisor_T(14),CLK,'0','0');
+Divisor_T(14) <= ((Divisor(15).EXP)
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT Divisor(14) AND Divisor(15))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Divisor(14) AND NOT Divisor(15))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT HexDigits(2) AND Divisor(14)));
+
+FTCPE_Divisor15: FTCPE port map (Divisor(15),Divisor_T(15),CLK,'0','0');
+Divisor_T(15) <= ((Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	Divisor(0) AND NOT Divisor(15))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND NOT Divisor(0) AND Divisor(15))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND HexDigits(3)_BUFR AND NOT Divisor(15))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT HexDigits(3)_BUFR AND Divisor(15)));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FDCPE_HexDigits0: FDCPE port map (HexDigits(0),HexDigits_D(0),CLK,'0','0');
+HexDigits_D(0) <= ((EXP16_.EXP)
+	OR (NOT Reset AND HexDigits(0))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(15))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	HexDigits(1))
+	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+	HexDigits(1))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND HexDigits(0)));
+
+FDCPE_HexDigits1: FDCPE port map (HexDigits(1),HexDigits_D(1),CLK,'0','0');
+HexDigits_D(1) <= ((Dividend(2).EXP)
+	OR (EXP15_.EXP)
+	OR (NOT Reset AND HexDigits(1))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	HexDigits(0))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	HexDigits(2))
+	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+	HexDigits(2))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND HexDigits(1)));
+
+FDCPE_HexDigits2: FDCPE port map (HexDigits(2),HexDigits_D(2),CLK,'0','0');
+HexDigits_D(2) <= ((EXP14_.EXP)
+	OR (NOT Reset AND HexDigits(2))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	HexDigits(1))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	HexDigits(3)_BUFR));
+
+
+HexDigits(3) <= HexDigits(3)_BUFR;
+
+FDCPE_HexDigits3_BUFR: FDCPE port map (HexDigits(3)_BUFR,HexDigits_D(3)_BUFR,CLK,'0','0');
+HexDigits_D(3)_BUFR <= ((MuxCntr(1).EXP)
+	OR (N0$BUF9.EXP)
+	OR (NOT Reset AND HexDigits(3)_BUFR)
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	HexDigits(2))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	Dividend(4))
+	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+	Dividend(4))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND HexDigits(3)_BUFR));
+
+
+KeypadCols_I(0) <= '0';
+KeypadCols(0) <= KeypadCols_I(0) when KeypadCols_OE(0) = '1' else 'Z';
+KeypadCols_OE(0) <= '0';
+
+
+KeypadCols_I(1) <= '0';
+KeypadCols(1) <= KeypadCols_I(1) when KeypadCols_OE(1) = '1' else 'Z';
+KeypadCols_OE(1) <= '0';
+
+
+KeypadCols_I(2) <= '0';
+KeypadCols(2) <= KeypadCols_I(2) when KeypadCols_OE(2) = '1' else 'Z';
+KeypadCols_OE(2) <= '0';
+
+
+KeypadCols_I(3) <= '0';
+KeypadCols(3) <= KeypadCols_I(3) when KeypadCols_OE(3) = '1' else 'Z';
+KeypadCols_OE(3) <= '0';
+
+FTCPE_KeypadRDYS: FTCPE port map (KeypadRDYS,KeypadRDYS_T,CLK,NOT Reset,'0');
+KeypadRDYS_T <= ((DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+	NOT DecoderCntr(3) AND NOT MuxCntr(4) AND NOT MuxCntr(5) AND MuxCntr(0) AND 
+	NOT MuxCntr(9) AND NOT MuxCntr(1) AND NOT MuxCntr(2) AND NOT MuxCntr(3) AND 
+	NOT MuxCntr(6) AND NOT MuxCntr(7) AND NOT MuxCntr(8) AND KeypadRDYS AND 
+	NOT InDivisor AND NOT KeypadRDY)
+	OR (DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+	NOT DecoderCntr(3) AND NOT MuxCntr(4) AND NOT MuxCntr(5) AND MuxCntr(0) AND 
+	NOT MuxCntr(9) AND NOT MuxCntr(1) AND NOT MuxCntr(2) AND NOT MuxCntr(3) AND 
+	NOT MuxCntr(6) AND NOT MuxCntr(7) AND NOT MuxCntr(8) AND NOT KeypadRDYS AND 
+	NOT InDivisor AND KeypadRDY)
+	OR (NOT DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+	NOT DecoderCntr(3) AND NOT MuxCntr(4) AND NOT MuxCntr(5) AND MuxCntr(0) AND 
+	NOT MuxCntr(9) AND NOT MuxCntr(1) AND NOT MuxCntr(2) AND NOT MuxCntr(3) AND 
+	NOT MuxCntr(6) AND NOT MuxCntr(7) AND NOT MuxCntr(8) AND KeypadRDYS AND 
+	InDivisor AND NOT KeypadRDY)
+	OR (NOT DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+	NOT DecoderCntr(3) AND NOT MuxCntr(4) AND NOT MuxCntr(5) AND MuxCntr(0) AND 
+	NOT MuxCntr(9) AND NOT MuxCntr(1) AND NOT MuxCntr(2) AND NOT MuxCntr(3) AND 
+	NOT MuxCntr(6) AND NOT MuxCntr(7) AND NOT MuxCntr(8) AND NOT KeypadRDYS AND 
+	InDivisor AND KeypadRDY));
+
+FTCPE_MuxCntr0: FTCPE port map (MuxCntr(0),'1',CLK,NOT Reset,'0');
+
+FTCPE_MuxCntr1: FTCPE port map (MuxCntr(1),MuxCntr(0),CLK,NOT Reset,'0');
+
+FTCPE_MuxCntr2: FTCPE port map (MuxCntr(2),MuxCntr_T(2),CLK,NOT Reset,'0');
+MuxCntr_T(2) <= (MuxCntr(0) AND MuxCntr(1));
+
+FTCPE_MuxCntr3: FTCPE port map (MuxCntr(3),MuxCntr_T(3),CLK,NOT Reset,'0');
+MuxCntr_T(3) <= (MuxCntr(0) AND MuxCntr(1) AND MuxCntr(2));
+
+FTCPE_MuxCntr4: FTCPE port map (MuxCntr(4),MuxCntr_T(4),CLK,NOT Reset,'0');
+MuxCntr_T(4) <= (MuxCntr(0) AND MuxCntr(1) AND MuxCntr(2) AND 
+	MuxCntr(3));
+
+FTCPE_MuxCntr5: FTCPE port map (MuxCntr(5),MuxCntr_T(5),CLK,NOT Reset,'0');
+MuxCntr_T(5) <= (MuxCntr(4) AND MuxCntr(0) AND MuxCntr(1) AND 
+	MuxCntr(2) AND MuxCntr(3));
+
+FTCPE_MuxCntr6: FTCPE port map (MuxCntr(6),MuxCntr_T(6),CLK,NOT Reset,'0');
+MuxCntr_T(6) <= (MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+	MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3));
+
+FTCPE_MuxCntr7: FTCPE port map (MuxCntr(7),MuxCntr_T(7),CLK,NOT Reset,'0');
+MuxCntr_T(7) <= (MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+	MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND MuxCntr(6));
+
+FTCPE_MuxCntr8: FTCPE port map (MuxCntr(8),MuxCntr_T(8),CLK,NOT Reset,'0');
+MuxCntr_T(8) <= (MuxCntr(4) AND MuxCntr(5) AND MuxCntr(0) AND 
+	MuxCntr(1) AND MuxCntr(2) AND MuxCntr(3) AND MuxCntr(6) AND 
+	MuxCntr(7));
+
+FTCPE_MuxCntr9: FTCPE port map (MuxCntr(9),MuxCntr(8).EXP,CLK,NOT Reset,'0');
+
+FTCPE_Quotient0: FTCPE port map (Quotient(0),Quotient_T(0),CLK,'0','0');
+Quotient_T(0) <= ((Divisor(2).EXP)
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT Quotient(0) AND Quotient(4))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	HexDigits(0) AND NOT Divisor(0) AND NOT Quotient(0))
+	OR (Reset AND NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND HexDigits(0) AND NOT Quotient(0)));
+
+FDCPE_Quotient1: FDCPE port map (Quotient(1),Quotient_D(1),CLK,'0','0');
+Quotient_D(1) <= ((NOT Reset AND Quotient(1))
+	OR (Divider_FSM_FFd3 AND Quotient(1))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(1))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Quotient(5))
+	OR (Reset AND NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND HexDigits(1)));
+
+FDCPE_Quotient2: FDCPE port map (Quotient(2),Quotient_D(2),CLK,'0','0');
+Quotient_D(2) <= ((N0$BUF18.EXP)
+	OR (NOT Reset AND Quotient(2))
+	OR (Divider_FSM_FFd3 AND Quotient(2))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(2))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(1))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Quotient(6)));
+
+FDCPE_Quotient3: FDCPE port map (Quotient(3),Quotient_D(3),CLK,'0','0');
+Quotient_D(3) <= ((N0$BUF17.EXP)
+	OR (NOT Reset AND Quotient(3))
+	OR (Divider_FSM_FFd3 AND Quotient(3))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(3))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(2))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Quotient(7)));
+
+FDCPE_Quotient4: FDCPE port map (Quotient(4),Quotient_D(4),CLK,'0','0');
+Quotient_D(4) <= ((N0$BUF15.EXP)
+	OR (NOT Reset AND Quotient(4))
+	OR (Divider_FSM_FFd3 AND Quotient(4))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(4))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(3))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Quotient(8)));
+
+FDCPE_Quotient5: FDCPE port map (Quotient(5),Quotient_D(5),CLK,'0','0');
+Quotient_D(5) <= ((N0$BUF13.EXP)
+	OR (NOT Reset AND Quotient(5))
+	OR (Divider_FSM_FFd3 AND Quotient(5))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(5))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(4))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Quotient(9)));
+
+FDCPE_Quotient6: FDCPE port map (Quotient(6),Quotient_D(6),CLK,'0','0');
+Quotient_D(6) <= ((N0$BUF5.EXP)
+	OR (NOT Reset AND Quotient(6))
+	OR (Divider_FSM_FFd3 AND Quotient(6))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(6)));
+
+FDCPE_Quotient7: FDCPE port map (Quotient(7),Quotient_D(7),CLK,'0','0');
+Quotient_D(7) <= ((Quotient(6).EXP)
+	OR (NOT Reset AND Quotient(7))
+	OR (Divider_FSM_FFd3 AND Quotient(7))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(7))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(6)));
+
+FDCPE_Quotient8: FDCPE port map (Quotient(8),Quotient_D(8),CLK,'0','0');
+Quotient_D(8) <= ((Quotient(7).EXP)
+	OR (NOT Reset AND Quotient(8))
+	OR (Divider_FSM_FFd3 AND Quotient(8))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(8))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(7))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Quotient(12)));
+
+FDCPE_Quotient9: FDCPE port map (Quotient(9),Quotient_D(9),CLK,'0','0');
+Quotient_D(9) <= ((Divisor(0).EXP)
+	OR (NOT Reset AND Quotient(9))
+	OR (Divider_FSM_FFd3 AND Quotient(9))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(9))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(8))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Quotient(13)));
+
+FDCPE_Quotient10: FDCPE port map (Quotient(10),Quotient_D(10),CLK,'0','0');
+Quotient_D(10) <= ((Divisor(12).EXP)
+	OR (NOT Reset AND Quotient(10))
+	OR (Divider_FSM_FFd3 AND Quotient(10))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(10))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(9))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Quotient(14)));
+
+FDCPE_Quotient11: FDCPE port map (Quotient(11),Quotient_D(11),CLK,'0','0');
+Quotient_D(11) <= ((N0$BUF1.EXP)
+	OR (NOT Reset AND Quotient(11))
+	OR (Divider_FSM_FFd3 AND Quotient(11))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(11))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(10))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Quotient(15)));
+
+FDCPE_Quotient12: FDCPE port map (Quotient(12),Quotient_D(12),CLK,'0','0');
+Quotient_D(12) <= ((N0$BUF2.EXP)
+	OR (NOT Reset AND Quotient(12))
+	OR (Divider_FSM_FFd3 AND Quotient(12))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(12))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(11)));
+
+FDCPE_Quotient13: FDCPE port map (Quotient(13),Quotient_D(13),CLK,'0','0');
+Quotient_D(13) <= ((Quotient(12).EXP)
+	OR (NOT Reset AND Quotient(13))
+	OR (Divider_FSM_FFd3 AND Quotient(13))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(13))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(12))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(1)));
+
+FDCPE_Quotient14: FDCPE port map (Quotient(14),Quotient_D(14),CLK,'0','0');
+Quotient_D(14) <= ((N0$BUF3.EXP)
+	OR (NOT Reset AND Quotient(14))
+	OR (Divider_FSM_FFd3 AND Quotient(14))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(14))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(13))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(2)));
+
+FDCPE_Quotient15: FDCPE port map (Quotient(15),Quotient_D(15),CLK,'0','0');
+Quotient_D(15) <= ((N0$BUF4.EXP)
+	OR (NOT Reset AND Quotient(15))
+	OR (Divider_FSM_FFd3 AND Quotient(15))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(15))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Quotient(14))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Divisor(3)));
+
+
+Segments_I(0) <= '0';
+Segments(0) <= Segments_I(0) when Segments_OE(0) = '1' else 'Z';
+Segments_OE(0) <= '0';
+
+
+Segments_I(1) <= '0';
+Segments(1) <= Segments_I(1) when Segments_OE(1) = '1' else 'Z';
+Segments_OE(1) <= '0';
+
+
+Segments_I(2) <= '0';
+Segments(2) <= Segments_I(2) when Segments_OE(2) = '1' else 'Z';
+Segments_OE(2) <= '0';
+
+
+Segments_I(3) <= '0';
+Segments(3) <= Segments_I(3) when Segments_OE(3) = '1' else 'Z';
+Segments_OE(3) <= '0';
+
+
+Segments_I(4) <= '0';
+Segments(4) <= Segments_I(4) when Segments_OE(4) = '1' else 'Z';
+Segments_OE(4) <= '0';
+
+
+Segments_I(5) <= '0';
+Segments(5) <= Segments_I(5) when Segments_OE(5) = '1' else 'Z';
+Segments_OE(5) <= '0';
+
+
+Segments_I(6) <= '0';
+Segments(6) <= Segments_I(6) when Segments_OE(6) = '1' else 'Z';
+Segments_OE(6) <= '0';
+
+FDCPE_highBit: FDCPE port map (highBit,MuxCntr(9),CLK,NOT Reset,'0');
+
+********** UnMapped Logic **********
+
+** Buried Nodes **
+
+FDCPE_Dividend15: FDCPE port map (Dividend(15),Dividend_D(15),CLK,'0','0');
+Dividend_D(15) <= ((NOT Reset AND Dividend(15))
+	OR (NOT Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Dividend(15))
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	Divider_FSM_FFd3 AND Dividend(15))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	Dividend(14))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT HexDigits(0) AND Divisor(0) AND Quotient(0))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	HexDigits(0) AND NOT Divisor(0) AND Quotient(0))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	HexDigits(0) AND Divisor(0) AND NOT Quotient(0))
+	OR (Reset AND Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND 
+	NOT HexDigits(0) AND NOT Divisor(0) AND NOT Quotient(0))
+	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+	Carry AND HexDigits(0) AND Divisor(0))
+	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+	Carry AND NOT HexDigits(0) AND NOT Divisor(0))
+	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+	NOT Carry AND NOT HexDigits(0) AND Divisor(0))
+	OR (Reset AND Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND 
+	NOT Carry AND HexDigits(0) AND NOT Divisor(0))
+	OR (Reset AND NOT DecoderCntr(0) AND Divider_FSM_FFd2 AND 
+	NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND Quotient(3))
+	OR (Reset AND NOT DecoderCntr(1) AND Divider_FSM_FFd2 AND 
+	NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND Quotient(3))
+	OR (Reset AND DecoderCntr(3) AND Divider_FSM_FFd2 AND 
+	NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND Quotient(3))
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND Quotient(3) AND NOT KeypadRDY)
+	OR (Reset AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND KeypadRDYS AND Quotient(3))
+	OR (Reset AND NOT DecoderCntr(2) AND Divider_FSM_FFd2 AND 
+	NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND Quotient(3) AND InDivisor)
+	OR (Reset AND DecoderCntr(2) AND Divider_FSM_FFd2 AND 
+	NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND Quotient(3) AND NOT InDivisor)
+	OR (DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+	NOT DecoderCntr(3) AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT KeypadRDYS AND Dividend(15) AND InDivisor AND 
+	KeypadRDY)
+	OR (NOT DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+	NOT DecoderCntr(3) AND Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3 AND NOT KeypadRDYS AND Dividend(15) AND NOT InDivisor AND 
+	KeypadRDY));
+
+FDCPE_Divider_FSM_FFd3: FDCPE port map (Divider_FSM_FFd3,Divider_FSM_FFd3_D,CLK,'0',NOT Reset);
+Divider_FSM_FFd3_D <= ((Divider_FSM_FFd2 AND Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND 
+	NOT Divider_FSM_FFd3)
+	OR (Divider_FSM_FFd1 AND Divider_FSM_FFd3 AND MuxCntr(4))
+	OR (Divider_FSM_FFd2 AND Divider_FSM_FFd3 AND MuxCntr(4))
+	OR (Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND MuxCntr(5) AND 
+	NOT Carry)
+	OR (Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND NOT MuxCntr(9) AND 
+	highBit)
+	OR (NOT Divider_FSM_FFd2 AND NOT Divider_FSM_FFd1 AND NOT MuxCntr(9) AND 
+	highBit)
+	OR (NOT DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+	NOT DecoderCntr(3) AND NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND NOT Calculate AND 
+	InDivisor)
+	OR (DecoderCntr(2) AND DecoderCntr(0) AND DecoderCntr(1) AND 
+	NOT DecoderCntr(3) AND NOT Divider_FSM_FFd1 AND NOT Divider_FSM_FFd3 AND NOT Calculate AND 
+	NOT InDivisor));
+
+Register Legend:
+ FDCPE (Q,D,C,CLR,PRE); 
+ FTCPE (Q,D,C,CLR,PRE); 
+ LDCP  (Q,D,G,CLR,PRE); 
+
+****************************  Compiler Options  ****************************
+
+Following is a list of all global compiler options used by the fitter run.
+
+Device(s) Specified                         : xc95108-7-PC84
+Optimization Method                         : SPEED
+Multi-Level Logic Optimization              : ON
+Ignore Timing Specifications                : OFF
+Default Register Power Up Value             : LOW
+Keep User Location Constraints              : ON
+What-You-See-Is-What-You-Get                : OFF
+Exhaustive Fitting                          : OFF
+Keep Unused Inputs                          : OFF
+Slew Rate                                   : FAST
+Power Mode                                  : STD
+Ground on Unused IOs                        : OFF
+Global Clock Optimization                   : ON
+Global Set/Reset Optimization               : ON
+Global Ouput Enable Optimization            : ON
+FASTConnect/UIM optimzation                 : ON
+Local Feedback                              : ON
+Pin Feedback                                : ON
+Input Limit                                 : 36
+Pterm Limit                                 : 25

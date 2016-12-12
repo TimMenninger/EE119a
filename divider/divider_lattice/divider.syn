@@ -1,0 +1,8 @@
+JDF B
+// Created by Version 8.1 
+PROJECT Untitled
+DESIGN divider Normal
+DEVKIT M4-128/64-10YC
+ENTRY ABEL/Schematic
+MODULE divider.abl
+MODSTYLE Divider Normal

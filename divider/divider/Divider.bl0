@@ -1,0 +1,1305 @@
+#$ TOOL XAbel
+#$ DATE Sun Dec 04 06:34:02 2016
+#$ TITLE 16-bit Divider for EE 119 Serial Divider Board
+#$ MODULE Divider
+#$ JEDECFILE Divider
+#$ PINS 45 Reset:4 Calculate:5 Divisor:6 KeypadRDY:33 Keypad0:25 Keypad1:26 \
+#  Keypad2:31 Keypad3:32 KeypadRow0:14 KeypadRow1:13 KeypadRow2:11 KeypadRow3:7 \
+#  KeypadCol0:15 KeypadCol1:17 KeypadCol2:18 KeypadCol3:19 HexDigit0:24 HexDigit1:23 \
+#  HexDigit2:21 HexDigit3:20 Segmenta:72 Segmentb:71 Segmentc:70 Segmentd:69 \
+#  Segmente:66 Segmentf:65 Segmentg:63 DecoderEn:44 DecoderBit0:43 DecoderBit1:41 \
+#  DecoderBit2:40 DecoderBit3:39 Digit0:57 Digit1:56 Digit2:55 Digit3:54 Digit4:53 \
+#  Digit5:52 Digit6:51 Digit7:50 Digit8:48 Digit9:47 Digit10:46 Digit11:45 CLK:9
+#$ NODES 106 KeypadRDYS1'ud'  KeypadRDYS2'ud'  KeypadRDYS3'ud'  HaveKey'ud'  MuxCntr0'ud'  \
+#  MuxCntr1'ud'  MuxCntr2'ud'  MuxCntr3'ud'  MuxCntr4'ud'  MuxCntr5'ud'  MuxCntr6'ud'  MuxCntr7'ud'  \
+#  MuxCntr8'ud'  MuxCntr9'ud'  DigitClkEn'ud'  KeyEn'ud'  InitEn'ud'  RemainderEn'ud'  AddSubEn'ud'  \
+#  QuotientEn'ud'  CarryEn'ud'  CalcLatch'ud'  CalcRDYS1'ud'  CalcRDYS2'ud'  CalcRDYS3'ud'  CalcCond'ud'  \
+#  CarryFlag0'ud'  AddSubFlag0'ud'  NewKey0'ud'  NewKey1'ud'  NewKey2'ud'  NewKey3'ud'  Remainder16'ud'  \
+#  Remainder15'ud'  Remainder14'ud'  Remainder13'ud'  Remainder12'ud'  Remainder11'ud'  Remainder10'ud'  \
+#  Remainder9'ud'  Remainder8'ud'  Remainder7'ud'  Remainder6'ud'  Remainder5'ud'  Remainder4'ud'  \
+#  Remainder3'ud'  Remainder2'ud'  Remainder1'ud'  Remainder0'ud'  DBits0'ud'  DBits1'ud'  DBits2'ud'  \
+#  DBits3'ud'  DBits4'ud'  DBits5'ud'  DBits6'ud'  DBits7'ud'  DBits8'ud'  DBits9'ud'  DBits10'ud'  DBits11'ud'  \
+#  DBits12'ud'  DBits13'ud'  DBits14'ud'  DBits15'ud'  DBits16'ud'  DBits17'ud'  DBits18'ud'  DBits19'ud'  \
+#  DBits20'ud'  DBits21'ud'  DBits22'ud'  DBits23'ud'  DBits24'ud'  DBits25'ud'  DBits26'ud'  DBits27'ud'  \
+#  DBits28'ud'  DBits29'ud'  DBits30'ud'  DBits31'ud'  DBits32'ud'  DBits33'ud'  DBits34'ud'  DBits35'ud'  \
+#  DBits36'ud'  DBits37'ud'  DBits38'ud'  DBits39'ud'  DBits40'ud'  DBits41'ud'  DBits42'ud'  DBits43'ud'  \
+#  DBits44'ud'  DBits45'ud'  DBits46'ud'  DBits47'ud'  ShiftHold'ud'  ShiftKeyIn'ud'  ShiftDisplay'ud'  \
+#  ShiftAddSub'ud'  ShiftInit'ud'  ShiftRem'ud'  ShiftQuo'ud'  CARRY@0'ud'  CARRY@1'ud' 
+.model Divider
+.inputs KeypadRDY.BLIF KeypadRDYS1.BLIF KeypadRDYS2.BLIF HaveKey.BLIF \
+DigitClkEn.BLIF DecoderBit3.BLIF DecoderBit2.BLIF DecoderBit1.BLIF \
+DecoderBit0.BLIF Divisor.BLIF KeypadRDYS3.BLIF Reset.BLIF MuxCntr0.BLIF \
+MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF MuxCntr4.BLIF MuxCntr5.BLIF \
+MuxCntr6.BLIF MuxCntr7.BLIF MuxCntr8.BLIF MuxCntr9.BLIF DBits47.BLIF \
+DBits46.BLIF DBits45.BLIF DBits44.BLIF Calculate.BLIF CalcRDYS1.BLIF \
+CalcRDYS2.BLIF CalcLatch.BLIF CalcRDYS3.BLIF ShiftKeyIn.BLIF ShiftInit.BLIF \
+ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF ShiftDisplay.BLIF KeyEn.BLIF \
+InitEn.BLIF CalcCond.BLIF RemainderEn.BLIF AddSubEn.BLIF QuotientEn.BLIF \
+DBits0.BLIF DBits1.BLIF DBits2.BLIF DBits3.BLIF DBits4.BLIF DBits5.BLIF \
+DBits6.BLIF DBits7.BLIF DBits8.BLIF DBits9.BLIF DBits10.BLIF DBits11.BLIF \
+DBits12.BLIF DBits13.BLIF DBits14.BLIF DBits15.BLIF DBits16.BLIF DBits17.BLIF \
+DBits18.BLIF DBits19.BLIF DBits20.BLIF DBits21.BLIF DBits22.BLIF DBits23.BLIF \
+DBits24.BLIF DBits25.BLIF DBits26.BLIF DBits27.BLIF DBits28.BLIF DBits29.BLIF \
+DBits30.BLIF DBits31.BLIF DBits32.BLIF DBits33.BLIF DBits34.BLIF DBits35.BLIF \
+DBits36.BLIF DBits37.BLIF DBits38.BLIF DBits39.BLIF DBits40.BLIF DBits41.BLIF \
+DBits42.BLIF DBits43.BLIF ShiftHold.BLIF NewKey3.BLIF NewKey2.BLIF \
+NewKey1.BLIF NewKey0.BLIF AddSubFlag0.BLIF CarryFlag0.BLIF Remainder16.BLIF \
+Remainder15.BLIF Remainder14.BLIF Remainder0.BLIF Remainder13.BLIF \
+Remainder12.BLIF Remainder11.BLIF Remainder10.BLIF Remainder9.BLIF \
+Remainder8.BLIF Remainder7.BLIF Remainder6.BLIF Remainder5.BLIF \
+Remainder4.BLIF Remainder3.BLIF Remainder2.BLIF Remainder1.BLIF CARRY@0.BLIF \
+CARRY@1.BLIF CarryEn.BLIF Keypad0.BLIF Keypad1.BLIF Keypad3.BLIF Keypad2.BLIF \
+CLK.BLIF
+.outputs HexDigit0 HexDigit1 HexDigit2 HexDigit3 DecoderEn CalcCond NewKey0 \
+NewKey1 NewKey2 NewKey3.X1 NewKey3.X2 DBits0 DBits1 DBits2 DBits3 DBits4 \
+DBits5 DBits6 DBits7 DBits8 DBits9 DBits10 DBits11 DBits12 DBits13 DBits14 \
+DBits15 DBits16 DBits17 DBits18 DBits19 DBits20 DBits21 DBits22 DBits23 \
+DBits24 DBits25 DBits26 DBits27 DBits28 DBits29 DBits30 DBits31 DBits32 \
+DBits33 DBits34 DBits35 DBits36 DBits37 DBits38 DBits39 DBits40 DBits41 \
+DBits42 DBits43 DBits44 DBits45 DBits46 DBits47 ShiftHold ShiftKeyIn \
+ShiftDisplay ShiftAddSub ShiftInit ShiftRem ShiftQuo KeypadRDYS1.REG \
+KeypadRDYS2.REG KeypadRDYS3.REG HaveKey.REG MuxCntr0.REG MuxCntr1.REG \
+MuxCntr2.REG MuxCntr3.REG MuxCntr4.REG MuxCntr5.REG MuxCntr6.REG MuxCntr7.REG \
+MuxCntr8.REG MuxCntr9.REG DigitClkEn.REG KeyEn.REG InitEn.REG RemainderEn.REG \
+AddSubEn.REG QuotientEn.REG CarryEn.REG DecoderBit0.REG DecoderBit1.REG \
+DecoderBit2.REG DecoderBit3.REG CalcRDYS1.REG CalcRDYS2.REG CalcRDYS3.REG \
+CalcLatch.REG DBits47.REG DBits46.REG DBits45.REG DBits44.REG DBits43.REG \
+DBits42.REG DBits41.REG DBits40.REG DBits39.REG DBits38.REG DBits37.REG \
+DBits36.REG DBits35.REG DBits34.REG DBits33.REG DBits32.REG DBits31.REG \
+DBits30.REG DBits29.REG DBits28.REG DBits27.REG DBits26.REG DBits25.REG \
+DBits24.REG DBits23.REG DBits22.REG DBits21.REG DBits20.REG DBits19.REG \
+DBits18.REG DBits17.REG DBits16.REG DBits15.REG DBits14.REG DBits13.REG \
+DBits12.REG DBits11.REG DBits10.REG DBits9.REG DBits8.REG DBits7.REG \
+DBits6.REG DBits5.REG DBits4.REG DBits3.REG DBits2.REG DBits1.REG DBits0.REG \
+Remainder16.REG Remainder15.REG Remainder14.REG Remainder13.REG \
+Remainder12.REG Remainder11.REG Remainder10.REG Remainder9.REG Remainder8.REG \
+Remainder7.REG Remainder6.REG Remainder5.REG Remainder4.REG Remainder3.REG \
+Remainder2.REG Remainder1.REG Remainder0.REG AddSubFlag0.REG CARRY@0 CARRY@1 \
+CarryFlag0.REG MuxCntr9.C MuxCntr8.C MuxCntr7.C MuxCntr6.C MuxCntr5.C \
+MuxCntr4.C MuxCntr3.C MuxCntr2.C MuxCntr1.C MuxCntr0.C Remainder16.C \
+Remainder15.C Remainder14.C Remainder13.C Remainder12.C Remainder11.C \
+Remainder10.C Remainder9.C Remainder8.C Remainder7.C Remainder6.C Remainder5.C \
+Remainder4.C Remainder3.C Remainder2.C Remainder1.C Remainder0.C DBits0.C \
+DBits1.C DBits2.C DBits3.C DBits4.C DBits5.C DBits6.C DBits7.C DBits8.C \
+DBits9.C DBits10.C DBits11.C DBits12.C DBits13.C DBits14.C DBits15.C DBits16.C \
+DBits17.C DBits18.C DBits19.C DBits20.C DBits21.C DBits22.C DBits23.C \
+DBits24.C DBits25.C DBits26.C DBits27.C DBits28.C DBits29.C DBits30.C \
+DBits31.C DBits32.C DBits33.C DBits34.C DBits35.C DBits36.C DBits37.C \
+DBits38.C DBits39.C DBits40.C DBits41.C DBits42.C DBits43.C DBits44.C \
+DBits45.C DBits46.C DBits47.C KeypadRDYS1.C KeypadRDYS2.C KeypadRDYS3.C \
+HaveKey.C DigitClkEn.C KeyEn.C InitEn.C RemainderEn.C AddSubEn.C QuotientEn.C \
+CarryEn.C CalcLatch.C CalcRDYS1.C CalcRDYS2.C CalcRDYS3.C CarryFlag0.C \
+AddSubFlag0.C DecoderBit0.C DecoderBit1.C DecoderBit2.C DecoderBit3.C \
+HexDigit0.OE HexDigit1.OE HexDigit2.OE HexDigit3.OE DecoderEn.OE \
+DecoderBit0.OE DecoderBit1.OE DecoderBit2.OE DecoderBit3.OE Calculate.OE \
+Divisor.OE KeypadRDY.OE Keypad0.OE Keypad1.OE Keypad2.OE Keypad3.OE
+.names DBits47.BLIF HexDigit0
+1 1
+.names DBits46.BLIF HexDigit1
+1 1
+.names DBits45.BLIF HexDigit2
+1 1
+.names DBits44.BLIF HexDigit3
+1 1
+.names DecoderEn
+ 1
+.names HaveKey.BLIF DigitClkEn.BLIF DecoderBit3.BLIF DecoderBit2.BLIF \
+DecoderBit1.BLIF DecoderBit0.BLIF CalcLatch.BLIF CalcCond
+0011001 1
+.names Keypad0.BLIF Keypad1.BLIF Keypad3.BLIF NewKey0
+-01 1
+0-1 1
+00- 1
+.names Keypad0.BLIF Keypad1.BLIF Keypad3.BLIF Keypad2.BLIF NewKey1
+1110 1
+001- 1
+-101 1
+10-1 1
+01-1 1
+.names Keypad0.BLIF Keypad1.BLIF Keypad3.BLIF Keypad2.BLIF NewKey2
+1110 1
+0111 1
+0-00 1
+10-1 1
+-00- 1
+.names Keypad0.BLIF NewKey3.X1
+1 1
+.names Keypad2.BLIF NewKey3.X2
+1 1
+.names DBits0.BLIF DBits0
+1 1
+.names DBits1.BLIF DBits1
+1 1
+.names DBits2.BLIF DBits2
+1 1
+.names DBits3.BLIF DBits3
+1 1
+.names DBits4.BLIF DBits4
+1 1
+.names DBits5.BLIF DBits5
+1 1
+.names DBits6.BLIF DBits6
+1 1
+.names DBits7.BLIF DBits7
+1 1
+.names DBits8.BLIF DBits8
+1 1
+.names DBits9.BLIF DBits9
+1 1
+.names DBits10.BLIF DBits10
+1 1
+.names DBits11.BLIF DBits11
+1 1
+.names DBits12.BLIF DBits12
+1 1
+.names DBits13.BLIF DBits13
+1 1
+.names DBits14.BLIF DBits14
+1 1
+.names DBits15.BLIF DBits15
+1 1
+.names DBits16.BLIF DBits16
+1 1
+.names DBits17.BLIF DBits17
+1 1
+.names DBits18.BLIF DBits18
+1 1
+.names DBits19.BLIF DBits19
+1 1
+.names DBits20.BLIF DBits20
+1 1
+.names DBits21.BLIF DBits21
+1 1
+.names DBits22.BLIF DBits22
+1 1
+.names DBits23.BLIF DBits23
+1 1
+.names DBits24.BLIF DBits24
+1 1
+.names DBits25.BLIF DBits25
+1 1
+.names DBits26.BLIF DBits26
+1 1
+.names DBits27.BLIF DBits27
+1 1
+.names DBits28.BLIF DBits28
+1 1
+.names DBits29.BLIF DBits29
+1 1
+.names DBits30.BLIF DBits30
+1 1
+.names DBits31.BLIF DBits31
+1 1
+.names DBits32.BLIF DBits32
+1 1
+.names DBits33.BLIF DBits33
+1 1
+.names DBits34.BLIF DBits34
+1 1
+.names DBits35.BLIF DBits35
+1 1
+.names DBits36.BLIF DBits36
+1 1
+.names DBits37.BLIF DBits37
+1 1
+.names DBits38.BLIF DBits38
+1 1
+.names DBits39.BLIF DBits39
+1 1
+.names DBits40.BLIF DBits40
+1 1
+.names DBits41.BLIF DBits41
+1 1
+.names DBits42.BLIF DBits42
+1 1
+.names DBits43.BLIF DBits43
+1 1
+.names DBits44.BLIF DBits44
+1 1
+.names DBits45.BLIF DBits45
+1 1
+.names DBits46.BLIF DBits46
+1 1
+.names DBits47.BLIF DBits47
+1 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF ShiftHold
+000000 1
+.names HaveKey.BLIF DigitClkEn.BLIF DecoderBit3.BLIF DecoderBit2.BLIF \
+DecoderBit1.BLIF DecoderBit0.BLIF Divisor.BLIF CalcLatch.BLIF KeyEn.BLIF \
+ShiftKeyIn
+100011001 1
+100111101 1
+.names DigitClkEn.BLIF DecoderBit3.BLIF DecoderBit2.BLIF DecoderBit1.BLIF \
+DecoderBit0.BLIF ShiftDisplay
+1---1 1
+1--1- 1
+1-0-- 1
+10--- 1
+.names CalcCond.BLIF AddSubEn.BLIF ShiftAddSub
+11 1
+.names InitEn.BLIF CalcCond.BLIF ShiftInit
+11 1
+.names CalcCond.BLIF RemainderEn.BLIF ShiftRem
+11 1
+.names CalcCond.BLIF QuotientEn.BLIF ShiftQuo
+11 1
+.names KeypadRDY.BLIF KeypadRDYS1.REG
+1 1
+.names KeypadRDYS1.BLIF KeypadRDYS2.REG
+1 1
+.names KeypadRDYS2.BLIF KeypadRDYS3.REG
+1 1
+.names KeypadRDYS2.BLIF HaveKey.BLIF DigitClkEn.BLIF DecoderBit3.BLIF \
+DecoderBit2.BLIF DecoderBit1.BLIF DecoderBit0.BLIF Divisor.BLIF \
+KeypadRDYS3.BLIF HaveKey.REG
+-1--1--0- 1
+-1--0--1- 1
+1-------0 1
+-1----0-- 1
+-1---0--- 1
+-1-1----- 1
+-10------ 1
+.names Reset.BLIF MuxCntr0.BLIF MuxCntr0.REG
+10 1
+.names Reset.BLIF MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr1.REG
+110 1
+101 1
+.names Reset.BLIF MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr2.REG
+1110 1
+1-01 1
+10-1 1
+.names Reset.BLIF MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF \
+MuxCntr3.REG
+11110 1
+1--01 1
+1-0-1 1
+10--1 1
+.names Reset.BLIF MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF \
+MuxCntr4.BLIF MuxCntr4.REG
+111110 1
+1---01 1
+1--0-1 1
+1-0--1 1
+10---1 1
+.names Reset.BLIF MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF \
+MuxCntr4.BLIF MuxCntr5.BLIF MuxCntr5.REG
+1111110 1
+1----01 1
+1---0-1 1
+1--0--1 1
+1-0---1 1
+10----1 1
+.names Reset.BLIF MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF \
+MuxCntr4.BLIF MuxCntr5.BLIF MuxCntr6.BLIF MuxCntr6.REG
+11111110 1
+1-----01 1
+1----0-1 1
+1---0--1 1
+1--0---1 1
+1-0----1 1
+10-----1 1
+.names Reset.BLIF MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF \
+MuxCntr4.BLIF MuxCntr5.BLIF MuxCntr6.BLIF MuxCntr7.BLIF MuxCntr7.REG
+111111110 1
+1------01 1
+1-----0-1 1
+1----0--1 1
+1---0---1 1
+1--0----1 1
+1-0-----1 1
+10------1 1
+.names Reset.BLIF MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF \
+MuxCntr4.BLIF MuxCntr5.BLIF MuxCntr6.BLIF MuxCntr7.BLIF MuxCntr8.BLIF \
+MuxCntr8.REG
+1111111110 1
+1-------01 1
+1------0-1 1
+1-----0--1 1
+1----0---1 1
+1---0----1 1
+1--0-----1 1
+1-0------1 1
+10-------1 1
+.names Reset.BLIF MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF \
+MuxCntr4.BLIF MuxCntr5.BLIF MuxCntr6.BLIF MuxCntr7.BLIF MuxCntr8.BLIF \
+MuxCntr9.BLIF MuxCntr9.REG
+11111111110 1
+1--------01 1
+1-------0-1 1
+1------0--1 1
+1-----0---1 1
+1----0----1 1
+1---0-----1 1
+1--0------1 1
+1-0-------1 1
+10--------1 1
+.names MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF MuxCntr4.BLIF \
+MuxCntr5.BLIF MuxCntr6.BLIF MuxCntr7.BLIF MuxCntr8.BLIF MuxCntr9.BLIF \
+DigitClkEn.REG
+1111111111 1
+.names MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF MuxCntr4.BLIF \
+MuxCntr5.BLIF MuxCntr6.BLIF MuxCntr7.BLIF MuxCntr8.BLIF MuxCntr9.BLIF \
+KeyEn.REG
+1000000000 1
+.names MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF MuxCntr4.BLIF \
+MuxCntr5.BLIF MuxCntr6.BLIF MuxCntr7.BLIF MuxCntr8.BLIF MuxCntr9.BLIF \
+InitEn.REG
+0000000000 1
+.names MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF MuxCntr4.BLIF \
+MuxCntr5.BLIF RemainderEn.REG
+100000 1
+.names MuxCntr4.BLIF MuxCntr5.BLIF AddSubEn.REG
+10 1
+.names MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF MuxCntr4.BLIF \
+MuxCntr5.BLIF QuotientEn.REG
+000001 1
+.names MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF MuxCntr4.BLIF \
+MuxCntr5.BLIF CarryEn.REG
+111100 1
+.names DigitClkEn.BLIF DecoderBit3.BLIF DecoderBit2.BLIF DecoderBit1.BLIF \
+DecoderBit0.BLIF Reset.BLIF DecoderBit0.REG
+111--- 1
+1--10- 1
+10--0- 1
+0---1- 1
+-----0 1
+.names DigitClkEn.BLIF DecoderBit3.BLIF DecoderBit2.BLIF DecoderBit1.BLIF \
+DecoderBit0.BLIF Reset.BLIF DecoderBit1.REG
+10-00- 1
+111--- 1
+---11- 1
+0--1-- 1
+-----0 1
+.names DigitClkEn.BLIF DecoderBit2.BLIF DecoderBit1.BLIF DecoderBit0.BLIF \
+Reset.BLIF DecoderBit2.REG
+10001 1
+-1-11 1
+-11-1 1
+01--1 1
+.names DigitClkEn.BLIF DecoderBit3.BLIF DecoderBit2.BLIF DecoderBit1.BLIF \
+DecoderBit0.BLIF Reset.BLIF DecoderBit3.REG
+101001 1
+-10--1 1
+01---1 1
+.names Calculate.BLIF CalcRDYS1.REG
+0 1
+.names CalcRDYS1.BLIF CalcRDYS2.REG
+1 1
+.names CalcRDYS2.BLIF CalcRDYS3.REG
+1 1
+.names DecoderBit3.BLIF DecoderBit2.BLIF DecoderBit1.BLIF DecoderBit0.BLIF \
+CalcRDYS2.BLIF CalcLatch.BLIF CalcRDYS3.BLIF CalcLatch.REG
+---11-0 1
+--1-1-0 1
+-0--1-0 1
+0---1-0 1
+---0-1- 1
+--0--1- 1
+-1---1- 1
+1----1- 1
+.names DBits47.BLIF ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF \
+ShiftAddSub.BLIF ShiftQuo.BLIF ShiftDisplay.BLIF DBits32.BLIF DBits43.BLIF \
+ShiftHold.BLIF NewKey3.BLIF DBits47.REG
+-1--------1 1
+------1-1-- 1
+-----1-1--- 1
+1--------1- 1
+1---1------ 1
+1--1------- 1
+1-1-------- 1
+.names DBits47.BLIF DBits46.BLIF ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF \
+ShiftAddSub.BLIF ShiftQuo.BLIF ShiftDisplay.BLIF DBits42.BLIF ShiftHold.BLIF \
+NewKey2.BLIF DBits46.REG
+--1-------1 1
+-------11-- 1
+1-----1---- 1
+-1-------1- 1
+-1---1----- 1
+-1--1------ 1
+-1-1------- 1
+.names DBits46.BLIF DBits45.BLIF ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF \
+ShiftAddSub.BLIF ShiftQuo.BLIF ShiftDisplay.BLIF DBits41.BLIF ShiftHold.BLIF \
+NewKey1.BLIF DBits45.REG
+--1-------1 1
+-------11-- 1
+1-----1---- 1
+-1-------1- 1
+-1---1----- 1
+-1--1------ 1
+-1-1------- 1
+.names DBits45.BLIF DBits44.BLIF ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF \
+ShiftAddSub.BLIF ShiftQuo.BLIF ShiftDisplay.BLIF DBits40.BLIF ShiftHold.BLIF \
+NewKey0.BLIF DBits44.REG
+--1-------1 1
+-------11-- 1
+1-----1---- 1
+-1-------1- 1
+-1---1----- 1
+-1--1------ 1
+-1-1------- 1
+.names DBits47.BLIF DBits44.BLIF ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF \
+ShiftAddSub.BLIF ShiftQuo.BLIF ShiftDisplay.BLIF DBits39.BLIF DBits43.BLIF \
+ShiftHold.BLIF DBits43.REG
+-------11-- 1
+-1----1---- 1
+1-1-------- 1
+---------11 1
+-----1---1- 1
+----1----1- 1
+---1-----1- 1
+.names DBits46.BLIF ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF \
+ShiftAddSub.BLIF ShiftQuo.BLIF ShiftDisplay.BLIF DBits38.BLIF DBits42.BLIF \
+DBits43.BLIF ShiftHold.BLIF DBits42.REG
+-----1---1- 1
+------11--- 1
+11--------- 1
+--------1-1 1
+----1---1-- 1
+---1----1-- 1
+--1-----1-- 1
+.names DBits45.BLIF ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF \
+ShiftAddSub.BLIF ShiftQuo.BLIF ShiftDisplay.BLIF DBits37.BLIF DBits41.BLIF \
+DBits42.BLIF ShiftHold.BLIF DBits41.REG
+-----1---1- 1
+------11--- 1
+11--------- 1
+--------1-1 1
+----1---1-- 1
+---1----1-- 1
+--1-----1-- 1
+.names DBits44.BLIF ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF \
+ShiftAddSub.BLIF ShiftQuo.BLIF ShiftDisplay.BLIF DBits36.BLIF DBits40.BLIF \
+DBits41.BLIF ShiftHold.BLIF DBits40.REG
+-----1---1- 1
+------11--- 1
+11--------- 1
+--------1-1 1
+----1---1-- 1
+---1----1-- 1
+--1-----1-- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits35.BLIF DBits39.BLIF DBits40.BLIF \
+DBits43.BLIF ShiftHold.BLIF DBits39.REG
+1--------1- 1
+----1---1-- 1
+-----11---- 1
+-------1--1 1
+---1---1--- 1
+--1----1--- 1
+-1-----1--- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits34.BLIF DBits38.BLIF DBits39.BLIF \
+DBits42.BLIF ShiftHold.BLIF DBits38.REG
+1--------1- 1
+----1---1-- 1
+-----11---- 1
+-------1--1 1
+---1---1--- 1
+--1----1--- 1
+-1-----1--- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits33.BLIF DBits37.BLIF DBits38.BLIF \
+DBits41.BLIF ShiftHold.BLIF DBits37.REG
+1--------1- 1
+----1---1-- 1
+-----11---- 1
+-------1--1 1
+---1---1--- 1
+--1----1--- 1
+-1-----1--- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits32.BLIF DBits36.BLIF DBits37.BLIF \
+DBits40.BLIF ShiftHold.BLIF DBits36.REG
+1--------1- 1
+----1---1-- 1
+-----11---- 1
+-------1--1 1
+---1---1--- 1
+--1----1--- 1
+-1-----1--- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits31.BLIF DBits35.BLIF DBits36.BLIF \
+DBits39.BLIF ShiftHold.BLIF DBits35.REG
+1--------1- 1
+----1---1-- 1
+-----11---- 1
+-------1--1 1
+---1---1--- 1
+--1----1--- 1
+-1-----1--- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits30.BLIF DBits34.BLIF DBits35.BLIF \
+DBits38.BLIF ShiftHold.BLIF DBits34.REG
+1--------1- 1
+----1---1-- 1
+-----11---- 1
+-------1--1 1
+---1---1--- 1
+--1----1--- 1
+-1-----1--- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits29.BLIF DBits33.BLIF DBits34.BLIF \
+DBits37.BLIF ShiftHold.BLIF DBits33.REG
+1--------1- 1
+----1---1-- 1
+-----11---- 1
+-------1--1 1
+---1---1--- 1
+--1----1--- 1
+-1-----1--- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits28.BLIF DBits32.BLIF DBits33.BLIF \
+DBits36.BLIF ShiftHold.BLIF DBits32.REG
+1--------1- 1
+----1---1-- 1
+-----11---- 1
+-------1--1 1
+---1---1--- 1
+--1----1--- 1
+-1-----1--- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits27.BLIF DBits30.BLIF DBits31.BLIF \
+ShiftHold.BLIF DBits31.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits26.BLIF DBits29.BLIF DBits30.BLIF \
+ShiftHold.BLIF DBits30.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits25.BLIF DBits28.BLIF DBits29.BLIF \
+ShiftHold.BLIF DBits29.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits24.BLIF DBits27.BLIF DBits28.BLIF \
+ShiftHold.BLIF DBits28.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits23.BLIF DBits26.BLIF DBits27.BLIF \
+ShiftHold.BLIF DBits27.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits22.BLIF DBits25.BLIF DBits26.BLIF \
+ShiftHold.BLIF DBits26.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits21.BLIF DBits24.BLIF DBits25.BLIF \
+ShiftHold.BLIF DBits25.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits20.BLIF DBits23.BLIF DBits24.BLIF \
+ShiftHold.BLIF DBits24.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits19.BLIF DBits22.BLIF DBits23.BLIF \
+ShiftHold.BLIF DBits23.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits18.BLIF DBits21.BLIF DBits22.BLIF \
+ShiftHold.BLIF DBits22.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits17.BLIF DBits20.BLIF DBits21.BLIF \
+ShiftHold.BLIF DBits21.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits16.BLIF DBits19.BLIF DBits20.BLIF \
+ShiftHold.BLIF DBits20.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits15.BLIF DBits18.BLIF DBits19.BLIF \
+ShiftHold.BLIF DBits19.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits14.BLIF DBits17.BLIF DBits18.BLIF \
+ShiftHold.BLIF DBits18.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits13.BLIF DBits16.BLIF DBits17.BLIF \
+ShiftHold.BLIF DBits17.REG
+---1---1-- 1
+-----11--- 1
+--------11 1
+----1---1- 1
+--1-----1- 1
+-1------1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftInit.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits12.BLIF DBits16.BLIF DBits31.BLIF \
+ShiftHold.BLIF DBits16.REG
+---1----1- 1
+-----11--- 1
+-------1-1 1
+----1--1-- 1
+--1----1-- 1
+-1-----1-- 1
+1------1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits11.BLIF DBits15.BLIF ShiftHold.BLIF AddSubFlag0.BLIF \
+CarryFlag0.BLIF Remainder16.BLIF DBits15.REG
+---1----000 1
+---1----110 1
+---1----101 1
+---1----011 1
+----11----- 1
+------11--- 1
+--1---1---- 1
+-1----1---- 1
+1-----1---- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits10.BLIF DBits14.BLIF DBits15.BLIF ShiftHold.BLIF \
+DBits14.REG
+---1---1- 1
+----11--- 1
+------1-1 1
+--1---1-- 1
+-1----1-- 1
+1-----1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits9.BLIF DBits13.BLIF DBits14.BLIF ShiftHold.BLIF \
+DBits13.REG
+---1---1- 1
+----11--- 1
+------1-1 1
+--1---1-- 1
+-1----1-- 1
+1-----1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits8.BLIF DBits12.BLIF DBits13.BLIF ShiftHold.BLIF \
+DBits12.REG
+---1---1- 1
+----11--- 1
+------1-1 1
+--1---1-- 1
+-1----1-- 1
+1-----1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits7.BLIF DBits11.BLIF DBits12.BLIF ShiftHold.BLIF \
+DBits11.REG
+---1---1- 1
+----11--- 1
+------1-1 1
+--1---1-- 1
+-1----1-- 1
+1-----1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits6.BLIF DBits10.BLIF DBits11.BLIF ShiftHold.BLIF \
+DBits10.REG
+---1---1- 1
+----11--- 1
+------1-1 1
+--1---1-- 1
+-1----1-- 1
+1-----1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits5.BLIF DBits9.BLIF DBits10.BLIF ShiftHold.BLIF \
+DBits9.REG
+---1---1- 1
+----11--- 1
+------1-1 1
+--1---1-- 1
+-1----1-- 1
+1-----1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits4.BLIF DBits8.BLIF DBits9.BLIF ShiftHold.BLIF \
+DBits8.REG
+---1---1- 1
+----11--- 1
+------1-1 1
+--1---1-- 1
+-1----1-- 1
+1-----1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits3.BLIF DBits7.BLIF DBits8.BLIF ShiftHold.BLIF \
+DBits7.REG
+---1---1- 1
+----11--- 1
+------1-1 1
+--1---1-- 1
+-1----1-- 1
+1-----1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits2.BLIF DBits6.BLIF DBits7.BLIF ShiftHold.BLIF \
+DBits6.REG
+---1---1- 1
+----11--- 1
+------1-1 1
+--1---1-- 1
+-1----1-- 1
+1-----1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits1.BLIF DBits5.BLIF DBits6.BLIF ShiftHold.BLIF \
+DBits5.REG
+---1---1- 1
+----11--- 1
+------1-1 1
+--1---1-- 1
+-1----1-- 1
+1-----1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits0.BLIF DBits4.BLIF DBits5.BLIF ShiftHold.BLIF \
+DBits4.REG
+---1---1- 1
+----11--- 1
+------1-1 1
+--1---1-- 1
+-1----1-- 1
+1-----1-- 1
+.names DBits47.BLIF ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits3.BLIF DBits4.BLIF ShiftHold.BLIF \
+DBits3.REG
+----1--1- 1
+1----1--- 1
+------1-1 1
+---1--1-- 1
+--1---1-- 1
+-1----1-- 1
+.names DBits46.BLIF ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits2.BLIF DBits3.BLIF ShiftHold.BLIF \
+DBits2.REG
+----1--1- 1
+1----1--- 1
+------1-1 1
+---1--1-- 1
+--1---1-- 1
+-1----1-- 1
+.names DBits45.BLIF ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits1.BLIF DBits2.BLIF ShiftHold.BLIF \
+DBits1.REG
+----1--1- 1
+1----1--- 1
+------1-1 1
+---1--1-- 1
+--1---1-- 1
+-1----1-- 1
+.names DBits44.BLIF ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF \
+ShiftQuo.BLIF ShiftDisplay.BLIF DBits0.BLIF DBits1.BLIF ShiftHold.BLIF \
+DBits0.REG
+----1--1- 1
+1----1--- 1
+------1-1 1
+---1--1-- 1
+--1---1-- 1
+-1----1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF AddSubFlag0.BLIF CarryFlag0.BLIF \
+Remainder16.BLIF Remainder15.BLIF Remainder16.REG
+---1--100- 1
+---1--010- 1
+---1--001- 1
+---1--111- 1
+-1-------1 1
+-----1--1- 1
+----1---1- 1
+--1-----1- 1
+1-------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits31.BLIF ShiftHold.BLIF AddSubFlag0.BLIF CarryFlag0.BLIF \
+Remainder15.BLIF Remainder14.BLIF Remainder0.BLIF Remainder15.REG
+--1--1-00--0 1
+--1--0-10--0 1
+--1--0-01--0 1
+--1--1-11--0 1
+--1--0-00--1 1
+--1--1-10--1 1
+--1--1-01--1 1
+--1--0-11--1 1
+-1--------1- 1
+------1--1-- 1
+----1----1-- 1
+---1-----1-- 1
+1--------1-- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder15.BLIF Remainder14.BLIF \
+Remainder13.BLIF Remainder14.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder14.BLIF Remainder13.BLIF \
+Remainder12.BLIF Remainder13.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder13.BLIF Remainder12.BLIF \
+Remainder11.BLIF Remainder12.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder12.BLIF Remainder11.BLIF \
+Remainder10.BLIF Remainder11.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder11.BLIF Remainder10.BLIF \
+Remainder9.BLIF Remainder10.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder10.BLIF Remainder9.BLIF \
+Remainder8.BLIF Remainder9.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder9.BLIF Remainder8.BLIF \
+Remainder7.BLIF Remainder8.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder8.BLIF Remainder7.BLIF \
+Remainder6.BLIF Remainder7.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder7.BLIF Remainder6.BLIF \
+Remainder5.BLIF Remainder6.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder6.BLIF Remainder5.BLIF \
+Remainder4.BLIF Remainder5.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder5.BLIF Remainder4.BLIF \
+Remainder3.BLIF Remainder4.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder4.BLIF Remainder3.BLIF \
+Remainder2.BLIF Remainder3.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder3.BLIF Remainder2.BLIF \
+Remainder1.BLIF Remainder2.REG
+-1------1 1
+--1---1-- 1
+-----1-1- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF ShiftHold.BLIF Remainder0.BLIF Remainder2.BLIF \
+Remainder1.BLIF Remainder1.REG
+--1----1- 1
+-1----1-- 1
+-----1--1 1
+----1---1 1
+---1----1 1
+1-------1 1
+.names ShiftKeyIn.BLIF ShiftRem.BLIF ShiftAddSub.BLIF ShiftQuo.BLIF \
+ShiftDisplay.BLIF DBits32.BLIF ShiftHold.BLIF Remainder0.BLIF Remainder1.BLIF \
+Remainder0.REG
+--1-----1 1
+-1---1--- 1
+------11- 1
+----1--1- 1
+---1---1- 1
+1------1- 1
+.names DecoderBit3.BLIF DecoderBit2.BLIF DecoderBit1.BLIF DecoderBit0.BLIF \
+MuxCntr8.BLIF MuxCntr9.BLIF Calculate.BLIF ShiftQuo.BLIF AddSubFlag0.BLIF \
+CarryFlag0.BLIF Remainder16.BLIF CARRY@0.BLIF CARRY@1.BLIF AddSubFlag0.REG
+-------1010-0 1
+-------1001-0 1
+------11010-- 1
+-----1-1010-- 1
+----1--1010-- 1
+---1---1010-- 1
+--1----1010-- 1
+-0-----1010-- 1
+0------1010-- 1
+------11001-- 1
+-----1-1001-- 1
+----1--1001-- 1
+---1---1001-- 1
+--1----1001-- 1
+-0-----1001-- 1
+0------1001-- 1
+-------1100-0 1
+-------1111-0 1
+------1-100-- 1
+-----1--100-- 1
+----1---100-- 1
+---1----100-- 1
+--1-----100-- 1
+-0------100-- 1
+0-------100-- 1
+------1-111-- 1
+-----1--111-- 1
+----1---111-- 1
+---1----111-- 1
+--1-----111-- 1
+-0------111-- 1
+0-------111-- 1
+-------01--0- 1
+------101---- 1
+-----1-01---- 1
+----1--01---- 1
+---1---01---- 1
+--1----01---- 1
+-0-----01---- 1
+0------01---- 1
+.names MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF MuxCntr4.BLIF \
+MuxCntr5.BLIF MuxCntr6.BLIF MuxCntr7.BLIF CARRY@0
+00001000 1
+.names MuxCntr0.BLIF MuxCntr1.BLIF MuxCntr2.BLIF MuxCntr3.BLIF MuxCntr4.BLIF \
+MuxCntr5.BLIF MuxCntr6.BLIF MuxCntr7.BLIF CARRY@1
+00001000 1
+.names ShiftAddSub.BLIF DBits31.BLIF AddSubFlag0.BLIF CarryFlag0.BLIF \
+Remainder0.BLIF CarryEn.BLIF CarryFlag0.REG
+110-0- 1
+1101-- 1
+101-0- 1
+1011-- 1
+--1--1 1
+1--10- 1
+.names CLK.BLIF MuxCntr9.C
+1 1
+.names CLK.BLIF MuxCntr8.C
+1 1
+.names CLK.BLIF MuxCntr7.C
+1 1
+.names CLK.BLIF MuxCntr6.C
+1 1
+.names CLK.BLIF MuxCntr5.C
+1 1
+.names CLK.BLIF MuxCntr4.C
+1 1
+.names CLK.BLIF MuxCntr3.C
+1 1
+.names CLK.BLIF MuxCntr2.C
+1 1
+.names CLK.BLIF MuxCntr1.C
+1 1
+.names CLK.BLIF MuxCntr0.C
+1 1
+.names CLK.BLIF Remainder16.C
+1 1
+.names CLK.BLIF Remainder15.C
+1 1
+.names CLK.BLIF Remainder14.C
+1 1
+.names CLK.BLIF Remainder13.C
+1 1
+.names CLK.BLIF Remainder12.C
+1 1
+.names CLK.BLIF Remainder11.C
+1 1
+.names CLK.BLIF Remainder10.C
+1 1
+.names CLK.BLIF Remainder9.C
+1 1
+.names CLK.BLIF Remainder8.C
+1 1
+.names CLK.BLIF Remainder7.C
+1 1
+.names CLK.BLIF Remainder6.C
+1 1
+.names CLK.BLIF Remainder5.C
+1 1
+.names CLK.BLIF Remainder4.C
+1 1
+.names CLK.BLIF Remainder3.C
+1 1
+.names CLK.BLIF Remainder2.C
+1 1
+.names CLK.BLIF Remainder1.C
+1 1
+.names CLK.BLIF Remainder0.C
+1 1
+.names CLK.BLIF DBits0.C
+1 1
+.names CLK.BLIF DBits1.C
+1 1
+.names CLK.BLIF DBits2.C
+1 1
+.names CLK.BLIF DBits3.C
+1 1
+.names CLK.BLIF DBits4.C
+1 1
+.names CLK.BLIF DBits5.C
+1 1
+.names CLK.BLIF DBits6.C
+1 1
+.names CLK.BLIF DBits7.C
+1 1
+.names CLK.BLIF DBits8.C
+1 1
+.names CLK.BLIF DBits9.C
+1 1
+.names CLK.BLIF DBits10.C
+1 1
+.names CLK.BLIF DBits11.C
+1 1
+.names CLK.BLIF DBits12.C
+1 1
+.names CLK.BLIF DBits13.C
+1 1
+.names CLK.BLIF DBits14.C
+1 1
+.names CLK.BLIF DBits15.C
+1 1
+.names CLK.BLIF DBits16.C
+1 1
+.names CLK.BLIF DBits17.C
+1 1
+.names CLK.BLIF DBits18.C
+1 1
+.names CLK.BLIF DBits19.C
+1 1
+.names CLK.BLIF DBits20.C
+1 1
+.names CLK.BLIF DBits21.C
+1 1
+.names CLK.BLIF DBits22.C
+1 1
+.names CLK.BLIF DBits23.C
+1 1
+.names CLK.BLIF DBits24.C
+1 1
+.names CLK.BLIF DBits25.C
+1 1
+.names CLK.BLIF DBits26.C
+1 1
+.names CLK.BLIF DBits27.C
+1 1
+.names CLK.BLIF DBits28.C
+1 1
+.names CLK.BLIF DBits29.C
+1 1
+.names CLK.BLIF DBits30.C
+1 1
+.names CLK.BLIF DBits31.C
+1 1
+.names CLK.BLIF DBits32.C
+1 1
+.names CLK.BLIF DBits33.C
+1 1
+.names CLK.BLIF DBits34.C
+1 1
+.names CLK.BLIF DBits35.C
+1 1
+.names CLK.BLIF DBits36.C
+1 1
+.names CLK.BLIF DBits37.C
+1 1
+.names CLK.BLIF DBits38.C
+1 1
+.names CLK.BLIF DBits39.C
+1 1
+.names CLK.BLIF DBits40.C
+1 1
+.names CLK.BLIF DBits41.C
+1 1
+.names CLK.BLIF DBits42.C
+1 1
+.names CLK.BLIF DBits43.C
+1 1
+.names CLK.BLIF DBits44.C
+1 1
+.names CLK.BLIF DBits45.C
+1 1
+.names CLK.BLIF DBits46.C
+1 1
+.names CLK.BLIF DBits47.C
+1 1
+.names CLK.BLIF KeypadRDYS1.C
+1 1
+.names CLK.BLIF KeypadRDYS2.C
+1 1
+.names CLK.BLIF KeypadRDYS3.C
+1 1
+.names CLK.BLIF HaveKey.C
+1 1
+.names CLK.BLIF DigitClkEn.C
+1 1
+.names CLK.BLIF KeyEn.C
+1 1
+.names CLK.BLIF InitEn.C
+1 1
+.names CLK.BLIF RemainderEn.C
+1 1
+.names CLK.BLIF AddSubEn.C
+1 1
+.names CLK.BLIF QuotientEn.C
+1 1
+.names CLK.BLIF CarryEn.C
+1 1
+.names CLK.BLIF CalcLatch.C
+1 1
+.names CLK.BLIF CalcRDYS1.C
+1 1
+.names CLK.BLIF CalcRDYS2.C
+1 1
+.names CLK.BLIF CalcRDYS3.C
+1 1
+.names CLK.BLIF CarryFlag0.C
+1 1
+.names CLK.BLIF AddSubFlag0.C
+1 1
+.names CLK.BLIF DecoderBit0.C
+1 1
+.names CLK.BLIF DecoderBit1.C
+1 1
+.names CLK.BLIF DecoderBit2.C
+1 1
+.names CLK.BLIF DecoderBit3.C
+1 1
+.names HexDigit0.OE
+ 1
+.names HexDigit1.OE
+ 1
+.names HexDigit2.OE
+ 1
+.names HexDigit3.OE
+ 1
+.names DecoderEn.OE
+ 1
+.names DecoderBit0.OE
+ 1
+.names DecoderBit1.OE
+ 1
+.names DecoderBit2.OE
+ 1
+.names DecoderBit3.OE
+ 1
+.names Calculate.OE
+.names Divisor.OE
+.names KeypadRDY.OE
+.names Keypad0.OE
+.names Keypad1.OE
+.names Keypad2.OE
+.names Keypad3.OE
+.end

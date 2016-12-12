@@ -1,0 +1,9 @@
+V3 6
+FL "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.vhf" 2016/12/04.06:34:04 K.39
+EN work/Divider 1480862043 \
+      FL "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.vhf" \
+      PB ieee/std_logic_1164 1217055545 LB aim PH aim/COMPONENTS 1217055546 \
+      LB unisim PH unisim/VCOMPONENTS 1217055545
+AR work/Divider/equation 1480862044 \
+      FL "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider/Divider.vhf" \
+      EN work/Divider 1480862043 CP G_DEC

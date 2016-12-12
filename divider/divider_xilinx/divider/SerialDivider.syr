@@ -1,0 +1,257 @@
+Release 10.1 - xst K.39 (nt)
+Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to C:/Documents and Settings/micro/Desktop/tmenning/divider/divider_xilinx/divider/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.05 secs
+ 
+--> Parameter xsthdpdir set to C:/Documents and Settings/micro/Desktop/tmenning/divider/divider_xilinx/divider/xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.05 secs
+ 
+--> Reading design: SerialDivider.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "SerialDivider.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "SerialDivider"
+Output Format                      : NGC
+Target Device                      : XC9500 CPLDs
+
+---- Source Options
+Top Module Name                    : SerialDivider
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+Mux Extraction                     : YES
+Resource Sharing                   : YES
+
+---- Target Options
+Add IO Buffers                     : YES
+MACRO Preserve                     : YES
+XOR Preserve                       : YES
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Area
+Optimization Effort                : 1
+Library Search Order               : SerialDivider.lso
+Keep Hierarchy                     : YES
+Netlist Hierarchy                  : as_optimized
+RTL Output                         : Yes
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : maintain
+Verilog 2001                       : YES
+
+---- Other Options
+wysiwyg                            : NO
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider.vhd" in Library work.
+Architecture dataflow of Entity serialdivider is up to date.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <SerialDivider> in library <work> (architecture <dataflow>).
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <SerialDivider> in library <work> (Architecture <dataflow>).
+INFO:Xst:1739 - HDL ADVISOR - "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider.vhd" line 37: declaration of a buffer port will make it difficult for you to validate this design by simulation. It is preferable to declare it as output.
+WARNING:Xst:819 - "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider.vhd" line 74: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <Dividend>
+Entity <SerialDivider> analyzed. Unit <SerialDivider> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <SerialDivider>.
+    Related source file is "C:/Documents and Settings/micro/Desktop/tmenning/divider/divider.vhd".
+WARNING:Xst:647 - Input <KeypadRows> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:646 - Signal <enableAS> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found finite state machine <FSM_0> for signal <Divider>.
+    -----------------------------------------------------------------------
+    | States             | 7                                              |
+    | Transitions        | 21                                             |
+    | Inputs             | 9                                              |
+    | Outputs            | 7                                              |
+    | Clock              | CLK (rising_edge)                              |
+    | Reset              | Reset (negative)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | display                                        |
+    | Power Up State     | init                                           |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 4-bit tristate buffer for signal <KeypadCols>.
+    Found 7-bit tristate buffer for signal <Segments>.
+    Found 4-bit register for signal <DecoderCntr>.
+    Found 12-bit tristate buffer for signal <Digits>.
+    Found 1-bit register for signal <Carry>.
+    Found 16-bit register for signal <Dividend>.
+    Found 1-bit xor2 for signal <Dividend_15$xor0000> created at line 251.
+    Found 1-bit xor2 for signal <Dividend_15$xor0001> created at line 275.
+    Found 1-bit xor2 for signal <Dividend_15$xor0002> created at line 251.
+    Found 16-bit register for signal <Divisor>.
+    Found 1-bit register for signal <highBit>.
+    Found 1-bit register for signal <KeypadRDYS>.
+    Found 10-bit up counter for signal <MuxCntr>.
+    Found 16-bit register for signal <Quotient>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred   1 Counter(s).
+	inferred  55 D-type flip-flop(s).
+	inferred   3 Xor(s).
+	inferred  23 Tristate(s).
+Unit <SerialDivider> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Counters                                             : 1
+ 10-bit up counter                                     : 1
+# Registers                                            : 55
+ 1-bit register                                        : 55
+# Tristates                                            : 23
+ 1-bit tristate buffer                                 : 23
+# Xors                                                 : 3
+ 1-bit xor2                                            : 3
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <Divider/FSM> on signal <Divider[1:3]> with user encoding.
+----------------------------
+ State          | Encoding
+----------------------------
+ init           | 000
+ display        | 001
+ rotate         | 010
+ subtract       | 011
+ waitforsub     | 100
+ add            | 101
+ shiftremainder | 110
+----------------------------
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Counters                                             : 1
+ 10-bit up counter                                     : 1
+# Registers                                            : 58
+ Flip-Flops                                            : 58
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <SerialDivider> ...
+  implementation constraint: INIT=r	 : Divider_FSM_FFd1
+  implementation constraint: INIT=r	 : Divider_FSM_FFd2
+  implementation constraint: INIT=r	 : Divider_FSM_FFd3
+
+=========================================================================
+*                           Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : SerialDivider.ngr
+Top Level Output File Name         : SerialDivider
+Output Format                      : NGC
+Optimization Goal                  : Area
+Keep Hierarchy                     : YES
+Target Technology                  : XC9500 CPLDs
+Macro Preserve                     : YES
+XOR Preserve                       : YES
+wysiwyg                            : NO
+
+Design Statistics
+# IOs                              : 45
+
+Cell Usage :
+# BELS                             : 621
+#      AND2                        : 329
+#      AND3                        : 13
+#      AND4                        : 1
+#      GND                         : 1
+#      INV                         : 96
+#      OR2                         : 161
+#      OR3                         : 6
+#      VCC                         : 1
+#      XOR2                        : 13
+# FlipFlops/Latches                : 68
+#      FD                          : 48
+#      FDC                         : 17
+#      FDP                         : 3
+# IO Buffers                       : 41
+#      IBUF                        : 9
+#      OBUF                        : 9
+#      OBUFE                       : 23
+=========================================================================
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 1.70 secs
+ 
+--> 
+
+Total memory usage is 115588 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    3 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+

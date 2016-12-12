@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="ConstraintSystem" num="119" delta="unknown" >Constraint <arg fmt="%s" index="1">&lt;NET &quot;KeypadRows(0)&quot;  LOC = &quot;P14&quot;  ;&gt; [C:/Documents and Settings/micro/Desktop/tmenning/divider/divider.ucf(11)]</arg>: This constraint cannot be distributed from the design objects matching &apos;<arg fmt="%s" index="2">NET &quot;KeypadRows(0)&quot;</arg>&apos; because those design objects do not contain or drive any instances of the correct type.
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="119" delta="unknown" >Constraint <arg fmt="%s" index="1">&lt;NET &quot;KeypadRows(1)&quot;  LOC = &quot;P13&quot;  ;&gt; [C:/Documents and Settings/micro/Desktop/tmenning/divider/divider.ucf(12)]</arg>: This constraint cannot be distributed from the design objects matching &apos;<arg fmt="%s" index="2">NET &quot;KeypadRows(1)&quot;</arg>&apos; because those design objects do not contain or drive any instances of the correct type.
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="119" delta="unknown" >Constraint <arg fmt="%s" index="1">&lt;NET &quot;KeypadRows(2)&quot;  LOC = &quot;P11&quot;  ;&gt; [C:/Documents and Settings/micro/Desktop/tmenning/divider/divider.ucf(13)]</arg>: This constraint cannot be distributed from the design objects matching &apos;<arg fmt="%s" index="2">NET &quot;KeypadRows(2)&quot;</arg>&apos; because those design objects do not contain or drive any instances of the correct type.
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="119" delta="unknown" >Constraint <arg fmt="%s" index="1">&lt;NET &quot;KeypadRows(3)&quot;  LOC = &quot;P7&quot;   ;&gt; [C:/Documents and Settings/micro/Desktop/tmenning/divider/divider.ucf(14)]</arg>: This constraint cannot be distributed from the design objects matching &apos;<arg fmt="%s" index="2">NET &quot;KeypadRows(3)&quot;</arg>&apos; because those design objects do not contain or drive any instances of the correct type.
+</msg>
+
+</messages>
+

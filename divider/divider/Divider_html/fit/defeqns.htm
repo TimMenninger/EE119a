@@ -1,0 +1,110 @@
+<html><head><link type='text/css' href='style.css' rel='stylesheet'></head><body class='pgBgnd'>
+<h3 align='center'>Equations</h3>
+<table width='90%' align='center' border='1' cellpadding='0' cellspacing='0'>
+<tr><td>
+</td></tr><tr><td>
+********** Mapped Logic **********
+</td></tr><tr><td>
+!DecoderBit0.D = Reset & !DecoderBit0_OBUF.LFBK & !DigitClkEn.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	!DecoderBit2_OBUF.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	!DecoderBit3_OBUF.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & DigitClkEn.LFBK & !DecoderBit2_OBUF.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	DecoderBit3_OBUF.LFBK & !DecoderBit1_OBUF.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   DecoderBit0.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+!DecoderBit1.D = Reset & !DigitClkEn.LFBK & !DecoderBit1_OBUF.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & DecoderBit0_OBUF.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	!DecoderBit3_OBUF.LFBK & !DecoderBit1_OBUF.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & !DecoderBit2_OBUF.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	DecoderBit3_OBUF.LFBK & !DecoderBit1_OBUF.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & !DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	!DecoderBit2_OBUF.LFBK & DecoderBit3_OBUF.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & !DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	!DecoderBit3_OBUF.LFBK & DecoderBit1_OBUF.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   DecoderBit1.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+DecoderBit2.T = !Reset & DecoderBit2_OBUF.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & !DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	!DecoderBit1_OBUF.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   DecoderBit2.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+DecoderBit3.D = Reset & !DigitClkEn.LFBK & DecoderBit3_OBUF.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & !DecoderBit2_OBUF.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	DecoderBit3_OBUF.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & !DecoderBit0_OBUF.LFBK & DigitClkEn.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	DecoderBit2_OBUF.LFBK & !DecoderBit3_OBUF.LFBK & !DecoderBit1_OBUF.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   DecoderBit3.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+DecoderEn = Vcc;    
+</td></tr><tr><td>
+DigitClkEn.D = MuxCntr0.LFBK & MuxCntr1.LFBK & MuxCntr2.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr3.LFBK & MuxCntr4.LFBK & MuxCntr5.LFBK & MuxCntr6.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr7.LFBK & MuxCntr8.LFBK & MuxCntr9.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   DigitClkEn.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+HexDigit0 = Gnd;    
+</td></tr><tr><td>
+HexDigit1 = Gnd;    
+</td></tr><tr><td>
+HexDigit2 = Gnd;    
+</td></tr><tr><td>
+HexDigit3 = Gnd;    
+</td></tr><tr><td>
+MuxCntr0.D = Reset & !MuxCntr0.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   MuxCntr0.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+MuxCntr1.D = Reset & MuxCntr0.LFBK & !MuxCntr1.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & !MuxCntr0.LFBK & MuxCntr1.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   MuxCntr1.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+MuxCntr2.T = !Reset & MuxCntr2.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   MuxCntr2.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+MuxCntr3.T = !Reset & MuxCntr3.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr2.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   MuxCntr3.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+MuxCntr4.T = !Reset & MuxCntr4.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr2.LFBK & MuxCntr3.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   MuxCntr4.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+MuxCntr5.T = !Reset & MuxCntr5.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr2.LFBK & MuxCntr3.LFBK & MuxCntr4.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   MuxCntr5.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+MuxCntr6.T = !Reset & MuxCntr6.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr2.LFBK & MuxCntr3.LFBK & MuxCntr4.LFBK & MuxCntr5.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   MuxCntr6.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+MuxCntr7.T = !Reset & MuxCntr7.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr2.LFBK & MuxCntr3.LFBK & MuxCntr4.LFBK & MuxCntr5.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr6.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   MuxCntr7.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+MuxCntr8.T = !Reset & MuxCntr8.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr2.LFBK & MuxCntr3.LFBK & MuxCntr4.LFBK & MuxCntr5.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr6.LFBK & MuxCntr7.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   MuxCntr8.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+MuxCntr9.T = !Reset & MuxCntr9.LFBK
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	# Reset & MuxCntr0.LFBK & MuxCntr1.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr2.LFBK & MuxCntr3.LFBK & MuxCntr4.LFBK & MuxCntr5.LFBK & 
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	MuxCntr6.LFBK & MuxCntr7.LFBK & MuxCntr8.LFBK;
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   MuxCntr9.CLK = CLK;	// GCK    
+</td></tr><tr><td>
+</td></tr>
+</table>
+<form><span class="pgRef"><table width="90%" align="center"><tr>
+<td align="left"><input type="button" onclick="javascript:parent.leftnav.showTop()" onmouseover="window.status='goto top of page'; return true;" onmouseout="window.status=''" value="back to top"></td>
+<td align="right"><input type="button" onclick="window.print()" onmouseover="window.status='print page'; return true;" onmouseout="window.status=''" value="print page"></td>
+</tr></table></span></form>
+</body></html>
